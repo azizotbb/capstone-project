@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:makfoul_app/screen/tra/trainer_screen.dart';
+import 'package:makfoul_app/screen/trainer/trainer_screen.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/homescreen/cook_cleen_widget.dart';
-
 
 class CleanScreen extends StatelessWidget {
   const CleanScreen({super.key});
