@@ -20,21 +20,18 @@ class InstructorCustomCard extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(17),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(0.3), blurRadius: 15),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.2),
+            blurRadius: 5,
+            offset: Offset(0, 2),
+          ),
         ],
       ),
       child: ListTile(
-        leading: Container(
-          height: 68,
-          clipBehavior: Clip.hardEdge,
-          decoration: BoxDecoration(shape: BoxShape.circle),
-          child: Image.asset(avatar),
-        ),
-        title: Text(title, style: AppTextStyle.textbold16),
-        subtitle: Text(
-          trainerName,
-          style: TextStyle(fontSize: 14, color: Color(0xffFF9E80)),
-        ),
+        minVerticalPadding: 30,
+        leading: CircleAvatar(maxRadius: 30, child: Image.asset(avatar)),
+        title: Text(title, style: AppTextStyle.textReguler16),
+        subtitle: Text(trainerName, style: AppTextStyle.text14primary),
       ),
     );
   }

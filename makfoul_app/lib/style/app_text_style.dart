@@ -14,11 +14,17 @@ class AppTextStyle {
     fontWeight: FontWeight.bold,
     color: Colors.white,
   );
-  static const TextStyle textTitleLarg24 = TextStyle(
+ static const TextStyle textTitleLarg24dark = TextStyle(
     fontFamily: 'poppins',
     fontSize: 24,
     fontWeight: FontWeight.bold,
     color: AppColors.colorDarkGrey,
+  );
+   static const TextStyle textTitleLarg24light = TextStyle(
+    fontFamily: 'poppins',
+    fontSize: 24,
+    fontWeight: FontWeight.bold,
+    color: Color.fromARGB(255, 255, 255, 255),
   );
   static const TextStyle textTitleMedium20 = TextStyle(
     fontFamily: 'poppins',
