@@ -13,6 +13,7 @@ class PrimryCustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
+        backgroundColor: AppColors.colorScondry,
         disabledBackgroundColor: AppColors.colorScondry,
         minimumSize: Size(context.getWidth(), 52),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(17)),
