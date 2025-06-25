@@ -92,4 +92,6 @@ class AppTextStyle {
     fontWeight: FontWeight.w500,
     color: AppColors.colorDarkGrey,
   );
+
+
 }
