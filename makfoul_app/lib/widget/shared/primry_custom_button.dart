@@ -7,7 +7,7 @@ class PrimryCustomButton extends StatelessWidget {
   const PrimryCustomButton({super.key, required this.setText, this.onPressed});
 
   final String setText;
-  final void Function()? onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
