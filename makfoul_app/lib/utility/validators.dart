@@ -40,7 +40,7 @@ class Validators {
     if (value == null || value.trim().isEmpty) {
       return 'Please enter your UserName';
     }
-    if (value.length < 13) {
+    if (value.length > 13) {
       return 'Name must be less than 13 characters.';
     }
     return null;

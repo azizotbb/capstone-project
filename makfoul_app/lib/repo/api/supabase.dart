@@ -42,4 +42,21 @@ class SupabaseConnect {
       throw FormatException("There is error with sign Up");
     }
   }
+
+  //add user
+  static addUser({
+    required String userid,
+    required String phone,
+    required String name,
+    required String email,
+    required String role,
+  }) async {
+    await supabase?.client.from("user").upsert({
+      "UID": userid,
+      "phone": phone,
+      "name": name,
+      "email": email,
+      "role": role,
+    });
+  }
 }

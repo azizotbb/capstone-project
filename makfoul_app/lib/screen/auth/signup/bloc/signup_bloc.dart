@@ -23,7 +23,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
   final TextEditingController controllerPassword = TextEditingController();
   final TextEditingController controllerPasswordConfi = TextEditingController();
 
-  String? selected;
+  String? selected = "user";
 
   final formKey = GlobalKey<FormState>();
 
@@ -49,13 +49,19 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
   ) async {
     try {
       emit(LoadingState());
-      final res = await authGetit.signUpMethod(
+      await authGetit.signUpMethod(
         phoneNumber: controllerNumber.text,
         email: controllerEmail.text,
         password: controllerPassword.text,
         role: selected!,
         username: controllerUserName.text,
       );
+      controllerEmail.clear();
+      controllerNumber.clear();
+      controllerPassword.clear();
+      controllerPasswordConfi.clear();
+      controllerUserName.clear();
+
       emit(SuccessState());
     } on AuthException catch (error) {
       log(error.message);

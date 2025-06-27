@@ -12,7 +12,6 @@ class AuthLayer {
   signUpMethod({
     required String phoneNumber,
     required String username,
-
     required String email,
     required String password,
     required String role,
@@ -24,6 +23,14 @@ class AuthLayer {
         phoneNumber: phoneNumber,
         role: role,
         username: username,
+      );
+
+      await SupabaseConnect.addUser(
+        userid: user.id,
+        phone: phoneNumber,
+        name: username,
+        email: email,
+        role: role,
       );
 
       userID = user.id;

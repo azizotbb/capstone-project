@@ -7,7 +7,6 @@ import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/utility/validators.dart';
 import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
 import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
@@ -53,7 +52,7 @@ class SignupScreen extends StatelessWidget {
                           Icons.phone_android,
                           color: AppColors.colorMedimGrey,
                         ),
-                        setHint: 'Number Phone',
+                        setHint: 'Phone Number',
                       ),
                       SizedBox(height: 16),
                       //-
@@ -67,7 +66,7 @@ class SignupScreen extends StatelessWidget {
                           Icons.person,
                           color: AppColors.colorMedimGrey,
                         ),
-                        setHint: 'UserName',
+                        setHint: 'Name',
                       ),
                       SizedBox(height: 16),
                       CustomTextField(
@@ -127,17 +126,16 @@ class SignupScreen extends StatelessWidget {
                           }
                           if (state is SuccessState) {
                             Navigator.pop(context);
-                            Future.delayed(
-                              const Duration(milliseconds: 500),
-                              () {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    backgroundColor: Colors.green,
-                                    content: Text("Successfully registered"),
+                            Future.delayed(const Duration(milliseconds: 500), () {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: Colors.green[600],
+                                  content: Text(
+                                    "We’ve sent a verification link to your email. Please check your inbox",
                                   ),
-                                );
-                              },
-                            );
+                                ),
+                              );
+                            });
                           }
                           return Row(
                             children: [
