@@ -6,6 +6,7 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class SupabaseConnect {
   static Supabase? supabase;
 
+  // Initializes the Supabase
   static Future<void> init() async {
     try {
       await dotenv.load(fileName: ".env");
@@ -37,8 +38,10 @@ class SupabaseConnect {
       );
       return user.user;
     } on AuthException catch (error) {
+      // Throws a more specific auth-related error
       throw AuthException(error.message);
     } catch (error) {
+      // General signup error
       throw FormatException("There is error with sign Up");
     }
   }
@@ -58,5 +61,26 @@ class SupabaseConnect {
       "email": email,
       "role": role,
     });
+  }
+
+  //Supabase sign-in integration
+
+  static Future<dynamic> signIn({
+    required String email,
+    required String password,
+  }) async {
+    try {
+      final AuthResponse user = await supabase!.client.auth.signInWithPassword(
+        password: password,
+        email: email,
+      );
+      return user.user;
+    } on AuthException catch (error) {
+      // Throws a more specific auth-related error
+      throw AuthException(error.message);
+    } catch (error) {
+      // General signهى error
+      throw FormatException("There is error with sign in");
+    }
   }
 }

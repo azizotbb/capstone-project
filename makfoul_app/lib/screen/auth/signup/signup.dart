@@ -13,9 +13,6 @@ class SignupScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final supabase = Supabase.instance.client;
-    // final session = supabase.auth.currentSession;
-    // print(session);
     return BlocProvider(
       create: (context) => SignupBloc(),
       child: Builder(

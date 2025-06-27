@@ -17,16 +17,20 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
 
   final bool isPasswordVisable = false;
 
+  // Controllers for the signup form input fields
   final TextEditingController controllerNumber = TextEditingController();
   final TextEditingController controllerUserName = TextEditingController();
   final TextEditingController controllerEmail = TextEditingController();
   final TextEditingController controllerPassword = TextEditingController();
   final TextEditingController controllerPasswordConfi = TextEditingController();
 
+  // Selected role for user (default is "user")
   String? selected = "user";
 
+  // Key for validating the signup form
   final formKey = GlobalKey<FormState>();
 
+  // Access the authentication logic via dependency injection
   final authGetit = GetIt.I.get<AuthLayer>();
 
   SignupBloc() : super(SignupInitial()) {
@@ -34,7 +38,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
 
     on<CreateNewAccountEvent>(createNewAccountMethod);
   }
-
+  // Handles updating the selected role
   FutureOr<void> selectedRolemethod(
     SelectedRoleEvent event,
     Emitter<SignupState> emit,
@@ -43,6 +47,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     emit(RoleUpdateState());
   }
 
+  // Handles user sign-up process
   FutureOr<void> createNewAccountMethod(
     CreateNewAccountEvent event,
     Emitter<SignupState> emit,
