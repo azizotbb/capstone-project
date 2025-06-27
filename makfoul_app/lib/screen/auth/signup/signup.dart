@@ -50,7 +50,7 @@ class SignupScreen extends StatelessWidget {
                   Icons.phone_android,
                   color: AppColors.colorMedimGrey,
                 ),
-                setHint: 'Number Phone',
+                setHint: 'Number phone',
               ),
               SizedBox(height: 16),
               CustomTextField(
@@ -77,18 +77,21 @@ class SignupScreen extends StatelessWidget {
               ),
               SizedBox(height: 16),
               CustomTextField(
+                setHint: 'ConfirmPassword',
+                controller: controllerPasswordConfi,
                 validator: (value) {
                   return Validators.confirmPassword(
                     value,
                     controllerPasswordConfi.text,
                   );
                 },
-                controller: controllerPasswordConfi,
-                setHint: 'Confirm Password',
                 isPassword: true,
-                isVisable: isConfirmVisable,
-                onPressedSuffix: () {},
+                isVisable: isPasswordVisable,
+                onPressedSuffix: () {
+                  
+                },
               ),
+
               Row(
                 children: [
                   Radio(
@@ -147,3 +150,16 @@ class SignupScreen extends StatelessWidget {
     );
   }
 }
+//       CustomTextField(
+//                 validator: (value) {
+//                   return Validators.confirmPassword(
+//                     value,
+//                     controllerPasswordConfi.text,
+//                   );
+//                 },
+//                 controller: controllerPasswordConfi,
+//                 setHint: 'Confirm Password',
+//                 isPassword: true,
+//                 isVisable: isConfirmVisable,
+//                 onPressedSuffix: () {},
+//               ),

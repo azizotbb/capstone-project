@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
+import 'package:makfoul_app/screen/home/homescreen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/shared/empty_custom_button.dart';
 
 class WelcomScreen extends StatelessWidget {
   const WelcomScreen({super.key});
-// Welcome screen with Login and Sign Up buttons
+  // Welcome screen with Login and Sign Up buttons
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,14 @@ class WelcomScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              Text('Continue as Guest', style: AppTextStyle.text14),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(
+                    context,
+                  ).push(MaterialPageRoute(builder: (context) => HomeScreen()));
+                },
+                child: Text('Continue as Guest', style: AppTextStyle.text14),
+              ),
             ],
           ),
         ),
