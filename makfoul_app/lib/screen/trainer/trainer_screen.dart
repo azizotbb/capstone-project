@@ -46,8 +46,11 @@ class TrainerScreen extends StatelessWidget {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InstructorCustomCard(
+                      //supabase here to get coures title
                       title: "Course title",
+                      //supabase here to get Trainer Name
                       trainerName: "Trainer Name",
+                      //supabase here to get Trainer avatar
                       avatar: "assets/images/circler avtar instructor.png",
                       ontap: () {
                         Navigator.push(

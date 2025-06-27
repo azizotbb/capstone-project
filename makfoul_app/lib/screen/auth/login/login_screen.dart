@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/screen/auth/resetpassword/reset_password_screen.dart';
 import 'package:makfoul_app/screen/auth/signup/signup.dart';
@@ -28,7 +29,7 @@ class LoginScreen extends StatelessWidget {
           children: [
             SizedBox(height: 30),
             Text(
-              'Login',
+              'login'.tr(),
               style: AppTextStyle.textHeadr36,
               textAlign: TextAlign.start,
             ),
@@ -37,7 +38,7 @@ class LoginScreen extends StatelessWidget {
               validator: (value) {
                 return Validators.email(value);
               },
-              setHint: 'Email',
+              setHint: 'email'.tr(),
               suffIcon: Icon(
                 Icons.email_outlined,
                 color: AppColors.colorMedimGrey,
@@ -45,7 +46,7 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             CustomTextField(
-              setHint: 'Password',
+              setHint: 'password'.tr(),
               isPassword: true,
               isVisable: isPasswordVisable,
               onPressedSuffix: () {},
@@ -67,20 +68,20 @@ class LoginScreen extends StatelessWidget {
                 },
 
                 child: Text(
-                  'Forget password ?',
+                  'forget_password'.tr(),
                   style: AppTextStyle.text14,
                   textAlign: TextAlign.start,
                 ),
               ),
             ),
             SizedBox(height: 16),
-            PrimryCustomButton(setText: 'Login', onPressed: () {}),
+            PrimryCustomButton(setText: 'login'.tr(), onPressed: () {}),
             SizedBox(height: 14),
             Padding(
               padding: const EdgeInsets.only(left: 55),
               child: Row(
                 children: [
-                  Text("Don't have an account? ", style: AppTextStyle.text14),
+                  Text("dont_have_account".tr(), style: AppTextStyle.text14),
                   InkWell(
                     onTap: () {
                       Navigator.push(
@@ -88,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => SignupScreen()),
                       );
                     },
-                    child: Text('Sign up', style: AppTextStyle.text14primary),
+                    child: Text('create_account'.tr(), style: AppTextStyle.text14primary),
                   ),
                 ],
               ),

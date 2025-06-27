@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/screen/auth/login/login_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
@@ -38,7 +39,7 @@ class SignupScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               SizedBox(height: 30),
-              Text('Sign Up', style: AppTextStyle.textHeadr36),
+              Text('create_account'.tr(), style: AppTextStyle.textHeadr36),
               SizedBox(height: 45),
               CustomTextField(
                 validator: (value) {
@@ -50,7 +51,7 @@ class SignupScreen extends StatelessWidget {
                   Icons.phone_android,
                   color: AppColors.colorMedimGrey,
                 ),
-                setHint: 'Number Phone',
+                setHint: 'number_phone'.tr(),
               ),
               SizedBox(height: 16),
               CustomTextField(
@@ -58,7 +59,7 @@ class SignupScreen extends StatelessWidget {
                 validator: (val) {
                   return Validators.email(val);
                 },
-                setHint: 'Email',
+                setHint: 'email'.tr(),
                 suffIcon: Icon(
                   Icons.email_outlined,
                   color: AppColors.colorMedimGrey,
@@ -70,30 +71,33 @@ class SignupScreen extends StatelessWidget {
                   return Validators.password(value);
                 },
                 controller: controllerPassword,
-                setHint: 'Password',
+                setHint: 'password'.tr(),
                 isPassword: true,
                 isVisable: isPasswordVisable,
                 onPressedSuffix: () {},
               ),
               SizedBox(height: 16),
               CustomTextField(
+                setHint: 'confirm_password'.tr(),
+                controller: controllerPasswordConfi,
                 validator: (value) {
                   return Validators.confirmPassword(
                     value,
                     controllerPasswordConfi.text,
                   );
                 },
-                controller: controllerPasswordConfi,
-                setHint: 'Confirm Password',
                 isPassword: true,
-                isVisable: isConfirmVisable,
-                onPressedSuffix: () {},
+                isVisable: isPasswordVisable,
+                onPressedSuffix: () {
+                  
+                },
               ),
+
               Row(
                 children: [
                   Radio(
                     activeColor: AppColors.colorPrimary,
-                    value: 'user',
+                    value: 'user'.tr(),
                     groupValue: selected,
                     onChanged: (val) {
                       // setState(() {
@@ -101,10 +105,10 @@ class SignupScreen extends StatelessWidget {
                       // });
                     },
                   ),
-                  Text('user', style: AppTextStyle.text14),
+                  Text('user'.tr(), style: AppTextStyle.text14),
                   Radio(
                     activeColor: AppColors.colorPrimary,
-                    value: 'trainer',
+                    value: 'trainer'.tr(),
                     groupValue: selected,
                     onChanged: (val) {
                       // setState(() {
@@ -112,18 +116,18 @@ class SignupScreen extends StatelessWidget {
                       // });
                     },
                   ),
-                  Text('trainer', style: AppTextStyle.text14),
+                  Text('trainer'.tr(), style: AppTextStyle.text14),
                 ],
               ),
               SizedBox(height: 8),
-              PrimryCustomButton(setText: 'Sign Up', onPressed: () {}),
+              PrimryCustomButton(setText: 'create_account'.tr(), onPressed: () {}),
               SizedBox(height: 14),
               Padding(
                 padding: const EdgeInsets.only(left: 55),
                 child: Row(
                   children: [
                     Text(
-                      'Already have an account? ',
+                      'already_have_account'.tr(),
                       style: AppTextStyle.text14,
                     ),
                     InkWell(
@@ -135,7 +139,7 @@ class SignupScreen extends StatelessWidget {
                           ),
                         );
                       },
-                      child: Text('Sign in', style: AppTextStyle.text14primary),
+                      child: Text('sign_in'.tr(), style: AppTextStyle.text14primary),
                     ),
                   ],
                 ),
@@ -147,3 +151,16 @@ class SignupScreen extends StatelessWidget {
     );
   }
 }
+//       CustomTextField(
+//                 validator: (value) {
+//                   return Validators.confirmPassword(
+//                     value,
+//                     controllerPasswordConfi.text,
+//                   );
+//                 },
+//                 controller: controllerPasswordConfi,
+//                 setHint: 'Confirm Password',
+//                 isPassword: true,
+//                 isVisable: isConfirmVisable,
+//                 onPressedSuffix: () {},
+//               ),

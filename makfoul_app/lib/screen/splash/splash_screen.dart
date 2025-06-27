@@ -8,22 +8,20 @@ class SplashScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Future.delayed(Duration(seconds: 3), () {
+      print('i was here');
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => OnBoarding()),
+      );
+    });
     return Scaffold(
       backgroundColor: AppColors.colorScondry,
-      body: InkWell(
-        //  inkwell مؤقت الى ما اشتغل ع البلوك 
-        onTap: () {
-          Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(builder: (context) => OnBoarding()),
-          );
-        },
-        child: Center(
-          child: SizedBox(
-            height: context.getHeight(size: 0.08),
-            width: context.getWidth(size: 0.8),
-            child: Image.asset('asset/images/logo_makfol-removebg-preview.png'),
-          ),
+      body: Center(
+        child: Image.asset(
+          'assets/images/logomakfoul.png',
+          width: 400,
+          height: 400,
         ),
       ),
     );

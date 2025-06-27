@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/style/app_colors.dart';
@@ -72,7 +73,7 @@ class TopCourses extends StatelessWidget {
               bottom: 14,
               child: TextButton(
                 onPressed: () {},
-                child: Text("View details >", style: AppTextStyle.textMedium14),
+                child: Text("view_details".tr(), style: AppTextStyle.textMedium14),
               ),
             ),
           ],

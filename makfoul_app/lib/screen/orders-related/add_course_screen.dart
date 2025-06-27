@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/model/coursemodel.dart';
+import 'package:makfoul_app/screen/orders-related/notification_screen.dart';
 import 'package:makfoul_app/screen/trainer/trainer_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -19,9 +21,11 @@ class AddCourseScreen extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         actions: [
-          IconButton(icon: Icon(Icons.notifications_none), onPressed: () {}),
+          IconButton(icon: Icon(Icons.notifications_none), onPressed: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> NotificationScreen()));
+          }),
         ],
-        title: Text('History', style: AppTextStyle.textTitleLarg24dark),
+        title: Text('history'.tr(), style: AppTextStyle.textTitleLarg24dark),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -77,7 +81,7 @@ class AddCourseScreen extends StatelessWidget {
               SizedBox(height: 30),
               Align(
                 alignment: Alignment.topLeft,
-                child: Text("Active Course "),
+                child: Text("active_courses").tr(),
               ),
               //active course
               ListView.builder(
@@ -85,16 +89,23 @@ class AddCourseScreen extends StatelessWidget {
                 itemCount: activeCourse.length,
                 itemBuilder: (BuildContext context, int index) {
                   print("${activeCourse.length}");
-                  return CustomCourseWidget(
-                    coursetitle: activeCourse[index].coursename,
-                    pricecourse: activeCourse[index].price,
-                    image: 'assets/images/Rectangle 61.png',
+                  return Dismissible(key: Key('activeCourse'),
+                  //supabase delete course
+                  onDismissed: (direction) {
+                    
+                  },
+                  background: Container(alignment: Alignment.centerRight,child: Icon(Icons.delete_outline_outlined,color: AppColors.colorPrimary,),),
+                    child: CustomCourseWidget(
+                      coursetitle: activeCourse[index].coursename,
+                      pricecourse: activeCourse[index].price,
+                      image: 'assets/images/Rectangle 61.png',
+                    ),
                   );
                 },
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: Text("anactive Course "),
+                child: Text("inactive_courses").tr(),
               ),
               //   active course
               ListView.builder(

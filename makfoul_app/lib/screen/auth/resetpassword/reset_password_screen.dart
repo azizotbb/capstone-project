@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/screen/auth/resetpassword/verification_code_screen.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -11,26 +12,26 @@ class ResetPasswordScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Reset Password', style: AppTextStyle.textTitleLarg24light),
+        title: Text('reset_password'.tr(), style: AppTextStyle.textTitleLarg24light),
       ),
       body: Padding(
         padding: EdgeInsets.all(24),
         child: Column(
           children: [
             // SizedBox(height: 100),
-            CustomTextField(setHint: 'Enter Your Email'),
+            CustomTextField(setHint: 'enter_email'.tr()),
             SizedBox(height: 16),
             PrimryCustomButton(
-              setText: 'Reset Password',
+              setText: 'reset_password'.tr(),
               onPressed: () {
                 showDialog(
                   context: context,
                   barrierDismissible: true,
                   builder: (context) {
                     return AlertDialog(
-                      title: Text('Check your email'),
+                      title: Text('check_your_email'.tr()),
                       content: Text(
-                        'We sent you a code to reset your password',
+                        'reset_code_sent_message'.tr(),
                       ),
                     );
                   },

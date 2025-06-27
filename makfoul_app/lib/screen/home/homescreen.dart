@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/screen/trainer/trainer_screen.dart';
@@ -6,6 +7,8 @@ import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
 import 'package:makfoul_app/widget/homescreen/TopCourses_widget.dart';
 import 'package:makfoul_app/widget/homescreen/main_caregory_widget.dart';
+
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key, this.name});
@@ -26,10 +29,10 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text("Hi," + name!, style: AppTextStyle.textButton20),
+                      Text("hi".tr() + name!, style: AppTextStyle.textButton20),
                       SizedBox(height: 8),
                       Text(
-                        "your daily helper, Learn with Makfool",
+                        'ad_title'.tr(),
                         style: AppTextStyle.text14,
                       ),
                     ],
@@ -41,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                   child: TextButton(
                     onPressed: () {},
                     child: Text(
-                      "create account  ",
+                      "create_account".tr(),
                       style: AppTextStyle.textMedium14,
                     ),
                   ),
@@ -83,7 +86,7 @@ class HomeScreen extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 24),
               child: Align(
                 alignment: Alignment.topLeft,
-                child: Text("Courses", style: AppTextStyle.textTitleLarg24dark),
+                child: Text("courses".tr(), style: AppTextStyle.textTitleLarg24dark),
               ),
             ),
             SizedBox(height: 16),
@@ -94,13 +97,13 @@ class HomeScreen extends StatelessWidget {
                 children: [
                   MainCaregoryWidget(
                     image: null,
-                    categoryname: 'All',
+                    categoryname: 'all'.tr(),
                     ontap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              TrainerScreen(appbarTitle: 'Courses'),
+                              TrainerScreen(appbarTitle: 'courses'.tr()),
                         ),
                       );
                     },
@@ -108,13 +111,13 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 12),
                   MainCaregoryWidget(
                     image: "assets/images/Clean (2).png",
-                    categoryname: 'Clean',
+                    categoryname: 'clean'.tr(),
                     ontap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              TrainerScreen(appbarTitle: 'Clean Courses'),
+                              TrainerScreen(appbarTitle: 'clean_courses'.tr()),
                         ),
                       );
                     },
@@ -122,13 +125,13 @@ class HomeScreen extends StatelessWidget {
                   SizedBox(height: 12),
                   MainCaregoryWidget(
                     image: "assets/images/cook (2).png",
-                    categoryname: 'Cook',
+                    categoryname: 'cook'.tr(),
                     ontap: () {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
                           builder: (context) =>
-                              TrainerScreen(appbarTitle: 'Cook Courses'),
+                              TrainerScreen(appbarTitle: 'cook_courses'.tr()),
                         ),
                       );
                     },
@@ -140,7 +143,7 @@ class HomeScreen extends StatelessWidget {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 24),
               child: Text(
-                "Top Courses",
+                "top_courses".tr(),
                 style: AppTextStyle.textTitleLarg24dark,
               ),
             ),
@@ -153,6 +156,7 @@ class HomeScreen extends StatelessWidget {
                 itemBuilder: (BuildContext context, int index) {
                   return TopCourses(
                     image: 'assets/images/TopCourse.png',
+                    //supabase get the name for the trainer and location and price
                     coursename: 'Amal',
                     location: 'Alrass',
                     price: 150,

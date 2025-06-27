@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -34,7 +35,7 @@ class CustomNotification extends StatelessWidget {
                         color: Color(0xff059820),
                       ),
                       child: Text(
-                        'Accept',
+                        'accept'.tr(),
                         style: AppTextStyle.textReguler16.copyWith(
                           color: Colors.white,
                         ),
@@ -47,7 +48,7 @@ class CustomNotification extends StatelessWidget {
                         color: Color(0xffF30404),
                       ),
                       child: Text(
-                        'Reject',
+                        'reject'.tr(),
                         style: AppTextStyle.textReguler16.copyWith(
                           color: Colors.white,
                         ),
@@ -62,7 +63,7 @@ class CustomNotification extends StatelessWidget {
                         color: Colors.grey,
                       ),
                       child: Text(
-                        'Dissmiss',
+                        'dissmiss'.tr(),
                         style: AppTextStyle.textReguler16.copyWith(
                           color: Colors.white,
                         ),

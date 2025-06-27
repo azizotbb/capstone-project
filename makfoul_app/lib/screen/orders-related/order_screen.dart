@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/widget/course/custom_course_widget.dart';
 
@@ -8,7 +9,7 @@ class OrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       
-      appBar: AppBar(title: Text("Order"), centerTitle: true),
+      appBar: AppBar(title: Text("order").tr(), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: ListView.builder(
