@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
+import 'package:makfoul_app/widget/course/custom_course_widget.dart';
 
 class AddCourseScreen extends StatelessWidget {
   const AddCourseScreen({super.key});
@@ -47,27 +48,63 @@ class AddCourseScreen extends StatelessWidget {
                           direction: DismissDirection.endToStart,
                           onDismissed: (direction) {},
                           background: Container(
-                            width: context.getWidth(size: 0.5),
+                            width: context.getWidth(),
 
-                            color: Colors.redAccent,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(Icons.delete, color: Colors.white),
-                                Text(
-                                  'Delete',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                              ],
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Icon(Icons.delete, color: Colors.redAccent),
+                                  Text(
+                                    'Delete',
+                                    style: TextStyle(color: Colors.redAccent),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                          key: Key(item),
-                          child: Center(child: Text(item)),
+                          key: Key(item.toString()),
+                          child: Center(child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: item,
+                          )),
                         );
                       },
                     ),
                   ),
-                  Tab(child: Text('Cook')),
+                  Tab(child:ListView.builder(
+                      itemCount: items.length,
+                      itemBuilder: (context, index) {
+                        final item = items[index];
+                        return Dismissible(
+                          direction: DismissDirection.endToStart,
+                          onDismissed: (direction) {},
+                          background: Container(
+                            width: context.getWidth(),
+
+                            child: Padding(
+                              padding: const EdgeInsets.all(16.0),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  Icon(Icons.delete, color: Colors.redAccent),
+                                  Text(
+                                    'Delete',
+                                    style: TextStyle(color: Colors.redAccent),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          key: Key(item.toString()),
+                          child: Center(child: Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: item,
+                          )),
+                        );
+                      },
+                    ),),
                 ],
               ),
             ),
@@ -78,4 +115,4 @@ class AddCourseScreen extends StatelessWidget {
   }
 }
 
-List<String> items = ['1', '2', '3'];
+List<Widget> items = [CustomCourseWidget(coursetitle: 'coursetitle', pricecourse: 121, image: 'assets/images/Rectangle 61.png'),CustomCourseWidget(coursetitle: 'coursetitle', pricecourse: 121, image: 'assets/images/Rectangle 61.png'),CustomCourseWidget(coursetitle: 'coursetitle', pricecourse: 121, image: 'assets/images/Rectangle 61.png')];
