@@ -6,7 +6,6 @@ import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
 import 'package:makfoul_app/widget/homescreen/main_caregory_widget.dart';
 import 'package:makfoul_app/widget/homescreen/search_widget.dart';
 
-
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -33,9 +32,7 @@ class HomeScreen extends StatelessWidget {
                           SizedBox(width: 12),
                           Container(
                             child: IconButton(
-                              onPressed: () {
-                               
-                              },
+                              onPressed: () {},
                               icon: Icon(
                                 Icons.tune,
                                 color: Colors.white,
@@ -52,7 +49,7 @@ class HomeScreen extends StatelessWidget {
                     //   child: Image.asset("images/Ad2.png", fit: BoxFit.cover),
                     // ),
                     // SizedBox(height: 100, width: 400, child: AdWidget()),
-                    Container(child: Image.asset("images/addcard.png")),
+                    Container(child: Image.asset("assets/images/addcard.png")),
                   ],
                 ),
               ],
@@ -70,7 +67,7 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 16),
             MainCaregoryWidget(
-              image: "images/Clean.png",
+              image: "assets/images/Clean.png",
               categoryname: 'Clean',
               ontap: () {
                 Navigator.push(
@@ -81,7 +78,7 @@ class HomeScreen extends StatelessWidget {
             ),
             SizedBox(height: 10),
             MainCaregoryWidget(
-              image: "images/Cook.png",
+              image: "assets/images/Cook.png",
               categoryname: 'Cook',
               ontap: () {
                 Navigator.push(

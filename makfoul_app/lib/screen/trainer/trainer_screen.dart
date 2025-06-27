@@ -6,7 +6,6 @@ import 'package:makfoul_app/widget/Instructor/instructor_custom_card.dart';
 import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
 import 'package:makfoul_app/widget/homescreen/search_widget.dart';
 
-
 class TrainerScreen extends StatelessWidget {
   const TrainerScreen({super.key, required this.appbarTitle});
   final String appbarTitle;
@@ -48,7 +47,7 @@ class TrainerScreen extends StatelessWidget {
                     child: InstructorCustomCard(
                       title: "Course title",
                       trainerName: "Trainer Name",
-                      avatar: "images/circler avtar instructor.png",
+                      avatar: "assets/images/circler avtar instructor.png",
                     ),
                   );
                 },

@@ -1,15 +1,16 @@
 class Validators {
   /// Validates verificationCode format
 
-static String? verificationCode(String? value) {
-  if (value == null || value.trim().isEmpty) {
-    return 'Please enter the verification code';
+  static String? verificationCode(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Please enter the verification code';
+    }
+    // if (!RegExp(r'^\d{6}$').hasMatch(value)) {
+    //   return 'The code must be 6 digits';
+    // }
+    return null;
   }
-  // if (!RegExp(r'^\d{6}$').hasMatch(value)) {
-  //   return 'The code must be 6 digits';
-  // }
-  return null;
-}
+
   /// Validates numberPhone format
 
   static String? numberPhone(String? value) {
@@ -31,6 +32,16 @@ static String? verificationCode(String? value) {
       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$',
     ).hasMatch(value)) {
       return 'Invalid email format';
+    }
+    return null;
+  }
+
+  static String? username(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Please enter your UserName';
+    }
+    if (value.length < 13) {
+      return 'Name must be less than 13 characters.';
     }
     return null;
   }

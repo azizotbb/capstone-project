@@ -25,7 +25,9 @@ class ProfileScreen extends StatelessWidget {
                       height: 68,
                       clipBehavior: Clip.hardEdge,
                       decoration: BoxDecoration(shape: BoxShape.circle),
-                      child: Image.asset("assets/chef.jpg"),
+                      child: Image.asset(
+                        "assets/images/circler avtar instructor.png",
+                      ),
                     ),
                     Column(
                       children: [
