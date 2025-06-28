@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/screen/auth/login/login_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
@@ -22,7 +23,7 @@ class VerificationCodeScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Reset New Password',
+          'reset_new_password_title'.tr(),
           style: AppTextStyle.textTitleLarg24light,
         ),
       ),
@@ -33,20 +34,20 @@ class VerificationCodeScreen extends StatelessWidget {
           children: [
             SizedBox(height: 30),
             Text(
-              'Create New Password',
+              'create_new_password'.tr(),
               style: AppTextStyle.textTitleLarg24light,
             ),
             SizedBox(height: 16),
             Text(
-              'Enter the reset token from your email and set a new password',
+              'reset_password_instructions'.tr(),
               style: AppTextStyle.textDes12,
             ),
             SizedBox(height: 30),
             CustomTextField(
-              validator: (value) {},
+              // validator: (value) {},
               controller: controllerToken,
               suffIcon: Icon(Icons.lock, color: AppColors.colorMedimGrey),
-              setHint: 'Reset Token',
+              setHint: 'reset_token_hint'.tr(),
             ),
             SizedBox(height: 16),
             CustomTextField(
@@ -54,7 +55,7 @@ class VerificationCodeScreen extends StatelessWidget {
               validator: (val) {
                 return Validators.email(val);
               },
-              setHint: 'Email',
+              setHint: 'email'.tr(),
               suffIcon: Icon(
                 Icons.email_outlined,
                 color: AppColors.colorMedimGrey,
@@ -66,7 +67,7 @@ class VerificationCodeScreen extends StatelessWidget {
                 return Validators.password(value);
               },
               controller: controllerNewPassword,
-              setHint: 'Password',
+              setHint: 'password'.tr(),
               isPassword: true,
               isVisable: isPasswordVisable,
               onPressedSuffix: () {},
@@ -80,14 +81,14 @@ class VerificationCodeScreen extends StatelessWidget {
                 );
               },
               controller: controllerNewPasswordConfi,
-              setHint: 'Confirm Password',
+              setHint: 'confirm_password'.tr(),
               isPassword: true,
               isVisable: isConfirmVisable,
               onPressedSuffix: () {},
             ),
             SizedBox(height: 16),
             PrimryCustomButton(
-              setText: 'Save',
+              setText: 'save'.tr(),
               onPressed: () {
                 Navigator.push(
                   context,

@@ -1,14 +1,21 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
+import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/screen/splash/splash_screen.dart';
 import 'package:makfoul_app/widget/profile/profile_option.dart';
 import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
 import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userinfo = GetIt.I.get<AuthLayer>().userinfo;
+
     return Scaffold(
       body: Padding(
         padding: EdgeInsetsGeometry.symmetric(horizontal: 10, vertical: 24),
@@ -32,13 +39,15 @@ class ProfileScreen extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          "Hello",
+                          "hello".tr(),
                           style: TextStyle(
                             fontSize: 17,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        Text("Aziz"),
+
+                        //supabase here to get current Username
+                        Text(userinfo.username),
                       ],
                     ),
                   ],
@@ -52,7 +61,17 @@ class ProfileScreen extends StatelessWidget {
 
             //profile option
             SizedBox(height: 80),
-            ProfileOption(icon: Icons.language, onTap: () {}, text: "Language"),
+            ProfileOption(
+              icon: Icons.language,
+              onTap: () {
+                if (context.locale.languageCode == "ar") {
+                  context.setLocale(Locale('en', 'US'));
+                } else {
+                  context.setLocale(Locale('ar', 'AR'));
+                }
+              },
+              text: "lang".tr(),
+            ),
             ProfileOption(
               icon: Icons.loop,
               onTap: () {
@@ -72,17 +91,20 @@ class ProfileScreen extends StatelessWidget {
                       child: Column(
                         spacing: 19,
                         children: [
-                          CustomTextField(setHint: "Password"),
-                          CustomTextField(setHint: "Confirm Password"),
-                          CustomTextField(setHint: "New password"),
-                          PrimryCustomButton(setText: "save", onPressed: () {}),
+                          CustomTextField(setHint: "password".tr()),
+                          CustomTextField(setHint: "confirm_password".tr()),
+                          CustomTextField(setHint: "new_password".tr()),
+                          PrimryCustomButton(
+                            setText: "save".tr(),
+                            onPressed: () {},
+                          ),
                         ],
                       ),
                     ),
                   ),
                 );
               },
-              text: "Change password",
+              text: "change_password".tr(),
             ),
             ProfileOption(
               icon: Icons.error_outline,
@@ -91,23 +113,21 @@ class ProfileScreen extends StatelessWidget {
                   context: context,
                   builder: (context) {
                     return AlertDialog(
-                      content: Text(
-                        "Are you sure you want to delete the account?",
-                      ),
+                      content: Text("delete_confirmation".tr()),
                       actions: [
                         TextButton(
                           onPressed: () {
                             Navigator.pop(context);
                           },
                           child: Text(
-                            "cancel",
+                            "cancel".tr(),
                             style: TextStyle(color: Color(0xff444444)),
                           ),
                         ),
                         TextButton(
                           onPressed: () {},
                           child: Text(
-                            "Accept",
+                            "accept".tr(),
                             style: TextStyle(color: Colors.red),
                           ),
                         ),
@@ -116,7 +136,7 @@ class ProfileScreen extends StatelessWidget {
                   },
                 );
               },
-              text: "Delete Account",
+              text: "delete_account".tr(),
             ),
             ProfileOption(
               icon: Icons.headphones_outlined,
@@ -138,7 +158,7 @@ class ProfileScreen extends StatelessWidget {
                           ListTile(
                             leading: Icon(Icons.email_outlined),
                             title: Text(
-                              "Email: Makfoul@gmail.com",
+                              "Makfoul@gmail.com",
                               style: TextStyle(fontSize: 14),
                             ),
                           ),
@@ -148,14 +168,23 @@ class ProfileScreen extends StatelessWidget {
                   ),
                 );
               },
-              text: "Customer serves",
+              text: "customer_service".tr(),
             ),
             SizedBox(height: 46),
             ListTile(
-              onTap: () {},
+              onTap: () async {
+                final supabase = Supabase.instance.client;
+
+                await supabase.auth.signOut();
+
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => SplashScreen()),
+                );
+              },
               leading: Icon(Icons.logout, color: Colors.red),
               title: Text(
-                "Logout",
+                "logout".tr(),
                 style: TextStyle(
                   fontSize: 13,
                   fontWeight: FontWeight.bold,

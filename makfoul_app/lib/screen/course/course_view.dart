@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
+import 'package:makfoul_app/screen/payment/payment_screen.dart';
+import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
 
@@ -13,10 +15,23 @@ class CourseView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
 
         children: [
-          SizedBox(
-            width: context.getWidth(),
-            height: 300,
-            child: Image.asset("assets/chef.jpg"),
+          Stack(
+            children: [
+              SizedBox(
+                width: context.getWidth(),
+                height: 300,
+                child: Image.asset("assets/chef.jpg"),
+              ),
+              IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back_ios,
+                  color: AppColors.colorDarkGrey,
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 12),
           Padding(
@@ -45,7 +60,14 @@ class CourseView extends StatelessWidget {
                     Center(
                       child: PrimryCustomButton(
                         setText: "Add to Cart",
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PaymentScreen(),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ],

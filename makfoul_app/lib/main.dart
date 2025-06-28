@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/repo/api/supabase.dart';
-import 'package:makfoul_app/screen/auth/login/login_screen.dart';
+import 'package:makfoul_app/screen/splash/splash_screen.dart';
+import 'package:makfoul_app/style/app_theme.dart';
 import 'package:makfoul_app/utility/setup.dart';
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   // to Initialized supabase
@@ -11,7 +13,17 @@ Future<void> main() async {
 
   setup();
 
-  runApp(const MainApp());
+  await EasyLocalization.ensureInitialized();
+
+  runApp(
+    EasyLocalization(
+      supportedLocales: [Locale('en', 'US'), Locale('ar', 'AR')],
+      path:
+          'assets/translations', // <-- change the path of the translation files
+      fallbackLocale: Locale('en', 'US'),
+      child: MainApp(),
+    ),
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -19,6 +31,15 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: LoginScreen());
+    return MaterialApp(
+      // theme: AppTheme.appTheme,
+      // home: BottomNavigationWidget(),
+      localizationsDelegates: context.localizationDelegates,
+      supportedLocales: context.supportedLocales,
+      locale: context.locale,
+      debugShowCheckedModeBanner: false,
+      theme: AppTheme.appTheme,
+      home: SplashScreen(),
+    );
   }
 }

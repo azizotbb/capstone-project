@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
+import 'package:makfoul_app/style/app_colors.dart';
 
 class BackgroundColorWidget extends StatelessWidget {
   const BackgroundColorWidget({super.key, required this.height});
@@ -10,11 +11,8 @@ class BackgroundColorWidget extends StatelessWidget {
       height: height,
       width: context.getWidth(),
       decoration: BoxDecoration(
-        color: Color.fromRGBO(255, 109, 64, 1),
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(20),
-          bottomRight: Radius.circular(20),
-        ),
+        color: AppColors.colorPrimary,
+        borderRadius: BorderRadius.only(bottomLeft: Radius.circular(32)),
       ),
     );
   }

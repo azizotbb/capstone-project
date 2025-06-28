@@ -14,17 +14,21 @@ part 'login_state.dart';
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final bool isPasswordVisable = false;
 
+  // Key for form validation
   final formKey = GlobalKey<FormState>();
 
+  // Controllers for email and password input fields
   final TextEditingController controllerEmail = TextEditingController();
   final TextEditingController controllerPassword = TextEditingController();
 
+  // Access the AuthLayer using GetIt dependency injection
   final authGetit = GetIt.I.get<AuthLayer>();
 
   LoginBloc() : super(LoginInitial()) {
     on<SignInEvent>(SignInMethod);
   }
 
+  // Handles the sign-in process when SignInEvent is triggered
   FutureOr<void> SignInMethod(
     SignInEvent event,
     Emitter<LoginState> emit,

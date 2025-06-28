@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makfoul_app/screen/auth/login/login_screen.dart';
@@ -37,7 +38,7 @@ class SignupScreen extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: 30),
-                      Text('Sign Up', style: AppTextStyle.textHeadr36),
+                      Text('Sign Up'.tr(), style: AppTextStyle.textHeadr36),
                       SizedBox(height: 45),
                       CustomTextField(
                         validator: (value) {
@@ -49,7 +50,7 @@ class SignupScreen extends StatelessWidget {
                           Icons.phone_android,
                           color: AppColors.colorMedimGrey,
                         ),
-                        setHint: 'Phone Number',
+                        setHint: 'Phone Number'.tr(),
                       ),
                       SizedBox(height: 16),
                       //-
@@ -63,7 +64,7 @@ class SignupScreen extends StatelessWidget {
                           Icons.person,
                           color: AppColors.colorMedimGrey,
                         ),
-                        setHint: 'Name',
+                        setHint: 'Name'.tr(),
                       ),
                       SizedBox(height: 16),
                       CustomTextField(
@@ -71,7 +72,7 @@ class SignupScreen extends StatelessWidget {
                         validator: (val) {
                           return Validators.email(val);
                         },
-                        setHint: 'Email',
+                        setHint: 'Email'.tr(),
                         suffIcon: Icon(
                           Icons.email_outlined,
                           color: AppColors.colorMedimGrey,
@@ -83,7 +84,7 @@ class SignupScreen extends StatelessWidget {
                           return Validators.password(value);
                         },
                         controller: bloc.controllerPassword,
-                        setHint: 'Password',
+                        setHint: 'Password'.tr(),
                         isPassword: true,
                         isVisable: bloc.isPasswordVisable,
                         onPressedSuffix: () {},
@@ -97,7 +98,7 @@ class SignupScreen extends StatelessWidget {
                           );
                         },
                         controller: bloc.controllerPasswordConfi,
-                        setHint: 'Confirm Password',
+                        setHint: 'Confirm Password'.tr(),
                         isPassword: true,
                         isVisable: bloc.isConfirmVisable,
                         onPressedSuffix: () {},
@@ -128,7 +129,8 @@ class SignupScreen extends StatelessWidget {
                                 SnackBar(
                                   backgroundColor: Colors.green[600],
                                   content: Text(
-                                    "We’ve sent a verification link to your email. Please check your inbox",
+                                    "We’ve sent a verification link to your email. Please check your inbox"
+                                        .tr(),
                                   ),
                                 ),
                               );
@@ -138,29 +140,29 @@ class SignupScreen extends StatelessWidget {
                             children: [
                               Radio(
                                 activeColor: AppColors.colorPrimary,
-                                value: 'user',
+                                value: 'user'.tr(),
                                 groupValue: bloc.selected,
                                 onChanged: (val) {
                                   bloc.add(SelectedRoleEvent(value: val));
                                 },
                               ),
-                              Text('user', style: AppTextStyle.text14),
+                              Text('user'.tr(), style: AppTextStyle.text14),
                               Radio(
                                 activeColor: AppColors.colorPrimary,
-                                value: 'trainer',
+                                value: 'trainer'.tr(),
                                 groupValue: bloc.selected,
                                 onChanged: (val) {
                                   bloc.add(SelectedRoleEvent(value: val));
                                 },
                               ),
-                              Text('trainer', style: AppTextStyle.text14),
+                              Text('trainer'.tr(), style: AppTextStyle.text14),
                             ],
                           );
                         },
                       ),
                       SizedBox(height: 8),
                       PrimryCustomButton(
-                        setText: 'Sign Up',
+                        setText: 'Sign Up'.tr(),
                         onPressed: () {
                           if (bloc.formKey.currentState!.validate()) {
                             bloc.add(CreateNewAccountEvent());
@@ -173,7 +175,7 @@ class SignupScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              'Already have an account? ',
+                              'Already have an account? '.tr(),
                               style: AppTextStyle.text14,
                             ),
                             InkWell(
@@ -186,7 +188,7 @@ class SignupScreen extends StatelessWidget {
                                 );
                               },
                               child: Text(
-                                'Sign in',
+                                'Sign in'.tr(),
                                 style: AppTextStyle.text14primary,
                               ),
                             ),
@@ -204,3 +206,16 @@ class SignupScreen extends StatelessWidget {
     );
   }
 }
+//       CustomTextField(
+//                 validator: (value) {
+//                   return Validators.confirmPassword(
+//                     value,
+//                     controllerPasswordConfi.text,
+//                   );
+//                 },
+//                 controller: controllerPasswordConfi,
+//                 setHint: 'Confirm Password',
+//                 isPassword: true,
+//                 isVisable: isConfirmVisable,
+//                 onPressedSuffix: () {},
+//               ),

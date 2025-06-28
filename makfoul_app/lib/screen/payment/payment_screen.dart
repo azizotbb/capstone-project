@@ -4,7 +4,6 @@ import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
 import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
 
-
 class PaymentScreen extends StatelessWidget {
   const PaymentScreen({super.key});
 

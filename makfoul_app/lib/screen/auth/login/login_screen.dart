@@ -1,22 +1,20 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makfoul_app/screen/auth/login/bloc/login_bloc.dart';
 import 'package:makfoul_app/screen/auth/resetpassword/reset_password_screen.dart';
 import 'package:makfoul_app/screen/auth/signup/signup.dart';
+import 'package:makfoul_app/screen/splash/splash_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/utility/validators.dart';
 import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
 import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    final supabase = Supabase.instance.client;
-    final session = supabase.auth.currentSession;
-    print(session?.user);
     return BlocProvider(
       create: (context) => LoginBloc(),
       child: Builder(
@@ -42,7 +40,7 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       SizedBox(height: 30),
                       Text(
-                        'Login',
+                        'Sign in'.tr(),
                         style: AppTextStyle.textHeadr36,
                         textAlign: TextAlign.start,
                       ),
@@ -52,7 +50,7 @@ class LoginScreen extends StatelessWidget {
                         validator: (value) {
                           return Validators.email(value);
                         },
-                        setHint: 'Email',
+                        setHint: 'Email'.tr(),
                         suffIcon: Icon(
                           Icons.email_outlined,
                           color: AppColors.colorMedimGrey,
@@ -61,7 +59,7 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(height: 16),
                       CustomTextField(
                         controller: bloc.controllerPassword,
-                        setHint: 'Password',
+                        setHint: 'Password'.tr(),
                         isPassword: true,
                         isVisable: bloc.isPasswordVisable,
                         onPressedSuffix: () {},
@@ -85,7 +83,7 @@ class LoginScreen extends StatelessWidget {
                           },
 
                           child: Text(
-                            'Forget password ?',
+                            'Forget password ?'.tr(),
                             style: AppTextStyle.text14,
                             textAlign: TextAlign.start,
                           ),
@@ -119,7 +117,15 @@ class LoginScreen extends StatelessWidget {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     backgroundColor: Colors.green[600],
-                                    content: Text("Logged in successfully"),
+                                    content: Text(
+                                      "Logged in successfully".tr(),
+                                    ),
+                                  ),
+                                );
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => SplashScreen(),
                                   ),
                                 );
                               },
@@ -133,18 +139,17 @@ class LoginScreen extends StatelessWidget {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     backgroundColor: Colors.red[400],
-                                    content: Text(state.msg),
+                                    content: Text(state.msg.tr()),
                                   ),
                                 );
                               },
                             );
                           }
                           return PrimryCustomButton(
-                            setText: 'Login',
+                            setText: 'Sign in'.tr(),
                             onPressed: () {
                               if (bloc.formKey.currentState!.validate()) {
                                 bloc.add(SignInEvent());
-                                print("-----------------------------");
                               }
                             },
                           );
@@ -156,7 +161,7 @@ class LoginScreen extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              "Don't have an account? ",
+                              "Don't have an account? ".tr(),
                               style: AppTextStyle.text14,
                             ),
                             InkWell(
@@ -169,7 +174,7 @@ class LoginScreen extends StatelessWidget {
                                 );
                               },
                               child: Text(
-                                'Sign up',
+                                'Sign Up'.tr(),
                                 style: AppTextStyle.text14primary,
                               ),
                             ),
