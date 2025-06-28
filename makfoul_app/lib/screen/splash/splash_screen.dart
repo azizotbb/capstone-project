@@ -24,10 +24,10 @@ class SplashScreen extends StatelessWidget {
       if (session?.isExpired == false) {
         // If session is active, populate the user info model with data from Supabase
         userinfo.uid = session!.user.id;
-        userinfo.username = session.user.userMetadata?["username"];
+        userinfo.username = session.user.userMetadata!["username"];
         userinfo.email = session.user.email!;
-        userinfo.role = session.user.userMetadata?["role"];
-        userinfo.phone = session.user.userMetadata?["phoneNumber"];
+        userinfo.role = session.user.userMetadata!["role"];
+        userinfo.phone = session.user.userMetadata!["phoneNumber"];
         userinfo.createdAt = session.user.createdAt;
 
         Navigator.pushReplacement(

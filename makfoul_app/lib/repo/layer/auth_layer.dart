@@ -5,12 +5,12 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 class AuthLayer {
   //authenticated user's information
   UserModel userinfo = UserModel(
-    uid: "",
-    username: "",
-    email: "",
-    role: "",
-    createdAt: "",
-    phone: "",
+    uid: " ",
+    username: " ",
+    email: " ",
+    role: " ",
+    createdAt: " ",
+    phone: " ",
   );
   // Method to handle user sign-up process
   signUpMethod({
