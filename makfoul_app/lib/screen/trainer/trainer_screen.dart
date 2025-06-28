@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
+import 'package:makfoul_app/screen/course/course_view.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/Instructor/instructor_custom_card.dart';
 import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
 import 'package:makfoul_app/widget/homescreen/search_widget.dart';
-
 
 class TrainerScreen extends StatelessWidget {
   const TrainerScreen({super.key, required this.appbarTitle});
@@ -48,7 +48,13 @@ class TrainerScreen extends StatelessWidget {
                     child: InstructorCustomCard(
                       title: "Course title",
                       trainerName: "Trainer Name",
-                      avatar: "images/circler avtar instructor.png",
+                      avatar: "assets/images/circler avtar instructor.png",
+                      ontap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => CourseView()),
+                        );
+                      },
                     ),
                   );
                 },

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:makfoul_app/screen/home/homescreen.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
-
 
 class Orderwaiting extends StatelessWidget {
   const Orderwaiting({super.key});
@@ -33,7 +33,13 @@ class Orderwaiting extends StatelessWidget {
             // SizedBox(height: 80),
             Padding(
               padding: const EdgeInsets.only(top: 30, right: 20, left: 20),
-              child: PrimryCustomButton(setText: 'Back To Home'),
+              child: PrimryCustomButton(
+                setText: 'Back To Home',
+                onPressed: () => Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                ),
+              ),
             ),
             SizedBox(height: 85),
           ],

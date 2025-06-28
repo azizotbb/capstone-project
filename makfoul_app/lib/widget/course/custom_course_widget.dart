@@ -8,7 +8,7 @@ class CustomCourseWidget extends StatelessWidget {
     required this.image,
   });
   final String coursetitle;
-  final int pricecourse;
+  final double pricecourse;
   final String image;
 
   @override
