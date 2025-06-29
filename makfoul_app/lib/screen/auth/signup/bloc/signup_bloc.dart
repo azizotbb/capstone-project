@@ -25,7 +25,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
   final TextEditingController controllerPasswordConfi = TextEditingController();
 
   // Selected role for user (default is "user")
-  String? selected = "user";
+  String? selected = 'user';
 
   // Key for validating the signup form
   final formKey = GlobalKey<FormState>();
