@@ -23,14 +23,15 @@ class BottomNavigationBloc
   List<Widget> listWidget = [HomeScreen(), OrderScreen(), ProfileScreen()];
 
   BottomNavigationBloc() : super(BottomNavigationInitial()) {
-    on<ChangeNavSelectEvent>(ChangeNavSelectMethod);
+    on<ChangeNavSelectEvent>(changeNavSelectMethod);
   }
 
-  FutureOr<void> ChangeNavSelectMethod(
+  FutureOr<void> changeNavSelectMethod(
     ChangeNavSelectEvent event,
     Emitter<BottomNavigationState> emit,
   ) {
     selectIndex = event.index;
+    print(userinfo.role);
     emit(RefreshUIState());
   }
 }

@@ -14,3 +14,5 @@ final class ErrorState extends LoginState {
 
   ErrorState({required this.msg});
 }
+final class SuccessStateShowPassword extends LoginState {}
+

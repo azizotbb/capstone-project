@@ -17,11 +17,13 @@ class BottomNavigationWidget extends StatelessWidget {
       child: Builder(
         builder: (context) {
           final bloc = context.read<BottomNavigationBloc>();
+            bloc.role = bloc.userinfo.role;
+            
 
           return BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
             builder: (context, state) {
               //supabase check role
-              if (bloc.role == bloc.userinfo.role) {
+              if (bloc.role == 'Trainer') {
                 bloc.listWidget[0] = HomescreenTrainerScreen();
                 bloc.listWidget[1] = AddCourseScreen();
 

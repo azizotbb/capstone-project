@@ -37,47 +37,50 @@ class TopCourses extends StatelessWidget {
             ),
           ],
         ),
-        child: Stack(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 18, left: 16, right: 16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Image.asset(image, fit: BoxFit.cover),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(height: 20),
-                        Text(coursename, style: AppTextStyle.textbold16),
 
-                        Row(
-                          children: [
-                            Image.asset("assets/images/Location.png"),
-                            SizedBox(width: 8),
-                            Text(location, style: AppTextStyle.textMedium14),
-                          ],
-                        ),
-                        SizedBox(height: 5),
-                        Text("${price} SAR", style: AppTextStyle.textMedium14),
+        child: Padding(
+          padding: const EdgeInsets.only(top: 18, left: 16, right: 16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Image.asset(image, fit: BoxFit.cover),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(height: 20),
+                    Text(coursename, style: AppTextStyle.textbold16),
+
+                    Row(
+                      children: [
+                        Image.asset("assets/images/Location.png"),
+                        SizedBox(width: 8),
+                        Text(location, style: AppTextStyle.textMedium14),
                       ],
                     ),
-                  ),
-                ],
+                    SizedBox(height: 5),
+                    Text("${price} SAR", style: AppTextStyle.textMedium14),
+                    Container(alignment: context.locale.countryCode == 'US'? Alignment.centerRight:Alignment.centerLeft,
+                      child: TextButton(
+                        onPressed: () {},
+                        child: Text(
+                          "view_details".tr(),
+                          style: AppTextStyle.textMedium14,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            Positioned(
-              right: 16,
-              bottom: 14,
-              child: TextButton(
-                onPressed: () {},
-                child: Text("view_details".tr(), style: AppTextStyle.textMedium14),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
+
+        // Positioned(
+        //   right: 16,
+        //   bottom: 14,
+        //   child:
       ),
     );
   }

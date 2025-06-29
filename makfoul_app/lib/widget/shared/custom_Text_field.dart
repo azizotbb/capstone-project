@@ -15,7 +15,7 @@ class CustomTextField extends StatelessWidget {
     this.isDescription = false,
     this.controller,
     this.validator,
-    this.isVisable,
+    this.isVisable ,
     this.onPressedSuffix,
   });
 
@@ -61,11 +61,11 @@ class CustomTextField extends StatelessWidget {
                   onPressed: onPressedSuffix,
                   icon: isVisable!
                       ? Icon(
-                          Icons.visibility_outlined,
+                          Icons.visibility_off_outlined,
                           color: AppColors.colorMedimGrey,
                         )
                       : Icon(
-                          Icons.visibility_off_outlined,
+                          Icons.visibility_outlined,
                           color: AppColors.colorMedimGrey,
                         ),
                 ))
@@ -81,7 +81,7 @@ class CustomTextField extends StatelessWidget {
           ),
         ),
         //check if the password is obscure or not
-        obscureText: isPassword! ? true : false,
+        obscureText: isPassword! ? (isVisable! ? true : false) : false,
       ),
     );
   }
