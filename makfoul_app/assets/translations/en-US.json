@@ -64,5 +64,10 @@
   "Already have an account? ": "Already have an account? ",
   "Sign in": "Sign in",
   "Don't have an account? ": "Don't have an account? ",
-  "Forget password ?": "Forget password ?"
+  "Forget password ?": "Forget password ?",
+  "Course Title": "Course Title",
+  "Description": "Description",
+  "Price": "Price",
+  "number of trainees": "number of trainees",
+  "Add course": "Add course"
 }

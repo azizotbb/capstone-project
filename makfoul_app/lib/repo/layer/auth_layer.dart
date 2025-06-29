@@ -62,4 +62,10 @@ class AuthLayer {
       throw FormatException(error.toString());
     }
   }
+
+  uploadImage(){
+    
+    
+
+  }
 }
