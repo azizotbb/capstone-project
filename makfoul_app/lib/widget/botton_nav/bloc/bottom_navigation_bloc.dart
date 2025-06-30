@@ -19,7 +19,7 @@ class BottomNavigationBloc
   int selectIndex = 0;
 
   // List of screens shown when changing bottom navigation
-  String role = 'x';
+  String role = 'trainer';
   List<Widget> listWidget = [HomeScreen(), OrderScreen(), ProfileScreen()];
 
   BottomNavigationBloc() : super(BottomNavigationInitial()) {
