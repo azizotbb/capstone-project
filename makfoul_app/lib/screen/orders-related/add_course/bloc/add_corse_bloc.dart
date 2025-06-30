@@ -15,7 +15,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
 
   String? selectedCategory;
   XFile? image;
- String? urlString ;
+  String? urlString;
   final TextEditingController titleController = TextEditingController();
   final TextEditingController descriptionController = TextEditingController();
   final TextEditingController numberOfTraineesController =
@@ -59,8 +59,8 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     if (image == null) return;
 
     Supabase.instance.client.storage.from('images').upload(path, file);
-   urlString =  Supabase.instance.client.storage.from('images').getPublicUrl(path);
-
-  
+    urlString = Supabase.instance.client.storage
+        .from('images')
+        .getPublicUrl(path);
   }
 }

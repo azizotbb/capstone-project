@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/model/coursemodel.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -24,6 +25,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userinfo = GetIt.I.get<AuthLayer>().userinfo;
+
     return BlocProvider(
       create: (context) => AddCorseBloc(),
       child: Builder(

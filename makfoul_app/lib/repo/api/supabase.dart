@@ -84,13 +84,8 @@ class SupabaseConnect {
     }
   }
 
-
-  
-    
-
-
-
-  
-
-
+  static Future<List<dynamic>> getCourses() async {
+    final response = await supabase!.client.from("course").select();
+    return response;
+  }
 }
