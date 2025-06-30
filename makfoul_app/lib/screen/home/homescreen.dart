@@ -31,7 +31,8 @@ class HomeScreen extends StatelessWidget {
                 BackgroundColorWidget(height: 230),
                 Padding(
                   padding: const EdgeInsets.only(top: 45),
-                  child: Expanded(
+                  child: Container(
+                    width: context.getWidth(),
                     child: ListTile(
                       leading: CircleAvatar(
                         radius: 30,

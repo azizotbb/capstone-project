@@ -42,7 +42,8 @@ class HomescreenTrainerScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.all(9),
                       child: SafeArea(
-                        child: Expanded(
+                        child: Container(
+                          width: context.getWidth(),
                           child: ListTile(
                             leading: CircleAvatar(
                               radius: 30,
