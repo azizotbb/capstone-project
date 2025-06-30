@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makfoul_app/screen/home/homescreen.dart';
 import 'package:makfoul_app/screen/home/homescreen_trainer_screen.dart';
-import 'package:makfoul_app/screen/orders-related/add_course_screen.dart';
+import 'package:makfoul_app/screen/orders-related/add_course/add_course_screen.dart';
 import 'package:makfoul_app/screen/orders-related/order_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/widget/botton_nav/bloc/bottom_navigation_bloc.dart';
@@ -17,11 +17,13 @@ class BottomNavigationWidget extends StatelessWidget {
       child: Builder(
         builder: (context) {
           final bloc = context.read<BottomNavigationBloc>();
+            bloc.role = bloc.userinfo.role;
+            
 
           return BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
             builder: (context, state) {
               //supabase check role
-              if (bloc.role == bloc.userinfo.role) {
+              if (bloc.role == 'Trainer') {
                 bloc.listWidget[0] = HomescreenTrainerScreen();
                 bloc.listWidget[1] = AddCourseScreen();
 

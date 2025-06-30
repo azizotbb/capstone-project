@@ -15,11 +15,15 @@ dependencies:
   get_it: ^8.0.3
   supabase_flutter: ^2.9.1
   easy_localization: ^3.0.7+1
+  dart_mappable: ^4.5.0
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  build_runner: ^2.5.4
+  dart_mappable_builder: ^4.5.0
 
 flutter:
   uses-material-design: true

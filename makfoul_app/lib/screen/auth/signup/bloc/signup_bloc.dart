@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -13,9 +14,9 @@ part 'signup_event.dart';
 part 'signup_state.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
-  final bool isConfirmVisable = false;
+   bool isConfirmVisable = true;
 
-  final bool isPasswordVisable = false;
+   bool isPasswordVisable = true;
 
   // Controllers for the signup form input fields
   final TextEditingController controllerNumber = TextEditingController();
@@ -25,7 +26,7 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
   final TextEditingController controllerPasswordConfi = TextEditingController();
 
   // Selected role for user (default is "user")
-  String? selected = "user";
+  String? selected = "User";
 
   // Key for validating the signup form
   final formKey = GlobalKey<FormState>();
@@ -37,6 +38,8 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     on<SelectedRoleEvent>(selectedRolemethod);
 
     on<CreateNewAccountEvent>(createNewAccountMethod);
+    on<VisibilityEvent>(showPasswordMethod);
+    on<VisibilityConfirmEvent>(showConfirmPasswordMethod);
   }
   // Handles updating the selected role
   FutureOr<void> selectedRolemethod(
@@ -71,5 +74,21 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     } on AuthException catch (error) {
       log(error.message);
     } catch (_) {}
+  }
+
+  FutureOr<void> showPasswordMethod(VisibilityEvent event, Emitter<SignupState> emit) {
+
+    isPasswordVisable = !isPasswordVisable;
+
+  emit(SuccessStateShow());
+
+  }
+
+  FutureOr<void> showConfirmPasswordMethod(VisibilityConfirmEvent event, Emitter<SignupState> emit) {
+
+    isConfirmVisable = !isConfirmVisable;
+
+    emit(SuccessStateShow());
+
   }
 }

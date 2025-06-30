@@ -12,7 +12,7 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  final bool isPasswordVisable = false;
+   bool isPasswordVisable = true;
 
   // Key for form validation
   final formKey = GlobalKey<FormState>();
@@ -26,6 +26,7 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   LoginBloc() : super(LoginInitial()) {
     on<SignInEvent>(SignInMethod);
+    on<VisibilityEvent>(showPasswordMethod);
   }
 
   // Handles the sign-in process when SignInEvent is triggered
@@ -60,5 +61,11 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
     } catch (error) {
       print(error);
     }
+  }
+
+  FutureOr<void> showPasswordMethod(VisibilityEvent event, Emitter<LoginState> emit) {
+    isPasswordVisable = !isPasswordVisable;
+
+    emit(SuccessStateShowPassword());
   }
 }

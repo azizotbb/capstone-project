@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 
+// main category widget homescreen user
 class MainCaregoryWidget extends StatelessWidget {
   const MainCaregoryWidget({
     super.key,
@@ -21,9 +22,9 @@ class MainCaregoryWidget extends StatelessWidget {
           child: Stack(
             children: [
               Container(
-                height: 70,
-                width: 70,
-                padding: EdgeInsets.all(10),
+                height: 80,
+                width: 80,
+                // padding: EdgeInsets.all(20),
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
                   color: AppColors.colorpeige,
@@ -34,10 +35,10 @@ class MainCaregoryWidget extends StatelessWidget {
                 child: Align(
                   alignment: Alignment.center,
                   child: image != null
-                      ? Image.asset(image!, fit: BoxFit.contain)
+                      ? Image.asset(image!, height: 32, fit: BoxFit.contain)
                       : Icon(
                           Icons.grid_view,
-                          color: AppColors.colorPrimary,
+                          color: AppColors.colorScondry,
                           size: 40,
                         ),
                 ),
@@ -45,7 +46,7 @@ class MainCaregoryWidget extends StatelessWidget {
             ],
           ),
         ),
-        SizedBox(height: 5),
+        SizedBox(height: 8),
         Text(categoryname, style: AppTextStyle.textMedium14),
       ],
     );

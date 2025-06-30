@@ -19,18 +19,19 @@ class BottomNavigationBloc
   int selectIndex = 0;
 
   // List of screens shown when changing bottom navigation
-  String role = 'x';
+  String role = 'trainer';
   List<Widget> listWidget = [HomeScreen(), OrderScreen(), ProfileScreen()];
 
   BottomNavigationBloc() : super(BottomNavigationInitial()) {
-    on<ChangeNavSelectEvent>(ChangeNavSelectMethod);
+    on<ChangeNavSelectEvent>(changeNavSelectMethod);
   }
 
-  FutureOr<void> ChangeNavSelectMethod(
+  FutureOr<void> changeNavSelectMethod(
     ChangeNavSelectEvent event,
     Emitter<BottomNavigationState> emit,
   ) {
     selectIndex = event.index;
+    print(userinfo.role);
     emit(RefreshUIState());
   }
 }

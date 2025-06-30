@@ -10,3 +10,5 @@ class SelectedRoleEvent extends SignupEvent {
 }
 
 class CreateNewAccountEvent extends SignupEvent {}
+class VisibilityEvent extends SignupEvent {}
+class VisibilityConfirmEvent extends SignupEvent {}

@@ -65,5 +65,10 @@
   "Already have an account? ": "هل لديك حساب بالفعل؟",
   "Sign in": "تسجيل الدخول",
   "Don't have an account? ": "ليس لديك حساب؟",
-  "Forget password ?": "نسيت كلمة المرور؟"
+  "Forget password ?": "نسيت كلمة المرور؟",
+  "Course Title": "عنوان الدورة",
+  "Description": "وصف",
+  "Price": "السعر",
+  "number of trainees": "عدد المتدربين",
+  "Add course": "إضافة الدورة"
 }

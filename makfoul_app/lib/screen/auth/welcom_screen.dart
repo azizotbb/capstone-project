@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/screen/auth/login/login_screen.dart';
 import 'package:makfoul_app/screen/auth/signup/signup.dart';
+import 'package:makfoul_app/screen/home/homescreen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/botton_nav/bottom_navigation_widget.dart';
@@ -60,11 +61,9 @@ class WelcomScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => BottomNavigationWidget(),
-                    ),
-                  );
+                  Navigator.of(
+                    context,
+                  ).push(MaterialPageRoute(builder: (context) => HomeScreen()));
                 },
                 child: Text(
                   'continue_as_guest'.tr(),

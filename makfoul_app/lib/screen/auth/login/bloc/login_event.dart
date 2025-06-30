@@ -4,3 +4,4 @@ part of 'login_bloc.dart';
 sealed class LoginEvent {}
 
 class SignInEvent extends LoginEvent {}
+class VisibilityEvent extends LoginEvent {}

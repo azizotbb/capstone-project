@@ -2,7 +2,9 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
+import 'package:makfoul_app/model/coursemodel.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/screen/auth/signup/signup.dart';
 import 'package:makfoul_app/screen/trainer/trainer_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -15,161 +17,215 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userinfo = GetIt.I.get<AuthLayer>().userinfo;
+    // final bool isgust = userinfo == null;
 
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Stack(
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+
+        children: [
+          SizedBox(
+            height: context.getHeight() * 0.35,
+            child: Stack(
               children: [
-                BackgroundColorWidget(height: 116),
-                Positioned(
-                  left: 30,
-                  top: 30,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "hi".tr() + userinfo.username,
-                        style: AppTextStyle.textButton20,
+                BackgroundColorWidget(height: 230),
+                Padding(
+                  padding: const EdgeInsets.only(top: 45),
+                  child: Expanded(
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 30,
+                        child: Image.asset(
+                          "assets/images/circler avtar instructor.png",
+                        ),
                       ),
-                      SizedBox(height: 8),
-                      Text('ad_title'.tr(), style: AppTextStyle.text14),
-                    ],
+                      title: Text(
+                        "Hi,".tr() + userinfo.username,
+                        style: AppTextStyle.textTitleLarg24dark,
+                      ),
+                      subtitle: Text(
+                        'ad_title'.tr(),
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                          color: AppColors.colorDarkGrey,
+                        ),
+                      ),
+                    ),
                   ),
                 ),
+                userinfo.role == 'User'
+                    ? Container()
+                    : Positioned(
+                        right: 20,
+                        top: 50,
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => SignupScreen(),
+                              ),
+                            );
+                          },
+                          child: Text(
+                            "create_account".tr(),
+                            style: AppTextStyle.textMedium14,
+                          ),
+                        ),
+                      ),
+
                 Positioned(
-                  right: 20,
-                  bottom: 40,
-                  child: TextButton(
-                    onPressed: () {},
-                    child: Text(
-                      "create_account".tr(),
-                      style: AppTextStyle.textMedium14,
+                  top: 120,
+                  child: Container(
+                    width: context.getWidth(),
+                    child: AspectRatio(
+                      aspectRatio: 16 / 7,
+                      child: PageView(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 5),
+                            child: Image.asset(
+                              "assets/images/adcard1.png",
+                              height: 300,
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+
+                          Stack(
+                            children: [
+                              Image.asset(
+                                "assets/images/Ad2.png",
+                                height: 300,
+                                fit: BoxFit.cover,
+                              ),
+                              Positioned(
+                                left: 65,
+                                bottom: 30,
+                                child: ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    minimumSize: Size(80, 30),
+                                    backgroundColor: AppColors.colorPrimary,
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SignupScreen(),
+                                      ),
+                                    );
+                                  },
+                                  child: Text(
+                                    "Join",
+                                    style: TextStyle(
+                                      color: AppColors.colorpeige,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ],
             ),
-            SizedBox(height: 16),
-            Container(
-              width: context.getWidth(),
-              height: context.getHeight() * 0.2,
-              child: PageView(
+          ),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: ListView(
                 children: [
-                  Image.asset("assets/images/addcard.png", fit: BoxFit.contain),
-                  Stack(
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "courses".tr(),
+                      style: AppTextStyle.textTitleLarg24dark,
+                    ),
+                  ),
+                  SizedBox(height: 16),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Image.asset("assets/images/Ad2.png"),
-                      Positioned(
-                        left: 65,
-                        bottom: 30,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            minimumSize: Size(80, 30),
-                            backgroundColor: AppColors.colorPrimary,
-                          ),
-                          onPressed: () {},
-                          child: Text(
-                            "Join",
-                            style: TextStyle(color: AppColors.colorpeige),
-                          ),
-                        ),
+                      MainCaregoryWidget(
+                        image: null,
+                        categoryname: 'all'.tr(),
+                        ontap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  TrainerScreen(appbarTitle: 'courses'.tr()),
+                            ),
+                          );
+                        },
+                      ),
+                      SizedBox(height: 12),
+                      MainCaregoryWidget(
+                        image: "assets/images/Clean (2).png",
+                        categoryname: 'clean'.tr(),
+                        ontap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TrainerScreen(
+                                appbarTitle: 'clean_courses'.tr(),
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                      SizedBox(height: 12),
+                      MainCaregoryWidget(
+                        image: "assets/images/cook (2).png",
+                        categoryname: 'cook'.tr(),
+                        ontap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TrainerScreen(
+                                appbarTitle: 'cook_courses'.tr(),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ],
                   ),
-                ],
-              ),
-            ),
-            // Courses
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "courses".tr(),
-                  style: AppTextStyle.textTitleLarg24dark,
-                ),
-              ),
-            ),
-            SizedBox(height: 16),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MainCaregoryWidget(
-                    image: null,
-                    categoryname: 'all'.tr(),
-                    ontap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              TrainerScreen(appbarTitle: 'courses'.tr()),
-                        ),
-                      );
-                    },
+                  SizedBox(height: 16),
+                  //top courses
+                  Text(
+                    "top_courses".tr(),
+                    style: AppTextStyle.textTitleLarg24dark,
                   ),
-                  SizedBox(height: 12),
-                  MainCaregoryWidget(
-                    image: "assets/images/Clean (2).png",
-                    categoryname: 'clean'.tr(),
-                    ontap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              TrainerScreen(appbarTitle: 'clean_courses'.tr()),
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 12),
-                  MainCaregoryWidget(
-                    image: "assets/images/cook (2).png",
-                    categoryname: 'cook'.tr(),
-                    ontap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              TrainerScreen(appbarTitle: 'cook_courses'.tr()),
-                        ),
-                      );
-                    },
+                  SizedBox(height: 10),
+                  SizedBox(
+                    height: context.getHeight() * 0.30,
+                    child: PageView.builder(
+                      controller: PageController(viewportFraction: 0.99),
+                      itemCount: courses.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final course = courses[index];
+                        return Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 2),
+                          child: TopCourses(
+                            image: course.image,
+                            //supabase get the name for the trainer and location and price
+                            coursename: course.coursename,
+                            location: course.addres,
+                            price: course.price,
+                          ),
+                        );
+                      },
+                    ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 16),
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 24),
-              child: Text(
-                "top_courses".tr(),
-                style: AppTextStyle.textTitleLarg24dark,
-              ),
-            ),
-            SizedBox(height: 16),
-            SizedBox(
-              height: context.getHeight() * 0.33,
-              child: PageView.builder(
-                controller: PageController(viewportFraction: 0.80),
-                itemCount: 4,
-                itemBuilder: (BuildContext context, int index) {
-                  return TopCourses(
-                    image: 'assets/images/TopCourse.png',
-                    //supabase get the name for the trainer and location and price
-                    coursename: 'Amal',
-                    location: 'Alrass',
-                    price: 150,
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

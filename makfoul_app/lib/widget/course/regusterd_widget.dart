@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// RegusterdWidget details screen
 
 class RegusterdWidget extends StatelessWidget {
   const RegusterdWidget({
@@ -13,6 +14,7 @@ class RegusterdWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text("$numserial"),
         Text(username),
