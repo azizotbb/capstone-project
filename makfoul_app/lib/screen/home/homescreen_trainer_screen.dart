@@ -12,6 +12,7 @@ import 'package:makfoul_app/widget/homescreen/TopCourses_widget.dart';
 import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
 import 'package:makfoul_app/widget/homescreen/dashboardcard.dart';
 import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
+import 'package:makfoul_app/widget/shared/custom_icon_button.dart';
 import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
 
 class HomescreenTrainerScreen extends StatelessWidget {
@@ -324,7 +325,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                   MainAxisAlignment.center,
                                               spacing: 17,
                                               children: [
-                                                TextButton(
+                                                CustomIconButton(
                                                   onPressed: () async {
                                                     DateTimeRange<DateTime>?
                                                     picked = await showDateRangePicker(
@@ -367,26 +368,12 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                     bloc.date = picked
                                                         .toString();
                                                   },
-                                                  child: Container(
-                                                    height: 56,
-                                                    width: 59,
-                                                    decoration: BoxDecoration(
-                                                      color: AppColors
-                                                          .colorLightGrey,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            17,
-                                                          ),
-                                                    ),
-                                                    child: Icon(
-                                                      Icons.date_range_outlined,
-                                                      size: 25,
-                                                      color: AppColors
-                                                          .colorDarkGrey,
-                                                    ),
+                                                  iconButton: Icon(
+                                                    Icons.date_range_outlined,
                                                   ),
                                                 ),
-                                                TextButton(
+
+                                                CustomIconButton(
                                                   onPressed: () async {
                                                     //here image
 
@@ -398,49 +385,10 @@ class HomescreenTrainerScreen extends StatelessWidget {
 
                                                     // print(image!.path.toString());
                                                   },
-                                                  child: Container(
-                                                    height: 56,
-                                                    width: 59,
-                                                    decoration: BoxDecoration(
-                                                      color: AppColors
-                                                          .colorLightGrey,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            17,
-                                                          ),
-                                                    ),
-                                                    child: Icon(
-                                                      Icons.image,
-                                                      size: 25,
-                                                      color: AppColors
-                                                          .colorDarkGrey,
-                                                    ),
-                                                  ),
+                                                  iconButton: Icon(Icons.image),
                                                 ),
-                                                TextButton(
-                                                  // print the url link for image replace with Google Map
-                                                  onPressed: () {
-                                                    print(bloc.urlString);
-                                                  },
-                                                  child: Container(
-                                                    height: 56,
-                                                    width: 59,
-                                                    decoration: BoxDecoration(
-                                                      color: AppColors
-                                                          .colorLightGrey,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            17,
-                                                          ),
-                                                    ),
-                                                    child: Icon(
-                                                      Icons.place_sharp,
-                                                      size: 25,
-                                                      color: AppColors
-                                                          .colorDarkGrey,
-                                                    ),
-                                                  ),
-                                                ),
+                                              
+                                              CustomIconButton(onPressed: ()async{}, iconButton:Icon( Icons.place_sharp,) ),
                                               ],
                                             ),
 
