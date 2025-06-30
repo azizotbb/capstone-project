@@ -17,7 +17,6 @@ class BottomNavigationWidget extends StatelessWidget {
       child: Builder(
         builder: (context) {
           final bloc = context.read<BottomNavigationBloc>();
-
           return BlocBuilder<BottomNavigationBloc, BottomNavigationState>(
             builder: (context, state) {
               //supabase check role

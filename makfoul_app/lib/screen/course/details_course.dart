@@ -8,13 +8,13 @@ import 'package:makfoul_app/widget/course/regusterd_widget.dart';
 class DetailsCourse extends StatelessWidget {
   const DetailsCourse({
     super.key,
-    this.image,
+
     this.coursetitle,
     this.categoryimage,
     this.regusterednum,
     this.canreguster,
   });
-  final String? image;
+
   final String? coursetitle;
   final String? categoryimage;
   final int? regusterednum;
@@ -24,7 +24,7 @@ class DetailsCourse extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 18),
           child: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -44,10 +44,16 @@ class DetailsCourse extends StatelessWidget {
                     Spacer(),
                   ],
                 ),
-                SizedBox(height: 16),
-                Image.asset("assets/images/Rectangle 61.png"),
-                SizedBox(height: 12),
-                Text("Course Title", style: AppTextStyle.textbold16),
+                SizedBox(height: 30),
+
+                Text(
+                  "Course Title",
+                  style: TextStyle(
+                    fontWeight: FontWeight.w700,
+                    fontSize: 18,
+                    color: AppColors.colorDarkGrey,
+                  ),
+                ),
                 SizedBox(height: 12),
                 Divider(),
                 SizedBox(height: 16),
@@ -55,9 +61,14 @@ class DetailsCourse extends StatelessWidget {
                   alignment: Alignment.bottomLeft,
                   child: Text(
                     "Course information",
-                    style: AppTextStyle.textbold16,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 18,
+                      color: AppColors.colorDarkGrey,
+                    ),
                   ),
                 ),
+                SizedBox(height: 12),
                 CourseInfo(
                   categoryimage: 'assets/images/Clean (2).png',
                   categoryname: 'Clean',
@@ -69,7 +80,9 @@ class DetailsCourse extends StatelessWidget {
                   isActive: true,
                   trainer: 'Amal Abdallah',
                 ),
-                SizedBox(height: 100),
+                SizedBox(height: 30),
+                Divider(),
+                SizedBox(height: 16),
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Row(
@@ -83,16 +96,22 @@ class DetailsCourse extends StatelessWidget {
                     ],
                   ),
                 ),
+
+                SizedBox(height: 20),
                 SizedBox(
-                  height: context.getHeight() * 0.75,
-                  width: context.getWidth(),
+                  height: context.getHeight() * 0.7,
                   child: ListView.builder(
-                    itemCount: 3,
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: 10,
                     itemBuilder: (BuildContext context, int index) {
-                      return RegusterdWidget(
-                        numserial: index + 1,
-                        username: 'Raghad',
-                        image: 'assets/images/circler avtar instructor.png',
+                      return Padding(
+                        padding: const EdgeInsets.all(9.0),
+                        child: RegusterdWidget(
+                          numserial: index + 1,
+                          username: 'Raghad',
+                          image: 'assets/images/circler avtar instructor.png',
+                        ),
                       );
                     },
                   ),

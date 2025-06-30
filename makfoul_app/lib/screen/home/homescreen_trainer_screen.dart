@@ -1,6 +1,9 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:makfoul_app/extension/app_sizes.dart';
+import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/model/coursemodel.dart';
+import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/homescreen/TopCourses_widget.dart';
 import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
@@ -15,170 +18,242 @@ class HomescreenTrainerScreen extends StatelessWidget {
   final int cookcourse = 7;
   @override
   Widget build(BuildContext context) {
+    final userinfo = GetIt.I.get<AuthLayer>().userinfo;
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Stack(
-              children: [
-                BackgroundColorWidget(height: 150),
-                Padding(
-                  padding: EdgeInsets.all(9),
-                  child: SafeArea(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        CircleAvatar(
-                          radius: 30,
-                          child: Image.asset(
-                            "assetsظimagesظcircler avtar instructor.png",
-                          ),
+      //header
+      body: Column(
+        children: [
+          Stack(
+            children: [
+              BackgroundColorWidget(height: 160),
+              Padding(
+                padding: EdgeInsets.all(9),
+                child: SafeArea(
+                  child: Expanded(
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        radius: 30,
+                        child: Image.asset(
+                          "assets/images/circler avtar instructor.png",
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Hi,",
-                              style: AppTextStyle.textTitleLarg24dark,
-                            ),
-                            SizedBox(height: 5),
-                            Text(
-                              "your dashboard for managing training \n courses and empowering  domestic workers ",
-
-                              style: AppTextStyle.textMedium14,
-                            ),
-                          ],
+                      ),
+                      title: Text(
+                        "Hi,".tr() + userinfo.username,
+                        style: AppTextStyle.textTitleLarg24dark,
+                      ),
+                      subtitle: Text(
+                        "your dashboard for managing training courses \nand empowering domestic workers ",
+                        style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 12,
+                          color: AppColors.colorDarkGrey,
                         ),
-                      ],
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 12),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "Dashboard ",
-                  style: AppTextStyle.textTitleLarg24dark,
                 ),
               ),
-            ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 20,
-                mainAxisSpacing: 10,
-                childAspectRatio: 1.4,
-                shrinkWrap: true,
+            ],
+          ),
+          //body
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 12),
+              child: ListView(
                 children: [
-                  Stack(
-                    children: [
-                      Dashboardcard(),
-                      Column(
-                        children: [Text("All courses"), Text("${totalcourse}")],
-                      ),
-                    ],
+                  //Dashboard
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Dashboard ",
+                      style: AppTextStyle.textTitleLarg24dark,
+                    ),
                   ),
-                  Stack(
+                  SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Dashboardcard(),
-                      Column(
-                        children: [
-                          Row(
-                            children: [
-                              Text("active"),
-                              Text("${numofactivecourse}"),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Text("inactive"),
-                              Text("${numofainctivecourse}"),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Stack(
-                    children: [
-                      Dashboardcard(),
-                      Column(
-                        children: [
-                          Text("course"),
-                          Row(
-                            children: [
-                              Image.asset(
-                                "assets/images/Clean (2).png",
-                                height: 20,
-                                width: 20,
-                              ),
-                              Text("${cleancourse}"),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Image.asset(
-                                "assets/images/cook (2).png",
-                                height: 20,
-                                width: 20,
-                              ),
-                              Text("${cookcourse}"),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Stack(
-                      children: [
-                        Dashboardcard(),
-                        Column(
+                      Dashboardcard(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Text("Add Course"),
-                            Image.asset("assets/images/AddCourse.png"),
+                            Text(
+                              "All courses",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                                color: AppColors.colorDarkGrey,
+                              ),
+                            ),
+                            Text(
+                              "${totalcourse}",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                                color: AppColors.colorScondry,
+                              ),
+                            ),
                           ],
                         ),
-                      ],
+                      ),
+
+                      Dashboardcard(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  "active",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
+                                    color: AppColors.colorDarkGrey,
+                                  ),
+                                ),
+                                Text(
+                                  "${numofactivecourse}",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
+                                    color: AppColors.colorScondry,
+                                  ),
+                                ),
+                              ],
+                            ),
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  "inactive",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
+                                    color: AppColors.colorDarkGrey,
+                                  ),
+                                ),
+                                Text(
+                                  "${numofainctivecourse}",
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 18,
+                                    color: AppColors.colorScondry,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Dashboardcard(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Text(
+                              "courses",
+                              style: TextStyle(
+                                fontWeight: FontWeight.w500,
+                                fontSize: 18,
+                                color: AppColors.colorDarkGrey,
+                              ),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset(
+                                  "assets/images/Clean (2).png",
+                                  height: 20,
+                                  width: 20,
+                                ),
+                                Text(
+                                  "${cleancourse}",
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Image.asset(
+                                  "assets/images/cook (2).png",
+                                  height: 20,
+                                  width: 20,
+                                ),
+                                Text(
+                                  "${cookcourse}",
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+
+                      Dashboardcard(
+                        hasborder: true,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              Text(
+                                "Add Course",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w700,
+                                  fontSize: 18,
+                                  color: AppColors.colorDarkGrey,
+                                ),
+                              ),
+                              Image.asset("assets/images/AddCourse.png"),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 12),
+                  // Courses
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      "Courses ",
+                      style: AppTextStyle.textTitleLarg24dark,
                     ),
+                  ),
+                  SizedBox(height: 12),
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: courses.length,
+                    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 10,
+                      crossAxisSpacing: 3,
+                      childAspectRatio: 0.8,
+                    ),
+                    itemBuilder: (context, index) {
+                      final e = courses[index];
+                      return TopCourses(
+                        image: e.image,
+                        coursename: e.coursename,
+                        location: e.addres,
+                        price: e.price,
+                      );
+                    },
                   ),
                 ],
               ),
             ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
-              child: Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  "Courses ",
-                  style: AppTextStyle.textTitleLarg24dark,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: context.getHeight() * 0.40,
-              child: GridView.count(
-                crossAxisCount: 2,
-                children: courses.map((e) {
-                  return TopCourses(
-                    image: e.image,
-                    coursename: e.coursename,
-                    location: e.addres,
-                    price: e.price,
-                  );
-                }).toList(),
-              ),
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -7,7 +7,7 @@ import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/course/custom_course_widget.dart';
 import 'package:makfoul_app/widget/homescreen/main_caregory_widget.dart';
-
+//history for trainer
 class AddCourseScreen extends StatelessWidget {
   const AddCourseScreen({super.key});
 
@@ -36,60 +36,18 @@ class AddCourseScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MainCaregoryWidget(
-                    image: null,
-                    categoryname: 'All',
-                    ontap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              TrainerScreen(appbarTitle: 'Courses'),
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 12),
-                  MainCaregoryWidget(
-                    image: "assets/images/Clean (2).png",
-                    categoryname: 'Clean',
-                    ontap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              TrainerScreen(appbarTitle: 'Clean Courses'),
-                        ),
-                      );
-                    },
-                  ),
-                  SizedBox(height: 12),
-                  MainCaregoryWidget(
-                    image: "assets/images/cook (2).png",
-                    categoryname: 'Cook',
-                    ontap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              TrainerScreen(appbarTitle: 'Cook Courses'),
-                        ),
-                      );
-                    },
-                  ),
-                ],
-              ),
               SizedBox(height: 30),
               Align(
                 alignment: Alignment.topLeft,
-                child: Text("active_courses").tr(),
+                child: Text(
+                  "active_courses",
+                  style: TextStyle(fontWeight: FontWeight.w500),
+                ).tr(),
               ),
               //active course
               ListView.builder(
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: activeCourse.length,
                 itemBuilder: (BuildContext context, int index) {
                   print("${activeCourse.length}");
@@ -107,18 +65,23 @@ class AddCourseScreen extends StatelessWidget {
                     child: CustomCourseWidget(
                       coursetitle: activeCourse[index].coursename,
                       pricecourse: activeCourse[index].price,
-                      image: 'assets/images/Rectangle 61.png',
+                      image: activeCourse[index].image,
                     ),
                   );
                 },
               ),
               Align(
                 alignment: Alignment.topLeft,
-                child: Text("inactive_courses").tr(),
+                child: Text(
+                  "inactive_courses",
+                  style: TextStyle(fontWeight: FontWeight.w500),
+                ).tr(),
               ),
-              //   active course
+              SizedBox(height: 12),
+              // inactive course
               ListView.builder(
                 shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
                 itemCount: inactiveCourse.length,
                 itemBuilder: (BuildContext context, int index) {
                   return CustomCourseWidget(

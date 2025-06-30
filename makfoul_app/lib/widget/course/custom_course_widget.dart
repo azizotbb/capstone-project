@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:makfoul_app/extension/app_sizes.dart';
+import 'package:makfoul_app/style/app_colors.dart';
+import 'package:makfoul_app/style/app_text_style.dart';
 
 class CustomCourseWidget extends StatelessWidget {
   CustomCourseWidget({
@@ -14,37 +17,25 @@ class CustomCourseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Card(
-        color: Colors.white,
-        elevation: 2,
-        child: Padding(
-          padding: const EdgeInsets.all(6),
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-
-            children: [
-              Row(
-                children: [
-                  Column(
-                    children: [
-                      Text(coursetitle),
-                      Radio(
-                        value: false,
-                        groupValue: true,
-                        onChanged: (val) {
-                          // isActive.value != val;
-                        },
-                      ),
-                      Text("$pricecourse SAR"),
-                    ],
-                  ),
-                  Spacer(),
-                  Image.asset(image),
-                  SizedBox(width: 30),
-                ],
+      child: SizedBox(
+        width: context.getWidth(),
+        height: context.getHeight() * 0.14,
+        child: Card(
+          color: const Color.fromARGB(255, 255, 255, 255),
+          elevation: 3.5,
+          child: Padding(
+            padding: const EdgeInsets.all(12),
+            child: ListTile(
+              title: Text(coursetitle, style: AppTextStyle.textbold16),
+              subtitle: Text(
+                "$pricecourse SAR",
+                style: TextStyle(
+                  color: AppColors.colorScondry,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ],
+              trailing: Image.asset(image, height: 80, width: 110),
+            ),
           ),
         ),
       ),

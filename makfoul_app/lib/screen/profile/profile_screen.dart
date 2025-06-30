@@ -36,6 +36,7 @@ class ProfileScreen extends StatelessWidget {
                         "assets/images/circler avtar instructor.png",
                       ),
                     ),
+                    SizedBox(width: 12),
                     Column(
                       children: [
                         Text(

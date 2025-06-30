@@ -13,7 +13,7 @@ class Orderwaiting extends StatelessWidget {
         padding: const EdgeInsets.only(top: 40),
         child: Column(
           children: [
-            Center(child: Image.asset("images/OrderWaiting.png")),
+            Center(child: Image.asset("assets/images/OrderWaiting.png")),
             Text("Thank you for your trust!", style: AppTextStyle.textbold16),
             SizedBox(height: 12),
             Text(
