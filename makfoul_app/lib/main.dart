@@ -1,9 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/repo/api/supabase.dart';
-import 'package:makfoul_app/screen/home/homescreen_trainer_screen.dart';
-import 'package:makfoul_app/screen/orders-related/add_course/add_course_screen.dart';
-import 'package:makfoul_app/screen/profile/profile_screen.dart';
 import 'package:makfoul_app/screen/splash/splash_screen.dart';
 import 'package:makfoul_app/style/app_theme.dart';
 import 'package:makfoul_app/utility/setup.dart';

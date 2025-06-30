@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:makfoul_app/screen/onboarding/onboarding.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/widget/botton_nav/bottom_navigation_widget.dart';
@@ -12,6 +13,8 @@ class SplashScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final supabase = Supabase.instance.client;
+    // get courses from supabase
+    final opreationsGetit = GetIt.I.get<OpreationsLayer>().getCoursesMethod();
 
     // Get the current authentication session
     final session = supabase.auth.currentSession;
