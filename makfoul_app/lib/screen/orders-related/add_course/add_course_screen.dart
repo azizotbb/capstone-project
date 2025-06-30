@@ -24,7 +24,7 @@ class AddCourseScreen extends StatelessWidget {
     final activeCourse = courses.where((e) => e.isActive).toList();
     final inactiveCourse = courses.where((e) => !e.isActive).toList();
     return BlocProvider(
-      create: (context) => AddCorseBloc(),
+      create: (_) => AddCorseBloc(),
       child: Builder(
         builder: (context) {
           final bloc = context.read<AddCorseBloc>();
@@ -54,34 +54,38 @@ class AddCourseScreen extends StatelessWidget {
                               color: AppColors.colorLightGrey,
                               borderRadius: BorderRadius.circular(17),
                             ),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton(
-                                value: bloc.items[0],
-                                isExpanded: true,
-                            
-                                items: bloc.items
-                                    .map(
-                                      (item) => DropdownMenuItem(
-                                        value: item,
-                                        child: Container(
-                                          margin: EdgeInsets.symmetric(
-                                            horizontal: 20,
+                            child: BlocBuilder<AddCorseBloc, AddCorseState>(
+                              builder: (context, state) {
+                                return DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    value: bloc.selectedCategory,
+                                    isExpanded: true,
+
+                                    items: bloc.items
+                                        .map(
+                                          (item) => DropdownMenuItem(
+                                            value: item,
+                                            child: Container(
+                                              margin: EdgeInsets.symmetric(
+                                                horizontal: 20,
+                                              ),
+                                              child: Text(
+                                                item,
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                            ),
                                           ),
-                                          child: Text(
-                                            item,
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
-                                      ),
-                                    )
-                                    .toList(),
-                                onChanged: (value) {
-                                  bloc.add(
-                                    SelectCategoryEvent(value: value!),
-                                  );
-                                  print(bloc.selectedCategory);
-                                },
-                              ),
+                                        )
+                                        .toList(),
+                                    onChanged: (value) {
+                                      bloc.add(
+                                        SelectCategoryEvent(value: value!),
+                                      );
+                                      print(bloc.selectedCategory);
+                                    },
+                                  ),
+                                );
+                              },
                             ),
                           ),
                           CustomTextField(
