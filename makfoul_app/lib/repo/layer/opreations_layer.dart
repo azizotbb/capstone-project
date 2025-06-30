@@ -60,4 +60,13 @@ class OpreationsLayer {
       }).toList();
     }
   }
+
+  updateUserNameMethod({required String name})async{
+
+
+    SupabaseConnect.updateName(name: name);
+    
+    print('getit layer name');
+  }
+
 }

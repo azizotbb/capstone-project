@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -141,5 +142,25 @@ class SupabaseConnect {
   static Future<List<dynamic>> getCourses() async {
     final response = await supabase!.client.from("course").select();
     return response;
+  }
+
+  static Future<void> updatePassword({
+    required String password,
+    required String oldPassword,
+  }) async {
+      await supabase!.client.auth.updateUser(
+        UserAttributes(password: password),
+      );
+      print('Layer supa');
+    
+   
+  }
+
+  static Future<void> updateName({required String name})async{
+
+
+    await supabase!.client.from('user').update({'name':name}).eq('UID', supabase!.client.auth.currentUser!.id);
+    print('supabase layer names');
+
   }
 }

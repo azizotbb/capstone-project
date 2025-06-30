@@ -63,9 +63,19 @@ class AuthLayer {
     }
   }
 
-  uploadImage(){
+  // uploadImage(){
     
     
 
-  }
+  // }
+
+
+updatePasswordMethod({required String password,required String oldPassword}){
+
+
+  SupabaseConnect.updatePassword(password: password,oldPassword: oldPassword);
+  print('Layer getit');
+}
+
+
 }
