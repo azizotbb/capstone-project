@@ -83,4 +83,14 @@ class SupabaseConnect {
       throw FormatException("There is error with sign in");
     }
   }
+
+
+  
+    
+
+
+
+  
+
+
 }

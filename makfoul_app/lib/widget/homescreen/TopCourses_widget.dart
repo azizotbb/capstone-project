@@ -90,6 +90,11 @@ class TopCourses extends StatelessWidget {
             ),
           ],
         ),
+
+        // Positioned(
+        //   right: 16,
+        //   bottom: 14,
+        //   child:
       ),
     );
   }

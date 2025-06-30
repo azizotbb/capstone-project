@@ -57,14 +57,20 @@ class LoginScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 16),
-                      CustomTextField(
-                        controller: bloc.controllerPassword,
-                        setHint: 'Password'.tr(),
-                        isPassword: true,
-                        isVisable: bloc.isPasswordVisable,
-                        onPressedSuffix: () {},
-                        validator: (value) {
-                          return Validators.password(value);
+                      BlocBuilder<LoginBloc, LoginState>(
+                        builder: (context, state) {
+                          return CustomTextField(
+                            controller: bloc.controllerPassword,
+                            setHint: 'Password'.tr(),
+                            isPassword: true,
+                            isVisable: bloc.isPasswordVisable,
+                            onPressedSuffix: () {
+                              bloc.add(VisibilityEvent());
+                            },
+                            validator: (value) {
+                              return Validators.password(value);
+                            },
+                          );
                         },
                       ),
                       SizedBox(height: 8),
@@ -96,6 +102,7 @@ class LoginScreen extends StatelessWidget {
                             Future.delayed(
                               const Duration(milliseconds: 200),
                               () {
+                                //blue
                                 showDialog(
                                   context: context,
                                   builder: (context) {

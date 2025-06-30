@@ -79,29 +79,44 @@ class SignupScreen extends StatelessWidget {
                         ),
                       ),
                       SizedBox(height: 16),
-                      CustomTextField(
-                        validator: (value) {
-                          return Validators.password(value);
-                        },
-                        controller: bloc.controllerPassword,
-                        setHint: 'Password'.tr(),
-                        isPassword: true,
-                        isVisable: bloc.isPasswordVisable,
-                        onPressedSuffix: () {},
-                      ),
-                      SizedBox(height: 16),
-                      CustomTextField(
-                        validator: (value) {
-                          return Validators.confirmPassword(
-                            value,
-                            bloc.controllerPasswordConfi.text,
+                      BlocBuilder<SignupBloc, SignupState>(
+                        builder: (context, state) {
+                          return CustomTextField(
+                            validator: (value) {
+                              return Validators.password(value);
+                            },
+                            controller: bloc.controllerPassword,
+                            setHint: 'Password'.tr(),
+                            isPassword: true,
+                            isVisable: bloc.isPasswordVisable,
+                            onPressedSuffix: () {
+                              print(bloc.isPasswordVisable);
+
+                              bloc.add(VisibilityEvent());
+                            },
                           );
                         },
-                        controller: bloc.controllerPasswordConfi,
-                        setHint: 'Confirm Password'.tr(),
-                        isPassword: true,
-                        isVisable: bloc.isConfirmVisable,
-                        onPressedSuffix: () {},
+                      ),
+                      SizedBox(height: 16),
+                      BlocBuilder<SignupBloc, SignupState>(
+                        builder: (context, state) {
+                          return CustomTextField(
+                            validator: (value) {
+                              return Validators.confirmPassword(
+                                value,
+                                bloc.controllerPasswordConfi.text,
+                              );
+                            },
+                            controller: bloc.controllerPasswordConfi,
+                            setHint: 'Confirm Password'.tr(),
+                            isPassword: true,
+                            isVisable: bloc.isConfirmVisable,
+                            onPressedSuffix: () {
+                              print(bloc.isConfirmVisable);
+                              bloc.add(VisibilityConfirmEvent());
+                            },
+                          );
+                        },
                       ),
                       BlocBuilder<SignupBloc, SignupState>(
                         builder: (context, state) {
@@ -140,7 +155,7 @@ class SignupScreen extends StatelessWidget {
                             children: [
                               Radio(
                                 activeColor: AppColors.colorPrimary,
-                                value: 'user'.tr(),
+                                value: 'User',
                                 groupValue: bloc.selected,
                                 onChanged: (val) {
                                   bloc.add(SelectedRoleEvent(value: val));
@@ -149,7 +164,7 @@ class SignupScreen extends StatelessWidget {
                               Text('user'.tr(), style: AppTextStyle.text14),
                               Radio(
                                 activeColor: AppColors.colorPrimary,
-                                value: 'trainer'.tr(),
+                                value: 'Trainer',
                                 groupValue: bloc.selected,
                                 onChanged: (val) {
                                   bloc.add(SelectedRoleEvent(value: val));

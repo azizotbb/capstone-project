@@ -12,3 +12,4 @@ final class SuccessState extends SignupState {}
 final class ErrorState extends SignupState {}
 
 final class RoleUpdateState extends SignupState {}
+final class SuccessStateShow extends SignupState {}
