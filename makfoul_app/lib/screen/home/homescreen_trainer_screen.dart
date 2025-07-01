@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/model/coursemodel.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/screen/home/picked_location.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -387,8 +388,25 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                   },
                                                   iconButton: Icon(Icons.image),
                                                 ),
-                                              
-                                              CustomIconButton(onPressed: ()async{}, iconButton:Icon( Icons.place_sharp,) ),
+
+                                                CustomIconButton(
+                                                  onPressed: () async {
+                                                    Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            BlocProvider.value(
+                                                              value: bloc,
+                                                              child:
+                                                                  PickedLocation(),
+                                                            ),
+                                                      ),
+                                                    );
+                                                  },
+                                                  iconButton: Icon(
+                                                    Icons.place_sharp,
+                                                  ),
+                                                ),
                                               ],
                                             ),
 
