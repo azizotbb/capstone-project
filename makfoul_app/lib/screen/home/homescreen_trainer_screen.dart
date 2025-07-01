@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/model/coursemodel.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:makfoul_app/screen/home/picked_location.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
 import 'package:makfoul_app/style/app_colors.dart';
@@ -26,6 +27,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userinfo = GetIt.I.get<AuthLayer>().userinfo;
+
     return BlocProvider(
       create: (context) => AddCorseBloc(),
       child: Builder(
@@ -42,7 +44,8 @@ class HomescreenTrainerScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.all(9),
                       child: SafeArea(
-                        child: Expanded(
+                        child: Container(
+                          width: context.getWidth(),
                           child: ListTile(
                             leading: CircleAvatar(
                               radius: 30,
@@ -328,8 +331,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                               children: [
                                                 CustomIconButton(
                                                   onPressed: () async {
-                                                    DateTimeRange<DateTime>?
-                                                    picked = await showDateRangePicker(
+                                                    bloc.pickedDate = await showDateRangePicker(
                                                       context: context,
                                                       firstDate: DateTime(
                                                         DateTime.now().year - 5,
@@ -366,8 +368,8 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                         );
                                                       },
                                                     );
-                                                    bloc.date = picked
-                                                        .toString();
+                                                    // bloc.date = picked
+                                                    // .toString();
                                                   },
                                                   iconButton: Icon(
                                                     Icons.date_range_outlined,

@@ -42,7 +42,14 @@ class TopCourses extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(image, fit: BoxFit.cover),
+                  Container(
+                    width: 300,
+                    height: 150,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(17),
+                    ),
+                    child: Image.network(image, fit: BoxFit.fill),
+                  ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

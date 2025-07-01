@@ -14,7 +14,9 @@ import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
 import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
 import 'package:image_picker/image_picker.dart';
 
-XFile? image;
+
+
+
 
 class AddCourseScreen extends StatelessWidget {
   const AddCourseScreen({super.key});
@@ -24,7 +26,7 @@ class AddCourseScreen extends StatelessWidget {
     final activeCourse = courses.where((e) => e.isActive).toList();
     final inactiveCourse = courses.where((e) => !e.isActive).toList();
     return BlocProvider(
-      create: (context) => AddCorseBloc(),
+      create: (_) => AddCorseBloc(),
       child: Builder(
         builder: (context) {
           final bloc = context.read<AddCorseBloc>();

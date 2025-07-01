@@ -32,9 +32,21 @@ class InstructorCustomCard extends StatelessWidget {
         ),
         child: ListTile(
           minVerticalPadding: 30,
-          leading: CircleAvatar(maxRadius: 30, child: Image.asset(avatar)),
+          leading: Container(
+            height: 60,
+            width: 60,
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(shape: BoxShape.circle),
+            child: Image.network(avatar, fit: BoxFit.cover),
+          ),
           title: Text(title, style: AppTextStyle.textReguler16),
-          subtitle: Text(trainerName, style: AppTextStyle.text14primary),
+          subtitle: Row(
+            spacing: 2,
+            children: [
+              Image.asset("assets/images/Saudi_Riyal_Symbol.png", height: 10),
+              Text(trainerName, style: AppTextStyle.text14primary),
+            ],
+          ),
         ),
       ),
     );
