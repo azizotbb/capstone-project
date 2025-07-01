@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:makfoul_app/model/course/course_model.dart';
 import 'package:makfoul_app/repo/api/supabase.dart';
@@ -49,8 +50,9 @@ class OpreationsLayer {
   /// Get courses from Supabase and save them to the list
   getCoursesMethod() async {
     // Get course data from Supabase
+    print("get course method rodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
     final response = await SupabaseConnect.getCourses();
-
+    print("الريسبونس والكورسات هذي : $response");
     // Convert the data to CourseModel objects if not empty
     if (response.isNotEmpty) {
       courses = response.map((item) {

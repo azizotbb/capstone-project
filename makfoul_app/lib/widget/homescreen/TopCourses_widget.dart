@@ -54,7 +54,7 @@ class TopCourses extends StatelessWidget {
                         softWrap: true,
                         overflow: TextOverflow.visible,
                       ),
-                      // SizedBox(height: 5),
+                      SizedBox(height: 30),
                       Row(
                         children: [
                           Image.asset("assets/images/Location.png"),
@@ -75,19 +75,19 @@ class TopCourses extends StatelessWidget {
                 child: Text("${price} SAR", style: AppTextStyle.textMedium14),
               ),
             ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  "view_details".tr(),
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: AppColors.colorDarkGrey,
-                  ),
-                ),
-              ),
-            ),
+            // Align(
+            //   alignment: Alignment.bottomRight,
+            //   child: TextButton(
+            //     onPressed: () {},
+            //     child: Text(
+            //       "view_details".tr(),
+            //       style: TextStyle(
+            //         fontSize: 12,
+            //         color: AppColors.colorDarkGrey,
+            //       ),
+            //     ),
+            //   ),
+            // ),
           ],
         ),
 

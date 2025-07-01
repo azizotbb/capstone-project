@@ -11,3 +11,8 @@ class SelectCategoryEvent extends AddCorseEvent {
 
 class AddNewCordeEvent extends AddCorseEvent {}
 class UploadImageEvent extends AddCorseEvent {}
+class GetCoursesEvent extends AddCorseEvent{
+  final String id;
+
+  GetCoursesEvent({required this.id}); 
+}
