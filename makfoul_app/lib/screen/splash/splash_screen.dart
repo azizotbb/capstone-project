@@ -14,7 +14,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final supabase = Supabase.instance.client;
     // get courses from supabase
-    final opreationsGetit = GetIt.I.get<OpreationsLayer>().getCoursesMethod();
+    GetIt.I.get<OpreationsLayer>().getCoursesMethod();
 
     // Get the current authentication session
     final session = supabase.auth.currentSession;
@@ -23,7 +23,7 @@ class SplashScreen extends StatelessWidget {
     final userinfo = GetIt.I.get<AuthLayer>().userinfo;
 
     // Delay navigation for 3 seconds to show the splash screen
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 3), () async {
       if (session?.isExpired == false) {
         // If session is active, populate the user info model with data from Supabase
         userinfo.uid = session!.user.id;
@@ -31,6 +31,7 @@ class SplashScreen extends StatelessWidget {
         userinfo.email = session.user.email!;
         userinfo.role = session.user.userMetadata!["role"];
         userinfo.phone = session.user.userMetadata!["phoneNumber"];
+
         userinfo.createdAt = session.user.createdAt;
 
         Navigator.pushReplacement(

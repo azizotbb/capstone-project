@@ -46,7 +46,7 @@ class OpreationsLayer {
     }
   }
 
-  /// Get courses from Supabase and save them to the list
+  // Get courses from Supabase and save them to the list
   getCoursesMethod() async {
     // Get course data from Supabase
     final response = await SupabaseConnect.getCourses();

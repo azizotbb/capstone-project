@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
+import 'package:makfoul_app/model/course/course_model.dart';
 import 'package:makfoul_app/screen/course/course_view.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -8,8 +9,13 @@ import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
 import 'package:makfoul_app/widget/homescreen/search_widget.dart';
 
 class TrainerScreen extends StatelessWidget {
-  const TrainerScreen({super.key, required this.appbarTitle});
+  const TrainerScreen({
+    super.key,
+    required this.appbarTitle,
+    required this.courses,
+  });
   final String appbarTitle;
+  final List courses;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,22 +47,22 @@ class TrainerScreen extends StatelessWidget {
             SizedBox(
               height: context.getHeight(),
               child: ListView.builder(
-                itemCount: 10,
+                itemCount: courses.length,
                 itemBuilder: (BuildContext context, int index) {
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InstructorCustomCard(
                       //supabase here to get coures title
-                      title: "Course title",
+                      title: courses[index].title,
                       //supabase here to get Trainer Name
-                      trainerName: "Trainer Name",
+                      trainerName: courses[index].price.toString(),
                       //supabase here to get Trainer avatar
-                      avatar: "assets/images/circler avtar instructor.png",
+                      avatar: courses[index].image,
                       ontap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => CourseView()),
-                        );
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(builder: (context) => CourseView()),
+                        // );
                       },
                     ),
                   );
