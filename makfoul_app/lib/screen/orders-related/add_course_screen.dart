@@ -8,7 +8,7 @@ import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/course/custom_course_widget.dart';
 import 'package:makfoul_app/widget/homescreen/main_caregory_widget.dart';
 
-//history for trainer
+//history for trainer deleteted
 class AddCourseScreen extends StatelessWidget {
   const AddCourseScreen({super.key});
 

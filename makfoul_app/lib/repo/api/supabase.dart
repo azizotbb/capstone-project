@@ -132,6 +132,7 @@ class SupabaseConnect {
         'state': state,
         'created_at': createdAt,
       });
+      
     } catch (error) {
       throw FormatException('there was an error: $error');
     }
@@ -140,6 +141,11 @@ class SupabaseConnect {
   // Supabase.instance.client.storage.from('images').upload(path, file);
   static Future<List<dynamic>> getCourses() async {
     final response = await supabase!.client.from("course").select();
+    print("ؤخعقسثسث ثضعشم : $response");
     return response;
+  }
+  static Future<void>deletecourse({required int idcourse})async{
+  await supabase!.client.from("course").delete().eq('id', idcourse);
+  getCourses();//to try
   }
 }

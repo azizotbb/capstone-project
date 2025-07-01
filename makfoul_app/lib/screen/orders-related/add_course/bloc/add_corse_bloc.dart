@@ -36,6 +36,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     on<AddNewCordeEvent>(addNewCordeMethod);
     on<UploadImageEvent>(uploadImageMethod);
     on<GetCoursesEvent>(getCourseMethod);
+    on<DeleteCourseEvent>(deleteCourseMethod);
   }
 
   FutureOr<void> selectCategoryMethod(
@@ -46,27 +47,106 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     emit(SelectCategoryState());
   }
 
+  // FutureOr<void> addNewCordeMethod(
+  //   AddNewCordeEvent event,
+  //   Emitter<AddCorseState> emit,
+  // ) async {
+  //   var result = await opreationsGet.addCourseMethod(
+  //     catagory: selectedCategory!,
+  //     title: titleController.text,
+  //     description: descriptionController.text,
+  //     price: double.parse(priceController.text),
+  //     numberOfTrainees: int.parse(numberOfTraineesController.text),
+  //     date: pickedDate.toString(),
+  //     image: urlString!,
+  //     location: 'location',
+  //     state: 'Active',
+  //     createdAt: DateTime.now().toString(),
+  //   );
+  //   print("result print mssssss$result");
+  //   //   final updatecourses= await opreationsGet.getCoursesMethod();
+  //   //  emit(CoursesLoaded().copyWith(trainearcourses:updatecourses));
+  //   // emit(SuccessState());
+  //   // opreationsGet.getCoursesMethod();
+  //   // await getCourseMethod(GetCoursesEvent(), emit);
+  //   add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
+  //   print('supa1');
+  // }
+
   FutureOr<void> addNewCordeMethod(
-    AddNewCordeEvent event,
-    Emitter<AddCorseState> emit,
-  ) {
-    opreationsGet.addCourseMethod(
-      catagory: selectedCategory!,
-      title: titleController.text,
-      description: descriptionController.text,
-      price: double.parse(priceController.text),
-      numberOfTrainees: int.parse(numberOfTraineesController.text),
-      date: pickedDate.toString(),
-      image: urlString!,
-      location: 'location',
-      state: 'Active',
-      createdAt: DateTime.now().toString(),
+
+  AddNewCordeEvent event,
+
+  Emitter<AddCorseState> emit,
+
+) async {
+
+  final result = await opreationsGet.addCourseMethod(
+    catagory: selectedCategory!,
+    title: titleController.text,
+    description: descriptionController.text,
+    price: double.parse(priceController.text),
+    numberOfTrainees: int.parse(numberOfTraineesController.text),
+    date: pickedDate.toString(),
+    image: urlString!,
+    location: 'location',
+    state: 'Active',
+    createdAt: DateTime.now().toString(),
+
+  );
+  if (result == null) {
+    final updatedCourses = await opreationsGet.getCoursesMethod( 
     );
-    // emit(SuccessState());
-    // opreationsGet.getCoursesMethod();
-    add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
-    print('supa1');
+ try {
+      final courseuser = opreationsGet.courses.where(
+        (e) => e.tid == Supabase.instance.client.auth.currentUser!.id,
+      );
+      print("to try rode   ${courseuser}");
+      final total = await courseuser.length;
+      final active = await courseuser.where((e) => e.state == 'Active').length;
+      final inactive = await courseuser
+          .where((e) => e.state == 'inactive')
+          .length;
+      final cook = await courseuser.where((e) => e.category == 'Cook').length;
+      final clean = await courseuser.where((e) => e.category == 'Clean').length;
+      print("total${total}");
+      print("active${active}");
+      print("inactive${inactive}");
+      print("cook${cook}");
+      print("clean${clean}");
+      // emit(
+      //   // CoursesLoaded(
+      //   //   trainearcourses:courseuser.toList(),
+      //   //   total: total,
+      //   //   active: active,
+      //   //   inactive: inactive,
+      //   //   cook: cook,
+      //   //   clean: clean,
+
+      //   // ),
+
+      // );
+      emit(
+        CoursesLoaded().copyWith(
+          trainearcourses: courseuser.toList(),
+          total: total,
+          active: active,
+          inactive: inactive,
+          cook: cook,
+          clean: clean,
+        ),
+      );
+    } catch (e) {
+      log("error :$e");
+    }
+
+  } else {
+
+    // emit(AddCourseFailed("Failed to add course"));
+
   }
+
+}
 
   //upload image need to be optimized and write it the correct way
   FutureOr<void> uploadImageMethod(
@@ -93,7 +173,9 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     Emitter<AddCorseState> emit,
   ) async {
     try {
-      final courseuser = opreationsGet.courses.where((e) => e.tid == Supabase.instance.client.auth.currentUser!.id);
+      final courseuser = opreationsGet.courses.where(
+        (e) => e.tid == Supabase.instance.client.auth.currentUser!.id,
+      );
       print("to try rode   ${courseuser}");
       final total = await courseuser.length;
       final active = await courseuser.where((e) => e.state == 'Active').length;
@@ -107,19 +189,41 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       print("inactive${inactive}");
       print("cook${cook}");
       print("clean${clean}");
+      // emit(
+      //   // CoursesLoaded(
+      //   //   trainearcourses:courseuser.toList(),
+      //   //   total: total,
+      //   //   active: active,
+      //   //   inactive: inactive,
+      //   //   cook: cook,
+      //   //   clean: clean,
+
+      //   // ),
+
+      // );
+
       emit(
-        CoursesLoaded(
-          trainearcourses:courseuser.toList(),
+        CoursesLoaded().copyWith(
+          trainearcourses: courseuser.toList(),
           total: total,
           active: active,
           inactive: inactive,
           cook: cook,
           clean: clean,
-
         ),
       );
     } catch (e) {
       log("error rodeeee whyydsydydfydf:$e");
     }
+  }
+
+  FutureOr<void> deleteCourseMethod(
+    DeleteCourseEvent event,
+    Emitter<AddCorseState> emit,
+  ) async {
+    await opreationsGet.deletecourseMethod(idcourse: event.courseId);
+    final updatecourses = await opreationsGet.getCoursesMethod();
+    emit(CoursesLoaded().copyWith(trainearcourses: updatecourses));
+
   }
 }

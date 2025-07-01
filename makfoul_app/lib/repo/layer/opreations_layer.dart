@@ -41,6 +41,7 @@ class OpreationsLayer {
         state: state,
         createdAt: createdAt,
       );
+      // getCoursesMethod();
       print('supa2');
     } catch (error) {
       throw FormatException('there was an error: $error');
@@ -59,5 +60,13 @@ class OpreationsLayer {
         return CourseModelMapper.fromMap(item);
       }).toList();
     }
+  }
+
+  deletecourseMethod({required int idcourse}) async{
+ try{
+SupabaseConnect.deletecourse(idcourse: idcourse);
+ }catch(e){
+print("error in delet course $e");
+ }
   }
 }

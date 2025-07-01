@@ -12,7 +12,13 @@ class SelectCategoryEvent extends AddCorseEvent {
 class AddNewCordeEvent extends AddCorseEvent {}
 class UploadImageEvent extends AddCorseEvent {}
 class GetCoursesEvent extends AddCorseEvent{
-  final String id;
+  final String? id;
 
-  GetCoursesEvent({required this.id}); 
+  GetCoursesEvent({ this.id}); 
+}
+
+class DeleteCourseEvent extends AddCorseEvent{
+  final int courseId;
+
+  DeleteCourseEvent({required this.courseId}); 
 }

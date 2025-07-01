@@ -91,7 +91,9 @@ class HomescreenTrainerScreen extends StatelessWidget {
                         BlocBuilder<AddCorseBloc, AddCorseState>(
                           builder: (context, state) {
                             print("current state is $state");
+                          
                             if (state is CoursesLoaded) {
+                                print("state total =${state.total} ");
                               return Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceEvenly,
@@ -111,6 +113,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                         ),
                                         Text(
                                           "${state.total}",
+                                        
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 18,
@@ -474,7 +477,9 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                 setText: "Add course".tr(),
                                                 onPressed: () {
                                                   bloc.add(AddNewCordeEvent());
-                                                
+                                                                                  //   bloc.add(GetCoursesEvent(id: userinfo.uid));
+                                  // bloc.add(GetCoursesEvent(id: userinfo.uid));
+
                                                 },
                                               ),
                                             ),
