@@ -13,8 +13,8 @@ class OpreationsLayer {
     print('layer2');
   }
 
-  getImageUrlMethod({required String path}) {
-    return SupabaseConnect.getImageUrl(path: path);
+  getImageUrlMethod({required String path}) async{
+    return await SupabaseConnect.getImageUrl(path: path);
   }
 
   addCourseMethod({
@@ -68,5 +68,11 @@ class OpreationsLayer {
     
     print('getit layer name');
   }
+  updateImageMethod({required String urlString})async{
 
+
+    SupabaseConnect.updateImage(urlString: urlString);
+    
+    print('getit layer name');
+  }
 }

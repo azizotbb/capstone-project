@@ -42,16 +42,21 @@ class HomescreenTrainerScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.all(9),
                       child: SafeArea(
-                        child: Container(width: context.getWidth(),
+                        child: Container(
+                          width: context.getWidth(),
                           child: ListTile(
-                            leading: CircleAvatar(
-                              radius: 30,
-                              child: Image.asset(
-                                "assets/images/circler avtar instructor.png",
-                              ),
+                            leading: Container(
+                              height: 68,
+                              clipBehavior: Clip.hardEdge,
+                              decoration: BoxDecoration(shape: BoxShape.circle),
+                              child: userinfo.url == null
+                                  ? Image.asset(
+                                      "assets/images/circler avtar instructor.png",
+                                    )
+                                  : Image.network(userinfo.url!),
                             ),
                             title: Text(
-                              "Hi,".tr() + userinfo.username,
+                              "hi".tr() + userinfo.username,
                               style: AppTextStyle.textTitleLarg24dark,
                             ),
                             subtitle: Text(
@@ -328,8 +333,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                               children: [
                                                 TextButton(
                                                   onPressed: () async {
-                                               
-                                                   bloc.pickedDate  = await showDateRangePicker(
+                                                    bloc.pickedDate = await showDateRangePicker(
                                                       context: context,
                                                       firstDate: DateTime(
                                                         DateTime.now().year - 5,
@@ -367,7 +371,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                       },
                                                     );
                                                     // bloc.date = picked
-                                                        // .toString();
+                                                    // .toString();
                                                   },
                                                   child: Container(
                                                     height: 56,

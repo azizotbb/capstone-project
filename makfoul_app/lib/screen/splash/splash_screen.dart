@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
@@ -14,7 +15,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final supabase = Supabase.instance.client;
     // get courses from supabase
-    final opreationsGetit = GetIt.I.get<OpreationsLayer>().getCoursesMethod();
+    // final opreationsGetit = GetIt.I.get<OpreationsLayer>().getCoursesMethod();
 
     // Get the current authentication session
     final session = supabase.auth.currentSession;
@@ -23,14 +24,24 @@ class SplashScreen extends StatelessWidget {
     final userinfo = GetIt.I.get<AuthLayer>().userinfo;
 
     // Delay navigation for 3 seconds to show the splash screen
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 3), () async {
+      print(session?.isExpired);
       if (session?.isExpired == false) {
         // If session is active, populate the user info model with data from Supabase
         userinfo.uid = session!.user.id;
-        userinfo.username = session.user.userMetadata!["username"];
+        final stringUrl = await supabase
+            .from('user')
+            .select('avatar')
+            .eq('UID', userinfo.uid); 
+           final userName = await supabase
+            .from('user')
+            .select('name')
+            .eq('UID', userinfo.uid);
+        userinfo.username = userName[0]['name'];
         userinfo.email = session.user.email!;
         userinfo.role = session.user.userMetadata!["role"];
         userinfo.phone = session.user.userMetadata!["phoneNumber"];
+        userinfo.url = stringUrl[0]['avatar'];
         userinfo.createdAt = session.user.createdAt;
 
         Navigator.pushReplacement(
@@ -38,7 +49,6 @@ class SplashScreen extends StatelessWidget {
           MaterialPageRoute(builder: (context) => BottomNavigationWidget()),
         );
       } else {
-        // If no session or expired, navigate to onboarding screen
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => OnBoarding()),

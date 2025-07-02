@@ -47,6 +47,8 @@ class ProfileScreen extends StatelessWidget {
                               return InkWell(
                                 onTap: () {
                                   bloc.add(UpdateImageEvent());
+                                  userinfo.url = bloc.urlString;
+                                  print(userinfo.url);
                                   print('Clicked');
                                 },
                                 child: Container(
@@ -55,11 +57,11 @@ class ProfileScreen extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                   ),
-                                  child: bloc.urlString == null
+                                  child: userinfo.url == null
                                       ? Image.asset(
                                           "assets/images/circler avtar instructor.png",
                                         )
-                                      : Image.network(bloc.urlString!),
+                                      : Image.network(userinfo.url!),
                                 ),
                               );
                             },
@@ -88,6 +90,7 @@ class ProfileScreen extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                           //edit here
+                          print(userinfo.url);
                           showDialog(
                             context: context,
                             builder: (context) {

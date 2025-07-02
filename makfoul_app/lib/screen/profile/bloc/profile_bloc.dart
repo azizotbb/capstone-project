@@ -5,6 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:makfoul_app/model/user_model.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
 import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:meta/meta.dart';
@@ -22,6 +23,8 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final getOpreations = GetIt.I.get<OpreationsLayer>();
   String? urlString;
   XFile? image;
+      UserModel userinfo = GetIt.I.get<AuthLayer>().userinfo;
+
   ProfileBloc() : super(ProfileInitial()) {
     on<UpdatePasswordEvent>(updatePasswordMethod);
     on<UpdateNameEvent>(updateNameMethod);
@@ -57,13 +60,18 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     final imageName = DateTime.now();
     final String path = 'avatar/$imageName';
     File file = File(image!.path);
-
+    print(image);
     if (image == null) return;
 
-    getOpreations.uploadImageMethod(path: path, file: file);
-
+   await getOpreations.uploadImageMethod(path: path, file: file);
+      print(urlString);
     urlString = await getOpreations.getImageUrlMethod(path: path);
+          print('--------------------------------');
+          userinfo.url =  urlString;
+          print(urlString);
 
+    await getOpreations.updateImageMethod(urlString: urlString!);
+    
     emit(SuccessState());
   }
 }

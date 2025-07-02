@@ -91,7 +91,7 @@ class SupabaseConnect {
     required File file,
   }) async {
     try {
-      supabase!.client.storage.from('images').upload(path, file);
+      await supabase!.client.storage.from('images').upload(path, file);
       print('layer1');
     } catch (error) {
       throw ('There was an error on your uploading: $error');
@@ -163,4 +163,37 @@ class SupabaseConnect {
     print('supabase layer names');
 
   }
+
+
+  static Future<void> updateImage({required String urlString})async{
+
+
+
+    await supabase!.client.from('user').update({'avatar':urlString}).eq('UID', supabase!.client.auth.currentUser!.id);
+
+
+  }
+
+
+  //  need testing
+
+static Future<void> addOrder({
+
+    required String createdAt,
+    required String uid,
+    required int courseId,
+
+  }) async {
+    try {
+      await supabase!.client.from('order').insert({
+        'created_at':createdAt,
+        'course_id': courseId,
+        'uid': supabase!.client.auth.currentSession!.user.id,
+        
+      });
+    } catch (error) {
+      throw FormatException('there was an error: $error');
+    }
+  }
+
 }

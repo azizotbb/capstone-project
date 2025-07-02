@@ -4,7 +4,7 @@ class UserModel {
   String email;
   String role;
   String phone;
-
+  String? url;
   String createdAt;
 
   UserModel({
@@ -14,7 +14,7 @@ class UserModel {
     required this.email,
     required this.role,
     required this.phone,
-
+    this.url,
     required this.createdAt,
   });
 }

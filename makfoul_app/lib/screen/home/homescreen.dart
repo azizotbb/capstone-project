@@ -33,11 +33,15 @@ class HomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 45),
                   child: Expanded(
                     child: ListTile(
-                      leading: CircleAvatar(
-                        radius: 30,
-                        child: Image.asset(
-                          "assets/images/circler avtar instructor.png",
-                        ),
+                      leading: Container(
+                        height: 68,
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(shape: BoxShape.circle),
+                        child: userinfo.url == null
+                            ? Image.asset(
+                                "assets/images/circler avtar instructor.png",
+                              )
+                            : Image.network(userinfo.url!),
                       ),
                       title: Text(
                         "Hi,".tr() + userinfo.username,
