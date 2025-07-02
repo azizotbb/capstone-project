@@ -59,10 +59,24 @@ class TrainerScreen extends StatelessWidget {
                       //supabase here to get Trainer avatar
                       avatar: courses[index].image,
                       ontap: () {
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(builder: (context) => CourseView()),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CourseView(
+                              courseId: courses[index].id.toString(),
+                              title: courses[index].title,
+                              img: courses[index].image,
+                              description: courses[index].description,
+                              location: courses[index].location,
+                              price: courses[index].price,
+                              tid: courses[index].tid,
+                              category: courses[index].category,
+                              numberOfTrainees: courses[index].numberOfTrainees,
+                              date: courses[index].date,
+                              state: courses[index].state,
+                            ),
+                          ),
+                        );
                       },
                     ),
                   );

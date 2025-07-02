@@ -1,6 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 
@@ -80,19 +79,6 @@ class TopCourses extends StatelessWidget {
               child: TextButton(
                 onPressed: null,
                 child: Text("${price} SAR", style: AppTextStyle.textMedium14),
-              ),
-            ),
-            Align(
-              alignment: Alignment.bottomRight,
-              child: TextButton(
-                onPressed: () {},
-                child: Text(
-                  "view_details".tr(),
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: AppColors.colorDarkGrey,
-                  ),
-                ),
               ),
             ),
           ],

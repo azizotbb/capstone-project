@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
@@ -31,8 +30,8 @@ class SplashScreen extends StatelessWidget {
         final stringUrl = await supabase
             .from('user')
             .select('avatar')
-            .eq('UID', userinfo.uid); 
-           final userName = await supabase
+            .eq('UID', userinfo.uid);
+        final userName = await supabase
             .from('user')
             .select('name')
             .eq('UID', userinfo.uid);

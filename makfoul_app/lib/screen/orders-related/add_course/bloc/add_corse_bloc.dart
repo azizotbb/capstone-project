@@ -7,10 +7,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:makfoul_app/utility/permission.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:meta/meta.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'add_corse_event.dart';
 part 'add_corse_state.dart';
@@ -90,8 +88,9 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     //  urlString =  Supabase.instance.client.storage.from('images').getPublicUrl(path);
     urlString = await opreationsGet.getImageUrlMethod(path: path);
   }
-// Called when user taps a location on the map.
-// Updates temporary selected location (for marker display only).
+
+  // Called when user taps a location on the map.
+  // Updates temporary selected location (for marker display only).
   FutureOr<void> pickedMethod(
     PickLocatioEvent event,
     Emitter<AddCorseState> emit,
@@ -100,8 +99,9 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     selectedLocation = event.location;
     emit(PickLocatioState(selectedLocation!));
   }
-// Called on page load to fetch user's current GPS location.
-// Used if no location is picked manually yet.
+
+  // Called on page load to fetch user's current GPS location.
+  // Used if no location is picked manually yet.
   FutureOr<void> dynamicMethod(
     DynamicLocationEvent event,
     Emitter<AddCorseState> emit,
@@ -114,8 +114,9 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       emit(ErrorState(e.toString()));
     }
   }
-// Called when user confirms and saves picked location.
-// Final location is saved and can be passed to other screens or backend.
+
+  // Called when user confirms and saves picked location.
+  // Final location is saved and can be passed to other screens or backend.
   FutureOr<void> saveLocationMethod(
     SavePickedLocationEvent event,
     Emitter<AddCorseState> emit,

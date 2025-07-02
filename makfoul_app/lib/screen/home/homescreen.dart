@@ -6,6 +6,7 @@ import 'package:makfoul_app/model/coursemodel.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
 import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:makfoul_app/screen/auth/signup/signup.dart';
+import 'package:makfoul_app/screen/course/course_view.dart';
 import 'package:makfoul_app/screen/trainer/trainer_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -227,12 +228,35 @@ class HomeScreen extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 2),
-                          child: TopCourses(
-                            image: allCourses[index].image,
-                            //supabase get the name for the trainer and location and price
-                            coursename: allCourses[index].title,
-                            location: "الرياض",
-                            price: allCourses[index].price,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CourseView(
+                                    courseId: allCourses[index].id.toString(),
+                                    title: allCourses[index].title,
+                                    img: allCourses[index].image,
+                                    description: allCourses[index].description,
+                                    location: allCourses[index].location,
+                                    price: allCourses[index].price,
+                                    tid: allCourses[index].tid,
+                                    category: allCourses[index].category,
+                                    numberOfTrainees:
+                                        allCourses[index].numberOfTrainees,
+                                    date: allCourses[index].date,
+                                    state: allCourses[index].state,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: TopCourses(
+                              image: allCourses[index].image,
+                              //supabase get the name for the trainer and location and price
+                              coursename: allCourses[index].title,
+                              location: "الرياض",
+                              price: allCourses[index].price,
+                            ),
                           ),
                         );
                       },
