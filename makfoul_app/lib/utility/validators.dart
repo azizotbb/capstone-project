@@ -55,13 +55,13 @@ class Validators {
     if (value.length > 15) {
       return 'the course must be under 15 letter.';
     }
-     if (value.length > 5) {
+     if (value.length < 5) {
       return 'the course must be above 5 letter.';
     }
     return null;
   }
 
-static String? validatePrice(String? value) {
+static String? validateTraineesNumber(String? value) {
     if (value == null || value.trim().isEmpty) {
       return 'Please enter a Price for your';
     }
@@ -73,9 +73,9 @@ static String? validatePrice(String? value) {
     return null;
   }
 
-static String? validateTraineesNumber(String? value) {
+static String? validatePrice(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter Number of Trainees';
+      return 'Please enter price';
     }
   
     return null;

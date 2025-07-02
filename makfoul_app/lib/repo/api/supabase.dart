@@ -120,7 +120,7 @@ class SupabaseConnect {
   }) async {
     try {
       print('supa3');
-      await supabase!.client.from('course').insert({
+       await supabase!.client.from('course').insert({
         'tid': supabase!.client.auth.currentSession!.user.id,
         'category': catagory,
         'title': title,
@@ -133,6 +133,7 @@ class SupabaseConnect {
         'state': state,
         'created_at': createdAt,
       });
+      print('object');
     } catch (error) {
       throw FormatException('there was an error: $error');
     }

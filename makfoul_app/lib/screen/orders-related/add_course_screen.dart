@@ -5,6 +5,7 @@ import 'package:makfoul_app/screen/orders-related/notification_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/course/custom_course_widget.dart';
+import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
 //history for trainer
 class AddCourseScreen extends StatelessWidget {
   const AddCourseScreen({super.key});
@@ -34,6 +35,7 @@ class AddCourseScreen extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
+              CustomTextField(setHint: ''),
               SizedBox(height: 30),
               Align(
                 alignment: Alignment.topLeft,

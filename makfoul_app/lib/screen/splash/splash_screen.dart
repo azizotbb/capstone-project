@@ -39,6 +39,7 @@ class SplashScreen extends StatelessWidget {
         userinfo.email = session.user.email!;
         userinfo.role = session.user.userMetadata!["role"];
         userinfo.phone = session.user.userMetadata!["phoneNumber"];
+        userinfo.url = stringUrl[0]['avatar'];
         userinfo.createdAt = session.user.createdAt;
 
         Navigator.pushReplacement(

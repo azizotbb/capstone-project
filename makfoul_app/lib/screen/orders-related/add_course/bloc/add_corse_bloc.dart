@@ -28,8 +28,11 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
   final TextEditingController priceController = TextEditingController();
   final opreationsGet = GetIt.I.get<OpreationsLayer>();
   final formKey = GlobalKey<FormState>();
-  final hasImage = false;
   String? date;
+  DateTime? fileName;
+  String? path;
+  File? file;
+  bool? isDone = false;
   AddCorseBloc() : super(AddCorseInitial()) {
     on<SelectCategoryEvent>(selectCategoryMethod);
 
@@ -51,8 +54,16 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
   FutureOr<void> addNewCordeMethod(
     AddNewCordeEvent event,
     Emitter<AddCorseState> emit,
-  ) {
-    opreationsGet.addCourseMethod(
+  ) async {
+        fileName = DateTime.now();
+     path = 'course/$fileName';
+    File file = File(image!.path);
+
+    await opreationsGet.uploadImageMethod(path: path!, file: file);
+
+    urlString = await opreationsGet.getImageUrlMethod(path: path!);
+
+    await opreationsGet.addCourseMethod(
       catagory: selectedCategory!,
       title: titleController.text,
       description: descriptionController.text,
@@ -60,12 +71,15 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       numberOfTrainees: int.parse(numberOfTraineesController.text),
       date: pickedDate.toString(),
       image: urlString!,
-      location: stringLocation!,
+      location: 'stringLocation',
       state: 'Active',
       createdAt: DateTime.now().toString(),
     );
     print('supa1');
 
+    emit(SuccessState());
+    // isDone = true;
+    // image = null;
     // print(selectedCategory);
     // print(date);
   }
@@ -77,27 +91,27 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
   ) async {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    final fileName = DateTime.now();
-    final path = 'course/$fileName';
-    File file = File(image!.path);
+    // final fileName = DateTime.now();
+    // final path = 'course/$fileName';
+    // File file = File(image!.path);
     if (image == null) {
-      
-          emit(SuccessState());
+      emit(NullState());
 
       return;
-      }
+    }
 
-    opreationsGet.uploadImageMethod(path: path, file: file);
-    print('layer3');
+    // opreationsGet.uploadImageMethod(path: path, file: file);
+    // print('layer3');
 
     // Supabase.instance.client.storage.from('images').upload(path, file);
     //  urlString =  Supabase.instance.client.storage.from('images').getPublicUrl(path);
-    urlString = await opreationsGet.getImageUrlMethod(path: path);
-    
+    // urlString = await opreationsGet.getImageUrlMethod(path: path);
+
     emit(SuccessState());
   }
-// Called when user taps a location on the map.
-// Updates temporary selected location (for marker display only).
+
+  // Called when user taps a location on the map.
+  // Updates temporary selected location (for marker display only).
   FutureOr<void> pickedMethod(
     PickLocatioEvent event,
     Emitter<AddCorseState> emit,
@@ -106,8 +120,9 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     selectedLocation = event.location;
     emit(PickLocatioState(selectedLocation!));
   }
-// Called on page load to fetch user's current GPS location.
-// Used if no location is picked manually yet.
+
+  // Called on page load to fetch user's current GPS location.
+  // Used if no location is picked manually yet.
   FutureOr<void> dynamicMethod(
     DynamicLocationEvent event,
     Emitter<AddCorseState> emit,
@@ -120,8 +135,9 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       emit(ErrorState(e.toString()));
     }
   }
-// Called when user confirms and saves picked location.
-// Final location is saved and can be passed to other screens or backend.
+
+  // Called when user confirms and saves picked location.
+  // Final location is saved and can be passed to other screens or backend.
   FutureOr<void> saveLocationMethod(
     SavePickedLocationEvent event,
     Emitter<AddCorseState> emit,

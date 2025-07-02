@@ -246,10 +246,11 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                         child: PopScope(
                                           onPopInvokedWithResult:
                                               (didPop, result) {
-                                                if (didPop == true) {
+                                                if (didPop == true ) {
                                                   print('it pop');
                                                   print(bloc.image);
-                                                  bloc.image == null;
+                                                  bloc.image = null;
+                                                  
                                                   print(bloc.image);
                                                 }
                                               },
@@ -515,7 +516,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                       child: PrimryCustomButton(
                                                         setText: "Add course"
                                                             .tr(),
-                                                        onPressed: () {
+                                                        onPressed: () async{
                                                           if (bloc
                                                               .formKey
                                                               .currentState!
@@ -523,10 +524,12 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                             bloc.add(
                                                               AddNewCordeEvent(),
                                                             );
+                                                            await Future.delayed(Duration(seconds: 3));
                                                             Navigator.pop(
                                                               context,
                                                             );
                                                           }
+                                                          
                                                         },
                                                       ),
                                                     ),
