@@ -3,6 +3,9 @@ import 'dart:io';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:makfoul_app/utility/permission.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:makfoul_app/repo/layer/opreations_layer.dart';
@@ -14,7 +17,8 @@ part 'add_corse_state.dart';
 
 class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
   final items = ["Cook", "Clean"];
-
+  LatLng? selectedLocation;
+  String? stringLocation;
   String? selectedCategory;
   XFile? image;
   DateTimeRange<DateTime>? pickedDate;
@@ -27,12 +31,14 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
   final opreationsGet = GetIt.I.get<OpreationsLayer>();
 
   String? date;
-
   AddCorseBloc() : super(AddCorseInitial()) {
     on<SelectCategoryEvent>(selectCategoryMethod);
 
     on<AddNewCordeEvent>(addNewCordeMethod);
     on<UploadImageEvent>(uploadImageMethod);
+    on<DynamicLocationEvent>(dynamicMethod);
+    on<PickLocatioEvent>(pickedMethod);
+    on<SavePickedLocationEvent>(saveLocationMethod);
   }
 
   FutureOr<void> selectCategoryMethod(
@@ -55,7 +61,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       numberOfTrainees: int.parse(numberOfTraineesController.text),
       date: pickedDate.toString(),
       image: urlString!,
-      location: 'location',
+      location: stringLocation!,
       state: 'Active',
       createdAt: DateTime.now().toString(),
     );
@@ -83,5 +89,42 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     // Supabase.instance.client.storage.from('images').upload(path, file);
     //  urlString =  Supabase.instance.client.storage.from('images').getPublicUrl(path);
     urlString = await opreationsGet.getImageUrlMethod(path: path);
+  }
+// Called when user taps a location on the map.
+// Updates temporary selected location (for marker display only).
+  FutureOr<void> pickedMethod(
+    PickLocatioEvent event,
+    Emitter<AddCorseState> emit,
+  ) {
+    print('Bloc received location: ${event.location}');
+    selectedLocation = event.location;
+    emit(PickLocatioState(selectedLocation!));
+  }
+// Called on page load to fetch user's current GPS location.
+// Used if no location is picked manually yet.
+  FutureOr<void> dynamicMethod(
+    DynamicLocationEvent event,
+    Emitter<AddCorseState> emit,
+  ) async {
+    try {
+      final position = await determinePosition();
+      final location = LatLng(position.latitude, position.longitude);
+      emit(LocationLodedState(location));
+    } catch (e) {
+      emit(ErrorState(e.toString()));
+    }
+  }
+// Called when user confirms and saves picked location.
+// Final location is saved and can be passed to other screens or backend.
+  FutureOr<void> saveLocationMethod(
+    SavePickedLocationEvent event,
+    Emitter<AddCorseState> emit,
+  ) {
+    print('Final saved location: ${event.finalLocation}');
+
+    selectedLocation = event.finalLocation;
+    stringLocation = event.finalLocation.toString();
+
+    emit(PickLocatioState(event.finalLocation));
   }
 }

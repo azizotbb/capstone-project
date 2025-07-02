@@ -10,4 +10,19 @@ class SelectCategoryEvent extends AddCorseEvent {
 }
 
 class AddNewCordeEvent extends AddCorseEvent {}
+
 class UploadImageEvent extends AddCorseEvent {}
+
+class DynamicLocationEvent extends AddCorseEvent {}
+
+class PickLocatioEvent extends AddCorseEvent {
+  final LatLng location;
+
+  PickLocatioEvent({required this.location});
+}
+
+class SavePickedLocationEvent extends AddCorseEvent {
+  final LatLng finalLocation;
+
+  SavePickedLocationEvent(this.finalLocation);
+}

@@ -9,7 +9,6 @@ class OpreationsLayer {
 
   uploadImageMethod({required String path, required File file}) {
     SupabaseConnect.uploadImage(path: path, file: file);
-    print('layer2');
   }
 
   getImageUrlMethod({required String path}) async {
@@ -47,7 +46,7 @@ class OpreationsLayer {
     }
   }
 
-  /// Get courses from Supabase and save them to the list
+  // Get courses from Supabase and save them to the list
   getCoursesMethod() async {
     // Get course data from Supabase
     final response = await SupabaseConnect.getCourses();

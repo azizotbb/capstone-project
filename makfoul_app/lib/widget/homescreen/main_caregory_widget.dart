@@ -19,31 +19,33 @@ class MainCaregoryWidget extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: ontap,
-          child: Stack(
-            children: [
-              Container(
-                height: 80,
-                width: 80,
-                // padding: EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: AppColors.colorpeige,
-                  // borderRadius: BorderRadius.circular(11),
+          child: SizedBox(
+            child: Stack(
+              children: [
+                Container(
+                  height: 80,
+                  width: 80,
+                  // padding: EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: AppColors.colorpeige,
+                    // borderRadius: BorderRadius.circular(11),
+                  ),
                 ),
-              ),
-              Positioned.fill(
-                child: Align(
-                  alignment: Alignment.center,
-                  child: image != null
-                      ? Image.asset(image!, height: 32, fit: BoxFit.contain)
-                      : Icon(
-                          Icons.grid_view,
-                          color: AppColors.colorScondry,
-                          size: 40,
-                        ),
+                Positioned.fill(
+                  child: Align(
+                    alignment: Alignment.center,
+                    child: image != null
+                        ? Image.asset(image!, height: 32, fit: BoxFit.contain)
+                        : Icon(
+                            Icons.grid_view,
+                            color: AppColors.colorScondry,
+                            size: 40,
+                          ),
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         ),
         SizedBox(height: 8),

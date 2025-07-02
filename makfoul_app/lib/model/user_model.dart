@@ -10,7 +10,6 @@ class UserModel {
   UserModel({
     required this.uid,
     required this.username,
-
     required this.email,
     required this.role,
     required this.phone,
