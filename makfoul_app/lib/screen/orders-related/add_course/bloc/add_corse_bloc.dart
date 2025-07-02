@@ -38,6 +38,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     on<UploadImageEvent>(uploadImageMethod);
     on<DynamicLocationEvent>(dynamicMethod);
     on<PickLocatioEvent>(pickedMethod);
+    on<SavePickedLocationEvent>(saveLocationMethod);
   }
 
   FutureOr<void> selectCategoryMethod(
@@ -89,17 +90,18 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     //  urlString =  Supabase.instance.client.storage.from('images').getPublicUrl(path);
     urlString = await opreationsGet.getImageUrlMethod(path: path);
   }
-
+// Called when user taps a location on the map.
+// Updates temporary selected location (for marker display only).
   FutureOr<void> pickedMethod(
     PickLocatioEvent event,
     Emitter<AddCorseState> emit,
   ) {
     print('Bloc received location: ${event.location}');
     selectedLocation = event.location;
-    stringLocation = event.location.toString();
     emit(PickLocatioState(selectedLocation!));
   }
-
+// Called on page load to fetch user's current GPS location.
+// Used if no location is picked manually yet.
   FutureOr<void> dynamicMethod(
     DynamicLocationEvent event,
     Emitter<AddCorseState> emit,
@@ -111,5 +113,18 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     } catch (e) {
       emit(ErrorState(e.toString()));
     }
+  }
+// Called when user confirms and saves picked location.
+// Final location is saved and can be passed to other screens or backend.
+  FutureOr<void> saveLocationMethod(
+    SavePickedLocationEvent event,
+    Emitter<AddCorseState> emit,
+  ) {
+    print('Final saved location: ${event.finalLocation}');
+
+    selectedLocation = event.finalLocation;
+    stringLocation = event.finalLocation.toString();
+
+    emit(PickLocatioState(event.finalLocation));
   }
 }

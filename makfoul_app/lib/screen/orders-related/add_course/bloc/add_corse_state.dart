@@ -16,9 +16,9 @@ final class ErrorState extends AddCorseState {
 final class SuccessState extends AddCorseState {}
 
 class LocationLodedState extends AddCorseState {
-  final LatLng location;
+  final LatLng currentLocation;
 
-  LocationLodedState(this.location);
+  LocationLodedState(this.currentLocation);
 }
 
 final class PickLocatioState extends AddCorseState {

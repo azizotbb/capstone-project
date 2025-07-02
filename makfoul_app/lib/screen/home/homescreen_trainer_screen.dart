@@ -2,6 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/model/coursemodel.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
@@ -393,17 +394,33 @@ class HomescreenTrainerScreen extends StatelessWidget {
 
                                                 CustomIconButton(
                                                   onPressed: () async {
-                                                    Navigator.push(
+                                                    // Open the map screen to pick a location
+                                                    final result = await Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
                                                         builder: (_) =>
                                                             BlocProvider.value(
-                                                              value: bloc,
+                                                              value: bloc
+                                                                ..add(
+                                                                  DynamicLocationEvent(), // Load user's current GPS location
+                                                                ),
                                                               child:
                                                                   PickedLocation(),
                                                             ),
                                                       ),
                                                     );
+                                                    // If user selected a location, save it to the bloc
+                                                    if (result != null &&
+                                                        result is LatLng) {
+                                                      print(
+                                                        'User picked location: $result',
+                                                      );
+                                                      bloc.add(
+                                                        SavePickedLocationEvent(
+                                                          result,
+                                                        ),
+                                                      );
+                                                    }
                                                   },
                                                   iconButton: Icon(
                                                     Icons.place_sharp,
