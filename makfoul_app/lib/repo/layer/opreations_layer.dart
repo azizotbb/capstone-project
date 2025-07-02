@@ -1,6 +1,5 @@
 import 'dart:io';
 
-
 import 'package:makfoul_app/model/course/course_model.dart';
 import 'package:makfoul_app/repo/api/supabase.dart';
 
@@ -13,7 +12,7 @@ class OpreationsLayer {
     print('layer2');
   }
 
-  getImageUrlMethod({required String path}) async{
+  getImageUrlMethod({required String path}) async {
     return await SupabaseConnect.getImageUrl(path: path);
   }
 
@@ -61,18 +60,31 @@ class OpreationsLayer {
     }
   }
 
-  updateUserNameMethod({required String name})async{
-
-
+  updateUserNameMethod({required String name}) async {
     SupabaseConnect.updateName(name: name);
-    
+
     print('getit layer name');
   }
-  updateImageMethod({required String urlString})async{
 
-
+  updateImageMethod({required String urlString}) async {
     SupabaseConnect.updateImage(urlString: urlString);
-    
+
     print('getit layer name');
+  }
+
+  addOrderMethod({
+    required String createdAt,
+    required String uid,
+    required int courseId,
+  }) {
+    try {
+      SupabaseConnect.addOrder(
+        createdAt: createdAt,
+        uid: uid,
+        courseId: courseId,
+      );
+    } catch (error) {
+      throw FormatException('there was an error: $error');
+    }
   }
 }
