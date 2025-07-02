@@ -7,10 +7,8 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:makfoul_app/utility/permission.dart';
 import 'package:get_it/get_it.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:meta/meta.dart';
-import 'package:supabase_flutter/supabase_flutter.dart';
 
 part 'add_corse_event.dart';
 part 'add_corse_state.dart';
@@ -29,7 +27,8 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       TextEditingController();
   final TextEditingController priceController = TextEditingController();
   final opreationsGet = GetIt.I.get<OpreationsLayer>();
-
+  final formKey = GlobalKey<FormState>();
+  final hasImage = false;
   String? date;
   AddCorseBloc() : super(AddCorseInitial()) {
     on<SelectCategoryEvent>(selectCategoryMethod);
@@ -81,7 +80,12 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     final fileName = DateTime.now();
     final path = 'course/$fileName';
     File file = File(image!.path);
-    if (image == null) return;
+    if (image == null) {
+      
+          emit(SuccessState());
+
+      return;
+      }
 
     opreationsGet.uploadImageMethod(path: path, file: file);
     print('layer3');
@@ -89,6 +93,8 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     // Supabase.instance.client.storage.from('images').upload(path, file);
     //  urlString =  Supabase.instance.client.storage.from('images').getPublicUrl(path);
     urlString = await opreationsGet.getImageUrlMethod(path: path);
+    
+    emit(SuccessState());
   }
 // Called when user taps a location on the map.
 // Updates temporary selected location (for marker display only).

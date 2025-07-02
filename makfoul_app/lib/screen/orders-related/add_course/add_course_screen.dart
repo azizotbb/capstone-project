@@ -1,19 +1,12 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/model/coursemodel.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
 import 'package:makfoul_app/screen/orders-related/notification_screen.dart';
-import 'package:makfoul_app/screen/trainer/trainer_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/course/custom_course_widget.dart';
-import 'package:makfoul_app/widget/homescreen/main_caregory_widget.dart';
-import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
-import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
-import 'package:image_picker/image_picker.dart';
-
 
 
 
@@ -79,6 +72,7 @@ class AddCourseScreen extends StatelessWidget {
                             ),
                           ),
                           child: CustomCourseWidget(
+                          
                             coursetitle: activeCourse[index].coursename,
                             pricecourse: activeCourse[index].price,
                             image: 'assets/images/Rectangle 61.png',

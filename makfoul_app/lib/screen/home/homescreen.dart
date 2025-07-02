@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
-import 'package:makfoul_app/model/coursemodel.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
 import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:makfoul_app/screen/auth/signup/signup.dart';
