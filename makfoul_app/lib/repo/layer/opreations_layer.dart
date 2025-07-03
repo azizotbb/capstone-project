@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:math';
 
 import 'package:makfoul_app/model/course/course_model.dart';
 import 'package:makfoul_app/repo/api/supabase.dart';
@@ -21,7 +22,8 @@ class OpreationsLayer {
     required String description,
     required double price,
     required int numberOfTrainees,
-    required String date,
+   required DateTime startDate, 
+   required DateTime endDate, 
     required String image,
     required String location,
     required String state,
@@ -34,29 +36,66 @@ class OpreationsLayer {
         description: description,
         price: price,
         numberOfTrainees: numberOfTrainees,
-        date: date,
         image: image,
         location: location,
         state: state,
         createdAt: createdAt,
+         startDate: startDate, endDate: endDate,
       );
+      // getCoursesMethod();
       print('supa2');
     } catch (error) {
       throw FormatException('there was an error: $error');
     }
   }
 
-  // Get courses from Supabase and save them to the list
-  getCoursesMethod() async {
-    // Get course data from Supabase
-    final response = await SupabaseConnect.getCourses();
-
-    // Convert the data to CourseModel objects if not empty
-    if (response.isNotEmpty) {
-      courses = response.map((item) {
-        return CourseModelMapper.fromMap(item);
-      }).toList();
+  /// Get courses from Supabase and save them to the list
+  // getCoursesMethod() async {
+  //   // Get course data from Supabase
+  //   print("get course method rodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+  //   final response = await SupabaseConnect.getCourses();
+  //   print("الريسبونس والكورسات هذي : $response");
+  //   // Convert the data to CourseModel objects if not empty
+  //   if (response.isNotEmpty) {
+  //     courses = response.map((item) {
+  //       return CourseModelMapper.fromMap(item);
+  //     }).toList();
+  //   }
+  // }
+ getCoursesMethod() async{
+  try{
+    final responces=await SupabaseConnect.getCourses();
+    if(responces.isNotEmpty){
+      print("responce in layer is look :$responces");
+      final now= DateTime.now();
+      for(final item in responces){
+        final endDateStr=item['endDate'];
+        final state =item['state'];
+        final id=item['id']; 
+        if(endDateStr!=null &&state=='Active'){
+          final endDate=DateTime.parse(endDateStr);
+          if(endDate.isBefore(now)){
+            await SupabaseConnect.updatecoursesState(id: id, newState: 'inActive');
+          }
+        }
+      }
+    
+      courses= responces.map((item)=>CourseModelMapper.fromMap(item)).toList();
+      return courses;
     }
+  }catch(e){
+    print("error in get course method layer $e");
+    throw FormatException('faild to load courses');
+  }
+}
+
+
+  deletecourseMethod({required int idcourse}) async{
+ try{
+SupabaseConnect.deletecourse(idcourse: idcourse);
+ }catch(e){
+print("error in delet course $e");
+ }
   }
 
   updateUserNameMethod({required String name}) async {

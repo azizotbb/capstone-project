@@ -24,5 +24,16 @@ class PickLocatioEvent extends AddCorseEvent {
 class SavePickedLocationEvent extends AddCorseEvent {
   final LatLng finalLocation;
 
-  SavePickedLocationEvent(this.finalLocation);
+  SavePickedLocationEvent(this.finalLocation);}
+class GetCoursesEvent extends AddCorseEvent{
+  final String? id;
+
+  GetCoursesEvent({ this.id}); 
 }
+
+class DeleteCourseEvent extends AddCorseEvent{
+  final int courseId;
+
+  DeleteCourseEvent({required this.courseId}); 
+}
+
