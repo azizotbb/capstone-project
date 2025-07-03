@@ -355,7 +355,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                               children: [
                                                 TextButton(
                                                   onPressed: () async {
-                                                    bloc.pickedDate = await showDateRangePicker(
+                                                   final range = await showDateRangePicker(
                                                       context: context,
                                                       firstDate: DateTime(
                                                         DateTime.now().year - 5,
@@ -392,6 +392,9 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                         );
                                                       },
                                                     );
+                                                    if(range!=null){
+                                                      bloc.pickedDate=range;
+                                                    }
                                                     // bloc.date = picked
                                                     // .toString();
                                                   },

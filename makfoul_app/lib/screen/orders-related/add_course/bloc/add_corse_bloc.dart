@@ -45,6 +45,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
   ) {
     selectedCategory = event.value;
     emit(SelectCategoryState());
+   add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
   }
 
   // FutureOr<void> addNewCordeMethod(
@@ -87,7 +88,8 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     description: descriptionController.text,
     price: double.parse(priceController.text),
     numberOfTrainees: int.parse(numberOfTraineesController.text),
-    date: pickedDate.toString(),
+    startDate: pickedDate?.start??DateTime.now(),
+    endDate: pickedDate?.end??DateTime.now(),
     image: urlString!,
     location: 'location',
     state: 'Active',
@@ -126,6 +128,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       //   // ),
 
       // );
+      
       emit(
         CoursesLoaded().copyWith(
           trainearcourses: courseuser.toList(),
@@ -175,12 +178,13 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     try {
       final courseuser = opreationsGet.courses.where(
         (e) => e.tid == Supabase.instance.client.auth.currentUser!.id,
-      );
+      ).toList();
+      print("from courses : ${opreationsGet.courses.length}");
       print("to try rode   ${courseuser}");
       final total = await courseuser.length;
       final active = await courseuser.where((e) => e.state == 'Active').length;
       final inactive = await courseuser
-          .where((e) => e.state == 'inactive')
+          .where((e) => e.state == 'inActive')
           .length;
       final cook = await courseuser.where((e) => e.category == 'Cook').length;
       final clean = await courseuser.where((e) => e.category == 'Clean').length;
@@ -189,22 +193,9 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       print("inactive${inactive}");
       print("cook${cook}");
       print("clean${clean}");
-      // emit(
-      //   // CoursesLoaded(
-      //   //   trainearcourses:courseuser.toList(),
-      //   //   total: total,
-      //   //   active: active,
-      //   //   inactive: inactive,
-      //   //   cook: cook,
-      //   //   clean: clean,
-
-      //   // ),
-
-      // );
-
       emit(
         CoursesLoaded().copyWith(
-          trainearcourses: courseuser.toList(),
+          trainearcourses: courseuser,
           total: total,
           active: active,
           inactive: inactive,
@@ -213,7 +204,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
         ),
       );
     } catch (e) {
-      log("error rodeeee whyydsydydfydf:$e");
+      log("error in get course method$e");
     }
   }
 
@@ -224,6 +215,6 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     await opreationsGet.deletecourseMethod(idcourse: event.courseId);
     final updatecourses = await opreationsGet.getCoursesMethod();
     emit(CoursesLoaded().copyWith(trainearcourses: updatecourses));
-
+   add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
   }
 }

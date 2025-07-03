@@ -96,6 +96,7 @@ class SupabaseConnect {
       throw ('There was an error on your uploading: $error');
     }
   }
+  // Supabase.instance.client.storage.from('images').upload(path, file);
 
   static Future<String> getImageUrl({required String path}) async {
     try {
@@ -111,7 +112,8 @@ class SupabaseConnect {
     required String description,
     required double price,
     required int numberOfTrainees,
-    required String date,
+    required DateTime startDate, 
+    required DateTime endDate, 
     required String image,
     required String location,
     required String createdAt,
@@ -126,7 +128,8 @@ class SupabaseConnect {
         'description': description,
         'price': price,
         'number_of_trainees': numberOfTrainees,
-        'date': date,
+        'startDate':startDate.toIso8601String(), 
+        'endDate':endDate.toIso8601String(),
         'image': image,
         'location': location,
         'state': state,
@@ -138,14 +141,21 @@ class SupabaseConnect {
     }
   }
 
-  // Supabase.instance.client.storage.from('images').upload(path, file);
+//get courses from supabase 
   static Future<List<dynamic>> getCourses() async {
     final response = await supabase!.client.from("course").select();
-    print("ؤخعقسثسث ثضعشم : $response");
+    print(" get course from supabase: $response");
     return response;
   }
+
+  //delete courses from supabase 
   static Future<void>deletecourse({required int idcourse})async{
   await supabase!.client.from("course").delete().eq('id', idcourse);
   getCourses();//to try
+  }
+
+  static Future<void> updatecoursesState({required int id, required String newState})async{
+ await supabase!.client.from('course').update({'state':newState}).eq('id', id);
+
   }
 }
