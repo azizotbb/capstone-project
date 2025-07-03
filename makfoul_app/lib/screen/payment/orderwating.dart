@@ -10,38 +10,27 @@ class Orderwaiting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 40),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            SizedBox(height: 100),
             Center(child: Image.asset("assets/images/OrderWaiting.png")),
             Text("Thank you for your trust!", style: AppTextStyle.textbold16),
-            SizedBox(height: 12),
+            Spacer(),
             Text(
-              " Your request is under review by available trainers.\n We’ll notify you as soon as it’s confirmed.",
+              """Your request is under review — you’ll be notified once it’s accepted.""",
               textAlign: TextAlign.center,
               style: AppTextStyle.text14primary,
             ),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 9),
-              child: Text(
-                "“You’ll receive a notification once your request is accepted”",
-                textAlign: TextAlign.center,
-                style: AppTextStyle.text14primary,
+            SizedBox(height: 20),
+            PrimryCustomButton(
+              setText: 'Back To Home',
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => HomeScreen()),
               ),
             ),
-            // SizedBox(height: 80),
-            Padding(
-              padding: const EdgeInsets.only(top: 30, right: 20, left: 20),
-              child: PrimryCustomButton(
-                setText: 'Back To Home',
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
-                ),
-              ),
-            ),
-            SizedBox(height: 85),
+            SizedBox(height: 30),
           ],
         ),
       ),
