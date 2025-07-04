@@ -75,12 +75,12 @@ class OpreationsLayer {
         if(endDateStr!=null &&state=='Active'){
           final endDate=DateTime.parse(endDateStr);
           if(endDate.isBefore(now)){
-            await SupabaseConnect.updatecoursesState(id: id, newState: 'inActive');
+            await SupabaseConnect.updatecoursesState(id: id, newState: 'InActive');
           }
         }
       }
     
-      courses= responces.map((item)=>CourseModelMapper.fromMap(item)).toList();
+      courses= await responces.map((item)=>CourseModelMapper.fromMap(item)).toList();
       return courses;
     }
   }catch(e){

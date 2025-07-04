@@ -69,7 +69,7 @@ class AddCourseScreen extends StatelessWidget {
                         .where((e) => e.state == "Active")
                         .toList();
                     final inactiveCourse = courses
-                        .where((e) => e.state == "inActive")
+                        .where((e) => e.state == "InActive")
                         .toList();
 
                     return TabBarView(

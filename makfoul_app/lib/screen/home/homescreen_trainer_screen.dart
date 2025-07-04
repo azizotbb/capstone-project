@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
-import 'package:makfoul_app/model/coursemodel.dart';
 import 'package:makfoul_app/model/user_model.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
-import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -85,7 +83,6 @@ class HomescreenTrainerScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 12),
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                        ////////////////////////////////////////////////
                         ////////////////////////////////////////
                         ////////////////////////////////////
                         BlocBuilder<AddCorseBloc, AddCorseState>(
@@ -156,7 +153,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                               MainAxisAlignment.spaceEvenly,
                                           children: [
                                             Text(
-                                              "inactive",
+                                              "inActive",
                                               style: TextStyle(
                                                 fontWeight: FontWeight.w500,
                                                 fontSize: 18,
@@ -246,7 +243,6 @@ class HomescreenTrainerScreen extends StatelessWidget {
 
                             /////////////////////////////////////////////////
                             ///////////////////////
-                            /////////////////////////////////////////////////////////
                             ///////////////////////
                             Dashboardcard(
                               hasborder: true,
@@ -280,7 +276,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                               ),
                                               child: DropdownButtonHideUnderline(
                                                 child: DropdownButton(
-                                                  value: bloc.items[0],
+                                                  value: bloc.selectedCategory,
                                                   isExpanded: true,
 
                                                   items: bloc.items
@@ -311,9 +307,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                         value: value!,
                                                       ),
                                                     );
-                                                    print(
-                                                      bloc.selectedCategory,
-                                                    );
+                                                   
                                                   },
                                                 ),
                                               ),
@@ -394,6 +388,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                     );
                                                     if(range!=null){
                                                       bloc.pickedDate=range;
+                                                      print("${bloc.pickedDate}");
                                                     }
                                                     // bloc.date = picked
                                                     // .toString();
@@ -480,9 +475,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                 setText: "Add course".tr(),
                                                 onPressed: () {
                                                   bloc.add(AddNewCordeEvent());
-                                                                                  //   bloc.add(GetCoursesEvent(id: userinfo.uid));
-                                  // bloc.add(GetCoursesEvent(id: userinfo.uid));
-
+                                                  Navigator.pop(context);
                                                 },
                                               ),
                                             ),
@@ -491,9 +484,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                       ),
                                     ),
                                   ); //
-                                  // if (result == true) {
-                                  //   bloc.add(GetCoursesEvent(id: userinfo.uid));
-                                  // }
+                                
                                 },
                                 child: Column(
                                   mainAxisAlignment:
