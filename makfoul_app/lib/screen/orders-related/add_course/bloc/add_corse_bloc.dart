@@ -92,6 +92,11 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
 
 ) async {
 
+    opreationsGet.uploadImageMethod(path: path!, file: file!);
+
+ Supabase.instance.client.storage.from('images').upload(path!, file!);
+     urlString =  Supabase.instance.client.storage.from('images').getPublicUrl(path!);
+    urlString = await opreationsGet.getImageUrlMethod(path: path!);
   final result = await opreationsGet.addCourseMethod(
     catagory: selectedCategory!,
     title: titleController.text,
@@ -168,23 +173,20 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
   ) async {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
-    // final fileName = DateTime.now();
-    // final path = 'course/$fileName';
-    // File file = File(image!.path);
+     fileName = DateTime.now();
+     path = 'course/$fileName';
+     file = File(image!.path);
     if (image == null) {
       emit(NullState());
 
       return;
     }
 
-    // opreationsGet.uploadImageMethod(path: path, file: file);
     // print('layer3');
 
-    // Supabase.instance.client.storage.from('images').upload(path, file);
-    //  urlString =  Supabase.instance.client.storage.from('images').getPublicUrl(path);
-    // urlString = await opreationsGet.getImageUrlMethod(path: path);
+   
 
-    emit(SuccessState());
+    // emit(CoursesLoaded());
   }
 
   // Called when user taps a location on the map.

@@ -50,7 +50,7 @@ class Validators {
 
   static String? validateCourseTitle(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter name for the course';
+      return 'Required';
     }
     if (value.length > 15) {
       return 'the course must be under 15 letter.';
@@ -63,21 +63,23 @@ class Validators {
 
 static String? validateTraineesNumber(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter a Price for your';
+      return 'Required';
     }
         if (int.parse(value) >= 5) {
-      return 'The max Trainees is 5';
+      return 'Max 5';
     }     if (int.parse(value) <1 ) {
-      return 'at least put 1 trainee';
+      return 'at Least 1 Trainee';
     }
     return null;
   }
 
 static String? validatePrice(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter price';
+      return 'Required';
     }
-  
+    if (int.parse(value)>10000) {
+      return 'Max Price 10000 SR';
+    }
     return null;
   }
   /// Validates password strength
