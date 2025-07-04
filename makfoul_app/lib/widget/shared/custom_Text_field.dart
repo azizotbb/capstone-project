@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -16,9 +17,13 @@ class CustomTextField extends StatelessWidget {
     this.controller,
     this.validator,
     this.isVisable ,
-    this.onPressedSuffix,
+    this.onPressedSuffix, this.inputFormatters, this.keyboardType,
   });
 
+  //set keyboard type
+  final TextInputType? keyboardType;
+  //set format
+  final List<TextInputFormatter>? inputFormatters;
   //set Hint text
   final String setHint;
   // is obscure text or not
@@ -45,7 +50,7 @@ class CustomTextField extends StatelessWidget {
       width: isSmall!
           ? context.getWidth(size: 0.38)
           : context.getWidth(size: 0.9),
-      child: TextFormField(
+      child: TextFormField(inputFormatters: inputFormatters,keyboardType:keyboardType ,
         validator: validator,
         controller: controller,
         //change the height if it's a description

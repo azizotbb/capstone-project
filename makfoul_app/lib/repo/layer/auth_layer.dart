@@ -57,15 +57,27 @@ class AuthLayer {
 
       return user;
     } on AuthException catch (error) {
+      print(error);
       throw AuthException(error.message);
     } catch (error) {
+      print(error);
+
       throw FormatException(error.toString());
     }
   }
 
-  uploadImage(){
-    
-    
+  // uploadImage(){
 
+  // }
+
+  updatePasswordMethod({
+    required String password,
+    required String oldPassword,
+  }) {
+    SupabaseConnect.updatePassword(
+      password: password,
+      oldPassword: oldPassword,
+    );
+    print('Layer getit');
   }
 }

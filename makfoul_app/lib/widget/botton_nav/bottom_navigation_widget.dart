@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makfoul_app/screen/home/homescreen.dart';
-import 'package:makfoul_app/screen/home/homescreen_trainer_screen.dart';
+import 'package:makfoul_app/screen/home/homescreen_trainer_screen.dart' hide BlocBuilder;
 import 'package:makfoul_app/screen/orders-related/add_course/add_course_screen.dart';
 import 'package:makfoul_app/screen/orders-related/order_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';

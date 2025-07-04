@@ -2,7 +2,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
-import 'package:makfoul_app/model/coursemodel.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
 import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:makfoul_app/screen/auth/signup/signup.dart';
@@ -36,11 +35,15 @@ class HomeScreen extends StatelessWidget {
                   child: Container(
                     width: context.getWidth(),
                     child: ListTile(
-                      leading: CircleAvatar(
-                        radius: 30,
-                        child: Image.asset(
-                          "assets/images/circler avtar instructor.png",
-                        ),
+                      leading: Container(
+                        height: 68,
+                        clipBehavior: Clip.hardEdge,
+                        decoration: BoxDecoration(shape: BoxShape.circle),
+                        child: userinfo.url == null
+                            ? Image.asset(
+                                "assets/images/circler avtar instructor.png",
+                              )
+                            : Image.network(userinfo.url!),
                       ),
                       title: Text(
                         "Hi,".tr() + userinfo.username,

@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -90,12 +91,13 @@ class SupabaseConnect {
     required File file,
   }) async {
     try {
-      supabase!.client.storage.from('images').upload(path, file);
+      await supabase!.client.storage.from('images').upload(path, file);
       print('layer1');
     } catch (error) {
       throw ('There was an error on your uploading: $error');
     }
   }
+  // Supabase.instance.client.storage.from('images').upload(path, file);
 
   static Future<String> getImageUrl({required String path}) async {
     try {
@@ -111,7 +113,8 @@ class SupabaseConnect {
     required String description,
     required double price,
     required int numberOfTrainees,
-    required String date,
+    required DateTime startDate, 
+    required DateTime endDate, 
     required String image,
     required String location,
     required String createdAt,
@@ -119,27 +122,93 @@ class SupabaseConnect {
   }) async {
     try {
       print('supa3');
-      await supabase!.client.from('course').insert({
+       await supabase!.client.from('course').insert({
         'tid': supabase!.client.auth.currentSession!.user.id,
         'category': catagory,
         'title': title,
         'description': description,
         'price': price,
         'number_of_trainees': numberOfTrainees,
-        'date': date,
+        'startDate':startDate.toIso8601String(), 
+        'endDate':endDate.toIso8601String(),
         'image': image,
         'location': location,
         'state': state,
         'created_at': createdAt,
+      });
+      
+    } catch (error) {
+      throw FormatException('there was an error: $error');
+    }
+  }
+
+//get courses from supabase 
+  static Future<List<dynamic>> getCourses() async {
+    final response = await supabase!.client.from("course").select();
+    print(" get course from supabase: $response");
+    return response;
+  }
+
+  static Future<void> updatePassword({
+    required String password,
+    required String oldPassword,
+  }) async {
+      await supabase!.client.auth.updateUser(
+        UserAttributes(password: password),
+      );
+      print('Layer supa');
+    
+   
+  }
+
+  static Future<void> updateName({required String name})async{
+
+
+    await supabase!.client.from('user').update({'name':name}).eq('UID', supabase!.client.auth.currentUser!.id);
+    print('supabase layer names');
+
+  }
+
+
+  static Future<void> updateImage({required String urlString})async{
+
+
+
+    await supabase!.client.from('user').update({'avatar':urlString}).eq('UID', supabase!.client.auth.currentUser!.id);
+
+
+  }
+
+
+  //  need testing
+
+static Future<void> addOrder({
+
+    required String createdAt,
+    required String uid,
+    required int courseId,
+
+  }) async {
+    try {
+      await supabase!.client.from('order').insert({
+        'created_at':createdAt,
+        'course_id': courseId,
+        'uid': supabase!.client.auth.currentSession!.user.id,
+        
       });
     } catch (error) {
       throw FormatException('there was an error: $error');
     }
   }
 
-  // Supabase.instance.client.storage.from('images').upload(path, file);
-  static Future<List<dynamic>> getCourses() async {
-    final response = await supabase!.client.from("course").select();
-    return response;
+  //delete courses from supabase 
+  static Future<void>deletecourse({required int idcourse})async{
+  await supabase!.client.from("course").delete().eq('id', idcourse);
+  getCourses();//to try
+  }
+
+  static Future<void> updatecoursesState({required int id, required String newState})async{
+ await supabase!.client.from('course').update({'state':newState}).eq('id', id);
+
   }
 }
