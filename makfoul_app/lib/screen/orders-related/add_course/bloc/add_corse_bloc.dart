@@ -54,35 +54,10 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     Emitter<AddCorseState> emit,
   ) {
     selectedCategory = event.value;
+    print ("category ${selectedCategory}");
     emit(SelectCategoryState());
    add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
   }
-
-  // FutureOr<void> addNewCordeMethod(
-  //   AddNewCordeEvent event,
-  //   Emitter<AddCorseState> emit,
-  // ) async {
-  //   var result = await opreationsGet.addCourseMethod(
-  //     catagory: selectedCategory!,
-  //     title: titleController.text,
-  //     description: descriptionController.text,
-  //     price: double.parse(priceController.text),
-  //     numberOfTrainees: int.parse(numberOfTraineesController.text),
-  //     date: pickedDate.toString(),
-  //     image: urlString!,
-  //     location: 'location',
-  //     state: 'Active',
-  //     createdAt: DateTime.now().toString(),
-  //   );
-  //   print("result print mssssss$result");
-  //   //   final updatecourses= await opreationsGet.getCoursesMethod();
-  //   //  emit(CoursesLoaded().copyWith(trainearcourses:updatecourses));
-  //   // emit(SuccessState());
-  //   // opreationsGet.getCoursesMethod();
-  //   // await getCourseMethod(GetCoursesEvent(), emit);
-  //   add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
-  //   print('supa1');
-  // }
 
   FutureOr<void> addNewCordeMethod(
 
@@ -91,6 +66,21 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
   Emitter<AddCorseState> emit,
 
 ) async {
+  final start= pickedDate?.start??DateTime.now();
+  final end =pickedDate?.end??DateTime.now();
+  final now=DateTime.now();
+  int registered=0; 
+  int required=int.parse(numberOfTraineesController.text);
+
+  final String courseState; 
+  if(now.isAfter(end)){
+    courseState="InActive";
+
+  }else if(registered>=required){
+    courseState="InActive"; 
+  }else{
+    courseState="Active";
+  }
 
     opreationsGet.uploadImageMethod(path: path!, file: file!);
 
@@ -107,22 +97,22 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     endDate: pickedDate?.end??DateTime.now(),
     image: urlString!,
     location: 'location',
-    state: 'Active',
+    state: courseState,
     createdAt: DateTime.now().toString(),
 
   );
-  if (result == null) {
+
     final updatedCourses = await opreationsGet.getCoursesMethod( 
     );
  try {
-      final courseuser = opreationsGet.courses.where(
+      final courseuser =await opreationsGet.courses.where(
         (e) => e.tid == Supabase.instance.client.auth.currentUser!.id,
       );
       print("to try rode   ${courseuser}");
       final total = await courseuser.length;
       final active = await courseuser.where((e) => e.state == 'Active').length;
       final inactive = await courseuser
-          .where((e) => e.state == 'inactive')
+          .where((e) => e.state == 'InActive')
           .length;
       final cook = await courseuser.where((e) => e.category == 'Cook').length;
       final clean = await courseuser.where((e) => e.category == 'Clean').length;
@@ -130,20 +120,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       print("active${active}");
       print("inactive${inactive}");
       print("cook${cook}");
-      print("clean${clean}");
-      // emit(
-      //   // CoursesLoaded(
-      //   //   trainearcourses:courseuser.toList(),
-      //   //   total: total,
-      //   //   active: active,
-      //   //   inactive: inactive,
-      //   //   cook: cook,
-      //   //   clean: clean,
-
-      //   // ),
-
-      // );
-      
+      print("clean${clean}"); 
       emit(
         CoursesLoaded().copyWith(
           trainearcourses: courseuser.toList(),
@@ -157,14 +134,18 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     } catch (e) {
       log("error :$e");
     }
+ descriptionController.clear();
+                                                 titleController.clear(); 
+                                                priceController.clear(); 
+                                              numberOfTraineesController.clear();
+                                                selectedCategory=null; 
+                                                  pickedDate=null; 
+                                                  image=null; 
 
-  } else {
-
-    // emit(AddCourseFailed("Failed to add course"));
-
-  }
+  
 
 }
+
 
   //upload image need to be optimized and write it the correct way
   FutureOr<void> uploadImageMethod(
@@ -242,7 +223,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       final total = await courseuser.length;
       final active = await courseuser.where((e) => e.state == 'Active').length;
       final inactive = await courseuser
-          .where((e) => e.state == 'inActive')
+          .where((e) => e.state == 'InActive')
           .length;
       final cook = await courseuser.where((e) => e.category == 'Cook').length;
       final clean = await courseuser.where((e) => e.category == 'Clean').length;
