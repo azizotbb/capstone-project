@@ -2,11 +2,14 @@ import 'dart:io';
 import 'dart:math';
 
 import 'package:makfoul_app/model/course/course_model.dart';
+import 'package:makfoul_app/model/user_model.dart';
 import 'package:makfoul_app/repo/api/supabase.dart';
 
 class OpreationsLayer {
   // List to store courses
   List<CourseModel> courses = [];
+  List<UserModel> users = [];
+
 
   uploadImageMethod({required String path, required File file}) {
     SupabaseConnect.uploadImage(path: path, file: file);
@@ -125,4 +128,15 @@ print("error in delet course $e");
       throw FormatException('there was an error: $error');
     }
   }
+
+
+  getDetailes({required courseId})async{
+
+    SupabaseConnect.getDetailes(courseId: courseId);
+    
+
+
+
+  }
+
 }

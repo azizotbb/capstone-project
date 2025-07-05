@@ -211,4 +211,14 @@ static Future<void> addOrder({
  await supabase!.client.from('course').update({'state':newState}).eq('id', id);
 
   }
+
+
+   static Future<List<dynamic>> getDetailes({required String courseId}) async{
+
+    final response = supabase!.client.from('order').select('uid').eq('course_id',courseId);
+    return response;
+  
+  }
+
+
 }

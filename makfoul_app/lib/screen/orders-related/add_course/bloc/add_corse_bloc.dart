@@ -82,10 +82,8 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     courseState="Active";
   }
 
-    opreationsGet.uploadImageMethod(path: path!, file: file!);
+    await opreationsGet.uploadImageMethod(path: path!, file: file!);
 
- Supabase.instance.client.storage.from('images').upload(path!, file!);
-     urlString =  Supabase.instance.client.storage.from('images').getPublicUrl(path!);
     urlString = await opreationsGet.getImageUrlMethod(path: path!);
   final result = await opreationsGet.addCourseMethod(
     catagory: selectedCategory!,
@@ -155,6 +153,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
      fileName = DateTime.now();
+     print('helllllllllllllllllooooooo $fileName');
      path = 'course/$fileName';
      file = File(image!.path);
     if (image == null) {

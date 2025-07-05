@@ -2,16 +2,22 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/model/user_model.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/screen/home/picked_location.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
+import 'package:makfoul_app/utility/validators.dart';
 import 'package:makfoul_app/widget/homescreen/TopCourses_widget.dart';
 import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
 import 'package:makfoul_app/widget/homescreen/dashboardcard.dart';
+import 'package:makfoul_app/widget/homescreen/home_trainer/activity_courses.dart';
+import 'package:makfoul_app/widget/homescreen/home_trainer/add_modal_sheet.dart';
 import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
+import 'package:makfoul_app/widget/shared/custom_icon_button.dart';
 import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
 
 class HomescreenTrainerScreen extends StatelessWidget {
@@ -85,100 +91,8 @@ class HomescreenTrainerScreen extends StatelessWidget {
                         /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
                         ////////////////////////////////////////
                         ////////////////////////////////////
-                        BlocBuilder<AddCorseBloc, AddCorseState>(
-                          builder: (context, state) {
-                            print("current state is $state");
-                          
-                            if (state is CoursesLoaded) {
-                                print("state total =${state.total} ");
-                              return Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Dashboardcard(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(
-                                          "All courses",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 18,
-                                            color: AppColors.colorDarkGrey,
-                                          ),
-                                        ),
-                                        Text(
-                                          "${state.total}",
-                                        
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 18,
-                                            color: AppColors.colorScondry,
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Dashboardcard(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(
-                                              "active",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 18,
-                                                color: AppColors.colorDarkGrey,
-                                              ),
-                                            ),
-                                            Text(
-                                              "${state.active}",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 18,
-                                                color: AppColors.colorScondry,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(
-                                              "inActive",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 18,
-                                                color: AppColors.colorDarkGrey,
-                                              ),
-                                            ),
-                                            Text(
-                                              "${state.inactive}",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
-                                                fontSize: 18,
-                                                color: AppColors.colorScondry,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
-                              );
-                            }
-                            return Text("no data or error");
-                          },
-                        ),
+                        
+                        BlocProvider.value(value: bloc,child: ActivityCourses(),),
                         SizedBox(height: 12),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -244,265 +158,8 @@ class HomescreenTrainerScreen extends StatelessWidget {
                             /////////////////////////////////////////////////
                             ///////////////////////
                             ///////////////////////
-                            Dashboardcard(
-                              hasborder: true,
-                              child: GestureDetector(
-                                onTap: () async {
-                                  final result = await showModalBottomSheet(
-                                    showDragHandle: true,
-                                    useSafeArea: true,
-                                    isScrollControlled: true,
-
-                                    context: context,
-                                    builder: (context) => Padding(
-                                      padding: EdgeInsets.only(
-                                        bottom: MediaQuery.of(
-                                          context,
-                                        ).viewInsets.bottom,
-                                      ),
-                                      child: SizedBox(
-                                        width: context.getWidth(),
-                                        height: 600,
-                                        child: Column(
-                                          spacing: 19,
-                                          children: [
-                                            Container(
-                                              width: 330,
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                color: AppColors.colorLightGrey,
-                                                borderRadius:
-                                                    BorderRadius.circular(17),
-                                              ),
-                                              child: DropdownButtonHideUnderline(
-                                                child: DropdownButton(
-                                                  value: bloc.selectedCategory,
-                                                  isExpanded: true,
-
-                                                  items: bloc.items
-                                                      .map(
-                                                        (
-                                                          item,
-                                                        ) => DropdownMenuItem(
-                                                          value: item,
-                                                          child: Container(
-                                                            margin:
-                                                                EdgeInsets.symmetric(
-                                                                  horizontal:
-                                                                      20,
-                                                                ),
-                                                            child: Text(
-                                                              item,
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      )
-                                                      .toList(),
-                                                  onChanged: (value) {
-                                                    bloc.add(
-                                                      SelectCategoryEvent(
-                                                        value: value!,
-                                                      ),
-                                                    );
-                                                   
-                                                  },
-                                                ),
-                                              ),
-                                            ),
-                                            CustomTextField(
-                                              controller: bloc.titleController,
-                                              setHint: "Course Title".tr(),
-                                            ),
-                                            CustomTextField(
-                                              controller:
-                                                  bloc.descriptionController,
-                                              setHint: "Description".tr(),
-                                              isDescription: true,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              spacing: 40,
-                                              children: [
-                                                CustomTextField(
-                                                  controller:
-                                                      bloc.priceController,
-                                                  setHint: "Price".tr(),
-                                                  isSmall: true,
-                                                ),
-                                                CustomTextField(
-                                                  controller: bloc
-                                                      .numberOfTraineesController,
-                                                  setHint: "number of trainees"
-                                                      .tr(),
-                                                  isSmall: true,
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              spacing: 17,
-                                              children: [
-                                                TextButton(
-                                                  onPressed: () async {
-                                                   final range = await showDateRangePicker(
-                                                      context: context,
-                                                      firstDate: DateTime(
-                                                        DateTime.now().year - 5,
-                                                      ),
-                                                      lastDate: DateTime(
-                                                        DateTime.now().year + 5,
-                                                      ),
-
-                                                      builder: (context, child) {
-                                                        return Theme(
-                                                          data: ThemeData(
-                                                            colorScheme:
-                                                                ColorScheme.fromSwatch(
-                                                                  // primarySwatch: Colors.orange,
-                                                                ),
-                                                          ),
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              ConstrainedBox(
-                                                                constraints:
-                                                                    BoxConstraints(
-                                                                      maxWidth:
-                                                                          400.0,
-                                                                      maxHeight:
-                                                                          500,
-                                                                    ),
-                                                                child: child,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        );
-                                                      },
-                                                    );
-                                                    if(range!=null){
-                                                      bloc.pickedDate=range;
-                                                      print("${bloc.pickedDate}");
-                                                    }
-                                                    // bloc.date = picked
-                                                    // .toString();
-                                                  },
-                                                  child: Container(
-                                                    height: 56,
-                                                    width: 59,
-                                                    decoration: BoxDecoration(
-                                                      color: AppColors
-                                                          .colorLightGrey,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            17,
-                                                          ),
-                                                    ),
-                                                    child: Icon(
-                                                      Icons.date_range_outlined,
-                                                      size: 25,
-                                                      color: AppColors
-                                                          .colorDarkGrey,
-                                                    ),
-                                                  ),
-                                                ),
-                                                TextButton(
-                                                  onPressed: () async {
-                                                    //here image
-
-                                                    print('hello');
-
-                                                    bloc.add(
-                                                      UploadImageEvent(),
-                                                    );
-
-                                                    // print(image!.path.toString());
-                                                  },
-                                                  child: Container(
-                                                    height: 56,
-                                                    width: 59,
-                                                    decoration: BoxDecoration(
-                                                      color: AppColors
-                                                          .colorLightGrey,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            17,
-                                                          ),
-                                                    ),
-                                                    child: Icon(
-                                                      Icons.image,
-                                                      size: 25,
-                                                      color: AppColors
-                                                          .colorDarkGrey,
-                                                    ),
-                                                  ),
-                                                ),
-                                                TextButton(
-                                                  // print the url link for image replace with Google Map
-                                                  onPressed: () {
-                                                    print(bloc.urlString);
-                                                  },
-                                                  child: Container(
-                                                    height: 56,
-                                                    width: 59,
-                                                    decoration: BoxDecoration(
-                                                      color: AppColors
-                                                          .colorLightGrey,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            17,
-                                                          ),
-                                                    ),
-                                                    child: Icon(
-                                                      Icons.place_sharp,
-                                                      size: 25,
-                                                      color: AppColors
-                                                          .colorDarkGrey,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: 350,
-                                              child: PrimryCustomButton(
-                                                setText: "Add course".tr(),
-                                                onPressed: () {
-                                                  bloc.add(AddNewCordeEvent());
-                                                  Navigator.pop(context);
-                                                },
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                  ); //
-                                
-                                },
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      "Add Course",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 18,
-                                        color: AppColors.colorDarkGrey,
-                                      ),
-                                    ),
-                                    Image.asset("assets/images/AddCourse.png"),
-                                  ],
-                                ),
-                              ),
-                            ),
+                            
+                            BlocProvider.value(value: bloc,child: AddModalSheet(),)
                           ],
                         ),
 
