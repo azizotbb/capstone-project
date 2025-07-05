@@ -25,7 +25,7 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
    bool? showConfirmPassword = true;
   String? urlString;
   XFile? image;
-      UserModel userinfo = GetIt.I.get<AuthLayer>().userinfo;
+  UserModel userinfo = GetIt.I.get<AuthLayer>().userinfo;
 
 
   ProfileBloc() : super(ProfileInitial()) {
@@ -44,7 +44,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
       password: newPasswordController.text,
       oldPassword: passwordController.text,
     );
-    print('layer bloc');
   }
 
   FutureOr<void> updateNameMethod(
@@ -52,7 +51,6 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     Emitter<ProfileState> emit,
   ) {
     getOpreations.updateUserNameMethod(name: nameController.text);
-    print('bloc layer name');
     emit(SuccessState());
   }
 
@@ -68,15 +66,15 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
     print(image);
     if (image == null) return;
 
-   await getOpreations.uploadImageMethod(path: path, file: file);
-      print(urlString);
+    await getOpreations.uploadImageMethod(path: path, file: file);
+    print(urlString);
     urlString = await getOpreations.getImageUrlMethod(path: path);
-          print('--------------------------------');
-          userinfo.url =  urlString;
-          print(urlString);
+    print('--------------------------------');
+    userinfo.url = urlString;
+    print(urlString);
 
     await getOpreations.updateImageMethod(urlString: urlString!);
-    
+
     emit(SuccessState());
   }
 

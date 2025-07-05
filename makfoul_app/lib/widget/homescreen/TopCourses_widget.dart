@@ -81,19 +81,6 @@ class TopCourses extends StatelessWidget {
                 child: Text("${price} SAR", style: AppTextStyle.textMedium14),
               ),
             ),
-            // Align(
-            //   alignment: Alignment.bottomRight,
-            //   child: TextButton(
-            //     onPressed: () {},
-            //     child: Text(
-            //       "view_details".tr(),
-            //       style: TextStyle(
-            //         fontSize: 12,
-            //         color: AppColors.colorDarkGrey,
-            //       ),
-            //     ),
-            //   ),
-            // ),
           ],
         ),
 

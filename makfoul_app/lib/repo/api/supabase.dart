@@ -113,8 +113,8 @@ class SupabaseConnect {
     required String description,
     required double price,
     required int numberOfTrainees,
-    required DateTime startDate, 
-    required DateTime endDate, 
+    required DateTime startDate,
+    required DateTime endDate,
     required String image,
     required String location,
     required String createdAt,
@@ -122,27 +122,26 @@ class SupabaseConnect {
   }) async {
     try {
       print('supa3');
-       await supabase!.client.from('course').insert({
+      await supabase!.client.from('course').insert({
         'tid': supabase!.client.auth.currentSession!.user.id,
         'category': catagory,
         'title': title,
         'description': description,
         'price': price,
         'number_of_trainees': numberOfTrainees,
-        'startDate':startDate.toIso8601String(), 
-        'endDate':endDate.toIso8601String(),
+        'startDate': startDate.toIso8601String(),
+        'endDate': endDate.toIso8601String(),
         'image': image,
         'location': location,
         'state': state,
         'created_at': createdAt,
       });
-      
     } catch (error) {
       throw FormatException('there was an error: $error');
     }
   }
 
-//get courses from supabase 
+  //get courses from supabase
   static Future<List<dynamic>> getCourses() async {
     final response = await supabase!.client.from("course").select();
     print(" get course from supabase: $response");
@@ -153,62 +152,81 @@ class SupabaseConnect {
     required String password,
     required String oldPassword,
   }) async {
-      await supabase!.client.auth.updateUser(
-        UserAttributes(password: password),
-      );
-      print('Layer supa');
-    
-   
+    await supabase!.client.auth.updateUser(UserAttributes(password: password));
+    print('Layer supa');
   }
 
-  static Future<void> updateName({required String name})async{
-
-
-    await supabase!.client.from('user').update({'name':name}).eq('UID', supabase!.client.auth.currentUser!.id);
+  static Future<void> updateName({required String name}) async {
+    await supabase!.client
+        .from('user')
+        .update({'name': name})
+        .eq('UID', supabase!.client.auth.currentUser!.id);
     print('supabase layer names');
-
   }
 
-
-  static Future<void> updateImage({required String urlString})async{
-
-
-
-    await supabase!.client.from('user').update({'avatar':urlString}).eq('UID', supabase!.client.auth.currentUser!.id);
-
-
+  static Future<void> updateImage({required String urlString}) async {
+    await supabase!.client
+        .from('user')
+        .update({'avatar': urlString})
+        .eq('UID', supabase!.client.auth.currentUser!.id);
   }
-
 
   //  need testing
 
-static Future<void> addOrder({
-
-    required String createdAt,
+  static Future<void> addOrder({
     required String uid,
     required int courseId,
-
   }) async {
     try {
       await supabase!.client.from('order').insert({
-        'created_at':createdAt,
         'course_id': courseId,
         'uid': supabase!.client.auth.currentSession!.user.id,
-        
       });
     } catch (error) {
       throw FormatException('there was an error: $error');
     }
   }
 
-  //delete courses from supabase 
-  static Future<void>deletecourse({required int idcourse})async{
-  await supabase!.client.from("course").delete().eq('id', idcourse);
-  getCourses();//to try
+  //delete courses from supabase
+  static Future<void> deletecourse({required int idcourse}) async {
+    await supabase!.client.from("course").delete().eq('id', idcourse);
+    getCourses(); //to try
   }
 
-  static Future<void> updatecoursesState({required int id, required String newState})async{
- await supabase!.client.from('course').update({'state':newState}).eq('id', id);
+  static Future<void> updatecoursesState({
+    required int id,
+    required String newState,
+  }) async {
+    await supabase!.client
+        .from('course')
+        .update({'state': newState})
+        .eq('id', id);
+  }
 
+  static Future forgotPassword({required String email}) async {
+    try {
+      final res = await supabase!.client.auth.resetPasswordForEmail(email);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  static Future verifyWithOTP({
+    required String token,
+    required String email,
+  }) async {
+    try {
+      final res = await supabase!.client.auth.verifyOTP(
+        type: OtpType.recovery,
+        email: email,
+        token: token,
+      );
+      return res.session?.isExpired;
+    } on AuthException catch (error) {
+      throw AuthException(error.message);
+    } catch (error) {
+      return error;
+    }
   }
 }

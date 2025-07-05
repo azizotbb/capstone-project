@@ -5,6 +5,7 @@ import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
 import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:makfoul_app/screen/auth/signup/signup.dart';
+import 'package:makfoul_app/screen/course/course_view.dart';
 import 'package:makfoul_app/screen/trainer/trainer_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -19,6 +20,10 @@ class HomeScreen extends StatelessWidget {
     final userinfo = GetIt.I.get<AuthLayer>().userinfo;
     // final bool isgust = userinfo == null;
     final allCourses = GetIt.I.get<OpreationsLayer>().courses;
+
+    List activeCourses = allCourses
+        .where((course) => course.state == 'Active')
+        .toList();
 
     return Scaffold(
       body: Column(
@@ -164,7 +169,7 @@ class HomeScreen extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => TrainerScreen(
                                 appbarTitle: 'courses'.tr(),
-                                courses: allCourses,
+                                courses: activeCourses,
                               ),
                             ),
                           );
@@ -175,7 +180,7 @@ class HomeScreen extends StatelessWidget {
                         image: "assets/images/Clean (2).png",
                         categoryname: 'clean'.tr(),
                         ontap: () {
-                          List cleanCourses = allCourses
+                          List cleanCourses = activeCourses
                               .where((course) => course.category == "Clean")
                               .toList();
 
@@ -195,7 +200,7 @@ class HomeScreen extends StatelessWidget {
                         image: "assets/images/cook (2).png",
                         categoryname: 'cook'.tr(),
                         ontap: () {
-                          List cookCourses = allCourses
+                          List cookCourses = activeCourses
                               .where((course) => course.category == "Cook")
                               .toList();
                           Navigator.push(
@@ -222,16 +227,39 @@ class HomeScreen extends StatelessWidget {
                     height: context.getHeight() * 0.30,
                     child: PageView.builder(
                       controller: PageController(viewportFraction: 0.99),
-                      itemCount: 3,
+                      itemCount: 1,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 2),
-                          child: TopCourses(
-                            image: allCourses[index].image,
-                            //supabase get the name for the trainer and location and price
-                            coursename: allCourses[index].title,
-                            location: "الرياض",
-                            price: allCourses[index].price,
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CourseView(
+                                    courseId: activeCourses[index].id,
+                                    title: activeCourses[index].title,
+                                    img: activeCourses[index].image,
+                                    description:
+                                        activeCourses[index].description,
+                                    location: activeCourses[index].location,
+                                    price: activeCourses[index].price,
+                                    tid: activeCourses[index].tid,
+                                    category: activeCourses[index].category,
+                                    numberOfTrainees:
+                                        activeCourses[index].numberOfTrainees,
+                                    state: activeCourses[index].state,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: TopCourses(
+                              image: activeCourses[index].image,
+                              //supabase get the name for the trainer and location and price
+                              coursename: activeCourses[index].title,
+                              location: "الرياض",
+                              price: activeCourses[index].price,
+                            ),
                           ),
                         );
                       },

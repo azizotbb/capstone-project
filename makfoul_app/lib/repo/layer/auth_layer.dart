@@ -57,11 +57,8 @@ class AuthLayer {
 
       return user;
     } on AuthException catch (error) {
-      print(error);
       throw AuthException(error.message);
     } catch (error) {
-      print(error);
-
       throw FormatException(error.toString());
     }
   }
@@ -78,6 +75,27 @@ class AuthLayer {
       password: password,
       oldPassword: oldPassword,
     );
-    print('Layer getit');
+  }
+
+  forgotPasswordMethod({required String email}) {
+    try {
+      SupabaseConnect.forgotPassword(email: email);
+    } catch (error) {
+      return error;
+    }
+  }
+
+  verifyWithOTPMethod({required String token, required String email}) async {
+    try {
+      final res = await SupabaseConnect.verifyWithOTP(
+        token: token,
+        email: email,
+      );
+      return res;
+    } on AuthException catch (error) {
+      throw AuthException(error.message);
+    } catch (error) {
+      return error;
+    }
   }
 }

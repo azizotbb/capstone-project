@@ -2,7 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makfoul_app/screen/auth/login/bloc/login_bloc.dart';
-import 'package:makfoul_app/screen/auth/resetpassword/reset_password_screen.dart';
+import 'package:makfoul_app/screen/auth/resetpassword/resetpassword/reset_password_screen.dart';
 import 'package:makfoul_app/screen/auth/signup/signup.dart';
 import 'package:makfoul_app/screen/splash/splash_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';

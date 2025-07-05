@@ -1,14 +1,31 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:makfoul_app/screen/payment/bloc/payment_bloc.dart';
 import 'package:makfoul_app/screen/payment/orderwating.dart';
 import 'package:moyasar/moyasar.dart';
 
+// A screen that handles payment using Moyasar and BLoC
 class PaymentScreen extends StatelessWidget {
-  const PaymentScreen({super.key});
+  final int courseId;
+  final int amount;
+  const PaymentScreen({
+    super.key,
+    required this.courseId,
+    required this.amount,
+  });
 
   @override
   Widget build(BuildContext context) {
+    // Create payment configuration using Moyasar
+    final paymentConfig = PaymentConfig(
+      publishableApiKey: dotenv.env["moyasarKey"].toString(),
+      amount: amount,
+      description: 'order #1324',
+      metadata: {'size': '250g'},
+      creditCard: CreditCardConfig(saveCard: false, manual: false),
+    );
     return BlocProvider(
       create: (context) => PaymentBloc(),
       child: Builder(
@@ -21,12 +38,13 @@ class PaymentScreen extends StatelessWidget {
                 body: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: CreditCard(
-                    config: bloc.paymentConfig,
+                    config: paymentConfig,
                     onPaymentResult: (result) {
                       if (result is PaymentResponse) {
                         switch (result.status) {
+                          // If payment is successful, dispatch event and navigate to waiting screen
                           case PaymentStatus.paid:
-                            print('####################${result.status}');
+                            bloc.add(PaymentPaidEvent(courseId: courseId));
                             Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
@@ -34,18 +52,24 @@ class PaymentScreen extends StatelessWidget {
                               ),
                             );
                             break;
-                          case PaymentStatus.failed:
+                          // If payment failed, show error message
 
-                            // handle failure.
+                          case PaymentStatus.failed:
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                backgroundColor: Colors.red[400],
+                                content: Text(
+                                  "Payment failed. Please try again or use a different payment method."
+                                      .tr(),
+                                ),
+                              ),
+                            );
                             break;
                           case PaymentStatus.initiated:
-                            // TODO: Handle this case.
                             throw UnimplementedError();
                           case PaymentStatus.authorized:
-                            // TODO: Handle this case.
                             throw UnimplementedError();
                           case PaymentStatus.captured:
-                            // TODO: Handle this case.
                             throw UnimplementedError();
                         }
                       }

@@ -54,58 +54,55 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     Emitter<AddCorseState> emit,
   ) {
     selectedCategory = event.value;
-    print ("category ${selectedCategory}");
+    print("category ${selectedCategory}");
     emit(SelectCategoryState());
-   add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
+    add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
   }
 
   FutureOr<void> addNewCordeMethod(
+    AddNewCordeEvent event,
 
-  AddNewCordeEvent event,
+    Emitter<AddCorseState> emit,
+  ) async {
+    final start = pickedDate?.start ?? DateTime.now();
+    final end = pickedDate?.end ?? DateTime.now();
+    final now = DateTime.now();
+    int registered = 0;
+    int required = int.parse(numberOfTraineesController.text);
 
-  Emitter<AddCorseState> emit,
-
-) async {
-  final start= pickedDate?.start??DateTime.now();
-  final end =pickedDate?.end??DateTime.now();
-  final now=DateTime.now();
-  int registered=0; 
-  int required=int.parse(numberOfTraineesController.text);
-
-  final String courseState; 
-  if(now.isAfter(end)){
-    courseState="InActive";
-
-  }else if(registered>=required){
-    courseState="InActive"; 
-  }else{
-    courseState="Active";
-  }
+    final String courseState;
+    if (now.isAfter(end)) {
+      courseState = "InActive";
+    } else if (registered >= required) {
+      courseState = "InActive";
+    } else {
+      courseState = "Active";
+    }
 
     opreationsGet.uploadImageMethod(path: path!, file: file!);
 
- Supabase.instance.client.storage.from('images').upload(path!, file!);
-     urlString =  Supabase.instance.client.storage.from('images').getPublicUrl(path!);
+    Supabase.instance.client.storage.from('images').upload(path!, file!);
+    urlString = Supabase.instance.client.storage
+        .from('images')
+        .getPublicUrl(path!);
     urlString = await opreationsGet.getImageUrlMethod(path: path!);
-  final result = await opreationsGet.addCourseMethod(
-    catagory: selectedCategory!,
-    title: titleController.text,
-    description: descriptionController.text,
-    price: double.parse(priceController.text),
-    numberOfTrainees: int.parse(numberOfTraineesController.text),
-    startDate: pickedDate?.start??DateTime.now(),
-    endDate: pickedDate?.end??DateTime.now(),
-    image: urlString!,
-    location: 'location',
-    state: courseState,
-    createdAt: DateTime.now().toString(),
-
-  );
-
-    final updatedCourses = await opreationsGet.getCoursesMethod( 
+    final result = await opreationsGet.addCourseMethod(
+      catagory: selectedCategory!,
+      title: titleController.text,
+      description: descriptionController.text,
+      price: double.parse(priceController.text),
+      numberOfTrainees: int.parse(numberOfTraineesController.text),
+      startDate: pickedDate?.start ?? DateTime.now(),
+      endDate: pickedDate?.end ?? DateTime.now(),
+      image: urlString!,
+      location: stringLocation!,
+      state: courseState,
+      createdAt: DateTime.now().toString(),
     );
- try {
-      final courseuser =await opreationsGet.courses.where(
+
+    final updatedCourses = await opreationsGet.getCoursesMethod();
+    try {
+      final courseuser = await opreationsGet.courses.where(
         (e) => e.tid == Supabase.instance.client.auth.currentUser!.id,
       );
       print("to try rode   ${courseuser}");
@@ -120,7 +117,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       print("active${active}");
       print("inactive${inactive}");
       print("cook${cook}");
-      print("clean${clean}"); 
+      print("clean${clean}");
       emit(
         CoursesLoaded().copyWith(
           trainearcourses: courseuser.toList(),
@@ -134,18 +131,14 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     } catch (e) {
       log("error :$e");
     }
- descriptionController.clear();
-                                                 titleController.clear(); 
-                                                priceController.clear(); 
-                                              numberOfTraineesController.clear();
-                                                selectedCategory=null; 
-                                                  pickedDate=null; 
-                                                  image=null; 
-
-  
-
-}
-
+    descriptionController.clear();
+    titleController.clear();
+    priceController.clear();
+    numberOfTraineesController.clear();
+    selectedCategory = null;
+    pickedDate = null;
+    image = null;
+  }
 
   //upload image need to be optimized and write it the correct way
   FutureOr<void> uploadImageMethod(
@@ -154,9 +147,9 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
   ) async {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
-     fileName = DateTime.now();
-     path = 'course/$fileName';
-     file = File(image!.path);
+    fileName = DateTime.now();
+    path = 'course/$fileName';
+    file = File(image!.path);
     if (image == null) {
       emit(NullState());
 
@@ -164,8 +157,6 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     }
 
     // print('layer3');
-
-   
 
     // emit(CoursesLoaded());
   }
@@ -205,7 +196,8 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     print('Final saved location: ${event.finalLocation}');
 
     selectedLocation = event.finalLocation;
-    stringLocation = event.finalLocation.toString();
+    stringLocation =
+        '${event.finalLocation.latitude},${event.finalLocation.longitude}';
 
     emit(PickLocatioState(event.finalLocation));
   }
@@ -215,9 +207,9 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     Emitter<AddCorseState> emit,
   ) async {
     try {
-      final courseuser = opreationsGet.courses.where(
-        (e) => e.tid == Supabase.instance.client.auth.currentUser!.id,
-      ).toList();
+      final courseuser = opreationsGet.courses
+          .where((e) => e.tid == Supabase.instance.client.auth.currentUser!.id)
+          .toList();
       print("from courses : ${opreationsGet.courses.length}");
       print("to try rode   ${courseuser}");
       final total = await courseuser.length;
@@ -254,6 +246,6 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     await opreationsGet.deletecourseMethod(idcourse: event.courseId);
     final updatecourses = await opreationsGet.getCoursesMethod();
     emit(CoursesLoaded().copyWith(trainearcourses: updatecourses));
-   add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
+    add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
   }
 }

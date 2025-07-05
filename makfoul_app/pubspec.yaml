@@ -19,7 +19,9 @@ dependencies:
   image_picker: ^1.1.2
   google_maps_flutter: ^2.12.3
   geolocator: ^14.0.1
+  flutter_verification_code_field: ^1.2.2
   moyasar: ^2.0.19
+  url_launcher: ^6.3.1
 
 dev_dependencies:
   flutter_test:
