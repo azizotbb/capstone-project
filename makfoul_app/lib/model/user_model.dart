@@ -6,7 +6,7 @@ class UserModel {
   String phone;
   String? url;
   String createdAt;
-
+  
   UserModel({
     required this.uid,
     required this.username,
