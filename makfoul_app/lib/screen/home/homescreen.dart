@@ -22,6 +22,10 @@ class HomeScreen extends StatelessWidget {
     // final bool isgust = userinfo == null;
     final allCourses = GetIt.I.get<OpreationsLayer>().courses;
 
+    List activeCourses = allCourses
+        .where((course) => course.state == 'Active')
+        .toList();
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,7 +170,7 @@ class HomeScreen extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => TrainerScreen(
                                 appbarTitle: 'courses'.tr(),
-                                courses: allCourses,
+                                courses: activeCourses,
                               ),
                             ),
                           );
@@ -177,7 +181,7 @@ class HomeScreen extends StatelessWidget {
                         image: "assets/images/Clean (2).png",
                         categoryname: 'clean'.tr(),
                         ontap: () {
-                          List cleanCourses = allCourses
+                          List cleanCourses = activeCourses
                               .where((course) => course.category == "Clean")
                               .toList();
 
@@ -197,7 +201,7 @@ class HomeScreen extends StatelessWidget {
                         image: "assets/images/cook (2).png",
                         categoryname: 'cook'.tr(),
                         ontap: () {
-                          List cookCourses = allCourses
+                          List cookCourses = activeCourses
                               .where((course) => course.category == "Cook")
                               .toList();
                           Navigator.push(
@@ -234,27 +238,28 @@ class HomeScreen extends StatelessWidget {
                                 context,
                                 MaterialPageRoute(
                                   builder: (context) => CourseView(
-                                    courseId: allCourses[index].id.toString(),
-                                    title: allCourses[index].title,
-                                    img: allCourses[index].image,
-                                    description: allCourses[index].description,
-                                    location: allCourses[index].location,
-                                    price: allCourses[index].price,
-                                    tid: allCourses[index].tid,
-                                    category: allCourses[index].category,
+                                    courseId: activeCourses[index].id,
+                                    title: activeCourses[index].title,
+                                    img: activeCourses[index].image,
+                                    description:
+                                        activeCourses[index].description,
+                                    location: activeCourses[index].location,
+                                    price: activeCourses[index].price,
+                                    tid: activeCourses[index].tid,
+                                    category: activeCourses[index].category,
                                     numberOfTrainees:
-                                        allCourses[index].numberOfTrainees,
-                                    state: allCourses[index].state,
+                                        activeCourses[index].numberOfTrainees,
+                                    state: activeCourses[index].state,
                                   ),
                                 ),
                               );
                             },
                             child: TopCourses(
-                              image: allCourses[index].image,
+                              image: activeCourses[index].image,
                               //supabase get the name for the trainer and location and price
-                              coursename: allCourses[index].title,
+                              coursename: activeCourses[index].title,
                               location: "الرياض",
-                              price: allCourses[index].price,
+                              price: activeCourses[index].price,
                             ),
                           ),
                         );

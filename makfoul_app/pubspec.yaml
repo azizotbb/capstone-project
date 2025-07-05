@@ -20,6 +20,7 @@ dependencies:
   google_maps_flutter: ^2.12.3
   geolocator: ^14.0.1
   flutter_verification_code_field: ^1.2.2
+  moyasar: ^2.0.19
 
 dev_dependencies:
   flutter_test:

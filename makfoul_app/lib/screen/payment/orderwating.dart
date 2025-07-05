@@ -1,6 +1,8 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/screen/home/homescreen.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
+import 'package:makfoul_app/widget/botton_nav/bottom_navigation_widget.dart';
 import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
 
 class Orderwaiting extends StatelessWidget {
@@ -10,38 +12,32 @@ class Orderwaiting extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.only(top: 40),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
+            SizedBox(height: 100),
             Center(child: Image.asset("assets/images/OrderWaiting.png")),
-            Text("Thank you for your trust!", style: AppTextStyle.textbold16),
-            SizedBox(height: 12),
             Text(
-              " Your request is under review by available trainers.\n We’ll notify you as soon as it’s confirmed.",
+              "Thank you for your trust!".tr(),
+              style: AppTextStyle.textbold16,
+            ),
+            Spacer(),
+            Text(
+              "Thank you! Your payment was processed successfully.".tr(),
               textAlign: TextAlign.center,
               style: AppTextStyle.text14primary,
             ),
-            Spacer(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 9),
-              child: Text(
-                "“You’ll receive a notification once your request is accepted”",
-                textAlign: TextAlign.center,
-                style: AppTextStyle.text14primary,
-              ),
-            ),
-            // SizedBox(height: 80),
-            Padding(
-              padding: const EdgeInsets.only(top: 30, right: 20, left: 20),
-              child: PrimryCustomButton(
-                setText: 'Back To Home',
-                onPressed: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => HomeScreen()),
+            SizedBox(height: 20),
+            PrimryCustomButton(
+              setText: 'Back To Home'.tr(),
+              onPressed: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => BottomNavigationWidget(),
                 ),
               ),
             ),
-            SizedBox(height: 85),
+            SizedBox(height: 30),
           ],
         ),
       ),

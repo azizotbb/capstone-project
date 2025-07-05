@@ -169,13 +169,11 @@ class SupabaseConnect {
   //  need testing
 
   static Future<void> addOrder({
-    required String createdAt,
     required String uid,
     required int courseId,
   }) async {
     try {
       await supabase!.client.from('order').insert({
-        'created_at': createdAt,
         'course_id': courseId,
         'uid': supabase!.client.auth.currentSession!.user.id,
       });

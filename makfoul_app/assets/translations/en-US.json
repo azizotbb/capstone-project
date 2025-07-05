@@ -76,5 +76,10 @@
   "Verification": "Verification",
   "Enter the code send to the email:": "Enter the code send to the email:",
   "Invalid verification code": "Invalid verification code",
-  "Set Your New Password": "Set Your New Password"
+  "Set Your New Password": "Set Your New Password",
+  "Payment failed. Please try again or use a different payment method.": "Payment failed. Please try again or use a different payment method.",
+  "Get Course": "Get Course",
+  "Thank you! Your payment was processed successfully.": "Thank you! Your payment was processed successfully.",
+  "Thank you for your trust!": "Thank you for your trust!",
+  "Back To Home": "Back To Home"
 }

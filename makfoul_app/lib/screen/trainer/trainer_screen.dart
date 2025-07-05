@@ -63,7 +63,7 @@ class TrainerScreen extends StatelessWidget {
                           context,
                           MaterialPageRoute(
                             builder: (context) => CourseView(
-                              courseId: courses[index].id.toString(),
+                              courseId: courses[index].id,
                               title: courses[index].title,
                               img: courses[index].image,
                               description: courses[index].description,

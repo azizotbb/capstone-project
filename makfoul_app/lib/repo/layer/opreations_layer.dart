@@ -71,17 +71,9 @@ class OpreationsLayer {
     print('getit layer name');
   }
 
-  addOrderMethod({
-    required String createdAt,
-    required String uid,
-    required int courseId,
-  }) {
+  addOrderMethod({required String uid, required int courseId}) {
     try {
-      SupabaseConnect.addOrder(
-        createdAt: createdAt,
-        uid: uid,
-        courseId: courseId,
-      );
+      SupabaseConnect.addOrder(uid: uid, courseId: courseId);
     } catch (error) {
       throw FormatException('there was an error: $error');
     }

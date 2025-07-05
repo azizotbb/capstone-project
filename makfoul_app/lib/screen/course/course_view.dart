@@ -10,7 +10,7 @@ import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
 
 class CourseView extends StatelessWidget {
-  final String courseId;
+  final int courseId;
   final String tid;
   final String category;
   final String img;
@@ -43,12 +43,30 @@ class CourseView extends StatelessWidget {
         height: 50,
         margin: const EdgeInsets.all(10),
         child: PrimryCustomButton(
-          setText: "Add to Cart".tr(),
+          setText: "Get Course".tr(),
           onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => PaymentScreen()),
+            showDialog(
+              context: context,
+              builder: (context) {
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: AppColors.colorPrimary,
+                  ),
+                );
+              },
             );
+            Future.delayed(const Duration(seconds: 1), () {
+              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PaymentScreen(
+                    courseId: courseId,
+                    amount: (price * 100).round(),
+                  ),
+                ),
+              );
+            });
           },
         ),
       ),

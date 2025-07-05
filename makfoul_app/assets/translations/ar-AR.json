@@ -77,5 +77,10 @@
   "Verification": "تَحَقّق",
   "Enter the code send to the email:": "أدخل الرمز المرسل إلى البريد الإلكتروني:",
   "Invalid verification code": "رمز التحقق غير صالح",
-  "Set Your New Password": "تعيين كلمة المرور الجديدة الخاصة بك"
+  "Set Your New Password": "تعيين كلمة المرور الجديدة الخاصة بك",
+  "Payment failed. Please try again or use a different payment method.": "فشل الدفع. يُرجى المحاولة مجددًا أو استخدام طريقة دفع أخرى.",
+  "Get Course": "احصل على الدورة",
+  "Thank you! Your payment was processed successfully.": "تم الدفع بنجاح. شكراً لشرائك",
+  "Thank you for your trust!": "شكرا لثقتكم!",
+  "Back To Home": "العودة إلى الصفحة الرئيسية"
 }
