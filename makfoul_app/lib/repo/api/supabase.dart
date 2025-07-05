@@ -208,4 +208,12 @@ class SupabaseConnect {
       return error;
     }
   }
+
+  static Future<List<dynamic>> getordersByUID({required String uid}) async {
+    final response = await supabase!.client
+        .from("order")
+        .select("*,uid(*),course_id(*)")
+        .eq("uid", uid);
+    return response;
+  }
 }

@@ -5,7 +5,7 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:makfoul_app/model/user_model.dart';
+import 'package:makfoul_app/model/userinfo_model.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
 import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:meta/meta.dart';

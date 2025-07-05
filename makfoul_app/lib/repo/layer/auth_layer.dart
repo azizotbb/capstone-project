@@ -1,4 +1,4 @@
-import 'package:makfoul_app/model/user_model.dart';
+import 'package:makfoul_app/model/userinfo_model.dart';
 import 'package:makfoul_app/repo/api/supabase.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 

@@ -1,11 +1,14 @@
 import 'dart:io';
 
 import 'package:makfoul_app/model/course/course_model.dart';
+import 'package:makfoul_app/model/order/order_model.dart';
 import 'package:makfoul_app/repo/api/supabase.dart';
 
 class OpreationsLayer {
   // List to store courses
   List<CourseModel> courses = [];
+
+  List<OrderModel> ordersByUID = [];
 
   uploadImageMethod({required String path, required File file}) {
     SupabaseConnect.uploadImage(path: path, file: file);
@@ -77,5 +80,15 @@ class OpreationsLayer {
     } catch (error) {
       throw FormatException('there was an error: $error');
     }
+  }
+
+  getordersByUID({required String uid}) async {
+    final response = await SupabaseConnect.getordersByUID(uid: uid);
+    if (response.isNotEmpty) {
+      ordersByUID = response.map((item) {
+        return OrderModelMapper.fromMap(item);
+      }).toList();
+    }
+    print(ordersByUID);
   }
 }
