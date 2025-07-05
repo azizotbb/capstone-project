@@ -34,7 +34,12 @@ class CustomCourseWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              trailing: Image.asset(image, height: 80, width: 110),
+              trailing: Image.network(
+                image,
+                height: 80,
+                width: 110,
+                fit: BoxFit.fill,
+              ),
             ),
           ),
         ),

@@ -74,6 +74,7 @@ class OpreationsLayer {
     print('getit layer name');
   }
 
+  // Method to add a new order using the given user ID and course ID
   addOrderMethod({required String uid, required int courseId}) {
     try {
       SupabaseConnect.addOrder(uid: uid, courseId: courseId);
@@ -82,13 +83,14 @@ class OpreationsLayer {
     }
   }
 
+  // Method to fetch orders for a specific user by UID
   getordersByUID({required String uid}) async {
     final response = await SupabaseConnect.getordersByUID(uid: uid);
+    // If response is not empty, map the data to a list of OrderModel
     if (response.isNotEmpty) {
       ordersByUID = response.map((item) {
         return OrderModelMapper.fromMap(item);
       }).toList();
     }
-    print(ordersByUID);
   }
 }

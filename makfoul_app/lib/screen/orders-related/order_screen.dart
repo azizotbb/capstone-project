@@ -10,27 +10,27 @@ class OrderScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final authGetit = GetIt.I.get<AuthLayer>();
-
-    final opreationsGet = GetIt.I.get<OpreationsLayer>().getordersByUID(
-      uid: authGetit.userinfo.uid,
-    );
+    // Get the list of user orders by UID from the operations layer (injected via GetIt)
+    final ordersByUID = GetIt.I.get<OpreationsLayer>().ordersByUID;
 
     return Scaffold(
       appBar: AppBar(title: Text("order").tr(), centerTitle: true),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: 3,
-          itemBuilder: (BuildContext context, int index) {
-            return CustomCourseWidget(
-              coursetitle: 'italy cook ',
-              pricecourse: 200,
-              image: 'assets/images/Rectangle 61.png',
-            );
-          },
-        ),
-      ),
+      // If there are no orders, show a message. Otherwise, display the list of courses.
+      body: ordersByUID.isEmpty
+          ? Center(child: Text("No orders found".tr()))
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: ListView.builder(
+                itemCount: ordersByUID.length,
+                itemBuilder: (BuildContext context, int index) {
+                  return CustomCourseWidget(
+                    coursetitle: ordersByUID[index].courseId.title,
+                    pricecourse: ordersByUID[index].courseId.price,
+                    image: ordersByUID[index].courseId.image,
+                  );
+                },
+              ),
+            ),
     );
   }
 }

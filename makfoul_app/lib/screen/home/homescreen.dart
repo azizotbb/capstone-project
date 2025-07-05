@@ -18,9 +18,13 @@ class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final authGetit = GetIt.I.get<AuthLayer>();
+
     final userinfo = GetIt.I.get<AuthLayer>().userinfo;
     // final bool isgust = userinfo == null;
     final allCourses = GetIt.I.get<OpreationsLayer>().courses;
+
+    GetIt.I.get<OpreationsLayer>().getordersByUID(uid: authGetit.userinfo.uid);
 
     List activeCourses = allCourses
         .where((course) => course.state == 'Active')
