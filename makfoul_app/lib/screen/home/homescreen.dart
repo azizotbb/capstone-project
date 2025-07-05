@@ -224,7 +224,7 @@ class HomeScreen extends StatelessWidget {
                     height: context.getHeight() * 0.30,
                     child: PageView.builder(
                       controller: PageController(viewportFraction: 0.99),
-                      itemCount: 3,
+                      itemCount: 1,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 2),
@@ -244,7 +244,6 @@ class HomeScreen extends StatelessWidget {
                                     category: allCourses[index].category,
                                     numberOfTrainees:
                                         allCourses[index].numberOfTrainees,
-                                    date: allCourses[index].date,
                                     state: allCourses[index].state,
                                   ),
                                 ),

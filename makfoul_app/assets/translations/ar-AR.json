@@ -73,5 +73,9 @@
   "Add course": "إضافة الدورة",
   "Hi,": "مرحبا,",
   "Add to Cart": "أضف إلى السلة",
-  "Location": "الموقع"
+  "Location": "الموقع",
+  "Verification": "تَحَقّق",
+  "Enter the code send to the email:": "أدخل الرمز المرسل إلى البريد الإلكتروني:",
+  "Invalid verification code": "رمز التحقق غير صالح",
+  "Set Your New Password": "تعيين كلمة المرور الجديدة الخاصة بك"
 }

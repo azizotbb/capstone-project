@@ -72,7 +72,6 @@ class TrainerScreen extends StatelessWidget {
                               tid: courses[index].tid,
                               category: courses[index].category,
                               numberOfTrainees: courses[index].numberOfTrainees,
-                              date: courses[index].date,
                               state: courses[index].state,
                             ),
                           ),

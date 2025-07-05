@@ -13,14 +13,17 @@ class CourseModel with CourseModelMappable {
   final double price;
   @MappableField(key: 'number_of_trainees')
   final int numberOfTrainees;
-  final String date;
   final String image;
+  final String startDate;
+  final String endDate;
   final String location;
   final String state;
   @MappableField(key: 'created_at')
   final String createdAt;
 
-  CourseModel({
+  CourseModel(
+    this.startDate,
+    this.endDate, {
     required this.id,
     required this.tid,
     required this.category,
@@ -28,7 +31,6 @@ class CourseModel with CourseModelMappable {
     required this.description,
     required this.price,
     required this.numberOfTrainees,
-    required this.date,
     required this.image,
     required this.location,
     required this.state,

@@ -1,6 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -81,7 +80,7 @@ class SupabaseConnect {
       // Throws a more specific auth-related error
       throw AuthException(error.message);
     } catch (error) {
-      // General signهى error
+      // General signىerror
       throw FormatException("There is error with sign in");
     }
   }
@@ -148,52 +147,67 @@ class SupabaseConnect {
     required String password,
     required String oldPassword,
   }) async {
-      await supabase!.client.auth.updateUser(
-        UserAttributes(password: password),
-      );
-      print('Layer supa');
-    
-   
+    await supabase!.client.auth.updateUser(UserAttributes(password: password));
+    print('Layer supa');
   }
 
-  static Future<void> updateName({required String name})async{
-
-
-    await supabase!.client.from('user').update({'name':name}).eq('UID', supabase!.client.auth.currentUser!.id);
+  static Future<void> updateName({required String name}) async {
+    await supabase!.client
+        .from('user')
+        .update({'name': name})
+        .eq('UID', supabase!.client.auth.currentUser!.id);
     print('supabase layer names');
-
   }
 
-
-  static Future<void> updateImage({required String urlString})async{
-
-
-
-    await supabase!.client.from('user').update({'avatar':urlString}).eq('UID', supabase!.client.auth.currentUser!.id);
-
-
+  static Future<void> updateImage({required String urlString}) async {
+    await supabase!.client
+        .from('user')
+        .update({'avatar': urlString})
+        .eq('UID', supabase!.client.auth.currentUser!.id);
   }
-
 
   //  need testing
 
-static Future<void> addOrder({
-
+  static Future<void> addOrder({
     required String createdAt,
     required String uid,
     required int courseId,
-
   }) async {
     try {
       await supabase!.client.from('order').insert({
-        'created_at':createdAt,
+        'created_at': createdAt,
         'course_id': courseId,
         'uid': supabase!.client.auth.currentSession!.user.id,
-        
       });
     } catch (error) {
       throw FormatException('there was an error: $error');
     }
   }
 
+  static Future forgotPassword({required String email}) async {
+    try {
+      final res = await supabase!.client.auth.resetPasswordForEmail(email);
+      return res;
+    } catch (error) {
+      return error;
+    }
+  }
+
+  static Future verifyWithOTP({
+    required String token,
+    required String email,
+  }) async {
+    try {
+      final res = await supabase!.client.auth.verifyOTP(
+        type: OtpType.recovery,
+        email: email,
+        token: token,
+      );
+      return res.session?.isExpired;
+    } on AuthException catch (error) {
+      throw AuthException(error.message);
+    } catch (error) {
+      return error;
+    }
+  }
 }

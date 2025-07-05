@@ -18,6 +18,8 @@ class SplashScreen extends StatelessWidget {
 
     // Get the current authentication session
     final session = supabase.auth.currentSession;
+    print("ss---------------");
+    print(session);
 
     // Access the user info model from the AuthLayer
     final userinfo = GetIt.I.get<AuthLayer>().userinfo;

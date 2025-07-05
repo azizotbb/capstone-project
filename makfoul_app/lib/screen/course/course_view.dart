@@ -19,7 +19,6 @@ class CourseView extends StatelessWidget {
   final String location;
   final double price;
   final int numberOfTrainees;
-  final String date;
   final String state;
 
   const CourseView({
@@ -33,7 +32,6 @@ class CourseView extends StatelessWidget {
     required this.tid,
     required this.category,
     required this.numberOfTrainees,
-    required this.date,
     required this.state,
   });
 
