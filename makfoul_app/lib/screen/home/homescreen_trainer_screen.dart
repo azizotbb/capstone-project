@@ -2,9 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/model/user_model.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/screen/home/picked_location.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -12,6 +14,7 @@ import 'package:makfoul_app/widget/homescreen/TopCourses_widget.dart';
 import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
 import 'package:makfoul_app/widget/homescreen/dashboardcard.dart';
 import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
+import 'package:makfoul_app/widget/shared/custom_icon_button.dart';
 import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
 
 class HomescreenTrainerScreen extends StatelessWidget {
@@ -342,14 +345,14 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                 ),
                                               ],
                                             ),
-                                            Row(
+                                          Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               spacing: 17,
                                               children: [
-                                                TextButton(
+                                                CustomIconButton(
                                                   onPressed: () async {
-                                                   final range = await showDateRangePicker(
+                                                    bloc.pickedDate = await showDateRangePicker(
                                                       context: context,
                                                       firstDate: DateTime(
                                                         DateTime.now().year - 5,
@@ -386,33 +389,15 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                                         );
                                                       },
                                                     );
-                                                    if(range!=null){
-                                                      bloc.pickedDate=range;
-                                                      print("${bloc.pickedDate}");
-                                                    }
                                                     // bloc.date = picked
                                                     // .toString();
                                                   },
-                                                  child: Container(
-                                                    height: 56,
-                                                    width: 59,
-                                                    decoration: BoxDecoration(
-                                                      color: AppColors
-                                                          .colorLightGrey,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            17,
-                                                          ),
-                                                    ),
-                                                    child: Icon(
-                                                      Icons.date_range_outlined,
-                                                      size: 25,
-                                                      color: AppColors
-                                                          .colorDarkGrey,
-                                                    ),
+                                                  iconButton: Icon(
+                                                    Icons.date_range_outlined,
                                                   ),
                                                 ),
-                                                TextButton(
+
+                                                CustomIconButton(
                                                   onPressed: () async {
                                                     //here image
 
@@ -424,47 +409,41 @@ class HomescreenTrainerScreen extends StatelessWidget {
 
                                                     // print(image!.path.toString());
                                                   },
-                                                  child: Container(
-                                                    height: 56,
-                                                    width: 59,
-                                                    decoration: BoxDecoration(
-                                                      color: AppColors
-                                                          .colorLightGrey,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            17,
-                                                          ),
-                                                    ),
-                                                    child: Icon(
-                                                      Icons.image,
-                                                      size: 25,
-                                                      color: AppColors
-                                                          .colorDarkGrey,
-                                                    ),
-                                                  ),
+                                                  iconButton: Icon(Icons.image),
                                                 ),
-                                                TextButton(
-                                                  // print the url link for image replace with Google Map
-                                                  onPressed: () {
-                                                    print(bloc.urlString);
+
+                                                CustomIconButton(
+                                                  onPressed: () async {
+                                                    // Open the map screen to pick a location
+                                                    final result = await Navigator.push(
+                                                      context,
+                                                      MaterialPageRoute(
+                                                        builder: (_) =>
+                                                            BlocProvider.value(
+                                                              value: bloc
+                                                                ..add(
+                                                                  DynamicLocationEvent(), // Load user's current GPS location
+                                                                ),
+                                                              child:
+                                                                  PickedLocation(),
+                                                            ),
+                                                      ),
+                                                    );
+                                                    // If user selected a location, save it to the bloc
+                                                    if (result != null &&
+                                                        result is LatLng) {
+                                                      print(
+                                                        'User picked location: $result',
+                                                      );
+                                                      bloc.add(
+                                                        SavePickedLocationEvent(
+                                                          result,
+                                                        ),
+                                                      );
+                                                    }
                                                   },
-                                                  child: Container(
-                                                    height: 56,
-                                                    width: 59,
-                                                    decoration: BoxDecoration(
-                                                      color: AppColors
-                                                          .colorLightGrey,
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                            17,
-                                                          ),
-                                                    ),
-                                                    child: Icon(
-                                                      Icons.place_sharp,
-                                                      size: 25,
-                                                      color: AppColors
-                                                          .colorDarkGrey,
-                                                    ),
+                                                  iconButton: Icon(
+                                                    Icons.place_sharp,
                                                   ),
                                                 ),
                                               ],
