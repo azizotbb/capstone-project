@@ -18,7 +18,7 @@ class OrderScreen extends StatelessWidget {
             return CustomCourseWidget(
               coursetitle: 'italy cook ',
               pricecourse: 200,
-              image: 'assets/images/Rectangle 61.png',
+              image: 'assets/images/Rectangle 61.png', onTap: () {  },
             );
           },
         ),

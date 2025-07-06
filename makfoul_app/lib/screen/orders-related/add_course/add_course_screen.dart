@@ -1,7 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/model/coursemodel.dart';
+import 'package:makfoul_app/model/user_model.dart';
+import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/screen/course/details_course.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
 import 'package:makfoul_app/screen/orders-related/notification_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
@@ -18,6 +22,8 @@ class AddCourseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+        UserModel userinfo = GetIt.I.get<AuthLayer>().userinfo;
+
     return BlocProvider(
       create: (_) => AddCorseBloc()
         ..add(
@@ -106,6 +112,8 @@ class AddCourseScreen extends StatelessWidget {
                                 coursetitle: e.title,
                                 pricecourse: e.price,
                                 image: e.image,
+                                onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsCourse(coursetitle: e.title, canreguster: e.numberOfTrainees, categoryname: e.category, startDate: e.startDate, endDate: e.endDate, state: e.state, price: e.price,desc: e.description, tranername:userinfo.username,)),);},
+
                               ),
                             );
                           },
@@ -144,7 +152,7 @@ class AddCourseScreen extends StatelessWidget {
                               child: CustomCourseWidget(
                                 coursetitle: e1.title,
                                 pricecourse: e1.price,
-                                image: e1.image,
+                                image: e1.image, onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailsCourse(coursetitle: e1.title, canreguster: e1.numberOfTrainees, categoryname: e1.category, startDate: e1.startDate, endDate: e1.endDate, state: e1.state, price:e1.price ,desc: e1.tid,tranername:userinfo.username,))); },
                               ),
                             );
                           },
