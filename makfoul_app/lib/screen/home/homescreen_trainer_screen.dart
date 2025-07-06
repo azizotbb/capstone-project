@@ -2,24 +2,18 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/model/user_model.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
-import 'package:makfoul_app/repo/layer/opreations_layer.dart';
-import 'package:makfoul_app/screen/home/picked_location.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
-import 'package:makfoul_app/utility/validators.dart';
 import 'package:makfoul_app/widget/homescreen/TopCourses_widget.dart';
 import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
 import 'package:makfoul_app/widget/homescreen/dashboardcard.dart';
 import 'package:makfoul_app/widget/homescreen/home_trainer/activity_courses.dart';
 import 'package:makfoul_app/widget/homescreen/home_trainer/add_modal_sheet.dart';
-import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
-import 'package:makfoul_app/widget/shared/custom_icon_button.dart';
-import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
+
 
 class HomescreenTrainerScreen extends StatelessWidget {
   const HomescreenTrainerScreen({super.key});

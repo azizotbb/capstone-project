@@ -12,7 +12,7 @@
 //     final get = GetIt.I.get<OpreationsLayer>();
 //     get.getDetailes;
 //     print(get.users.length);
-//     print(get.users[0].courseData!.userData!.username);
+//     print(get.users[0].uid.);
 //     return Scaffold(
 //       // body: Center(
 //       //   child: SizedBox(width: context.getWidth(),height: context.getHeight(),

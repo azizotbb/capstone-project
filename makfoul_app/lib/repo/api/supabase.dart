@@ -219,7 +219,7 @@ static Future<void> addOrder({
     final  response = await supabase?.client.from('order').select('*,uid(*),cours_id(*)').eq('course_id',courseId);
       print(response);
       print(response!.length);
-    if(response == null || response.isEmpty){return[];}
+    if(response.isEmpty){return[];}
    
     return response.map((users){
       return OrderModelMapper.fromMap(users);

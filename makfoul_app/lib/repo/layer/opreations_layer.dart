@@ -135,8 +135,7 @@ print("error in delet course $e");
     print(users);
 
      users = await SupabaseConnect.getDetailes(courseId: courseId);
-    print(users);
-    // users = ;
+  
     
 
 
