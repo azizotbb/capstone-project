@@ -191,7 +191,8 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     print('Final saved location: ${event.finalLocation}');
 
     selectedLocation = event.finalLocation;
-    stringLocation = event.finalLocation.toString();
+    stringLocation =
+        '${event.finalLocation.latitude},${event.finalLocation.longitude}';
 
     emit(PickLocatioState(event.finalLocation));
   }

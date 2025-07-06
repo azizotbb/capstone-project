@@ -79,7 +79,7 @@ class SupabaseConnect {
       // Throws a more specific auth-related error
       throw AuthException(error.message);
     } catch (error) {
-      // General signىerror
+      // General signهى error
       throw FormatException("There is error with sign in");
     }
   }

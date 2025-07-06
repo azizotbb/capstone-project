@@ -73,7 +73,7 @@ class VerificationCodeScreen extends StatelessWidget {
                       PrimryCustomButton(
                         setText: 'save'.tr(),
                         onPressed: () {
-                          // bloc.add(UpdatePasswordEvent());
+                          bloc.add(UpdatePasswordEvent());
                         },
                       ),
                     ],
