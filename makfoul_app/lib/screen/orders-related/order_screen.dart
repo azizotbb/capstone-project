@@ -27,6 +27,7 @@ class OrderScreen extends StatelessWidget {
                     coursetitle: ordersByUID[index].courseId.title,
                     pricecourse: ordersByUID[index].courseId.price,
                     image: ordersByUID[index].courseId.image,
+                    onTap: () {},
                   );
                 },
               ),

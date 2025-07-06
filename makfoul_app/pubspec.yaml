@@ -21,6 +21,7 @@ dependencies:
   geolocator: ^14.0.1
   flutter_verification_code_field: ^1.2.2
   moyasar: ^2.0.19
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:

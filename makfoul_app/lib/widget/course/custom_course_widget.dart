@@ -9,10 +9,12 @@ class CustomCourseWidget extends StatelessWidget {
     required this.coursetitle,
     required this.pricecourse,
     required this.image,
+    required this .onTap,
   });
   final String coursetitle;
   final double pricecourse;
   final String image;
+  final VoidCallback onTap; 
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class CustomCourseWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(12),
             child: ListTile(
+              onTap: onTap,
               title: Text(coursetitle, style: AppTextStyle.textbold16),
               subtitle: Text(
                 "$pricecourse SAR",

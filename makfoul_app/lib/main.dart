@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:makfoul_app/repo/api/supabase.dart';
 import 'package:makfoul_app/screen/home/test3.dart';
 import 'package:makfoul_app/screen/profile/profile_screen.dart';
@@ -16,6 +17,9 @@ void main() async {
   setup();
 
   await EasyLocalization.ensureInitialized();
+
+  // Only orientation for this app is Portia up
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(
     EasyLocalization(

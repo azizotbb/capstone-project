@@ -1,4 +1,6 @@
+import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 // CourseInfo details screen
 class CourseInfo extends StatelessWidget {
@@ -6,23 +8,28 @@ class CourseInfo extends StatelessWidget {
     super.key,
     required this.categoryimage,
     required this.categoryname,
-    required this.date,
+    required this.startDate,
     required this.location,
     required this.description,
     required this.price,
     required this.isActive,
-    required this.trainer,
+    required this.trainer, required this.endDate,
   });
   final String categoryimage;
   final String categoryname;
-  final String date;
+  final String startDate;
+  final String endDate; 
   final String location;
   final String description;
   final double price;
-  final bool isActive;
+  final String isActive;
   final String trainer;
   @override
   Widget build(BuildContext context) {
+  final startdateday=DateTime.parse(startDate);
+  final enddateday=DateTime.parse(endDate);
+String formateddateStart= DateFormat('yyyy-MM-dd').format(startdateday);
+String formateddateEnd= DateFormat('yyyy-MM-dd').format(enddateday);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Column(
@@ -48,7 +55,12 @@ class CourseInfo extends StatelessWidget {
                 children: [
                   Image.asset("assets/images/date.png"),
                   SizedBox(width: 10),
-                  Text("$date", style: TextStyle(fontWeight: FontWeight.w500)),
+                  Column(
+                    children: [
+                      Text("$formateddateStart ", style: TextStyle(fontWeight: FontWeight.w500)),
+                   Text("$formateddateEnd ", style: TextStyle(fontWeight: FontWeight.w500)),
+                    ],
+                  )
                 ],
               ),
 
@@ -70,7 +82,9 @@ class CourseInfo extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
-          Text(description),
+          Align(
+            alignment: Alignment.topLeft,
+            child: Text(description,)),
           SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -87,7 +101,7 @@ class CourseInfo extends StatelessWidget {
                 children: [
                   Text("State", style: TextStyle(fontWeight: FontWeight.w500)),
                   SizedBox(height: 10),
-                  Text(isActive ? "Active" : "inactive"),
+                  Text(isActive),
                 ],
               ),
               Column(
