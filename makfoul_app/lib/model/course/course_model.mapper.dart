@@ -21,38 +21,54 @@ class CourseModelMapper extends ClassMapperBase<CourseModel> {
   final String id = 'CourseModel';
 
   static String _$startDate(CourseModel v) => v.startDate;
-  static const Field<CourseModel, String> _f$startDate =
-      Field('startDate', _$startDate);
+  static const Field<CourseModel, String> _f$startDate = Field(
+    'startDate',
+    _$startDate,
+  );
   static String _$endDate(CourseModel v) => v.endDate;
-  static const Field<CourseModel, String> _f$endDate =
-      Field('endDate', _$endDate);
+  static const Field<CourseModel, String> _f$endDate = Field(
+    'endDate',
+    _$endDate,
+  );
   static int _$id(CourseModel v) => v.id;
   static const Field<CourseModel, int> _f$id = Field('id', _$id);
   static String _$tid(CourseModel v) => v.tid;
   static const Field<CourseModel, String> _f$tid = Field('tid', _$tid);
   static String _$category(CourseModel v) => v.category;
-  static const Field<CourseModel, String> _f$category =
-      Field('category', _$category);
+  static const Field<CourseModel, String> _f$category = Field(
+    'category',
+    _$category,
+  );
   static String _$title(CourseModel v) => v.title;
   static const Field<CourseModel, String> _f$title = Field('title', _$title);
   static String _$description(CourseModel v) => v.description;
-  static const Field<CourseModel, String> _f$description =
-      Field('description', _$description);
+  static const Field<CourseModel, String> _f$description = Field(
+    'description',
+    _$description,
+  );
   static double _$price(CourseModel v) => v.price;
   static const Field<CourseModel, double> _f$price = Field('price', _$price);
   static int _$numberOfTrainees(CourseModel v) => v.numberOfTrainees;
-  static const Field<CourseModel, int> _f$numberOfTrainees =
-      Field('numberOfTrainees', _$numberOfTrainees, key: r'number_of_trainees');
+  static const Field<CourseModel, int> _f$numberOfTrainees = Field(
+    'numberOfTrainees',
+    _$numberOfTrainees,
+    key: r'number_of_trainees',
+  );
   static String _$image(CourseModel v) => v.image;
   static const Field<CourseModel, String> _f$image = Field('image', _$image);
   static String _$location(CourseModel v) => v.location;
-  static const Field<CourseModel, String> _f$location =
-      Field('location', _$location);
+  static const Field<CourseModel, String> _f$location = Field(
+    'location',
+    _$location,
+  );
   static String _$state(CourseModel v) => v.state;
   static const Field<CourseModel, String> _f$state = Field('state', _$state);
   static String _$createdAt(CourseModel v) => v.createdAt;
-  static const Field<CourseModel, String> _f$createdAt =
-      Field('createdAt', _$createdAt, key: r'created_at');
+  static const Field<CourseModel, String> _f$createdAt = Field(
+    'createdAt',
+    _$createdAt,
+    key: r'created_at',
+  );
 
   @override
   final MappableFields<CourseModel> fields = const {
@@ -72,18 +88,21 @@ class CourseModelMapper extends ClassMapperBase<CourseModel> {
   };
 
   static CourseModel _instantiate(DecodingData data) {
-    return CourseModel(data.dec(_f$startDate), data.dec(_f$endDate),
-        id: data.dec(_f$id),
-        tid: data.dec(_f$tid),
-        category: data.dec(_f$category),
-        title: data.dec(_f$title),
-        description: data.dec(_f$description),
-        price: data.dec(_f$price),
-        numberOfTrainees: data.dec(_f$numberOfTrainees),
-        image: data.dec(_f$image),
-        location: data.dec(_f$location),
-        state: data.dec(_f$state),
-        createdAt: data.dec(_f$createdAt));
+    return CourseModel(
+      data.dec(_f$startDate),
+      data.dec(_f$endDate),
+      id: data.dec(_f$id),
+      tid: data.dec(_f$tid),
+      category: data.dec(_f$category),
+      title: data.dec(_f$title),
+      description: data.dec(_f$description),
+      price: data.dec(_f$price),
+      numberOfTrainees: data.dec(_f$numberOfTrainees),
+      image: data.dec(_f$image),
+      location: data.dec(_f$location),
+      state: data.dec(_f$state),
+      createdAt: data.dec(_f$createdAt),
+    );
   }
 
   @override
@@ -100,28 +119,36 @@ class CourseModelMapper extends ClassMapperBase<CourseModel> {
 
 mixin CourseModelMappable {
   String toJson() {
-    return CourseModelMapper.ensureInitialized()
-        .encodeJson<CourseModel>(this as CourseModel);
+    return CourseModelMapper.ensureInitialized().encodeJson<CourseModel>(
+      this as CourseModel,
+    );
   }
 
   Map<String, dynamic> toMap() {
-    return CourseModelMapper.ensureInitialized()
-        .encodeMap<CourseModel>(this as CourseModel);
+    return CourseModelMapper.ensureInitialized().encodeMap<CourseModel>(
+      this as CourseModel,
+    );
   }
 
   CourseModelCopyWith<CourseModel, CourseModel, CourseModel> get copyWith =>
       _CourseModelCopyWithImpl<CourseModel, CourseModel>(
-          this as CourseModel, $identity, $identity);
+        this as CourseModel,
+        $identity,
+        $identity,
+      );
   @override
   String toString() {
-    return CourseModelMapper.ensureInitialized()
-        .stringifyValue(this as CourseModel);
+    return CourseModelMapper.ensureInitialized().stringifyValue(
+      this as CourseModel,
+    );
   }
 
   @override
   bool operator ==(Object other) {
-    return CourseModelMapper.ensureInitialized()
-        .equalsValue(this as CourseModel, other);
+    return CourseModelMapper.ensureInitialized().equalsValue(
+      this as CourseModel,
+      other,
+    );
   }
 
   @override
@@ -138,20 +165,21 @@ extension CourseModelValueCopy<$R, $Out>
 
 abstract class CourseModelCopyWith<$R, $In extends CourseModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
-  $R call(
-      {String? startDate,
-      String? endDate,
-      int? id,
-      String? tid,
-      String? category,
-      String? title,
-      String? description,
-      double? price,
-      int? numberOfTrainees,
-      String? image,
-      String? location,
-      String? state,
-      String? createdAt});
+  $R call({
+    String? startDate,
+    String? endDate,
+    int? id,
+    String? tid,
+    String? category,
+    String? title,
+    String? description,
+    double? price,
+    int? numberOfTrainees,
+    String? image,
+    String? location,
+    String? state,
+    String? createdAt,
+  });
   CourseModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -164,54 +192,56 @@ class _CourseModelCopyWithImpl<$R, $Out>
   late final ClassMapperBase<CourseModel> $mapper =
       CourseModelMapper.ensureInitialized();
   @override
-  $R call(
-          {String? startDate,
-          String? endDate,
-          int? id,
-          String? tid,
-          String? category,
-          String? title,
-          String? description,
-          double? price,
-          int? numberOfTrainees,
-          String? image,
-          String? location,
-          String? state,
-          String? createdAt}) =>
-      $apply(FieldCopyWithData({
-        if (startDate != null) #startDate: startDate,
-        if (endDate != null) #endDate: endDate,
-        if (id != null) #id: id,
-        if (tid != null) #tid: tid,
-        if (category != null) #category: category,
-        if (title != null) #title: title,
-        if (description != null) #description: description,
-        if (price != null) #price: price,
-        if (numberOfTrainees != null) #numberOfTrainees: numberOfTrainees,
-        if (image != null) #image: image,
-        if (location != null) #location: location,
-        if (state != null) #state: state,
-        if (createdAt != null) #createdAt: createdAt
-      }));
+  $R call({
+    String? startDate,
+    String? endDate,
+    int? id,
+    String? tid,
+    String? category,
+    String? title,
+    String? description,
+    double? price,
+    int? numberOfTrainees,
+    String? image,
+    String? location,
+    String? state,
+    String? createdAt,
+  }) => $apply(
+    FieldCopyWithData({
+      if (startDate != null) #startDate: startDate,
+      if (endDate != null) #endDate: endDate,
+      if (id != null) #id: id,
+      if (tid != null) #tid: tid,
+      if (category != null) #category: category,
+      if (title != null) #title: title,
+      if (description != null) #description: description,
+      if (price != null) #price: price,
+      if (numberOfTrainees != null) #numberOfTrainees: numberOfTrainees,
+      if (image != null) #image: image,
+      if (location != null) #location: location,
+      if (state != null) #state: state,
+      if (createdAt != null) #createdAt: createdAt,
+    }),
+  );
   @override
   CourseModel $make(CopyWithData data) => CourseModel(
-      data.get(#startDate, or: $value.startDate),
-      data.get(#endDate, or: $value.endDate),
-      id: data.get(#id, or: $value.id),
-      tid: data.get(#tid, or: $value.tid),
-      category: data.get(#category, or: $value.category),
-      title: data.get(#title, or: $value.title),
-      description: data.get(#description, or: $value.description),
-      price: data.get(#price, or: $value.price),
-      numberOfTrainees:
-          data.get(#numberOfTrainees, or: $value.numberOfTrainees),
-      image: data.get(#image, or: $value.image),
-      location: data.get(#location, or: $value.location),
-      state: data.get(#state, or: $value.state),
-      createdAt: data.get(#createdAt, or: $value.createdAt));
+    data.get(#startDate, or: $value.startDate),
+    data.get(#endDate, or: $value.endDate),
+    id: data.get(#id, or: $value.id),
+    tid: data.get(#tid, or: $value.tid),
+    category: data.get(#category, or: $value.category),
+    title: data.get(#title, or: $value.title),
+    description: data.get(#description, or: $value.description),
+    price: data.get(#price, or: $value.price),
+    numberOfTrainees: data.get(#numberOfTrainees, or: $value.numberOfTrainees),
+    image: data.get(#image, or: $value.image),
+    location: data.get(#location, or: $value.location),
+    state: data.get(#state, or: $value.state),
+    createdAt: data.get(#createdAt, or: $value.createdAt),
+  );
 
   @override
   CourseModelCopyWith<$R2, CourseModel, $Out2> $chain<$R2, $Out2>(
-          Then<$Out2, $R2> t) =>
-      _CourseModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
+    Then<$Out2, $R2> t,
+  ) => _CourseModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }

@@ -21,14 +21,19 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
   final TextEditingController nameController = TextEditingController();
   final getAuth = GetIt.I.get<AuthLayer>();
   final getOpreations = GetIt.I.get<OpreationsLayer>();
+   bool? showPassword = true;
+   bool? showConfirmPassword = true;
   String? urlString;
   XFile? image;
   UserModel userinfo = GetIt.I.get<AuthLayer>().userinfo;
+
 
   ProfileBloc() : super(ProfileInitial()) {
     on<UpdatePasswordEvent>(updatePasswordMethod);
     on<UpdateNameEvent>(updateNameMethod);
     on<UpdateImageEvent>(updateImageMethod);
+    on<ShowPasswordEvent>(showPasswordMethod);
+    on<ShowConfirmPasswordEvent>(showConfirmPasswordMethod);
   }
 
   FutureOr<void> updatePasswordMethod(
@@ -70,6 +75,21 @@ class ProfileBloc extends Bloc<ProfileEvent, ProfileState> {
 
     await getOpreations.updateImageMethod(urlString: urlString!);
 
+    emit(SuccessState());
+  }
+
+  FutureOr<void> showPasswordMethod(ShowPasswordEvent event, Emitter<ProfileState> emit) {
+
+
+    showPassword = !showPassword!;
+
+    emit(SuccessState());
+
+  }
+
+  FutureOr<void> showConfirmPasswordMethod(ShowConfirmPasswordEvent event, Emitter<ProfileState> emit) {
+    showConfirmPassword = !showConfirmPassword!;
+    
     emit(SuccessState());
   }
 }

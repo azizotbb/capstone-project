@@ -43,7 +43,7 @@ class TopCourses extends StatelessWidget {
                 children: [
                   Container(
                     width: 300,
-                    height: 150,
+                    height: 122,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(17),
                     ),
@@ -60,7 +60,7 @@ class TopCourses extends StatelessWidget {
                         softWrap: true,
                         overflow: TextOverflow.visible,
                       ),
-                      // SizedBox(height: 5),
+                      SizedBox(height: 30),
                       Row(
                         children: [
                           Image.asset("assets/images/Location.png"),

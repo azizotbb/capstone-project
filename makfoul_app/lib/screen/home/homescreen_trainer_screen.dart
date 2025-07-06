@@ -2,38 +2,33 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
-import 'package:makfoul_app/model/coursemodel.dart';
+import 'package:makfoul_app/model/userinfo_model.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
-import 'package:makfoul_app/repo/layer/opreations_layer.dart';
-import 'package:makfoul_app/screen/home/picked_location.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/homescreen/TopCourses_widget.dart';
 import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
 import 'package:makfoul_app/widget/homescreen/dashboardcard.dart';
-import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
-import 'package:makfoul_app/widget/shared/custom_icon_button.dart';
-import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
+import 'package:makfoul_app/widget/homescreen/home_trainer/activity_courses.dart';
+import 'package:makfoul_app/widget/homescreen/home_trainer/add_modal_sheet.dart';
 
 class HomescreenTrainerScreen extends StatelessWidget {
   const HomescreenTrainerScreen({super.key});
-  final int totalcourse = 10;
-  final int numofactivecourse = 5;
-  final int numofainctivecourse = 5;
-  final int cleancourse = 3;
-  final int cookcourse = 7;
+
   @override
   Widget build(BuildContext context) {
-    final userinfo = GetIt.I.get<AuthLayer>().userinfo;
-
+    UserModel userinfo = GetIt.I.get<AuthLayer>().userinfo;
     return BlocProvider(
-      create: (context) => AddCorseBloc(),
+      create: (context) =>
+          AddCorseBloc()..add(GetCoursesEvent(id: userinfo.uid)),
       child: Builder(
         builder: (context) {
           final bloc = context.read<AddCorseBloc>();
+          // WidgetsBinding.instance.addPostFrameCallback((_){
+          //   context.read<AddCorseBloc>().add(GetCoursesEvent());
+          // });
           return Scaffold(
             resizeToAvoidBottomInset: false,
             //header
@@ -59,7 +54,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                   : Image.network(userinfo.url!),
                             ),
                             title: Text(
-                              "hi".tr() + userinfo.username,
+                              "Hi,".tr() + userinfo.username,
                               style: AppTextStyle.textTitleLarg24dark,
                             ),
                             subtitle: Text(
@@ -91,382 +86,83 @@ class HomescreenTrainerScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 12),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Dashboardcard(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    "All courses",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18,
-                                      color: AppColors.colorDarkGrey,
-                                    ),
-                                  ),
-                                  Text(
-                                    "${totalcourse}",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18,
-                                      color: AppColors.colorScondry,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
 
-                            Dashboardcard(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text(
-                                        "active",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 18,
-                                          color: AppColors.colorDarkGrey,
-                                        ),
-                                      ),
-                                      Text(
-                                        "${numofactivecourse}",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 18,
-                                          color: AppColors.colorScondry,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Text(
-                                        "inactive",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 18,
-                                          color: AppColors.colorDarkGrey,
-                                        ),
-                                      ),
-                                      Text(
-                                        "${numofainctivecourse}",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                          fontSize: 18,
-                                          color: AppColors.colorScondry,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ],
+                        BlocProvider.value(
+                          value: bloc,
+                          child: ActivityCourses(),
                         ),
                         SizedBox(height: 12),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
-                            Dashboardcard(
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceEvenly,
-                                children: [
-                                  Text(
-                                    "courses",
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.w500,
-                                      fontSize: 18,
-                                      color: AppColors.colorDarkGrey,
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Image.asset(
-                                        "assets/images/Clean (2).png",
-                                        height: 20,
-                                        width: 20,
-                                      ),
-                                      Text(
-                                        "${cleancourse}",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
+                            BlocBuilder<AddCorseBloc, AddCorseState>(
+                              builder: (context, state) {
+                                if (state is CoursesLoaded) {
+                                  return Dashboardcard(
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Text(
+                                          "courses",
+                                          style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 18,
+                                            color: AppColors.colorDarkGrey,
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
-                                    children: [
-                                      Image.asset(
-                                        "assets/images/cook (2).png",
-                                        height: 20,
-                                        width: 20,
-                                      ),
-                                      Text(
-                                        "${cookcourse}",
-                                        style: TextStyle(
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-
-                            Dashboardcard(
-                              hasborder: true,
-                              child: GestureDetector(
-                                onTap: () {
-                                  showModalBottomSheet(
-                                    showDragHandle: true,
-                                    useSafeArea: true,
-                                    isScrollControlled: true,
-
-                                    context: context,
-                                    builder: (context) => Padding(
-                                      padding: EdgeInsets.only(
-                                        bottom: MediaQuery.of(
-                                          context,
-                                        ).viewInsets.bottom,
-                                      ),
-                                      child: SizedBox(
-                                        width: context.getWidth(),
-                                        height: 600,
-                                        child: Column(
-                                          spacing: 19,
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
                                           children: [
-                                            Container(
-                                              width: 330,
-                                              height: 50,
-                                              decoration: BoxDecoration(
-                                                color: AppColors.colorLightGrey,
-                                                borderRadius:
-                                                    BorderRadius.circular(17),
-                                              ),
-                                              child: DropdownButtonHideUnderline(
-                                                child: DropdownButton(
-                                                  value: bloc.items[0],
-                                                  isExpanded: true,
-
-                                                  items: bloc.items
-                                                      .map(
-                                                        (
-                                                          item,
-                                                        ) => DropdownMenuItem(
-                                                          value: item,
-                                                          child: Container(
-                                                            margin:
-                                                                EdgeInsets.symmetric(
-                                                                  horizontal:
-                                                                      20,
-                                                                ),
-                                                            child: Text(
-                                                              item,
-                                                              style: TextStyle(
-                                                                fontSize: 12,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                        ),
-                                                      )
-                                                      .toList(),
-                                                  onChanged: (value) {
-                                                    bloc.add(
-                                                      SelectCategoryEvent(
-                                                        value: value!,
-                                                      ),
-                                                    );
-                                                    print(
-                                                      bloc.selectedCategory,
-                                                    );
-                                                  },
-                                                ),
-                                              ),
+                                            Image.asset(
+                                              "assets/images/Clean (2).png",
+                                              height: 20,
+                                              width: 20,
                                             ),
-                                            CustomTextField(
-                                              controller: bloc.titleController,
-                                              setHint: "Course Title".tr(),
-                                            ),
-                                            CustomTextField(
-                                              controller:
-                                                  bloc.descriptionController,
-                                              setHint: "Description".tr(),
-                                              isDescription: true,
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              spacing: 40,
-                                              children: [
-                                                CustomTextField(
-                                                  controller:
-                                                      bloc.priceController,
-                                                  setHint: "Price".tr(),
-                                                  isSmall: true,
-                                                ),
-                                                CustomTextField(
-                                                  controller: bloc
-                                                      .numberOfTraineesController,
-                                                  setHint: "number of trainees"
-                                                      .tr(),
-                                                  isSmall: true,
-                                                ),
-                                              ],
-                                            ),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              spacing: 17,
-                                              children: [
-                                                CustomIconButton(
-                                                  onPressed: () async {
-                                                    bloc.pickedDate = await showDateRangePicker(
-                                                      context: context,
-                                                      firstDate: DateTime(
-                                                        DateTime.now().year - 5,
-                                                      ),
-                                                      lastDate: DateTime(
-                                                        DateTime.now().year + 5,
-                                                      ),
-
-                                                      builder: (context, child) {
-                                                        return Theme(
-                                                          data: ThemeData(
-                                                            colorScheme:
-                                                                ColorScheme.fromSwatch(
-                                                                  // primarySwatch: Colors.orange,
-                                                                ),
-                                                          ),
-                                                          child: Column(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              ConstrainedBox(
-                                                                constraints:
-                                                                    BoxConstraints(
-                                                                      maxWidth:
-                                                                          400.0,
-                                                                      maxHeight:
-                                                                          500,
-                                                                    ),
-                                                                child: child,
-                                                              ),
-                                                            ],
-                                                          ),
-                                                        );
-                                                      },
-                                                    );
-                                                    // bloc.date = picked
-                                                    // .toString();
-                                                  },
-                                                  iconButton: Icon(
-                                                    Icons.date_range_outlined,
-                                                  ),
-                                                ),
-
-                                                CustomIconButton(
-                                                  onPressed: () async {
-                                                    //here image
-
-                                                    print('hello');
-
-                                                    bloc.add(
-                                                      UploadImageEvent(),
-                                                    );
-
-                                                    // print(image!.path.toString());
-                                                  },
-                                                  iconButton: Icon(Icons.image),
-                                                ),
-
-                                                CustomIconButton(
-                                                  onPressed: () async {
-                                                    // Open the map screen to pick a location
-                                                    final result = await Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                        builder: (_) =>
-                                                            BlocProvider.value(
-                                                              value: bloc
-                                                                ..add(
-                                                                  DynamicLocationEvent(), // Load user's current GPS location
-                                                                ),
-                                                              child:
-                                                                  PickedLocation(),
-                                                            ),
-                                                      ),
-                                                    );
-                                                    // If user selected a location, save it to the bloc
-                                                    if (result != null &&
-                                                        result is LatLng) {
-                                                      print(
-                                                        'User picked location: $result',
-                                                      );
-                                                      bloc.add(
-                                                        SavePickedLocationEvent(
-                                                          result,
-                                                        ),
-                                                      );
-                                                    }
-                                                  },
-                                                  iconButton: Icon(
-                                                    Icons.place_sharp,
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-
-                                            SizedBox(
-                                              width: 350,
-                                              child: PrimryCustomButton(
-                                                setText: "Add course".tr(),
-                                                onPressed: () {
-                                                  bloc.add(AddNewCordeEvent());
-                                                },
+                                            Text(
+                                              "${state.clean}",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w500,
                                               ),
                                             ),
                                           ],
                                         ),
-                                      ),
+                                        Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Image.asset(
+                                              "assets/images/cook (2).png",
+                                              height: 20,
+                                              width: 20,
+                                            ),
+                                            Text(
+                                              "${state.cook}",
+                                              style: TextStyle(
+                                                fontWeight: FontWeight.w500,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
                                     ),
                                   );
-                                },
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceEvenly,
-                                  children: [
-                                    Text(
-                                      "Add Course",
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.w700,
-                                        fontSize: 18,
-                                        color: AppColors.colorDarkGrey,
-                                      ),
-                                    ),
-                                    Image.asset("assets/images/AddCourse.png"),
-                                  ],
-                                ),
-                              ),
+                                }
+                                return SizedBox();
+                              },
+                            ),
+
+                            /////////////////////////////////////////////////
+                            ///////////////////////
+                            ///////////////////////
+                            BlocProvider.value(
+                              value: bloc,
+                              child: AddModalSheet(),
                             ),
                           ],
                         ),
+
                         SizedBox(height: 12),
                         // Courses
                         Align(
@@ -477,25 +173,32 @@ class HomescreenTrainerScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 12),
-                        GridView.builder(
-                          shrinkWrap: true,
-                          physics: NeverScrollableScrollPhysics(),
-                          itemCount: courses.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                                crossAxisCount: 2,
-                                mainAxisSpacing: 10,
-                                crossAxisSpacing: 3,
-                                childAspectRatio: 0.8,
-                              ),
-                          itemBuilder: (context, index) {
-                            final e = courses[index];
-                            return TopCourses(
-                              image: e.image,
-                              coursename: e.coursename,
-                              location: e.addres,
-                              price: e.price,
-                            );
+                        BlocBuilder<AddCorseBloc, AddCorseState>(
+                          builder: (context, state) {
+                            if (state is CoursesLoaded) {
+                              return GridView.builder(
+                                shrinkWrap: true,
+                                physics: NeverScrollableScrollPhysics(),
+                                itemCount: state.trainearcourses!.length,
+                                gridDelegate:
+                                    SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                      mainAxisSpacing: 10,
+                                      crossAxisSpacing: 3,
+                                      childAspectRatio: 0.8,
+                                    ),
+                                itemBuilder: (context, index) {
+                                  final e = state.trainearcourses![index];
+                                  return TopCourses(
+                                    image: e.image,
+                                    coursename: e.title,
+                                    location: e.location,
+                                    price: e.price,
+                                  );
+                                },
+                              );
+                            }
+                            return SizedBox();
                           },
                         ),
                       ],

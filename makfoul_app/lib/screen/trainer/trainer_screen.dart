@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
-import 'package:makfoul_app/model/course/course_model.dart';
 import 'package:makfoul_app/screen/course/course_view.dart';
+
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/Instructor/instructor_custom_card.dart';

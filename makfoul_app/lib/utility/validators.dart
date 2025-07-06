@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 class Validators {
   /// Validates verificationCode format
 
@@ -46,6 +48,40 @@ class Validators {
     return null;
   }
 
+  static String? validateCourseTitle(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Required';
+    }
+    if (value.length > 15) {
+      return 'the course must be under 15 letter.';
+    }
+     if (value.length < 5) {
+      return 'the course must be above 5 letter.';
+    }
+    return null;
+  }
+
+static String? validateTraineesNumber(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Required';
+    }
+        if (int.parse(value) >= 5) {
+      return 'Max 5';
+    }     if (int.parse(value) <1 ) {
+      return 'at Least 1 Trainee';
+    }
+    return null;
+  }
+
+static String? validatePrice(String? value) {
+    if (value == null || value.trim().isEmpty) {
+      return 'Required';
+    }
+    if (int.parse(value)>10000) {
+      return 'Max Price 10000 SR';
+    }
+    return null;
+  }
   /// Validates password strength
   static String? password(String? value) {
     if (value == null || value.trim().isEmpty) {
