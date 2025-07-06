@@ -29,6 +29,8 @@ class HomeScreen extends StatelessWidget {
         .where((course) => course.state == 'Active')
         .toList();
 
+    print(allCourses[0].user?.phone);
+
     return Scaffold(
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

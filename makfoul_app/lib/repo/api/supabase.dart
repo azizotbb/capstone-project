@@ -140,7 +140,11 @@ class SupabaseConnect {
 
   // Supabase.instance.client.storage.from('images').upload(path, file);
   static Future<List<dynamic>> getCourses() async {
-    final response = await supabase!.client.from("course").select();
+    final response = await supabase!.client.from("course").select("*,user(*)");
+    print("***************start i am");
+    log(response.toString());
+    print("***************end i am");
+
     return response;
   }
 

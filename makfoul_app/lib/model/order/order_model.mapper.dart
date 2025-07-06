@@ -25,19 +25,13 @@ class OrderModelMapper extends ClassMapperBase<OrderModel> {
   static int _$id(OrderModel v) => v.id;
   static const Field<OrderModel, int> _f$id = Field('id', _$id);
   static String _$createdAt(OrderModel v) => v.createdAt;
-  static const Field<OrderModel, String> _f$createdAt = Field(
-    'createdAt',
-    _$createdAt,
-    key: r'created_at',
-  );
+  static const Field<OrderModel, String> _f$createdAt =
+      Field('createdAt', _$createdAt, key: r'created_at');
   static UserModel _$uid(OrderModel v) => v.uid;
   static const Field<OrderModel, UserModel> _f$uid = Field('uid', _$uid);
   static CourseModel _$courseId(OrderModel v) => v.courseId;
-  static const Field<OrderModel, CourseModel> _f$courseId = Field(
-    'courseId',
-    _$courseId,
-    key: r'course_id',
-  );
+  static const Field<OrderModel, CourseModel> _f$courseId =
+      Field('courseId', _$courseId, key: r'course_id');
 
   @override
   final MappableFields<OrderModel> fields = const {
@@ -49,11 +43,10 @@ class OrderModelMapper extends ClassMapperBase<OrderModel> {
 
   static OrderModel _instantiate(DecodingData data) {
     return OrderModel(
-      id: data.dec(_f$id),
-      createdAt: data.dec(_f$createdAt),
-      uid: data.dec(_f$uid),
-      courseId: data.dec(_f$courseId),
-    );
+        id: data.dec(_f$id),
+        createdAt: data.dec(_f$createdAt),
+        uid: data.dec(_f$uid),
+        courseId: data.dec(_f$courseId));
   }
 
   @override
@@ -70,36 +63,28 @@ class OrderModelMapper extends ClassMapperBase<OrderModel> {
 
 mixin OrderModelMappable {
   String toJson() {
-    return OrderModelMapper.ensureInitialized().encodeJson<OrderModel>(
-      this as OrderModel,
-    );
+    return OrderModelMapper.ensureInitialized()
+        .encodeJson<OrderModel>(this as OrderModel);
   }
 
   Map<String, dynamic> toMap() {
-    return OrderModelMapper.ensureInitialized().encodeMap<OrderModel>(
-      this as OrderModel,
-    );
+    return OrderModelMapper.ensureInitialized()
+        .encodeMap<OrderModel>(this as OrderModel);
   }
 
   OrderModelCopyWith<OrderModel, OrderModel, OrderModel> get copyWith =>
       _OrderModelCopyWithImpl<OrderModel, OrderModel>(
-        this as OrderModel,
-        $identity,
-        $identity,
-      );
+          this as OrderModel, $identity, $identity);
   @override
   String toString() {
-    return OrderModelMapper.ensureInitialized().stringifyValue(
-      this as OrderModel,
-    );
+    return OrderModelMapper.ensureInitialized()
+        .stringifyValue(this as OrderModel);
   }
 
   @override
   bool operator ==(Object other) {
-    return OrderModelMapper.ensureInitialized().equalsValue(
-      this as OrderModel,
-      other,
-    );
+    return OrderModelMapper.ensureInitialized()
+        .equalsValue(this as OrderModel, other);
   }
 
   @override
@@ -137,29 +122,26 @@ class _OrderModelCopyWithImpl<$R, $Out>
   CourseModelCopyWith<$R, CourseModel, CourseModel> get courseId =>
       $value.courseId.copyWith.$chain((v) => call(courseId: v));
   @override
-  $R call({
-    int? id,
-    String? createdAt,
-    UserModel? uid,
-    CourseModel? courseId,
-  }) => $apply(
-    FieldCopyWithData({
-      if (id != null) #id: id,
-      if (createdAt != null) #createdAt: createdAt,
-      if (uid != null) #uid: uid,
-      if (courseId != null) #courseId: courseId,
-    }),
-  );
+  $R call(
+          {int? id,
+          String? createdAt,
+          UserModel? uid,
+          CourseModel? courseId}) =>
+      $apply(FieldCopyWithData({
+        if (id != null) #id: id,
+        if (createdAt != null) #createdAt: createdAt,
+        if (uid != null) #uid: uid,
+        if (courseId != null) #courseId: courseId
+      }));
   @override
   OrderModel $make(CopyWithData data) => OrderModel(
-    id: data.get(#id, or: $value.id),
-    createdAt: data.get(#createdAt, or: $value.createdAt),
-    uid: data.get(#uid, or: $value.uid),
-    courseId: data.get(#courseId, or: $value.courseId),
-  );
+      id: data.get(#id, or: $value.id),
+      createdAt: data.get(#createdAt, or: $value.createdAt),
+      uid: data.get(#uid, or: $value.uid),
+      courseId: data.get(#courseId, or: $value.courseId));
 
   @override
   OrderModelCopyWith<$R2, OrderModel, $Out2> $chain<$R2, $Out2>(
-    Then<$Out2, $R2> t,
-  ) => _OrderModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
+          Then<$Out2, $R2> t) =>
+      _OrderModelCopyWithImpl<$R2, $Out2>($value, $cast, t);
 }

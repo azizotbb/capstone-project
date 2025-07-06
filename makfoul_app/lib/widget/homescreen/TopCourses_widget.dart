@@ -42,12 +42,15 @@ class TopCourses extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   Container(
-                    width: 300,
-                    height: 122,
+                    height: 120,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(17),
                     ),
-                    child: Image.network(image,height: 12,width: 14, fit: BoxFit.contain),
+                    child: Image.network(
+                      image,
+                      height: 120,
+                      fit: BoxFit.contain,
+                    ),
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -65,7 +68,7 @@ class TopCourses extends StatelessWidget {
                         children: [
                           Image.asset("assets/images/Location.png"),
                           SizedBox(width: 8),
-                          Text(location, style: AppTextStyle.textMedium14),
+                          Text("Riyadh", style: AppTextStyle.textMedium14),
                         ],
                       ),
                       SizedBox(height: 10),
@@ -75,7 +78,7 @@ class TopCourses extends StatelessWidget {
               ),
             ),
             Align(
-              alignment: Alignment.bottomLeft,
+              alignment: Alignment.bottomRight,
               child: TextButton(
                 onPressed: null,
                 child: Text("${price} SAR", style: AppTextStyle.textMedium14),

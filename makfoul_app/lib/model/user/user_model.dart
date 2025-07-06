@@ -11,7 +11,7 @@ class UserModel with UserModelMappable {
   final String role;
   final String email;
   final String phone;
-  final String avatar;
+  final String? avatar;
 
   @MappableField(key: 'created_at')
   final String createdAt;

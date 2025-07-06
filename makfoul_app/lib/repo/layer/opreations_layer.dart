@@ -1,5 +1,5 @@
+import 'dart:developer';
 import 'dart:io';
-import 'dart:math';
 
 import 'package:makfoul_app/model/course/course_model.dart';
 import 'package:makfoul_app/model/order/order_model.dart';
@@ -9,7 +9,6 @@ class OpreationsLayer {
   // List to store courses
   List<CourseModel> courses = [];
   List<OrderModel> users = [];
-
   List<OrderModel> ordersByUID = [];
 
   uploadImageMethod({required String path, required File file}) {
@@ -88,9 +87,10 @@ class OpreationsLayer {
           }
         }
 
-        courses = await responces
+        courses = responces
             .map((item) => CourseModelMapper.fromMap(item))
             .toList();
+
         return courses;
       }
     } catch (e) {

@@ -12,7 +12,6 @@ class OrderScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Get the list of user orders by UID from the operations layer (injected via GetIt)
     final ordersByUID = GetIt.I.get<OpreationsLayer>().ordersByUID;
-
     return Scaffold(
       appBar: AppBar(title: Text("order").tr(), centerTitle: true),
       // If there are no orders, show a message. Otherwise, display the list of courses.

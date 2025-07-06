@@ -49,6 +49,7 @@ class TrainerScreen extends StatelessWidget {
               child: ListView.builder(
                 itemCount: courses.length,
                 itemBuilder: (BuildContext context, int index) {
+                  
                   return Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: InstructorCustomCard(
