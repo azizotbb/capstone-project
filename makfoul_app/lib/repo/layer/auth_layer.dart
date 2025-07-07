@@ -1,18 +1,20 @@
-import 'package:makfoul_app/model/user_model.dart';
+import 'package:makfoul_app/model/user/user_model.dart';
 import 'package:makfoul_app/repo/api/supabase.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthLayer {
   //authenticated user's information
   UserModel userinfo = UserModel(
-    uid: " ",
-    username: " ",
+    UID: " ",
+    name: " ",
     email: " ",
     role: " ",
     createdAt: " ",
     phone: " ",
+    avatar: '',
   );
-  // Method to handle user sign-up process
+
+  /// Method to handle user sign-up process
   signUpMethod({
     required String phoneNumber,
     required String username,
@@ -21,7 +23,7 @@ class AuthLayer {
     required String role,
   }) async {
     try {
-      // Call signUp function from SupabaseConnect to create a new user account
+      // Step 1: Sign up the user through Supabase Auth
       final user = await SupabaseConnect.signUp(
         email: email,
         password: password,
@@ -29,7 +31,7 @@ class AuthLayer {
         role: role,
         username: username,
       );
-      // After successful sign-up, add user data to the "user" table in Supabase
+      // Step 2: Store user details in the database
       await SupabaseConnect.addUser(
         userid: user.id,
         phone: phoneNumber,
@@ -57,19 +59,13 @@ class AuthLayer {
 
       return user;
     } on AuthException catch (error) {
-      print(error);
       throw AuthException(error.message);
     } catch (error) {
-      print(error);
-
       throw FormatException(error.toString());
     }
   }
 
-  // uploadImage(){
-
-  // }
-
+  /// Method to update the user's password
   updatePasswordMethod({
     required String password,
     required String oldPassword,
@@ -78,6 +74,29 @@ class AuthLayer {
       password: password,
       oldPassword: oldPassword,
     );
-    print('Layer getit');
+  }
+
+  /// Sends a reset password link to the user's email address.
+  forgotPasswordMethod({required String email}) {
+    try {
+      SupabaseConnect.forgotPassword(email: email);
+    } catch (error) {
+      return error;
+    }
+  }
+
+  /// Method to verify OTP token for password recovery
+  verifyWithOTPMethod({required String token, required String email}) async {
+    try {
+      final res = await SupabaseConnect.verifyWithOTP(
+        token: token,
+        email: email,
+      );
+      return res;
+    } on AuthException catch (error) {
+      throw AuthException(error.message);
+    } catch (error) {
+      return error;
+    }
   }
 }

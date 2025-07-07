@@ -1,7 +1,5 @@
 import 'dart:developer';
 import 'dart:io';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:makfoul_app/model/order/order_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -25,7 +23,7 @@ class SupabaseConnect {
     }
   }
 
-  //Supabase sign-up integration
+  /// Registers a new user with email and password and stores additional metadata.
   static Future<dynamic> signUp({
     required String phoneNumber,
     required String username,
@@ -49,7 +47,7 @@ class SupabaseConnect {
     }
   }
 
-  //add user
+  /// Adds a new user to the "user" table in Supabase.
   static addUser({
     required String userid,
     required String phone,
@@ -66,8 +64,7 @@ class SupabaseConnect {
     });
   }
 
-  //Supabase sign-in integration
-
+  /// Logs in a user using their email and password.
   static Future<dynamic> signIn({
     required String email,
     required String password,
@@ -87,19 +84,19 @@ class SupabaseConnect {
     }
   }
 
+  /// Uploads an image to Supabase storage.
   static Future<void> uploadImage({
     required String path,
     required File file,
   }) async {
     try {
       await supabase!.client.storage.from('images').upload(path, file);
-      print('layer1');
     } catch (error) {
       throw ('There was an error on your uploading: $error');
     }
   }
-  // Supabase.instance.client.storage.from('images').upload(path, file);
 
+  /// Gets the public URL of an image from Supabase storage.
   static Future<String> getImageUrl({required String path}) async {
     try {
       return supabase!.client.storage.from('images').getPublicUrl(path);
@@ -108,124 +105,155 @@ class SupabaseConnect {
     }
   }
 
+  /// Adds a new course to the "course" table.
   static Future<void> addCourse({
     required String catagory,
     required String title,
     required String description,
     required double price,
     required int numberOfTrainees,
-    required DateTime startDate, 
-    required DateTime endDate, 
+    required DateTime startDate,
+    required DateTime endDate,
     required String image,
     required String location,
     required String createdAt,
     required String state,
   }) async {
     try {
-      print('supa3');
-       await supabase!.client.from('course').insert({
+      await supabase!.client.from('course').insert({
         'tid': supabase!.client.auth.currentSession!.user.id,
         'category': catagory,
         'title': title,
         'description': description,
         'price': price,
         'number_of_trainees': numberOfTrainees,
-        'startDate':startDate.toIso8601String(), 
-        'endDate':endDate.toIso8601String(),
+        'startDate': startDate.toIso8601String(),
+        'endDate': endDate.toIso8601String(),
         'image': image,
         'location': location,
         'state': state,
         'created_at': createdAt,
       });
-      
     } catch (error) {
       throw FormatException('there was an error: $error');
     }
   }
 
-//get courses from supabase 
+  /// Retrieves all courses along with user information.
   static Future<List<dynamic>> getCourses() async {
-    final response = await supabase!.client.from("course").select();
-    print(" get course from supabase: $response");
+    final response = await supabase!.client.from("course").select("*,user(*)");
+
     return response;
   }
 
+  /// Updates the current user's password.
   static Future<void> updatePassword({
     required String password,
     required String oldPassword,
   }) async {
-      await supabase!.client.auth.updateUser(
-        UserAttributes(password: password),
-      );
-      print('Layer supa');
-    
-   
+    await supabase!.client.auth.updateUser(UserAttributes(password: password));
   }
 
-  static Future<void> updateName({required String name})async{
-
-
-    await supabase!.client.from('user').update({'name':name}).eq('UID', supabase!.client.auth.currentUser!.id);
-    print('supabase layer names');
-
+  /// Updates the current user's name.
+  static Future<void> updateName({required String name}) async {
+    await supabase!.client
+        .from('user')
+        .update({'name': name})
+        .eq('UID', supabase!.client.auth.currentUser!.id);
   }
 
-
-  static Future<void> updateImage({required String urlString})async{
-
-
-
-    await supabase!.client.from('user').update({'avatar':urlString}).eq('UID', supabase!.client.auth.currentUser!.id);
-
-
+  /// Updates the current user's profile image URL.
+  static Future<void> updateImage({required String urlString}) async {
+    await supabase!.client
+        .from('user')
+        .update({'avatar': urlString})
+        .eq('UID', supabase!.client.auth.currentUser!.id);
   }
 
-
-  //  need testing
-
-static Future<void> addOrder({
-
-    required String createdAt,
+  /// Adds a new order for the currently logged-in user.
+  static Future<void> addOrder({
     required String uid,
     required int courseId,
-
   }) async {
     try {
       await supabase!.client.from('order').insert({
-        'created_at':createdAt,
         'course_id': courseId,
         'uid': supabase!.client.auth.currentSession!.user.id,
-        
       });
     } catch (error) {
       throw FormatException('there was an error: $error');
     }
   }
 
-  //delete courses from supabase 
-  static Future<void>deletecourse({required int idcourse})async{
-  await supabase!.client.from("course").delete().eq('id', idcourse);
-  getCourses();//to try
+  /// Sends a password reset email.
+  static Future forgotPassword({required String email}) async {
+    try {
+      final res = await supabase!.client.auth.resetPasswordForEmail(email);
+      return res;
+    } catch (error) {
+      return error;
+    }
   }
 
-  static Future<void> updatecoursesState({required int id, required String newState})async{
- await supabase!.client.from('course').update({'state':newState}).eq('id', id);
-
+  /// Verifies password reset using OTP.
+  static Future verifyWithOTP({
+    required String token,
+    required String email,
+  }) async {
+    try {
+      final res = await supabase!.client.auth.verifyOTP(
+        type: OtpType.recovery,
+        email: email,
+        token: token,
+      );
+      return res.session?.isExpired;
+    } on AuthException catch (error) {
+      throw AuthException(error.message);
+    } catch (error) {
+      return error;
+    }
   }
 
+  /// Deletes a course and related orders by course ID.
+  static Future<void> deletecourse({required int idcourse}) async {
+    await supabase!.client.from("order").delete().eq('course_id', idcourse);
 
-   static Future<List<OrderModel>> getDetailes({required int courseId}) async{
+    await supabase!.client.from("course").delete().eq('id', idcourse);
+    getCourses(); //to try
+  }
 
-    final  response = await supabase?.client.from('order').select('*,uid(*),cours_id(*)').eq('course_id',courseId);
-      print(response);
-      print(response!.length);
-    if(response.isEmpty){return[];}
-   
-    return response.map((users){
+  /// Updates the state of a course.
+  static Future<void> updatecoursesState({
+    required int id,
+    required String newState,
+  }) async {
+    await supabase!.client
+        .from('course')
+        .update({'state': newState})
+        .eq('id', id);
+  }
+
+  // Static method to fetch orders for a specific user by UID from the "order" table
+  static Future<List<dynamic>> getordersByUID({required String uid}) async {
+    final response = await supabase!.client
+        .from("order")
+        .select("*,uid(*),course_id(* , user(*))")
+        .eq("uid", uid);
+    return response;
+  }
+
+  /// Fetches detailed order information for a specific course ID.
+  static Future<List<OrderModel>> getDetailes({required int courseId}) async {
+    final response = await supabase?.client
+        .from('order')
+        .select('*,uid(*),course_id(*,user(*))')
+        .eq('course_id', courseId);
+    if (response!.isEmpty) {
+      return [];
+    }
+
+    return response.map((users) {
       return OrderModelMapper.fromMap(users);
     }).toList();
-  
   }
-
-
 }

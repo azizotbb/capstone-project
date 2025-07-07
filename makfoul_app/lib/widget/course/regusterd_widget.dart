@@ -18,7 +18,7 @@ class RegusterdWidget extends StatelessWidget {
       children: [
         Text("$numserial"),
         Text(username),
-        CircleAvatar(child: Image.asset(image)),
+        CircleAvatar(backgroundImage:  NetworkImage(image.isNotEmpty?image:"assets/imagescircler avtar instructor.png")),
       ],
     );
   }

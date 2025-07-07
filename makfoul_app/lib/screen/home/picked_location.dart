@@ -25,7 +25,6 @@ class PickedLocation extends StatelessWidget {
           }
           // Priority 2: Use GPS location loaded from state if no picked location
           else if (state is LocationLodedState) {
-            print('Location loaded from state: ${state.currentLocation}');
             currentLoc = state.currentLocation;
           }
 
@@ -45,7 +44,6 @@ class PickedLocation extends StatelessWidget {
                   },
                   // When user taps on map, send location picked event
                   onTap: (newloc) {
-                    print(' New location selected: $newloc');
                     bloc.add(PickLocatioEvent(location: newloc));
                   },
                 ),
@@ -54,8 +52,6 @@ class PickedLocation extends StatelessWidget {
               PrimryCustomButton(
                 setText: 'Save',
                 onPressed: () {
-                  print(' selectedLocation: ${bloc.selectedLocation}');
-
                   if (bloc.selectedLocation != null) {
                     // Return selected location back to previous screen
                     Navigator.pop(context, bloc.selectedLocation);

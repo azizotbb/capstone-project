@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:makfoul_app/screen/profile/bloc/profile_bloc.dart';
 
 class DeleteAccount extends StatelessWidget {
   const DeleteAccount({super.key});
@@ -12,29 +10,26 @@ class DeleteAccount extends StatelessWidget {
     return Builder(
       builder: (context) {
         // for deleteing
-        final bloc = context.read<ProfileBloc>();
         return AlertDialog(
-                                content: Text("delete_confirmation".tr()),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                      "cancel".tr(),
-                                      style: TextStyle(color: Color(0xff444444)),
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "accept".tr(),
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                  ),
-                                ],
-                              );
-      }
-    );;
+          backgroundColor: Colors.white,
+          content: Text("delete_confirmation".tr()),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                "cancel".tr(),
+                style: TextStyle(color: Color(0xff444444)),
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text("accept".tr(), style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        );
+      },
+    );
   }
 }

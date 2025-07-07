@@ -26,20 +26,20 @@ class SplashScreen extends StatelessWidget {
     Future.delayed(Duration(seconds: 3), () async {
       if (session?.isExpired == false) {
         // If session is active, populate the user info model with data from Supabase
-        userinfo.uid = session!.user.id;
+        userinfo.UID = session!.user.id;
         final stringUrl = await supabase
             .from('user')
             .select('avatar')
-            .eq('UID', userinfo.uid); 
-           final userName = await supabase
+            .eq('UID', userinfo.UID);
+        final userName = await supabase
             .from('user')
             .select('name')
-            .eq('UID', userinfo.uid);
-        userinfo.username = userName[0]['name'];
+            .eq('UID', userinfo.UID);
+        userinfo.name = userName[0]['name'];
         userinfo.email = session.user.email!;
         userinfo.role = session.user.userMetadata!["role"];
         userinfo.phone = session.user.userMetadata!["phoneNumber"];
-        userinfo.url = stringUrl[0]['avatar'];
+        userinfo.avatar = stringUrl[0]['avatar'];
         userinfo.createdAt = session.user.createdAt;
 
         Navigator.pushReplacement(

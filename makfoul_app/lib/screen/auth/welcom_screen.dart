@@ -6,7 +6,6 @@ import 'package:makfoul_app/screen/auth/signup/signup.dart';
 import 'package:makfoul_app/screen/home/homescreen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
-import 'package:makfoul_app/widget/botton_nav/bottom_navigation_widget.dart';
 import 'package:makfoul_app/widget/shared/empty_custom_button.dart';
 
 class WelcomScreen extends StatelessWidget {
@@ -27,7 +26,7 @@ class WelcomScreen extends StatelessWidget {
               EmptyCustomButton(
                 setText: 'sign_in'.tr(),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => LoginScreen()),
                   );
@@ -37,7 +36,7 @@ class WelcomScreen extends StatelessWidget {
               EmptyCustomButton(
                 setText: 'create_account'.tr(),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => SignupScreen()),
                   );
@@ -61,9 +60,9 @@ class WelcomScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(
-                    context,
-                  ).push(MaterialPageRoute(builder: (context) => HomeScreen()));
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
                 },
                 child: Text(
                   'continue_as_guest'.tr(),

@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -14,9 +13,9 @@ part 'signup_event.dart';
 part 'signup_state.dart';
 
 class SignupBloc extends Bloc<SignupEvent, SignupState> {
-   bool isConfirmVisable = true;
+  bool isConfirmVisable = true;
 
-   bool isPasswordVisable = true;
+  bool isPasswordVisable = true;
 
   // Controllers for the signup form input fields
   final TextEditingController controllerNumber = TextEditingController();
@@ -76,19 +75,21 @@ class SignupBloc extends Bloc<SignupEvent, SignupState> {
     } catch (_) {}
   }
 
-  FutureOr<void> showPasswordMethod(VisibilityEvent event, Emitter<SignupState> emit) {
-
+  FutureOr<void> showPasswordMethod(
+    VisibilityEvent event,
+    Emitter<SignupState> emit,
+  ) {
     isPasswordVisable = !isPasswordVisable;
 
-  emit(SuccessStateShow());
-
+    emit(SuccessStateShow());
   }
 
-  FutureOr<void> showConfirmPasswordMethod(VisibilityConfirmEvent event, Emitter<SignupState> emit) {
-
+  FutureOr<void> showConfirmPasswordMethod(
+    VisibilityConfirmEvent event,
+    Emitter<SignupState> emit,
+  ) {
     isConfirmVisable = !isConfirmVisable;
 
     emit(SuccessStateShow());
-
   }
 }

@@ -10,32 +10,27 @@ class ChangeImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-            final userinfo = GetIt.I.get<AuthLayer>().userinfo;
+    var userinfo = GetIt.I.get<AuthLayer>().userinfo;
 
     return Builder(
       builder: (context) {
         final bloc = context.read<ProfileBloc>();
+
         return InkWell(
-                                    onTap: () {
-                                      bloc.add(UpdateImageEvent());
-                                      userinfo.url = bloc.urlString;
-                                      print(userinfo.url);
-                                      print('Clicked');
-                                    },
-                                    child: Container(
-                                      height: 68,
-                                      clipBehavior: Clip.hardEdge,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                      ),
-                                      child: userinfo.url == null
-                                          ? Image.asset(
-                                              "assets/images/circler avtar instructor.png",
-                                            )
-                                          : Image.network(userinfo.url!),
-                                    ),
-                                  );
-      }
-    );;
+          onTap: () {
+            bloc.add(UpdateImageEvent());
+            userinfo.avatar = userinfo.avatar = bloc.urlString;
+          },
+          child: Container(
+            height: 68,
+            clipBehavior: Clip.hardEdge,
+            decoration: BoxDecoration(shape: BoxShape.circle),
+            child: userinfo.avatar == null
+                ? Image.asset("assets/images/circler avtar instructor.png")
+                : Image.network(userinfo.avatar!),
+          ),
+        );
+      },
+    );
   }
 }

@@ -9,7 +9,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:makfoul_app/utility/permission.dart';
 import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/model/course/course_model.dart';
-import 'package:makfoul_app/repo/layer/auth_layer.dart';
 import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:meta/meta.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -32,12 +31,14 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
   final TextEditingController priceController = TextEditingController();
   final opreationsGet = GetIt.I.get<OpreationsLayer>();
   final formKey = GlobalKey<FormState>();
+  String searchQuery = '';
   // final
   String? date;
   DateTime? fileName;
   String? path;
   File? file;
   bool? isDone = false;
+  // final List<String> allcourses=[];
   AddCorseBloc() : super(AddCorseInitial()) {
     on<SelectCategoryEvent>(selectCategoryMethod);
     on<AddNewCordeEvent>(addNewCordeMethod);
@@ -47,6 +48,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     on<SavePickedLocationEvent>(saveLocationMethod);
     on<GetCoursesEvent>(getCourseMethod);
     on<DeleteCourseEvent>(deleteCourseMethod);
+    on<UpdateSearchQuery>(searchMethod);
   }
 
   FutureOr<void> selectCategoryMethod(
@@ -54,59 +56,52 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     Emitter<AddCorseState> emit,
   ) {
     selectedCategory = event.value;
-    print ("category ${selectedCategory}");
-    emit(SelectCategoryState());
-   add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
+    add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
+    emit(AddCorseInitial());
   }
 
   FutureOr<void> addNewCordeMethod(
+    AddNewCordeEvent event,
 
-  AddNewCordeEvent event,
+    Emitter<AddCorseState> emit,
+  ) async {
+    final start = pickedDate?.start ?? DateTime.now();
+    final end = pickedDate?.end ?? DateTime.now();
+    final now = DateTime.now();
+    int registered = 0;
+    int required = int.parse(numberOfTraineesController.text);
 
-  Emitter<AddCorseState> emit,
-
-) async {
-  final start= pickedDate?.start??DateTime.now();
-  final end =pickedDate?.end??DateTime.now();
-  final now=DateTime.now();
-  int registered=0; 
-  int required=int.parse(numberOfTraineesController.text);
-
-  final String courseState; 
-  if(now.isAfter(end)){
-    courseState="InActive";
-
-  }else if(registered>=required){
-    courseState="InActive"; 
-  }else{
-    courseState="Active";
-  }
+    final String courseState;
+    if (now.isAfter(end)) {
+      courseState = "InActive";
+    } else if (registered >= required) {
+      courseState = "InActive";
+    } else {
+      courseState = "Active";
+    }
 
     await opreationsGet.uploadImageMethod(path: path!, file: file!);
 
     urlString = await opreationsGet.getImageUrlMethod(path: path!);
-  final result = await opreationsGet.addCourseMethod(
-    catagory: selectedCategory!,
-    title: titleController.text,
-    description: descriptionController.text,
-    price: double.parse(priceController.text),
-    numberOfTrainees: int.parse(numberOfTraineesController.text),
-    startDate: pickedDate?.start??DateTime.now(),
-    endDate: pickedDate?.end??DateTime.now(),
-    image: urlString!,
-    location: 'location',
-    state: courseState,
-    createdAt: DateTime.now().toString(),
-
-  );
-
-    final updatedCourses = await opreationsGet.getCoursesMethod( 
+    final result = await opreationsGet.addCourseMethod(
+      catagory: selectedCategory!,
+      title: titleController.text,
+      description: descriptionController.text,
+      price: double.parse(priceController.text),
+      numberOfTrainees: int.parse(numberOfTraineesController.text),
+      startDate: pickedDate?.start ?? DateTime.now(),
+      endDate: pickedDate?.end ?? DateTime.now(),
+      image: urlString!,
+      location: 'location',
+      state: courseState,
+      createdAt: DateTime.now().toString(),
     );
- try {
-      final courseuser =await opreationsGet.courses.where(
+
+    final updatedCourses = await opreationsGet.getCoursesMethod();
+    try {
+      final courseuser = await opreationsGet.courses.where(
         (e) => e.tid == Supabase.instance.client.auth.currentUser!.id,
       );
-      print("to try rode   ${courseuser}");
       final total = await courseuser.length;
       final active = await courseuser.where((e) => e.state == 'Active').length;
       final inactive = await courseuser
@@ -114,11 +109,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
           .length;
       final cook = await courseuser.where((e) => e.category == 'Cook').length;
       final clean = await courseuser.where((e) => e.category == 'Clean').length;
-      print("total${total}");
-      print("active${active}");
-      print("inactive${inactive}");
-      print("cook${cook}");
-      print("clean${clean}"); 
+
       emit(
         CoursesLoaded().copyWith(
           trainearcourses: courseuser.toList(),
@@ -132,18 +123,14 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     } catch (e) {
       log("error :$e");
     }
- descriptionController.clear();
-                                                 titleController.clear(); 
-                                                priceController.clear(); 
-                                              numberOfTraineesController.clear();
-                                                selectedCategory=null; 
-                                                  pickedDate=null; 
-                                                  image=null; 
-
-  
-
-}
-
+    descriptionController.clear();
+    titleController.clear();
+    priceController.clear();
+    numberOfTraineesController.clear();
+    selectedCategory = null;
+    pickedDate = null;
+    image = null;
+  }
 
   //upload image need to be optimized and write it the correct way
   FutureOr<void> uploadImageMethod(
@@ -152,10 +139,9 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
   ) async {
     image = await ImagePicker().pickImage(source: ImageSource.gallery);
 
-     fileName = DateTime.now();
-     print('helllllllllllllllllooooooo $fileName');
-     path = 'course/$fileName';
-     file = File(image!.path);
+    fileName = DateTime.now();
+    path = 'course/$fileName';
+    file = File(image!.path);
     if (image == null) {
       emit(NullState());
 
@@ -163,8 +149,6 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     }
 
     // print('layer3');
-
-   
 
     // emit(CoursesLoaded());
   }
@@ -175,7 +159,6 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     PickLocatioEvent event,
     Emitter<AddCorseState> emit,
   ) {
-    print('Bloc received location: ${event.location}');
     selectedLocation = event.location;
     emit(PickLocatioState(selectedLocation!));
   }
@@ -201,10 +184,9 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     SavePickedLocationEvent event,
     Emitter<AddCorseState> emit,
   ) {
-    print('Final saved location: ${event.finalLocation}');
-
     selectedLocation = event.finalLocation;
-    stringLocation = event.finalLocation.toString();
+    stringLocation =
+        '${event.finalLocation.latitude},${event.finalLocation.longitude}';
 
     emit(PickLocatioState(event.finalLocation));
   }
@@ -214,11 +196,9 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     Emitter<AddCorseState> emit,
   ) async {
     try {
-      final courseuser = opreationsGet.courses.where(
-        (e) => e.tid == Supabase.instance.client.auth.currentUser!.id,
-      ).toList();
-      print("from courses : ${opreationsGet.courses.length}");
-      print("to try rode   ${courseuser}");
+      final courseuser = opreationsGet.courses
+          .where((e) => e.tid == Supabase.instance.client.auth.currentUser!.id)
+          .toList();
       final total = await courseuser.length;
       final active = await courseuser.where((e) => e.state == 'Active').length;
       final inactive = await courseuser
@@ -226,11 +206,6 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
           .length;
       final cook = await courseuser.where((e) => e.category == 'Cook').length;
       final clean = await courseuser.where((e) => e.category == 'Clean').length;
-      print("total${total}");
-      print("active${active}");
-      print("inactive${inactive}");
-      print("cook${cook}");
-      print("clean${clean}");
       emit(
         CoursesLoaded().copyWith(
           trainearcourses: courseuser,
@@ -253,6 +228,24 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     await opreationsGet.deletecourseMethod(idcourse: event.courseId);
     final updatecourses = await opreationsGet.getCoursesMethod();
     emit(CoursesLoaded().copyWith(trainearcourses: updatecourses));
-   add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
+    add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
+  }
+
+  FutureOr<void> searchMethod(
+    UpdateSearchQuery event,
+    Emitter<AddCorseState> emit,
+  ) {
+    final List<CourseModel> searchList = List<CourseModel>.from(event.toserch);
+    final List<dynamic> emptysearch = [];
+
+    final String searchQuery = event.searchtext.toLowerCase().trim();
+
+    if (searchQuery.isEmpty) {
+      emit(updateserch(toserch: searchList));
+    }
+    final List<CourseModel> filter = searchList.where((item) {
+      return item.title.toLowerCase().contains(searchQuery);
+    }).toList();
+    emit(updateserch(toserch: filter));
   }
 }

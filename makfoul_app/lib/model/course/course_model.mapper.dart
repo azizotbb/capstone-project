@@ -13,6 +13,7 @@ class CourseModelMapper extends ClassMapperBase<CourseModel> {
   static CourseModelMapper ensureInitialized() {
     if (_instance == null) {
       MapperContainer.globals.use(_instance = CourseModelMapper._());
+      UserModelMapper.ensureInitialized();
     }
     return _instance!;
   }
@@ -20,6 +21,12 @@ class CourseModelMapper extends ClassMapperBase<CourseModel> {
   @override
   final String id = 'CourseModel';
 
+  static String _$startDate(CourseModel v) => v.startDate;
+  static const Field<CourseModel, String> _f$startDate =
+      Field('startDate', _$startDate);
+  static String _$endDate(CourseModel v) => v.endDate;
+  static const Field<CourseModel, String> _f$endDate =
+      Field('endDate', _$endDate);
   static int _$id(CourseModel v) => v.id;
   static const Field<CourseModel, int> _f$id = Field('id', _$id);
   static String _$tid(CourseModel v) => v.tid;
@@ -37,12 +44,6 @@ class CourseModelMapper extends ClassMapperBase<CourseModel> {
   static int _$numberOfTrainees(CourseModel v) => v.numberOfTrainees;
   static const Field<CourseModel, int> _f$numberOfTrainees =
       Field('numberOfTrainees', _$numberOfTrainees, key: r'number_of_trainees');
-  static String _$startDate(CourseModel v) => v.startDate;
-  static const Field<CourseModel, String> _f$startDate =
-      Field('startDate', _$startDate);
-  static String _$endDate(CourseModel v) => v.endDate;
-  static const Field<CourseModel, String> _f$endDate =
-      Field('endDate', _$endDate);
   static String _$image(CourseModel v) => v.image;
   static const Field<CourseModel, String> _f$image = Field('image', _$image);
   static String _$location(CourseModel v) => v.location;
@@ -53,9 +54,14 @@ class CourseModelMapper extends ClassMapperBase<CourseModel> {
   static String _$createdAt(CourseModel v) => v.createdAt;
   static const Field<CourseModel, String> _f$createdAt =
       Field('createdAt', _$createdAt, key: r'created_at');
+  static UserModel? _$user(CourseModel v) => v.user;
+  static const Field<CourseModel, UserModel> _f$user =
+      Field('user', _$user, opt: true);
 
   @override
   final MappableFields<CourseModel> fields = const {
+    #startDate: _f$startDate,
+    #endDate: _f$endDate,
     #id: _f$id,
     #tid: _f$tid,
     #category: _f$category,
@@ -63,16 +69,15 @@ class CourseModelMapper extends ClassMapperBase<CourseModel> {
     #description: _f$description,
     #price: _f$price,
     #numberOfTrainees: _f$numberOfTrainees,
-    #startDate: _f$startDate,
-    #endDate: _f$endDate,
     #image: _f$image,
     #location: _f$location,
     #state: _f$state,
     #createdAt: _f$createdAt,
+    #user: _f$user,
   };
 
   static CourseModel _instantiate(DecodingData data) {
-    return CourseModel(
+    return CourseModel(data.dec(_f$startDate), data.dec(_f$endDate),
         id: data.dec(_f$id),
         tid: data.dec(_f$tid),
         category: data.dec(_f$category),
@@ -80,12 +85,11 @@ class CourseModelMapper extends ClassMapperBase<CourseModel> {
         description: data.dec(_f$description),
         price: data.dec(_f$price),
         numberOfTrainees: data.dec(_f$numberOfTrainees),
-        startDate: data.dec(_f$startDate),
-        endDate: data.dec(_f$endDate),
         image: data.dec(_f$image),
         location: data.dec(_f$location),
         state: data.dec(_f$state),
-        createdAt: data.dec(_f$createdAt));
+        createdAt: data.dec(_f$createdAt),
+        user: data.dec(_f$user));
   }
 
   @override
@@ -140,20 +144,22 @@ extension CourseModelValueCopy<$R, $Out>
 
 abstract class CourseModelCopyWith<$R, $In extends CourseModel, $Out>
     implements ClassCopyWith<$R, $In, $Out> {
+  UserModelCopyWith<$R, UserModel, UserModel>? get user;
   $R call(
-      {int? id,
+      {String? startDate,
+      String? endDate,
+      int? id,
       String? tid,
       String? category,
       String? title,
       String? description,
       double? price,
       int? numberOfTrainees,
-      String? startDate,
-      String? endDate,
       String? image,
       String? location,
       String? state,
-      String? createdAt});
+      String? createdAt,
+      UserModel? user});
   CourseModelCopyWith<$R2, $In, $Out2> $chain<$R2, $Out2>(Then<$Out2, $R2> t);
 }
 
@@ -166,21 +172,27 @@ class _CourseModelCopyWithImpl<$R, $Out>
   late final ClassMapperBase<CourseModel> $mapper =
       CourseModelMapper.ensureInitialized();
   @override
+  UserModelCopyWith<$R, UserModel, UserModel>? get user =>
+      $value.user?.copyWith.$chain((v) => call(user: v));
+  @override
   $R call(
-          {int? id,
+          {String? startDate,
+          String? endDate,
+          int? id,
           String? tid,
           String? category,
           String? title,
           String? description,
           double? price,
           int? numberOfTrainees,
-          String? startDate,
-          String? endDate,
           String? image,
           String? location,
           String? state,
-          String? createdAt}) =>
+          String? createdAt,
+          Object? user = $none}) =>
       $apply(FieldCopyWithData({
+        if (startDate != null) #startDate: startDate,
+        if (endDate != null) #endDate: endDate,
         if (id != null) #id: id,
         if (tid != null) #tid: tid,
         if (category != null) #category: category,
@@ -188,15 +200,16 @@ class _CourseModelCopyWithImpl<$R, $Out>
         if (description != null) #description: description,
         if (price != null) #price: price,
         if (numberOfTrainees != null) #numberOfTrainees: numberOfTrainees,
-        if (startDate != null) #startDate: startDate,
-        if (endDate != null) #endDate: endDate,
         if (image != null) #image: image,
         if (location != null) #location: location,
         if (state != null) #state: state,
-        if (createdAt != null) #createdAt: createdAt
+        if (createdAt != null) #createdAt: createdAt,
+        if (user != $none) #user: user
       }));
   @override
   CourseModel $make(CopyWithData data) => CourseModel(
+      data.get(#startDate, or: $value.startDate),
+      data.get(#endDate, or: $value.endDate),
       id: data.get(#id, or: $value.id),
       tid: data.get(#tid, or: $value.tid),
       category: data.get(#category, or: $value.category),
@@ -205,12 +218,11 @@ class _CourseModelCopyWithImpl<$R, $Out>
       price: data.get(#price, or: $value.price),
       numberOfTrainees:
           data.get(#numberOfTrainees, or: $value.numberOfTrainees),
-      startDate: data.get(#startDate, or: $value.startDate),
-      endDate: data.get(#endDate, or: $value.endDate),
       image: data.get(#image, or: $value.image),
       location: data.get(#location, or: $value.location),
       state: data.get(#state, or: $value.state),
-      createdAt: data.get(#createdAt, or: $value.createdAt));
+      createdAt: data.get(#createdAt, or: $value.createdAt),
+      user: data.get(#user, or: $value.user));
 
   @override
   CourseModelCopyWith<$R2, CourseModel, $Out2> $chain<$R2, $Out2>(

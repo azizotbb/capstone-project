@@ -23,7 +23,7 @@ class OnBoarding extends StatelessWidget {
               builder: (context, state) {
                 if (state is LodaingState) {
                   return Padding(
-                    padding: const EdgeInsets.all(24.0),
+                    padding: const EdgeInsets.all(16.0),
                     child: Column(
                       children: [
                         SizedBox(height: 100),
@@ -39,7 +39,7 @@ class OnBoarding extends StatelessWidget {
                             );
                           }).toList(),
                           options: CarouselOptions(
-                            height: 150,
+                            height: 160,
                             autoPlay: true,
                             enlargeFactor: 0.3,
                             viewportFraction: 0.3,
@@ -64,7 +64,7 @@ class OnBoarding extends StatelessWidget {
                             );
                           }).toList(),
                           options: CarouselOptions(
-                            height: 150,
+                            height: 160,
                             autoPlay: true,
                             reverse: true,
                             enlargeStrategy: CenterPageEnlargeStrategy.scale,
@@ -101,6 +101,7 @@ class OnBoarding extends StatelessWidget {
                             );
                           },
                         ),
+                        SizedBox(height: 15,)
                       ],
                     ),
                   );

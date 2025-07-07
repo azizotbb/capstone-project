@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:makfoul_app/style/app_text_style.dart';
 
 class ProfileOption extends StatelessWidget {
   final String text;
@@ -26,7 +27,7 @@ class ProfileOption extends StatelessWidget {
       ),
       title: Text(
         text,
-        style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
+        style: AppTextStyle.textMedium14,
       ),
     );
   }

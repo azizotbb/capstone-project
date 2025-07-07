@@ -37,3 +37,9 @@ class DeleteCourseEvent extends AddCorseEvent{
   DeleteCourseEvent({required this.courseId}); 
 }
 
+class UpdateSearchQuery extends AddCorseEvent {
+  final String searchtext;
+  final List<dynamic>toserch;
+  UpdateSearchQuery({required this.searchtext,required this.toserch});
+
+}

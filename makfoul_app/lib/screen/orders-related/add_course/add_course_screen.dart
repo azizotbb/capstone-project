@@ -1,16 +1,14 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:makfoul_app/model/coursemodel.dart';
+import 'package:get_it/get_it.dart';
+import 'package:makfoul_app/model/user/user_model.dart';
+import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/screen/course/details_course.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
-import 'package:makfoul_app/screen/orders-related/notification_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/course/custom_course_widget.dart';
-import 'package:makfoul_app/widget/homescreen/main_caregory_widget.dart';
-import 'package:makfoul_app/widget/shared/custom_Text_field.dart';
-import 'package:makfoul_app/widget/shared/primry_custom_button.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AddCourseScreen extends StatelessWidget {
@@ -18,6 +16,8 @@ class AddCourseScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    UserModel userinfo = GetIt.I.get<AuthLayer>().userinfo;
+
     return BlocProvider(
       create: (_) => AddCorseBloc()
         ..add(
@@ -25,25 +25,12 @@ class AddCourseScreen extends StatelessWidget {
         ),
       child: Builder(
         builder: (context) {
-          final bloc = context.read<AddCorseBloc>();
           return DefaultTabController(
             length: 2,
             child: Scaffold(
               appBar: AppBar(
                 centerTitle: true,
-                actions: [
-                  IconButton(
-                    icon: Icon(Icons.notifications_none),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NotificationScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+
                 title: Text(
                   'history'.tr(),
                   style: AppTextStyle.textTitleLarg24dark,
@@ -60,7 +47,6 @@ class AddCourseScreen extends StatelessWidget {
 
               body: BlocBuilder<AddCorseBloc, AddCorseState>(
                 builder: (context, state) {
-                  print(state);
                   if (state is CoursesLoaded) {
                     final courses = state.trainearcourses ?? [];
                     final activeCourse = courses
@@ -106,6 +92,25 @@ class AddCourseScreen extends StatelessWidget {
                                 coursetitle: e.title,
                                 pricecourse: e.price,
                                 image: e.image,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailsCourse(
+                                        coursetitle: e.title,
+                                        canreguster: e.numberOfTrainees,
+                                        categoryname: e.category,
+                                        startDate: e.startDate,
+                                        endDate: e.endDate,
+                                        state: e.state,
+                                        price: e.price,
+                                        desc: e.description,
+                                        tranername: userinfo.name,
+                                        courseId: e.id,
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                             );
                           },
@@ -145,6 +150,25 @@ class AddCourseScreen extends StatelessWidget {
                                 coursetitle: e1.title,
                                 pricecourse: e1.price,
                                 image: e1.image,
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => DetailsCourse(
+                                        coursetitle: e1.title,
+                                        canreguster: e1.numberOfTrainees,
+                                        categoryname: e1.category,
+                                        startDate: e1.startDate,
+                                        endDate: e1.endDate,
+                                        state: e1.state,
+                                        price: e1.price,
+                                        desc: e1.tid,
+                                        tranername: userinfo.name,
+                                        courseId: e1.id,
+                                      ),
+                                    ),
+                                  );
+                                },
                               ),
                             );
                           },
