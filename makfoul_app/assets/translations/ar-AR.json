@@ -67,7 +67,7 @@
   "Don't have an account? ": "ليس لديك حساب؟",
   "Forget password ?": "نسيت كلمة المرور؟",
   "Course Title": "عنوان الدورة",
-  "Description": "وصف",
+  "Description": "الوصف",
   "Price": "السعر",
   "number of trainees": "عدد المتدربين",
   "Add course": "إضافة الدورة",
@@ -83,5 +83,13 @@
   "Thank you! Your payment was processed successfully.": "تم الدفع بنجاح. شكراً لشرائك",
   "Thank you for your trust!": "شكرا لثقتكم!",
   "Back To Home": "العودة إلى الصفحة الرئيسية",
-  "No orders found": "لم يتم العثور على أي طلبات"
+  "No orders found": "لم يتم العثور على أي طلبات",
+  "Details": "تفاصيل",
+  "Course information": "معلومات الدورة",
+  "State": "الحالة",
+  "Trainer": "المدرب",
+  "Phone": "الهاتف",
+  "Clean": "التنظيف",
+  "Cook": "الطبخ",
+  "Ryaidh": "الرياض"
 }

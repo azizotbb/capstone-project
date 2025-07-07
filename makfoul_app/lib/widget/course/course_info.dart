@@ -1,4 +1,5 @@
 import 'package:dart_mappable/dart_mappable.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
@@ -13,12 +14,13 @@ class CourseInfo extends StatelessWidget {
     required this.description,
     required this.price,
     required this.isActive,
-    required this.trainer, required this.endDate,
+    required this.trainer,
+    required this.endDate,
   });
   final String categoryimage;
   final String categoryname;
   final String startDate;
-  final String endDate; 
+  final String endDate;
   final String location;
   final String description;
   final double price;
@@ -26,10 +28,10 @@ class CourseInfo extends StatelessWidget {
   final String trainer;
   @override
   Widget build(BuildContext context) {
-  final startdateday=DateTime.parse(startDate);
-  final enddateday=DateTime.parse(endDate);
-String formateddateStart= DateFormat('yyyy-MM-dd').format(startdateday);
-String formateddateEnd= DateFormat('yyyy-MM-dd').format(enddateday);
+    final startdateday = DateTime.parse(startDate);
+    final enddateday = DateTime.parse(endDate);
+    String formateddateStart = DateFormat('yyyy-MM-dd').format(startdateday);
+    String formateddateEnd = DateFormat('yyyy-MM-dd').format(enddateday);
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12),
       child: Column(
@@ -57,10 +59,16 @@ String formateddateEnd= DateFormat('yyyy-MM-dd').format(enddateday);
                   SizedBox(width: 10),
                   Column(
                     children: [
-                      Text("$formateddateStart ", style: TextStyle(fontWeight: FontWeight.w500)),
-                   Text("$formateddateEnd ", style: TextStyle(fontWeight: FontWeight.w500)),
+                      Text(
+                        "$formateddateStart ",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
+                      Text(
+                        "$formateddateEnd ",
+                        style: TextStyle(fontWeight: FontWeight.w500),
+                      ),
                     ],
-                  )
+                  ),
                 ],
               ),
 
@@ -77,14 +85,12 @@ String formateddateEnd= DateFormat('yyyy-MM-dd').format(enddateday);
           Align(
             alignment: Alignment.bottomLeft,
             child: Text(
-              "Description",
+              "Description".tr(),
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
           ),
           SizedBox(height: 10),
-          Align(
-            alignment: Alignment.topLeft,
-            child: Text(description,)),
+          Align(alignment: Alignment.topLeft, child: Text(description)),
           SizedBox(height: 30),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -92,14 +98,20 @@ String formateddateEnd= DateFormat('yyyy-MM-dd').format(enddateday);
             children: [
               Column(
                 children: [
-                  Text("Price", style: TextStyle(fontWeight: FontWeight.w500)),
+                  Text(
+                    "Price".tr(),
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
                   SizedBox(height: 10),
                   Text("$price"),
                 ],
               ),
               Column(
                 children: [
-                  Text("State", style: TextStyle(fontWeight: FontWeight.w500)),
+                  Text(
+                    "State".tr(),
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
                   SizedBox(height: 10),
                   Text(isActive),
                 ],
@@ -107,7 +119,7 @@ String formateddateEnd= DateFormat('yyyy-MM-dd').format(enddateday);
               Column(
                 children: [
                   Text(
-                    "Trainer",
+                    "Trainer".tr(),
                     style: TextStyle(fontWeight: FontWeight.w500),
                   ),
                   SizedBox(height: 10),
