@@ -43,7 +43,10 @@ class ProfileScreen extends StatelessWidget {
                         children: [
                           BlocBuilder<ProfileBloc, ProfileState>(
                             builder: (context, state) {
-                              return BlocProvider.value(value: bloc,child: ChangeImage(),);
+                              return BlocProvider.value(
+                                value: bloc,
+                                child: ChangeImage(),
+                              );
                             },
                           ),
                           SizedBox(width: 12),
@@ -60,7 +63,7 @@ class ProfileScreen extends StatelessWidget {
                               //supabase here to get current Username
                               BlocBuilder<ProfileBloc, ProfileState>(
                                 builder: (context, state) {
-                                  return Text(userinfo.username);
+                                  return Text(userinfo.name);
                                 },
                               ),
                             ],
@@ -70,12 +73,14 @@ class ProfileScreen extends StatelessWidget {
                       IconButton(
                         onPressed: () {
                           //edit here
-                          print(userinfo.url);
                           showDialog(
                             context: context,
                             builder: (context) {
                               //translation needed
-                              return BlocProvider.value(value: bloc,child:ChangeName() ,);
+                              return BlocProvider.value(
+                                value: bloc,
+                                child: ChangeName(),
+                              );
                             },
                           );
                         },
@@ -109,7 +114,10 @@ class ProfileScreen extends StatelessWidget {
                         isScrollControlled: true,
 
                         context: context,
-                        builder: (context) => BlocProvider.value(value: bloc,child:  ChangePassword(),)
+                        builder: (context) => BlocProvider.value(
+                          value: bloc,
+                          child: ChangePassword(),
+                        ),
                       );
                     },
                     text: "change_password".tr(),
@@ -120,7 +128,10 @@ class ProfileScreen extends StatelessWidget {
                       showDialog(
                         context: context,
                         builder: (context) {
-                          return BlocProvider.value(value: bloc,child: DeleteAccount(),);
+                          return BlocProvider.value(
+                            value: bloc,
+                            child: DeleteAccount(),
+                          );
                         },
                       );
                     },
@@ -131,13 +142,13 @@ class ProfileScreen extends StatelessWidget {
                     onTap: () {
                       showDialog(
                         context: context,
-                        builder: (context) =>CustomerService()
+                        builder: (context) => CustomerService(),
                       );
                     },
                     text: "customer_service".tr(),
                   ),
                   SizedBox(height: 46),
-                  Logout()
+                  Logout(),
                 ],
               ),
             ),

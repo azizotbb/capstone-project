@@ -6,23 +6,23 @@ part 'user_model.mapper.dart';
 
 @MappableClass()
 class UserModel with UserModelMappable {
-  final String UID;
-  final String name;
-  final String role;
-  final String email;
-  final String phone;
-  final String? avatar;
+  String UID;
+  String name;
+  String role;
+  String email;
+  String phone;
+  String? avatar;
 
   @MappableField(key: 'created_at')
-  final String createdAt;
+  String createdAt;
 
-  const UserModel({
+  UserModel({
     required this.UID,
     required this.name,
     required this.role,
     required this.email,
     required this.phone,
-    required this.avatar,
+    this.avatar,
     required this.createdAt,
   });
 }

@@ -31,7 +31,8 @@ class UserModelMapper extends ClassMapperBase<UserModel> {
   static String _$phone(UserModel v) => v.phone;
   static const Field<UserModel, String> _f$phone = Field('phone', _$phone);
   static String? _$avatar(UserModel v) => v.avatar;
-  static const Field<UserModel, String> _f$avatar = Field('avatar', _$avatar);
+  static const Field<UserModel, String> _f$avatar =
+      Field('avatar', _$avatar, opt: true);
   static String _$createdAt(UserModel v) => v.createdAt;
   static const Field<UserModel, String> _f$createdAt =
       Field('createdAt', _$createdAt, key: r'created_at');

@@ -1,16 +1,17 @@
-import 'package:makfoul_app/model/userinfo_model.dart';
+import 'package:makfoul_app/model/user/user_model.dart';
 import 'package:makfoul_app/repo/api/supabase.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthLayer {
   //authenticated user's information
   UserModel userinfo = UserModel(
-    uid: " ",
-    username: " ",
+    UID: " ",
+    name: " ",
     email: " ",
     role: " ",
     createdAt: " ",
     phone: " ",
+    avatar: '',
   );
   // Method to handle user sign-up process
   signUpMethod({

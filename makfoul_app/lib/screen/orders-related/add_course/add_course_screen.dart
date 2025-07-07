@@ -2,8 +2,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
-import 'package:makfoul_app/model/coursemodel.dart';
-import 'package:makfoul_app/model/userinfo_model.dart';
+import 'package:makfoul_app/model/user/user_model.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
 import 'package:makfoul_app/screen/course/details_course.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
@@ -121,7 +120,7 @@ class AddCourseScreen extends StatelessWidget {
                                         state: e.state,
                                         price: e.price,
                                         desc: e.description,
-                                        tranername: userinfo.username,
+                                        tranername: userinfo.name,
                                       ),
                                     ),
                                   );
@@ -178,7 +177,7 @@ class AddCourseScreen extends StatelessWidget {
                                         state: e1.state,
                                         price: e1.price,
                                         desc: e1.tid,
-                                        tranername: userinfo.username,
+                                        tranername: userinfo.name,
                                       ),
                                     ),
                                   );

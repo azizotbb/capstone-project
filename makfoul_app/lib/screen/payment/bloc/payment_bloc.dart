@@ -28,7 +28,7 @@ class PaymentBloc extends Bloc<PaymentEvent, PaymentState> {
     Emitter<PaymentState> emit,
   ) {
     opreationsGet.addOrderMethod(
-      uid: authGetit.userinfo.uid,
+      uid: authGetit.userinfo.UID,
       courseId: event.courseId,
     );
   }

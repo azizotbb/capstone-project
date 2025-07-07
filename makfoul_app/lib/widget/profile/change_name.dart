@@ -15,48 +15,44 @@ class ChangeName extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-        final userinfo = GetIt.I.get<AuthLayer>().userinfo;
+    final userinfo = GetIt.I.get<AuthLayer>().userinfo;
 
     return Builder(
       builder: (context) {
         final bloc = context.read<ProfileBloc>();
         return Dialog(
-                                    child: Container(
-                                      width: context.getWidth(size: 0.85),
-                                      height: context.getHeight(size: 0.3),
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                        child: Center(
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Text(
-                                                'Enter Your New Name',
-                                                style:
-                                                    AppTextStyle.textTitleMedium20,
-                                              ),
-                                              CustomTextField(
-                                                setHint: 'New Name',
-                                                controller: bloc.nameController,
-                                              ),
-                                              PrimryCustomButton(
-                                                setText: "save".tr(),
-                                                onPressed: () {
-                                                  bloc.add(UpdateNameEvent());
-                                                  print('Done');
-                                                  userinfo.username =
-                                                      bloc.nameController.text;
-                                                  Navigator.pop(context);
-                                                },
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  );
-      }
-    );;
+          child: Container(
+            width: context.getWidth(size: 0.85),
+            height: context.getHeight(size: 0.3),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Text(
+                      'Enter Your New Name',
+                      style: AppTextStyle.textTitleMedium20,
+                    ),
+                    CustomTextField(
+                      setHint: 'New Name',
+                      controller: bloc.nameController,
+                    ),
+                    PrimryCustomButton(
+                      setText: "save".tr(),
+                      onPressed: () {
+                        bloc.add(UpdateNameEvent());
+                        userinfo.name = bloc.nameController.text;
+                        Navigator.pop(context);
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

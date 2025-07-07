@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
-import 'package:makfoul_app/model/userinfo_model.dart';
+import 'package:makfoul_app/model/user/user_model.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
 import 'package:makfoul_app/style/app_colors.dart';
@@ -22,7 +22,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
     UserModel userinfo = GetIt.I.get<AuthLayer>().userinfo;
     return BlocProvider(
       create: (context) =>
-          AddCorseBloc()..add(GetCoursesEvent(id: userinfo.uid)),
+          AddCorseBloc()..add(GetCoursesEvent(id: userinfo.UID)),
       child: Builder(
         builder: (context) {
           final bloc = context.read<AddCorseBloc>();
@@ -47,14 +47,14 @@ class HomescreenTrainerScreen extends StatelessWidget {
                               height: 68,
                               clipBehavior: Clip.hardEdge,
                               decoration: BoxDecoration(shape: BoxShape.circle),
-                              child: userinfo.url == null
+                              child: userinfo.avatar == null
                                   ? Image.asset(
                                       "assets/images/circler avtar instructor.png",
                                     )
-                                  : Image.network(userinfo.url!),
+                                  : Image.network(userinfo.avatar!),
                             ),
                             title: Text(
-                              "Hi,".tr() + userinfo.username,
+                              "Hi,".tr() + userinfo.name,
                               style: AppTextStyle.textTitleLarg24dark,
                             ),
                             subtitle: Text(

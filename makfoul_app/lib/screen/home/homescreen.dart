@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
     // final bool isgust = userinfo == null;
     final allCourses = GetIt.I.get<OpreationsLayer>().courses;
 
-    GetIt.I.get<OpreationsLayer>().getordersByUID(uid: authGetit.userinfo.uid);
+    GetIt.I.get<OpreationsLayer>().getordersByUID(uid: authGetit.userinfo.UID);
 
     List activeCourses = allCourses
         .where((course) => course.state == 'Active')
@@ -50,14 +50,14 @@ class HomeScreen extends StatelessWidget {
                         height: 68,
                         clipBehavior: Clip.hardEdge,
                         decoration: BoxDecoration(shape: BoxShape.circle),
-                        child: userinfo.url == null
+                        child: userinfo.UID == null
                             ? Image.asset(
                                 "assets/images/circler avtar instructor.png",
                               )
-                            : Image.network(userinfo.url!),
+                            : Image.network(userinfo.avatar!),
                       ),
                       title: Text(
-                        "Hi,".tr() + userinfo.username,
+                        "Hi,".tr() + userinfo.name,
                         style: AppTextStyle.textTitleLarg24dark,
                       ),
                       subtitle: Text(

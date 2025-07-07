@@ -41,10 +41,9 @@ class UserDetailsCourse extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 18),
+          padding: const EdgeInsets.symmetric(horizontal: 21),
           child: SingleChildScrollView(
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -70,7 +69,7 @@ class UserDetailsCourse extends StatelessWidget {
                   coursetitle,
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
-                    fontSize: 18,
+                    fontSize: 24,
                     color: AppColors.colorDarkGrey,
                   ),
                 ),
@@ -84,7 +83,7 @@ class UserDetailsCourse extends StatelessWidget {
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 18,
-                      color: AppColors.colorDarkGrey,
+                      color: AppColors.colorPrimary,
                     ),
                   ),
                 ),
@@ -103,8 +102,42 @@ class UserDetailsCourse extends StatelessWidget {
                   trainer: tranername,
                 ),
                 SizedBox(height: 16),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
 
-                Column(children: [Text("Phone".tr()), Text(tranerPhone)]),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "Trainer".tr(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.colorPrimary,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(":  $tranername"),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text(
+                            "Phone".tr(),
+                            style: TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.colorPrimary,
+                            ),
+                          ),
+                          SizedBox(height: 10),
+                          Text(":  $tranerPhone"),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+
                 SizedBox(height: 30),
               ],
             ),
