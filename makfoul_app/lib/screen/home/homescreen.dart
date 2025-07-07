@@ -108,7 +108,6 @@ class HomeScreen extends StatelessWidget {
                               fit: BoxFit.cover,
                             ),
                           ),
-
                           Stack(
                             children: [
                               Image.asset(
@@ -233,10 +232,10 @@ class HomeScreen extends StatelessWidget {
                     height: context.getHeight() * 0.30,
                     child: PageView.builder(
                       controller: PageController(viewportFraction: 0.99),
-                      itemCount: 1,
+                      itemCount: 3,
                       itemBuilder: (BuildContext context, int index) {
                         return Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 2),
+                          padding: const EdgeInsets.only(bottom: 10),
                           child: InkWell(
                             onTap: () {
                               Navigator.push(

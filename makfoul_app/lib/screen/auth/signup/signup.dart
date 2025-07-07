@@ -41,6 +41,8 @@ class SignupScreen extends StatelessWidget {
                       Text('Sign Up'.tr(), style: AppTextStyle.textHeadr36),
                       SizedBox(height: 45),
                       CustomTextField(
+                        keyboardType: TextInputType.number,
+
                         validator: (value) {
                           // This function uses the Validators class to validate the input
                           return Validators.numberPhone(value);
@@ -227,16 +229,3 @@ class SignupScreen extends StatelessWidget {
     );
   }
 }
-//       CustomTextField(
-//                 validator: (value) {
-//                   return Validators.confirmPassword(
-//                     value,
-//                     controllerPasswordConfi.text,
-//                   );
-//                 },
-//                 controller: controllerPasswordConfi,
-//                 setHint: 'Confirm Password',
-//                 isPassword: true,
-//                 isVisable: isConfirmVisable,
-//                 onPressedSuffix: () {},
-//               ),

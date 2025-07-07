@@ -53,9 +53,8 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     Emitter<AddCorseState> emit,
   ) {
     selectedCategory = event.value;
-    print("category ${selectedCategory}");
-    emit(SelectCategoryState());
     add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
+    emit(AddCorseInitial());
   }
 
   FutureOr<void> addNewCordeMethod(
@@ -100,7 +99,6 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       final courseuser = await opreationsGet.courses.where(
         (e) => e.tid == Supabase.instance.client.auth.currentUser!.id,
       );
-      print("to try rode   ${courseuser}");
       final total = await courseuser.length;
       final active = await courseuser.where((e) => e.state == 'Active').length;
       final inactive = await courseuser
@@ -108,11 +106,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
           .length;
       final cook = await courseuser.where((e) => e.category == 'Cook').length;
       final clean = await courseuser.where((e) => e.category == 'Clean').length;
-      print("total${total}");
-      print("active${active}");
-      print("inactive${inactive}");
-      print("cook${cook}");
-      print("clean${clean}");
+
       emit(
         CoursesLoaded().copyWith(
           trainearcourses: courseuser.toList(),
@@ -188,8 +182,6 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     SavePickedLocationEvent event,
     Emitter<AddCorseState> emit,
   ) {
-    print('Final saved location: ${event.finalLocation}');
-
     selectedLocation = event.finalLocation;
     stringLocation =
         '${event.finalLocation.latitude},${event.finalLocation.longitude}';
@@ -205,8 +197,6 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       final courseuser = opreationsGet.courses
           .where((e) => e.tid == Supabase.instance.client.auth.currentUser!.id)
           .toList();
-      print("from courses : ${opreationsGet.courses.length}");
-      print("to try rode   ${courseuser}");
       final total = await courseuser.length;
       final active = await courseuser.where((e) => e.state == 'Active').length;
       final inactive = await courseuser
@@ -214,11 +204,6 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
           .length;
       final cook = await courseuser.where((e) => e.category == 'Cook').length;
       final clean = await courseuser.where((e) => e.category == 'Clean').length;
-      print("total${total}");
-      print("active${active}");
-      print("inactive${inactive}");
-      print("cook${cook}");
-      print("clean${clean}");
       emit(
         CoursesLoaded().copyWith(
           trainearcourses: courseuser,

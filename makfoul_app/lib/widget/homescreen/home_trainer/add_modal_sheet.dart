@@ -44,39 +44,53 @@ class AddModalSheet extends StatelessWidget {
                       child: Column(
                         spacing: 19,
                         children: [
-                          Container(
-                            width: 330,
-                            height: 50,
-                            decoration: BoxDecoration(
-                              color: AppColors.colorLightGrey,
-                              borderRadius: BorderRadius.circular(17),
-                            ),
-                            child: DropdownButtonHideUnderline(
-                              child: DropdownButton(
-                                value: bloc.selectedCategory,
-                                isExpanded: true,
-
-                                items: bloc.items
-                                    .map(
-                                      (item) => DropdownMenuItem(
-                                        value: item,
-                                        child: Container(
-                                          margin: EdgeInsets.symmetric(
-                                            horizontal: 20,
-                                          ),
-                                          child: Text(
-                                            item,
-                                            style: TextStyle(fontSize: 12),
-                                          ),
-                                        ),
+                          BlocBuilder<AddCorseBloc, AddCorseState>(
+                            bloc: bloc,
+                            builder: (context, state) {
+                              return Container(
+                                width: 330,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: AppColors.colorLightGrey,
+                                  borderRadius: BorderRadius.circular(17),
+                                ),
+                                child: DropdownButtonHideUnderline(
+                                  child: DropdownButton(
+                                    hint: Text(
+                                      "   select category",
+                                      style: TextStyle(
+                                        fontSize: 12,
+                                        color: AppColors.colorMedimGrey,
                                       ),
-                                    )
-                                    .toList(),
-                                onChanged: (value) {
-                                  bloc.add(SelectCategoryEvent(value: value!));
-                                },
-                              ),
-                            ),
+                                    ),
+                                    value: bloc.selectedCategory,
+                                    isExpanded: true,
+
+                                    items: bloc.items
+                                        .map(
+                                          (item) => DropdownMenuItem(
+                                            value: item,
+                                            child: Container(
+                                              margin: EdgeInsets.symmetric(
+                                                horizontal: 20,
+                                              ),
+                                              child: Text(
+                                                item,
+                                                style: TextStyle(fontSize: 12),
+                                              ),
+                                            ),
+                                          ),
+                                        )
+                                        .toList(),
+                                    onChanged: (value) {
+                                      bloc.add(
+                                        SelectCategoryEvent(value: value!),
+                                      );
+                                    },
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                           CustomTextField(
                             validator: (p0) {

@@ -152,10 +152,6 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                 return SizedBox();
                               },
                             ),
-
-                            /////////////////////////////////////////////////
-                            ///////////////////////
-                            ///////////////////////
                             BlocProvider.value(
                               value: bloc,
                               child: AddModalSheet(),
@@ -164,7 +160,6 @@ class HomescreenTrainerScreen extends StatelessWidget {
                         ),
 
                         SizedBox(height: 12),
-                        // Courses
                         Align(
                           alignment: Alignment.topLeft,
                           child: Text(

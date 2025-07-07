@@ -23,8 +23,8 @@ class MainCaregoryWidget extends StatelessWidget {
             child: Stack(
               children: [
                 Container(
-                  height: 80,
-                  width: 80,
+                  height: 70,
+                  width: 70,
                   // padding: EdgeInsets.all(20),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
@@ -36,11 +36,11 @@ class MainCaregoryWidget extends StatelessWidget {
                   child: Align(
                     alignment: Alignment.center,
                     child: image != null
-                        ? Image.asset(image!, height: 32, fit: BoxFit.contain)
+                        ? Image.asset(image!, height: 25, fit: BoxFit.contain)
                         : Icon(
                             Icons.grid_view,
                             color: AppColors.colorScondry,
-                            size: 40,
+                            size: 30,
                           ),
                   ),
                 ),

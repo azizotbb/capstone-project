@@ -90,7 +90,6 @@ class SupabaseConnect {
   }) async {
     try {
       await supabase!.client.storage.from('images').upload(path, file);
-      print('layer1');
     } catch (error) {
       throw ('There was an error on your uploading: $error');
     }
@@ -118,7 +117,6 @@ class SupabaseConnect {
     required String state,
   }) async {
     try {
-      print('supa3');
       await supabase!.client.from('course').insert({
         'tid': supabase!.client.auth.currentSession!.user.id,
         'category': catagory,
@@ -141,9 +139,6 @@ class SupabaseConnect {
   // Supabase.instance.client.storage.from('images').upload(path, file);
   static Future<List<dynamic>> getCourses() async {
     final response = await supabase!.client.from("course").select("*,user(*)");
-    print("***************start i am");
-    log(response.toString());
-    print("***************end i am");
 
     return response;
   }
@@ -153,7 +148,6 @@ class SupabaseConnect {
     required String oldPassword,
   }) async {
     await supabase!.client.auth.updateUser(UserAttributes(password: password));
-    print('Layer supa');
   }
 
   static Future<void> updateName({required String name}) async {
@@ -161,7 +155,6 @@ class SupabaseConnect {
         .from('user')
         .update({'name': name})
         .eq('UID', supabase!.client.auth.currentUser!.id);
-    print('supabase layer names');
   }
 
   static Future<void> updateImage({required String urlString}) async {
@@ -215,7 +208,10 @@ class SupabaseConnect {
   }
 
   static Future<void> deletecourse({required int idcourse}) async {
+    await supabase!.client.from("order").delete().eq('course_id', idcourse);
+
     await supabase!.client.from("course").delete().eq('id', idcourse);
+    log(idcourse.toString());
     getCourses(); //to try
   }
 

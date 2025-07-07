@@ -5,6 +5,7 @@ import 'package:makfoul_app/repo/api/supabase.dart';
 import 'package:makfoul_app/screen/splash/splash_screen.dart';
 import 'package:makfoul_app/style/app_theme.dart';
 import 'package:makfoul_app/utility/setup.dart';
+import 'package:onesignal_flutter/onesignal_flutter.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,10 @@ void main() async {
       child: MainApp(),
     ),
   );
+
+  OneSignal.Debug.setLogLevel(OSLogLevel.verbose);
+  OneSignal.initialize("ec565c2d-a535-4611-8aa1-0c56d6447495");
+  OneSignal.Notifications.requestPermission(false);
 }
 
 class MainApp extends StatelessWidget {

@@ -104,17 +104,16 @@ class ResetPasswordScreen extends StatelessWidget {
                                         builder: (context, state) {
                                           if (state is SusseccState) {
                                             Future.delayed(
-                                              const Duration(
-                                                milliseconds: 1000,
-                                              ),
+                                              const Duration(milliseconds: 500),
                                               () {
-                                                Navigator.push(
+                                                Navigator.pushReplacement(
                                                   context,
                                                   MaterialPageRoute(
                                                     builder: (context) =>
                                                         VerificationCodeScreen(),
                                                   ),
                                                 );
+                                                return;
                                               },
                                             );
                                             return Container();

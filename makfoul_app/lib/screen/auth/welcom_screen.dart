@@ -27,7 +27,7 @@ class WelcomScreen extends StatelessWidget {
               EmptyCustomButton(
                 setText: 'sign_in'.tr(),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => LoginScreen()),
                   );
@@ -37,7 +37,7 @@ class WelcomScreen extends StatelessWidget {
               EmptyCustomButton(
                 setText: 'create_account'.tr(),
                 onPressed: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (context) => SignupScreen()),
                   );
@@ -61,9 +61,9 @@ class WelcomScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(
-                    context,
-                  ).push(MaterialPageRoute(builder: (context) => HomeScreen()));
+                  Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(builder: (context) => HomeScreen()),
+                  );
                 },
                 child: Text(
                   'continue_as_guest'.tr(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
+import 'package:makfoul_app/model/course/course_model.dart';
 import 'package:makfoul_app/screen/course/course_view.dart';
 
 import 'package:makfoul_app/style/app_colors.dart';
@@ -9,13 +10,11 @@ import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
 import 'package:makfoul_app/widget/homescreen/search_widget.dart';
 
 class TrainerScreen extends StatelessWidget {
-  const TrainerScreen({
-    super.key,
-    required this.appbarTitle,
-    required this.courses,
-  });
+  TrainerScreen({super.key, required this.appbarTitle, required this.courses});
   final String appbarTitle;
   final List courses;
+  List? searchCourses;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,7 +38,32 @@ class TrainerScreen extends StatelessWidget {
                 BackgroundColorWidget(height: 100),
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 20),
-                  child: SearchWidget(),
+                  child: SizedBox(
+                    height: 50,
+                    child: SearchBar(
+                      leading: Icon(
+                        Icons.search,
+                        color: AppColors.colorDarkGrey,
+                      ),
+                      hintText: "Search",
+                      hintStyle: MaterialStateProperty.all(
+                        AppTextStyle.textReguler16,
+                      ),
+                      elevation: WidgetStatePropertyAll(1),
+                      backgroundColor: WidgetStatePropertyAll(Colors.white),
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onChanged: (value) {
+                        searchCourses = courses.map((item) {
+                          item.title.contains(value);
+                        }).toList();
+                        print(searchCourses);
+                      },
+                    ),
+                  ),
                 ),
               ],
             ),

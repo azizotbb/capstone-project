@@ -47,7 +47,6 @@ class OpreationsLayer {
         endDate: endDate,
       );
       // getCoursesMethod();
-      print('supa2');
     } catch (error) {
       throw FormatException('there was an error: $error');
     }
@@ -70,7 +69,6 @@ class OpreationsLayer {
     try {
       final responces = await SupabaseConnect.getCourses();
       if (responces.isNotEmpty) {
-        print("responce in layer is look :$responces");
         final now = DateTime.now();
         for (final item in responces) {
           final endDateStr = item['endDate'];
