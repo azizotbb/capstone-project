@@ -61,23 +61,26 @@ class ChangePassword extends StatelessWidget {
                       );
                     },
                   ),
-        
+
                   SizedBox(height: context.getHeight(size: 0.08)),
-                  PrimryCustomButton(
-                    setText: "save".tr(),
-                    onPressed: () {
-                      if (bloc.formKey.currentState!.validate()) {
-                        bloc.add(UpdatePasswordEvent());
-                        print('Done');
-                      }
-                    },
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: PrimryCustomButton(
+                      setText: "save".tr(),
+                      onPressed: () {
+                        if (bloc.formKey.currentState!.validate()) {
+                          bloc.add(UpdatePasswordEvent());
+                          print('Done');
+                        }
+                      },
+                    ),
                   ),
                 ],
               ),
             ),
           ),
         );
-      }
+      },
     );
   }
 }

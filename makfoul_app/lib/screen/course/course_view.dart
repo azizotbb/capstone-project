@@ -84,14 +84,23 @@ class CourseView extends StatelessWidget {
 
                   child: Image.network(img, fit: BoxFit.fill),
                 ),
-                IconButton(
-                  padding: EdgeInsets.only(top: 50),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    color: AppColors.colorPrimary,
+
+                Container(
+                  margin: const EdgeInsets.only(top: 50, left: 18),
+                  width: 40,
+                  height: 40,
+                  decoration: const BoxDecoration(
+                    color: Colors.white24,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new_outlined,
+                      color: AppColors.colorPrimary,
+                    ),
                   ),
                 ),
               ],

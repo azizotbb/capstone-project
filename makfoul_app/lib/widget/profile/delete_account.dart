@@ -14,27 +14,26 @@ class DeleteAccount extends StatelessWidget {
         // for deleteing
         final bloc = context.read<ProfileBloc>();
         return AlertDialog(
-                                content: Text("delete_confirmation".tr()),
-                                actions: [
-                                  TextButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    child: Text(
-                                      "cancel".tr(),
-                                      style: TextStyle(color: Color(0xff444444)),
-                                    ),
-                                  ),
-                                  TextButton(
-                                    onPressed: () {},
-                                    child: Text(
-                                      "accept".tr(),
-                                      style: TextStyle(color: Colors.red),
-                                    ),
-                                  ),
-                                ],
-                              );
-      }
-    );;
+          backgroundColor: Colors.white,
+          content: Text("delete_confirmation".tr()),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text(
+                "cancel".tr(),
+                style: TextStyle(color: Color(0xff444444)),
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text("accept".tr(), style: TextStyle(color: Colors.red)),
+            ),
+          ],
+        );
+      },
+    );
+    ;
   }
 }
