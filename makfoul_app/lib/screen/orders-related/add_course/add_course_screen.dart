@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -121,6 +123,7 @@ class AddCourseScreen extends StatelessWidget {
                                         price: e.price,
                                         desc: e.description,
                                         tranername: userinfo.name,
+                                        courseId: e.id,
                                       ),
                                     ),
                                   );
@@ -178,6 +181,7 @@ class AddCourseScreen extends StatelessWidget {
                                         price: e1.price,
                                         desc: e1.tid,
                                         tranername: userinfo.name,
+                                        courseId: e1.id,
                                       ),
                                     ),
                                   );

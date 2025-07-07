@@ -61,3 +61,9 @@ final class CoursesLoaded extends AddCorseState {
     );
   }
 }
+final class updateserch extends AddCorseState{
+  final List<dynamic>toserch;
+
+  updateserch({required this.toserch});
+
+}

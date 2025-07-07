@@ -136,4 +136,15 @@ class OpreationsLayer {
       }).toList();
     }
   }
+
+getDetailes({required int courseId})async{
+    print(users);
+
+     users = await SupabaseConnect.getDetailes(courseId: courseId);
+     return users; 
+
+
+
+  }
+  
 }

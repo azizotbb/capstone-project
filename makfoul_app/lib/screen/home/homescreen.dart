@@ -188,7 +188,6 @@ class HomeScreen extends StatelessWidget {
                           List cleanCourses = activeCourses
                               .where((course) => course.category == "Clean")
                               .toList();
-
                           Navigator.push(
                             context,
                             MaterialPageRoute(
