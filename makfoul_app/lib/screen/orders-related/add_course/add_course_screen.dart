@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,7 +6,6 @@ import 'package:makfoul_app/model/user/user_model.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
 import 'package:makfoul_app/screen/course/details_course.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
-import 'package:makfoul_app/screen/orders-related/notification_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/course/custom_course_widget.dart';
@@ -28,25 +25,12 @@ class AddCourseScreen extends StatelessWidget {
         ),
       child: Builder(
         builder: (context) {
-          final bloc = context.read<AddCorseBloc>();
           return DefaultTabController(
             length: 2,
             child: Scaffold(
               appBar: AppBar(
                 centerTitle: true,
-                actions: [
-                  IconButton(
-                    icon: Icon(Icons.notifications_none),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => NotificationScreen(),
-                        ),
-                      );
-                    },
-                  ),
-                ],
+
                 title: Text(
                   'history'.tr(),
                   style: AppTextStyle.textTitleLarg24dark,
@@ -63,7 +47,6 @@ class AddCourseScreen extends StatelessWidget {
 
               body: BlocBuilder<AddCorseBloc, AddCorseState>(
                 builder: (context, state) {
-                  print(state);
                   if (state is CoursesLoaded) {
                     final courses = state.trainearcourses ?? [];
                     final activeCourse = courses

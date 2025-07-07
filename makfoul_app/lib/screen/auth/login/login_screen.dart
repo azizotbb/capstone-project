@@ -188,13 +188,6 @@ class LoginScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-
-                      // Text.rich(
-                      //   TextSpan(
-                      //     text: 'Already have an account? Sign in',
-                      //     style: AppTextStyle.textMedium14,
-                      //   ),
-                      // ),
                     ],
                   ),
                 ),

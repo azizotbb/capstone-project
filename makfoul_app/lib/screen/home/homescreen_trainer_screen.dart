@@ -40,7 +40,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.all(9),
                       child: SafeArea(
-                        child: Container(
+                        child: SizedBox(
                           width: context.getWidth(),
                           child: ListTile(
                             leading: Container(

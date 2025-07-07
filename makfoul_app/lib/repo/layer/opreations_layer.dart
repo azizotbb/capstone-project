@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'dart:io';
 
 import 'package:makfoul_app/model/course/course_model.dart';
@@ -6,19 +5,26 @@ import 'package:makfoul_app/model/order/order_model.dart';
 import 'package:makfoul_app/repo/api/supabase.dart';
 
 class OpreationsLayer {
-  // List to store courses
+  // List to hold all fetched courses
   List<CourseModel> courses = [];
+
+  // List to hold users who ordered a specific course
   List<OrderModel> users = [];
+
+  // List to hold all orders placed by a specific user
   List<OrderModel> ordersByUID = [];
 
+  /// Method to upload an image to Supabase storage
   uploadImageMethod({required String path, required File file}) {
     SupabaseConnect.uploadImage(path: path, file: file);
   }
 
+  /// Method to get the public URL of an uploaded image
   getImageUrlMethod({required String path}) async {
     return await SupabaseConnect.getImageUrl(path: path);
   }
 
+  /// Method to add a new course to Supabase
   addCourseMethod({
     required String catagory,
     required String title,
@@ -46,25 +52,14 @@ class OpreationsLayer {
         startDate: startDate,
         endDate: endDate,
       );
-      // getCoursesMethod();
     } catch (error) {
       throw FormatException('there was an error: $error');
     }
   }
 
-  /// Get courses from Supabase and save them to the list
-  // getCoursesMethod() async {
-  //   // Get course data from Supabase
-  //   print("get course method rodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-  //   final response = await SupabaseConnect.getCourses();
-  //   print("الريسبونس والكورسات هذي : $response");
-  //   // Convert the data to CourseModel objects if not empty
-  //   if (response.isNotEmpty) {
-  //     courses = response.map((item) {
-  //       return CourseModelMapper.fromMap(item);
-  //     }).toList();
-  //   }
-  // }
+  /// Method to fetch all courses from Supabase
+  /// - Converts expired courses (based on end date) from Active to InActive.
+
   getCoursesMethod() async {
     try {
       final responces = await SupabaseConnect.getCourses();
@@ -92,29 +87,27 @@ class OpreationsLayer {
         return courses;
       }
     } catch (e) {
-      print("error in get course method layer $e");
       throw FormatException('faild to load courses');
     }
   }
 
+  /// Method to delete a course by its ID
+  /// Also deletes related orders automatically
   deletecourseMethod({required int idcourse}) async {
     try {
       SupabaseConnect.deletecourse(idcourse: idcourse);
     } catch (e) {
-      print("error in delet course $e");
+      throw FormatException('there was an error: $e');
     }
   }
 
+  /// Method to update the user's name in the database
   updateUserNameMethod({required String name}) async {
     SupabaseConnect.updateName(name: name);
-
-    print('getit layer name');
   }
 
   updateImageMethod({required String urlString}) async {
     SupabaseConnect.updateImage(urlString: urlString);
-
-    print('getit layer name');
   }
 
   // Method to add a new order using the given user ID and course ID
@@ -137,14 +130,8 @@ class OpreationsLayer {
     }
   }
 
-getDetailes({required int courseId})async{
-    print(users);
-
-     users = await SupabaseConnect.getDetailes(courseId: courseId);
-     return users; 
-
-
-
+  getDetailes({required int courseId}) async {
+    users = await SupabaseConnect.getDetailes(courseId: courseId);
+    return users;
   }
-  
 }

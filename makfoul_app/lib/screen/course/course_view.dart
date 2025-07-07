@@ -84,14 +84,23 @@ class CourseView extends StatelessWidget {
 
                   child: Image.network(img, fit: BoxFit.fill),
                 ),
-                IconButton(
-                  padding: EdgeInsets.only(top: 50),
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    color: AppColors.colorPrimary,
+
+                Container(
+                  margin: const EdgeInsets.only(top: 50, left: 18),
+                  width: 40,
+                  height: 40,
+                  decoration: const BoxDecoration(
+                    color: Colors.white24,
+                    shape: BoxShape.circle,
+                  ),
+                  child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(
+                      Icons.arrow_back_ios_new_outlined,
+                      color: AppColors.colorPrimary,
+                    ),
                   ),
                 ),
               ],
@@ -197,49 +206,3 @@ class CourseView extends StatelessWidget {
     );
   }
 }
-
-
-
-//  FutureBuilder(
-//                     future:toget,
-//                      builder: (context, index ){
-// if(index.connectionState==ConnectionState.waiting){
-// return Center(child: CircularProgressIndicator(),);
-// }else if(index.hasError){
-// return Center(child: Text("error:${index.error}"),);
-// }
-// final userrs =index.data as List<OrderModel>;
-// return Column(
-//   children: [
-//  Align(
-//                   alignment: Alignment.bottomLeft,
-//                   child: Row(
-//                     children: [
-//                       Text(
-//                         "Registered in the Course",
-//                         style: AppTextStyle.textbold16,
-//                       ),
-//                       Spacer(),
-//                       Text("${userrs.length}" + "/" + "$canreguster"),
-//                     ],
-//                   ),
-//                 ),
-//     ListView.builder(
-//                         shrinkWrap: true,
-//                         physics: NeverScrollableScrollPhysics(),
-//                         itemCount: userrs.length,
-//                         itemBuilder: (BuildContext context, int index) {
-//                           final user=userrs[index];
-//                           return Padding(
-//                             padding: const EdgeInsets.all(9.0),
-//                             child: RegusterdWidget(
-//                               numserial: index + 1,
-//                               username: user.uid.name,
-//                               image: user.uid.avatar??'',
-//                             ),
-//                           );
-//                         },
-//                       ),
-//   ],
-// );
-//                     })

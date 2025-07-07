@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makfoul_app/screen/auth/login/login_screen.dart';
 import 'package:makfoul_app/screen/auth/resetpassword/verification/bloc/verificationn_bloc.dart';
-import 'package:makfoul_app/screen/splash/splash_screen.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/utility/validators.dart';
 import 'package:makfoul_app/widget/shared/custom_Text_field.dart';

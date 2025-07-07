@@ -27,129 +27,129 @@ class ProfileScreen extends StatelessWidget {
         builder: (context) {
           final bloc = context.read<ProfileBloc>();
           return Scaffold(
-            body: Padding(
-              padding: EdgeInsetsGeometry.symmetric(
-                horizontal: 10,
-                vertical: 24,
-              ),
-              //profile info and edit
-              child: Column(
-                children: [
-                  SizedBox(height: 20),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          BlocBuilder<ProfileBloc, ProfileState>(
-                            builder: (context, state) {
-                              return BlocProvider.value(
-                                value: bloc,
-                                child: ChangeImage(),
-                              );
-                            },
-                          ),
-                          SizedBox(width: 12),
-                          Column(
-                            children: [
-                              Text(
-                                "hello".tr(),
-                                style: TextStyle(
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.bold,
+            body: SafeArea(
+              child: Padding(
+                padding: EdgeInsetsGeometry.symmetric(horizontal: 20),
+                //profile info and edit
+                child: Column(
+                  children: [
+                    SizedBox(height: 20),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            BlocBuilder<ProfileBloc, ProfileState>(
+                              builder: (context, state) {
+                                return BlocProvider.value(
+                                  value: bloc,
+                                  child: ChangeImage(),
+                                );
+                              },
+                            ),
+                            SizedBox(width: 12),
+                            Column(
+                              children: [
+                                Text(
+                                  "hello".tr(),
+                                  style: TextStyle(
+                                    fontSize: 17,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
 
-                              //supabase here to get current Username
-                              BlocBuilder<ProfileBloc, ProfileState>(
-                                builder: (context, state) {
-                                  return Text(userinfo.name);
-                                },
-                              ),
-                            ],
+                                //supabase here to get current Username
+                                BlocBuilder<ProfileBloc, ProfileState>(
+                                  builder: (context, state) {
+                                    return Text(userinfo.name);
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            //edit here
+                            showDialog(
+                              context: context,
+                              builder: (context) {
+                                //translation needed
+                                return BlocProvider.value(
+                                  value: bloc,
+                                  child: ChangeName(),
+                                );
+                              },
+                            );
+                          },
+                          icon: Icon(
+                            Icons.edit_outlined,
+                            color: Color(0xffFF6D40),
                           ),
-                        ],
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          //edit here
-                          showDialog(
-                            context: context,
-                            builder: (context) {
-                              //translation needed
-                              return BlocProvider.value(
-                                value: bloc,
-                                child: ChangeName(),
-                              );
-                            },
-                          );
-                        },
-                        icon: Icon(
-                          Icons.edit_outlined,
-                          color: Color(0xffFF6D40),
                         ),
-                      ),
-                    ],
-                  ),
+                      ],
+                    ),
 
-                  //profile option
-                  SizedBox(height: 80),
-                  ProfileOption(
-                    icon: Icons.language,
-                    onTap: () {
-                      if (context.locale.languageCode == "ar") {
-                        context.setLocale(Locale('en', 'US'));
-                      } else {
-                        context.setLocale(Locale('ar', 'AR'));
-                      }
-                    },
-                    text: "lang".tr(),
-                  ),
-                  ProfileOption(
-                    icon: Icons.loop,
-                    onTap: () {
-                      showModalBottomSheet(
-                        showDragHandle: true,
-                        useSafeArea: true,
-                        isScrollControlled: true,
+                    //profile option
+                    SizedBox(height: 80),
+                    ProfileOption(
+                      icon: Icons.language,
+                      onTap: () {
+                        if (context.locale.languageCode == "ar") {
+                          context.setLocale(Locale('en', 'US'));
+                        } else {
+                          context.setLocale(Locale('ar', 'AR'));
+                        }
+                      },
+                      text: "lang".tr(),
+                    ),
+                    ProfileOption(
+                      icon: Icons.loop,
+                      onTap: () {
+                        showModalBottomSheet(
+                          backgroundColor: Colors.white,
+                          showDragHandle: true,
+                          useSafeArea: true,
+                          isScrollControlled: true,
 
-                        context: context,
-                        builder: (context) => BlocProvider.value(
-                          value: bloc,
-                          child: ChangePassword(),
-                        ),
-                      );
-                    },
-                    text: "change_password".tr(),
-                  ),
-                  ProfileOption(
-                    icon: Icons.error_outline,
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return BlocProvider.value(
+                          context: context,
+                          builder: (context) => BlocProvider.value(
                             value: bloc,
-                            child: DeleteAccount(),
-                          );
-                        },
-                      );
-                    },
-                    text: "delete_account".tr(),
-                  ),
-                  ProfileOption(
-                    icon: Icons.headphones_outlined,
-                    onTap: () {
-                      showDialog(
-                        context: context,
-                        builder: (context) => CustomerService(),
-                      );
-                    },
-                    text: "customer_service".tr(),
-                  ),
-                  SizedBox(height: 46),
-                  Logout(),
-                ],
+                            child: ChangePassword(),
+                          ),
+                        );
+                      },
+                      text: "change_password".tr(),
+                    ),
+                    ProfileOption(
+                      icon: Icons.error_outline,
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) {
+                            return BlocProvider.value(
+                              value: bloc,
+                              child: DeleteAccount(),
+                            );
+                          },
+                        );
+                      },
+                      text: "delete_account".tr(),
+                    ),
+                    ProfileOption(
+                      icon: Icons.headphones_outlined,
+                      onTap: () {
+                        showDialog(
+                          context: context,
+                          builder: (context) => CustomerService(),
+                        );
+                      },
+                      text: "customer_service".tr(),
+                    ),
+                    SizedBox(height: 46),
+                    Logout(),
+                  ],
+                ),
               ),
             ),
           );

@@ -19,32 +19,22 @@ class MainCaregoryWidget extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: ontap,
-          child: SizedBox(
-            child: Stack(
-              children: [
-                Container(
-                  height: 70,
-                  width: 70,
-                  // padding: EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: AppColors.colorpeige,
-                    // borderRadius: BorderRadius.circular(11),
-                  ),
-                ),
-                Positioned.fill(
-                  child: Align(
-                    alignment: Alignment.center,
-                    child: image != null
-                        ? Image.asset(image!, height: 25, fit: BoxFit.contain)
-                        : Icon(
-                            Icons.grid_view,
-                            color: AppColors.colorScondry,
-                            size: 30,
-                          ),
-                  ),
-                ),
-              ],
+          child: Container(
+            height: 80,
+            width: 80,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              color: AppColors.colorpeige,
+            ),
+            child: Align(
+              alignment: Alignment.center,
+              child: image != null
+                  ? Image.asset(image!, height: 32, fit: BoxFit.contain)
+                  : Icon(
+                      Icons.grid_view,
+                      color: AppColors.colorScondry,
+                      size: 40,
+                    ),
             ),
           ),
         ),

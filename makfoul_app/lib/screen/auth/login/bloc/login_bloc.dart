@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +11,7 @@ part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-   bool isPasswordVisable = true;
+  bool isPasswordVisable = true;
 
   // Key for form validation
   final formKey = GlobalKey<FormState>();
@@ -57,13 +56,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
       } else {
         emit(ErrorState(msg: "Something went wrong. Please try again."));
       }
-      log(error.message);
-    } catch (error) {
-      print(error);
     }
   }
 
-  FutureOr<void> showPasswordMethod(VisibilityEvent event, Emitter<LoginState> emit) {
+  FutureOr<void> showPasswordMethod(
+    VisibilityEvent event,
+    Emitter<LoginState> emit,
+  ) {
     isPasswordVisable = !isPasswordVisable;
 
     emit(SuccessStateShowPassword());

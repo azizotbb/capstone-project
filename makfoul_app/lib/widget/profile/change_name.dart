@@ -21,7 +21,8 @@ class ChangeName extends StatelessWidget {
       builder: (context) {
         final bloc = context.read<ProfileBloc>();
         return Dialog(
-          child: Container(
+          backgroundColor: Colors.white,
+          child: SizedBox(
             width: context.getWidth(size: 0.85),
             height: context.getHeight(size: 0.3),
             child: Padding(

@@ -11,8 +11,10 @@ part 'verification_event.dart';
 part 'verification_state.dart';
 
 class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
+  // Controller for the email input field
   TextEditingController emailController = TextEditingController();
 
+  // Global key to validate the form in the UI
   final formKey = GlobalKey<FormState>();
 
   final authGetit = GetIt.I.get<AuthLayer>();
@@ -22,6 +24,7 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
     on<OnFilledEvent>(onFilledMethod);
   }
 
+  /// Handles the ForgotPasswordEvent
   FutureOr<void> forgotPasswordMethod(
     ForgotPasswordEvent event,
     Emitter<VerificationState> emit,
@@ -29,6 +32,10 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
     await authGetit.forgotPasswordMethod(email: emailController.text);
   }
 
+  /// Handles the OnFilledEvent
+  ///
+  /// Attempts to verify the OTP token entered by the user
+  /// Emits [SusseccState] on success and [ErrorState] on failure
   FutureOr<void> onFilledMethod(
     OnFilledEvent event,
     Emitter<VerificationState> emit,
@@ -39,7 +46,7 @@ class VerificationBloc extends Bloc<VerificationEvent, VerificationState> {
         email: emailController.text,
       );
       emit(SusseccState());
-    } on AuthException catch (error) {
+    } on AuthException catch (_) {
       emit(ErrorState());
     } catch (error) {
       emit(ErrorState());

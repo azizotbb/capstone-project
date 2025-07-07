@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/model/course/course_model.dart';
 import 'package:makfoul_app/screen/course/course_view.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
@@ -9,8 +8,8 @@ import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/Instructor/instructor_custom_card.dart';
 import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
-import 'package:makfoul_app/widget/homescreen/search_widget.dart';
 
+// ignore: must_be_immutable
 class TrainerScreen extends StatelessWidget {
   TrainerScreen({super.key, required this.appbarTitle, required this.courses});
   final String appbarTitle;

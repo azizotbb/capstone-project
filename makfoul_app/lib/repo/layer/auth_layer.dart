@@ -13,7 +13,8 @@ class AuthLayer {
     phone: " ",
     avatar: '',
   );
-  // Method to handle user sign-up process
+
+  /// Method to handle user sign-up process
   signUpMethod({
     required String phoneNumber,
     required String username,
@@ -22,7 +23,7 @@ class AuthLayer {
     required String role,
   }) async {
     try {
-      // Call signUp function from SupabaseConnect to create a new user account
+      // Step 1: Sign up the user through Supabase Auth
       final user = await SupabaseConnect.signUp(
         email: email,
         password: password,
@@ -30,7 +31,7 @@ class AuthLayer {
         role: role,
         username: username,
       );
-      // After successful sign-up, add user data to the "user" table in Supabase
+      // Step 2: Store user details in the database
       await SupabaseConnect.addUser(
         userid: user.id,
         phone: phoneNumber,
@@ -64,10 +65,7 @@ class AuthLayer {
     }
   }
 
-  // uploadImage(){
-
-  // }
-
+  /// Method to update the user's password
   updatePasswordMethod({
     required String password,
     required String oldPassword,
@@ -78,6 +76,7 @@ class AuthLayer {
     );
   }
 
+  /// Sends a reset password link to the user's email address.
   forgotPasswordMethod({required String email}) {
     try {
       SupabaseConnect.forgotPassword(email: email);
@@ -86,6 +85,7 @@ class AuthLayer {
     }
   }
 
+  /// Method to verify OTP token for password recovery
   verifyWithOTPMethod({required String token, required String email}) async {
     try {
       final res = await SupabaseConnect.verifyWithOTP(

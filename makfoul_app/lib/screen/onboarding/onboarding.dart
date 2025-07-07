@@ -101,6 +101,7 @@ class OnBoarding extends StatelessWidget {
                             );
                           },
                         ),
+                        SizedBox(height: 15,)
                       ],
                     ),
                   );

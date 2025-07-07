@@ -23,7 +23,7 @@ class SupabaseConnect {
     }
   }
 
-  //Supabase sign-up integration
+  /// Registers a new user with email and password and stores additional metadata.
   static Future<dynamic> signUp({
     required String phoneNumber,
     required String username,
@@ -47,7 +47,7 @@ class SupabaseConnect {
     }
   }
 
-  //add user
+  /// Adds a new user to the "user" table in Supabase.
   static addUser({
     required String userid,
     required String phone,
@@ -64,8 +64,7 @@ class SupabaseConnect {
     });
   }
 
-  //Supabase sign-in integration
-
+  /// Logs in a user using their email and password.
   static Future<dynamic> signIn({
     required String email,
     required String password,
@@ -85,6 +84,7 @@ class SupabaseConnect {
     }
   }
 
+  /// Uploads an image to Supabase storage.
   static Future<void> uploadImage({
     required String path,
     required File file,
@@ -96,6 +96,7 @@ class SupabaseConnect {
     }
   }
 
+  /// Gets the public URL of an image from Supabase storage.
   static Future<String> getImageUrl({required String path}) async {
     try {
       return supabase!.client.storage.from('images').getPublicUrl(path);
@@ -104,6 +105,7 @@ class SupabaseConnect {
     }
   }
 
+  /// Adds a new course to the "course" table.
   static Future<void> addCourse({
     required String catagory,
     required String title,
@@ -137,13 +139,14 @@ class SupabaseConnect {
     }
   }
 
-  // Supabase.instance.client.storage.from('images').upload(path, file);
+  /// Retrieves all courses along with user information.
   static Future<List<dynamic>> getCourses() async {
     final response = await supabase!.client.from("course").select("*,user(*)");
 
     return response;
   }
 
+  /// Updates the current user's password.
   static Future<void> updatePassword({
     required String password,
     required String oldPassword,
@@ -151,6 +154,7 @@ class SupabaseConnect {
     await supabase!.client.auth.updateUser(UserAttributes(password: password));
   }
 
+  /// Updates the current user's name.
   static Future<void> updateName({required String name}) async {
     await supabase!.client
         .from('user')
@@ -158,6 +162,7 @@ class SupabaseConnect {
         .eq('UID', supabase!.client.auth.currentUser!.id);
   }
 
+  /// Updates the current user's profile image URL.
   static Future<void> updateImage({required String urlString}) async {
     await supabase!.client
         .from('user')
@@ -165,8 +170,7 @@ class SupabaseConnect {
         .eq('UID', supabase!.client.auth.currentUser!.id);
   }
 
-  //  need testing
-
+  /// Adds a new order for the currently logged-in user.
   static Future<void> addOrder({
     required String uid,
     required int courseId,
@@ -181,6 +185,7 @@ class SupabaseConnect {
     }
   }
 
+  /// Sends a password reset email.
   static Future forgotPassword({required String email}) async {
     try {
       final res = await supabase!.client.auth.resetPasswordForEmail(email);
@@ -190,6 +195,7 @@ class SupabaseConnect {
     }
   }
 
+  /// Verifies password reset using OTP.
   static Future verifyWithOTP({
     required String token,
     required String email,
@@ -208,14 +214,15 @@ class SupabaseConnect {
     }
   }
 
+  /// Deletes a course and related orders by course ID.
   static Future<void> deletecourse({required int idcourse}) async {
     await supabase!.client.from("order").delete().eq('course_id', idcourse);
 
     await supabase!.client.from("course").delete().eq('id', idcourse);
-    log(idcourse.toString());
     getCourses(); //to try
   }
 
+  /// Updates the state of a course.
   static Future<void> updatecoursesState({
     required int id,
     required String newState,
@@ -235,16 +242,18 @@ class SupabaseConnect {
     return response;
   }
 
-  static Future<List<OrderModel>> getDetailes({required int courseId}) async{
+  /// Fetches detailed order information for a specific course ID.
+  static Future<List<OrderModel>> getDetailes({required int courseId}) async {
+    final response = await supabase?.client
+        .from('order')
+        .select('*,uid(*),course_id(*,user(*))')
+        .eq('course_id', courseId);
+    if (response!.isEmpty) {
+      return [];
+    }
 
-    final  response = await supabase?.client.from('order').select('*,uid(*),course_id(*,user(*))').eq('course_id',courseId);
-      print(response);
-      print("here course responce ${response!.length}");
-    if(response.isEmpty){return[];}
-
-    return response.map((users){
+    return response.map((users) {
       return OrderModelMapper.fromMap(users);
     }).toList();
-// return response;
   }
 }
