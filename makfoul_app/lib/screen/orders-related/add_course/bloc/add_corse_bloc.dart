@@ -31,12 +31,14 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
   final TextEditingController priceController = TextEditingController();
   final opreationsGet = GetIt.I.get<OpreationsLayer>();
   final formKey = GlobalKey<FormState>();
+   String searchQuery=''; 
   // final
   String? date;
   DateTime? fileName;
   String? path;
   File? file;
   bool? isDone = false;
+  // final List<String> allcourses=[];
   AddCorseBloc() : super(AddCorseInitial()) {
     on<SelectCategoryEvent>(selectCategoryMethod);
     on<AddNewCordeEvent>(addNewCordeMethod);
@@ -46,6 +48,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     on<SavePickedLocationEvent>(saveLocationMethod);
     on<GetCoursesEvent>(getCourseMethod);
     on<DeleteCourseEvent>(deleteCourseMethod);
+    on<UpdateSearchQuery>(searchMethod); 
   }
 
   FutureOr<void> selectCategoryMethod(
@@ -243,4 +246,23 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     emit(CoursesLoaded().copyWith(trainearcourses: updatecourses));
     add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
   }
+
+  FutureOr<void> searchMethod(UpdateSearchQuery event, Emitter<AddCorseState> emit) {
+final List<CourseModel>searchList=List<CourseModel>.from(event.toserch);
+final List <dynamic> emptysearch=[]; 
+
+   final String  searchQuery=event.searchtext.toLowerCase().trim(); 
+
+if(searchQuery.isEmpty){
+  emit(updateserch(
+    toserch: searchList,
+  ));
+  
+}
+final List<CourseModel>filter=searchList.where((item){
+  return item.title.toLowerCase().contains(searchQuery);
+}).toList();
+emit(updateserch(toserch: filter));
+}
+
 }

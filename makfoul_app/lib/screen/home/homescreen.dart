@@ -189,7 +189,7 @@ class HomeScreen extends StatelessWidget {
                           List cleanCourses = activeCourses
                               .where((course) => course.category == "Clean")
                               .toList();
-
+//هنا كلين كورسس سوينا له بوش 
                           Navigator.push(
                             context,
                             MaterialPageRoute(

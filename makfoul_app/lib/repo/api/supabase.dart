@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:makfoul_app/model/order/order_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class SupabaseConnect {
@@ -236,5 +237,18 @@ class SupabaseConnect {
         .select("*,uid(*),course_id(*)")
         .eq("uid", uid);
     return response;
+  }
+
+  static Future<List<OrderModel>> getDetailes({required int courseId}) async{
+
+    final  response = await supabase?.client.from('order').select('*,uid(*),course_id(*,user(*))').eq('course_id',courseId);
+      print(response);
+      print("here course responce ${response!.length}");
+    if(response.isEmpty){return[];}
+
+    return response.map((users){
+      return OrderModelMapper.fromMap(users);
+    }).toList();
+// return response;
   }
 }
