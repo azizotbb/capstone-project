@@ -168,8 +168,9 @@ class HomescreenTrainerScreen extends StatelessWidget {
                           ),
                         ),
                         SizedBox(height: 12),
-                        BlocBuilder<AddCorseBloc, AddCorseState>(
+                        BlocBuilder<AddCorseBloc, AddCorseState>(bloc: bloc,
                           builder: (context, state) {
+                            bloc.add(GetCoursesEvent());
                             if (state is CoursesLoaded) {
                               return GridView.builder(
                                 shrinkWrap: true,

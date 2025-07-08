@@ -63,7 +63,7 @@ class Validators {
     if (value == null || value.trim().isEmpty) {
       return 'Required';
     }
-    if (int.parse(value) >= 5) {
+    if (int.parse(value) > 5) {
       return 'Max 5';
     }
     if (int.parse(value) < 1) {

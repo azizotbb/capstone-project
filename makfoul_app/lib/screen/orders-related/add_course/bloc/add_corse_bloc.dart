@@ -80,10 +80,13 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       courseState = "Active";
     }
 
+    if(image != null){
     await opreationsGet.uploadImageMethod(path: path!, file: file!);
 
     urlString = await opreationsGet.getImageUrlMethod(path: path!);
-    final result = await opreationsGet.addCourseMethod(
+    }
+    else{urlString  = 'https://bfgdwvwxxrgslclveiji.supabase.co/storage/v1/object/public/images/course/Rectangle%2061.png';}
+    await opreationsGet.addCourseMethod(
       catagory: selectedCategory!,
       title: titleController.text,
       description: descriptionController.text,
@@ -92,27 +95,27 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
       startDate: pickedDate?.start ?? DateTime.now(),
       endDate: pickedDate?.end ?? DateTime.now(),
       image: urlString!,
-      location: 'location',
+      location: stringLocation!,
       state: courseState,
       createdAt: DateTime.now().toString(),
     );
-
-    final updatedCourses = await opreationsGet.getCoursesMethod();
+    
+    var updatedCourses = opreationsGet.getCoursesMethod();
     try {
-      final courseuser = await opreationsGet.courses.where(
+      updatedCourses =  opreationsGet.courses.where(
         (e) => e.tid == Supabase.instance.client.auth.currentUser!.id,
       );
-      final total = await courseuser.length;
-      final active = await courseuser.where((e) => e.state == 'Active').length;
-      final inactive = await courseuser
+      final total = updatedCourses.length;
+      final active = updatedCourses.where((e) => e.state == 'Active').length;
+      final inactive = updatedCourses
           .where((e) => e.state == 'InActive')
           .length;
-      final cook = await courseuser.where((e) => e.category == 'Cook').length;
-      final clean = await courseuser.where((e) => e.category == 'Clean').length;
+      final cook = updatedCourses.where((e) => e.category == 'Cook').length;
+      final clean = updatedCourses.where((e) => e.category == 'Clean').length;
 
       emit(
         CoursesLoaded().copyWith(
-          trainearcourses: courseuser.toList(),
+          trainearcourses: updatedCourses.toList(),
           total: total,
           active: active,
           inactive: inactive,
@@ -127,6 +130,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     titleController.clear();
     priceController.clear();
     numberOfTraineesController.clear();
+    stringLocation = null;
     selectedCategory = null;
     pickedDate = null;
     image = null;
@@ -143,24 +147,20 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
     path = 'course/$fileName';
     file = File(image!.path);
     if (image == null) {
-      emit(NullState());
 
       return;
     }
 
-    // print('layer3');
-
-    // emit(CoursesLoaded());
+   
   }
 
-  // Called when user taps a location on the map.
-  // Updates temporary selected location (for marker display only).
   FutureOr<void> pickedMethod(
     PickLocatioEvent event,
     Emitter<AddCorseState> emit,
   ) {
     selectedLocation = event.location;
     emit(PickLocatioState(selectedLocation!));
+    add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
   }
 
   // Called on page load to fetch user's current GPS location.
@@ -189,6 +189,7 @@ class AddCorseBloc extends Bloc<AddCorseEvent, AddCorseState> {
         '${event.finalLocation.latitude},${event.finalLocation.longitude}';
 
     emit(PickLocatioState(event.finalLocation));
+    add(GetCoursesEvent(id: Supabase.instance.client.auth.currentUser!.id));
   }
 
   FutureOr<void> getCourseMethod(

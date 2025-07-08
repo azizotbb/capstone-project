@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -80,7 +81,7 @@ class TopCourses extends StatelessWidget {
                           Icons.location_on_outlined,
                           color: AppColors.colorPrimary,
                         ),
-                        Text(location, style: AppTextStyle.textMedium14),
+                        Text('Riyadh'.tr(), style: AppTextStyle.textMedium14),
                       ],
                     ),
                   ],

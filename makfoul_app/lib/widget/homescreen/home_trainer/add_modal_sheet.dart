@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -108,7 +109,7 @@ class AddModalSheet extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.center,
                             spacing: 40,
                             children: [
-                              CustomTextField(
+                              CustomTextField(inputFormatters: [FilteringTextInputFormatter.digitsOnly],keyboardType: TextInputType.number,
                                 validator: (p0) {
                                   return Validators.validatePrice(p0);
                                 },
@@ -116,7 +117,7 @@ class AddModalSheet extends StatelessWidget {
                                 setHint: "Price".tr(),
                                 isSmall: true,
                               ),
-                              CustomTextField(
+                              CustomTextField(inputFormatters: [FilteringTextInputFormatter.digitsOnly],keyboardType: TextInputType.number,
                                 validator: (p0) {
                                   return Validators.validateTraineesNumber(p0);
                                 },

@@ -11,6 +11,9 @@ class ActivityCourses extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<AddCorseBloc, AddCorseState>(
       builder: (context, state) {
+        final bloc = context.read<AddCorseBloc>();
+        bloc.add(GetCoursesEvent());
+
         if (state is CoursesLoaded) {
           return Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
