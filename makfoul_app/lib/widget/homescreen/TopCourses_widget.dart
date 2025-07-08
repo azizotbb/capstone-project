@@ -35,13 +35,13 @@ class TopCourses extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            Container(
-              height: 150,
+            Container(clipBehavior: Clip.hardEdge,
+              height: 120,
               decoration: BoxDecoration(
-                color: Colors.amber,
+        
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Image.network(image),
+              child: Image.network(image,fit: BoxFit.fill,),
             ),
             SizedBox(height: 10),
             Column(
