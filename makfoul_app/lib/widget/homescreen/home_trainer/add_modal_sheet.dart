@@ -176,8 +176,6 @@ class AddModalSheet extends StatelessWidget {
                                 //here image
 
                                 bloc.add(UploadImageEvent());
-
-                                // print(image!.path.toString());
                               },
                               iconButton: Icon(Icons.image),
                             ),

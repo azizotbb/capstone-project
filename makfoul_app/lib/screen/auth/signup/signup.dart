@@ -92,8 +92,6 @@ class SignupScreen extends StatelessWidget {
                             isPassword: true,
                             isVisable: bloc.isPasswordVisable,
                             onPressedSuffix: () {
-                              print(bloc.isPasswordVisable);
-
                               bloc.add(VisibilityEvent());
                             },
                           );
@@ -114,7 +112,6 @@ class SignupScreen extends StatelessWidget {
                             isPassword: true,
                             isVisable: bloc.isConfirmVisable,
                             onPressedSuffix: () {
-                              print(bloc.isConfirmVisable);
                               bloc.add(VisibilityConfirmEvent());
                             },
                           );

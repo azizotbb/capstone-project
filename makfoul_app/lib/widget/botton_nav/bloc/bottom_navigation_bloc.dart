@@ -31,7 +31,6 @@ class BottomNavigationBloc
     Emitter<BottomNavigationState> emit,
   ) {
     selectIndex = event.index;
-    print(userinfo.role);
     emit(RefreshUIState());
   }
 }

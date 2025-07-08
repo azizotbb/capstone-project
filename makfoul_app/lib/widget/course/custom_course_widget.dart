@@ -9,12 +9,12 @@ class CustomCourseWidget extends StatelessWidget {
     required this.coursetitle,
     required this.pricecourse,
     required this.image,
-    required this .onTap,
+    required this.onTap,
   });
   final String coursetitle;
   final double pricecourse;
   final String image;
-  final VoidCallback onTap; 
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {

@@ -70,7 +70,6 @@ class ChangePassword extends StatelessWidget {
                       onPressed: () {
                         if (bloc.formKey.currentState!.validate()) {
                           bloc.add(UpdatePasswordEvent());
-                          print('Done');
                         }
                       },
                     ),
