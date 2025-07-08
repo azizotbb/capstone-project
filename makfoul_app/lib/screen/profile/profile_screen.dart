@@ -121,21 +121,7 @@ class ProfileScreen extends StatelessWidget {
                       },
                       text: "change_password".tr(),
                     ),
-                    ProfileOption(
-                      icon: Icons.error_outline,
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return BlocProvider.value(
-                              value: bloc,
-                              child: DeleteAccount(),
-                            );
-                          },
-                        );
-                      },
-                      text: "delete_account".tr(),
-                    ),
+                  
                     ProfileOption(
                       icon: Icons.headphones_outlined,
                       onTap: () {

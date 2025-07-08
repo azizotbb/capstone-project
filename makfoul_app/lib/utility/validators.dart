@@ -1,9 +1,11 @@
+import 'package:easy_localization/easy_localization.dart';
+
 class Validators {
   /// Validates verificationCode format
 
   static String? verificationCode(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter the verification code';
+      return 'codeReq'.tr();
     }
     // if (!RegExp(r'^\d{6}$').hasMatch(value)) {
     //   return 'The code must be 6 digits';
@@ -15,69 +17,70 @@ class Validators {
 
   static String? numberPhone(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter your phone number';
+      return 'phoneReq'.tr();
     }
-    if (value.length < 9) {
-      return 'Phone number too short';
+    if (value.length == 10) {
+      return null;
+    } else {
+      return 'phoneValid'.tr();
     }
-    return null;
   }
 
   /// Validates email format
   static String? email(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter your email';
+      return 'emailReq'.tr();
     }
     if (!RegExp(
       r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+.[a-zA-Z]{2,4}$',
     ).hasMatch(value)) {
-      return 'Invalid email format';
+      return 'emailFormat'.tr();
     }
     return null;
   }
 
   static String? username(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter your UserName';
+      return 'nameReq'.tr();
     }
     if (value.length > 13) {
-      return 'Name must be less than 13 characters.';
+      return 'nameLess'.tr();
     }
     return null;
   }
 
   static String? validateCourseTitle(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Required';
+      return 'Required'.tr();
     }
     if (value.length > 15) {
-      return 'the course must be under 15 letter.';
+      return 'courseUnder'.tr();
     }
     if (value.length < 5) {
-      return 'the course must be above 5 letter.';
+      return 'courseAbove'.tr();
     }
     return null;
   }
 
   static String? validateTraineesNumber(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Required';
+      return 'Required'.tr();
     }
     if (int.parse(value) > 5) {
-      return 'Max 5';
+      return 'maxTrainee'.tr();
     }
     if (int.parse(value) < 1) {
-      return 'at Least 1 Trainee';
+      return 'atLest'.tr();
     }
     return null;
   }
 
   static String? validatePrice(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Required';
+      return 'Required'.tr();
     }
     if (int.parse(value) > 10000) {
-      return 'Max Price 10000 SR';
+      return 'maxPrice'.tr();
     }
     return null;
   }
@@ -85,22 +88,22 @@ class Validators {
   /// Validates password strength
   static String? password(String? value) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please enter your password';
+      return 'enterPass'.tr();
     }
     if (value.length < 8) {
-      return 'Password must be at least 8 characters long';
+      return 'passLeast'.tr();
     }
     if (!RegExp(r'[A-Z]').hasMatch(value)) {
-      return 'Password must contain at least one uppercase letter';
+      return 'passCap'.tr();
     }
     if (!RegExp(r'[a-z]').hasMatch(value)) {
-      return 'Password must contain at least one lowercase letter';
+      return 'passSmall'.tr();
     }
     if (!RegExp(r'\d').hasMatch(value)) {
-      return 'Password must contain at least one digit';
+      return 'passDigit'.tr();
     }
     if (!RegExp(r'[!@#\$&*~]').hasMatch(value)) {
-      return 'Password must contain at least one special character (!@#\$&*~)';
+      return 'passSpe'.tr();
     }
     return null;
   }
@@ -108,10 +111,10 @@ class Validators {
   /// Validates confirm-password matches the original
   static String? confirmPassword(String? value, String pass1) {
     if (value == null || value.trim().isEmpty) {
-      return 'Please confirm your password';
+      return 'passConf'.tr();
     }
     if (value != pass1) {
-      return 'Passwords do not match';
+      return 'passMatch'.tr();
     }
     return null;
   }

@@ -58,10 +58,10 @@ class AddModalSheet extends StatelessWidget {
                                 child: DropdownButtonHideUnderline(
                                   child: DropdownButton(
                                     hint: Text(
-                                      "   select category",
+                                      "selectCat".tr(),
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: AppColors.colorMedimGrey,
+                                        color: const Color.fromRGBO(157, 157, 157, 1),
                                       ),
                                     ),
                                     value: bloc.selectedCategory,
@@ -76,7 +76,7 @@ class AddModalSheet extends StatelessWidget {
                                                 horizontal: 20,
                                               ),
                                               child: Text(
-                                                item,
+                                                item.tr(),
                                                 style: TextStyle(fontSize: 12),
                                               ),
                                             ),
@@ -233,7 +233,7 @@ class AddModalSheet extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 Text(
-                  "Add Course",
+                  "Add course".tr(),
                   style: TextStyle(
                     fontWeight: FontWeight.w700,
                     fontSize: 18,

@@ -67,7 +67,7 @@ class HomeScreen extends StatelessWidget {
                 userinfo.role == 'User'
                     ? Container()
                     : Positioned(
-                        right: 20,
+                        right: context.locale.languageCode == 'US'? 20:300,
                         top: 50,
                         child: TextButton(
                           onPressed: () {
@@ -95,7 +95,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Align(
-                      alignment: Alignment.topLeft,
+                      alignment: context.locale.countryCode =='US'? Alignment.topLeft:Alignment.topRight,
                       child: Text(
                         "courses".tr(),
                         style: AppTextStyle.textTitleLarg24dark,
@@ -164,7 +164,7 @@ class HomeScreen extends StatelessWidget {
                     SizedBox(height: 16),
                     //top courses
                     Align(
-                      alignment: Alignment.centerLeft,
+                      alignment: context.locale.countryCode =='US'? Alignment.topLeft:Alignment.topRight,
                       child: Text(
                         "top_courses".tr(),
                         style: AppTextStyle.textTitleLarg24dark,

@@ -59,7 +59,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                               style: AppTextStyle.textTitleLarg24dark,
                             ),
                             subtitle: Text(
-                              "your dashboard for managing training courses \nand empowering domestic workers ",
+                              "dashboradText".tr(),
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
@@ -80,9 +80,9 @@ class HomescreenTrainerScreen extends StatelessWidget {
                       children: [
                         //Dashboard
                         Align(
-                          alignment: Alignment.topLeft,
+                          alignment: context.locale.countryCode == 'US'? Alignment.topLeft:Alignment.topRight,
                           child: Text(
-                            "Dashboard ",
+                            "dashboard".tr(),
                             style: AppTextStyle.textTitleLarg24dark,
                           ),
                         ),
@@ -107,7 +107,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                           MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Text(
-                                          "courses",
+                                          "courses".tr(),
                                           style: TextStyle(
                                             fontWeight: FontWeight.w500,
                                             fontSize: 18,
@@ -164,9 +164,9 @@ class HomescreenTrainerScreen extends StatelessWidget {
 
                         SizedBox(height: 12),
                         Align(
-                          alignment: Alignment.topLeft,
+                          alignment: context.locale.countryCode == 'US'? Alignment.topLeft:Alignment.topRight,
                           child: Text(
-                            "Courses ",
+                            "courses".tr(),
                             style: AppTextStyle.textTitleLarg24dark,
                           ),
                         ),

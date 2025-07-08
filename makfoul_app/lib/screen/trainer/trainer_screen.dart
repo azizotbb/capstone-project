@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makfoul_app/model/course/course_model.dart';
@@ -58,7 +59,7 @@ class TrainerScreen extends StatelessWidget {
                           Icons.search,
                           color: AppColors.colorDarkGrey,
                         ),
-                        hintText: "Search",
+                        hintText: "Search".tr(),
                         hintStyle: MaterialStateProperty.all(
                           AppTextStyle.textReguler16,
                         ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
@@ -65,7 +66,7 @@ class DetailsCourse extends StatelessWidget {
                       color: AppColors.colorDarkGrey,
                     ),
                     SizedBox(width: 90),
-                    Text("Details", style: AppTextStyle.textTitleLarg24dark),
+                    Text("Details".tr(), style: AppTextStyle.textTitleLarg24dark),
                     Spacer(),
                   ],
                 ),
@@ -85,7 +86,7 @@ class DetailsCourse extends StatelessWidget {
                 Align(
                   alignment: Alignment.bottomLeft,
                   child: Text(
-                    "Course information",
+                    "Course information".tr(),
                     style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 18,
@@ -141,7 +142,7 @@ class DetailsCourse extends StatelessWidget {
                             child: Row(
                               children: [
                                 Text(
-                                  "Registered in the Course",
+                                  "regInCourse".tr(),
                                   style: AppTextStyle.textbold16,
                                 ),
                                 Spacer(),

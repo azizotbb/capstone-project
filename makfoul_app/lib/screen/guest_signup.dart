@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:makfoul_app/screen/auth/login/login_screen.dart';
 import 'package:makfoul_app/screen/auth/signup/signup.dart';
@@ -12,9 +13,9 @@ class GuestSignup extends StatelessWidget {
       body: Center(
         child: Column(mainAxisAlignment: MainAxisAlignment.center,spacing: 16,
           children: [
-            Text('Please Sign up or Sign in to view this page'),
+            Text('guestSign').tr(),
             EmptyCustomButton(
-              setText: 'Sign up',
+              setText: 'Sign Up'.tr(),
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
@@ -23,7 +24,7 @@ class GuestSignup extends StatelessWidget {
               },
             ),
             EmptyCustomButton(
-              setText: 'Sign in',
+              setText: 'Sign in'.tr(),
               onPressed: () {
                 Navigator.pushReplacement(
                   context,

@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
+import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/screen/guest_signup.dart';
 import 'package:makfoul_app/screen/payment/payment_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
@@ -58,6 +61,7 @@ class CourseView extends StatelessWidget {
             );
             Future.delayed(const Duration(seconds: 1), () {
               Navigator.pop(context);
+              if(GetIt.I.get<AuthLayer>().userinfo.UID != ' '){
               Navigator.push(
                 context,
                 MaterialPageRoute(
@@ -67,6 +71,10 @@ class CourseView extends StatelessWidget {
                   ),
                 ),
               );
+            }
+            else{
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>GuestSignup()));
+            }
             });
           },
         ),
