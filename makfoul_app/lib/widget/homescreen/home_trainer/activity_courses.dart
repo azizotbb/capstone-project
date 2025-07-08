@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/bloc/add_corse_bloc.dart';
@@ -23,7 +24,7 @@ class ActivityCourses extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Text(
-                      "All courses",
+                      "allCourses".tr(),
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 18,
@@ -50,7 +51,7 @@ class ActivityCourses extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "active",
+                          "active_courses".tr(),
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 18,
@@ -72,7 +73,7 @@ class ActivityCourses extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Text(
-                          "inActive",
+                          "inactive_courses".tr(),
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 18,

@@ -20,7 +20,7 @@ class CustomCourseWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       width: context.getWidth(),
-      height: context.getHeight() * 0.14,
+      height: context.getHeight() * 0.16,
       child: InkWell(
         onTap: onTap,
         child: Card(
@@ -30,7 +30,8 @@ class CustomCourseWidget extends StatelessWidget {
             padding: const EdgeInsets.all(15),
             child: Column(
               children: [
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Align(
                       alignment: Alignment.centerLeft,
@@ -47,7 +48,11 @@ class CustomCourseWidget extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container( clipBehavior: Clip.hardEdge,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                    Container(
+                      clipBehavior: Clip.hardEdge,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                       child: Image.network(
                         image,
                         height: 80,

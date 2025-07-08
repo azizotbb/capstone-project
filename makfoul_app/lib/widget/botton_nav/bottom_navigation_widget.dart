@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:makfoul_app/screen/auth/signup/signup.dart';
+import 'package:makfoul_app/screen/guest_signup.dart';
 import 'package:makfoul_app/screen/home/homescreen.dart';
 import 'package:makfoul_app/screen/home/homescreen_trainer_screen.dart';
 import 'package:makfoul_app/screen/orders-related/add_course/add_course_screen.dart';
 import 'package:makfoul_app/screen/orders-related/order_screen.dart';
+import 'package:makfoul_app/screen/profile/profile_screen.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/widget/botton_nav/bloc/bottom_navigation_bloc.dart';
 
@@ -25,11 +28,18 @@ class BottomNavigationWidget extends StatelessWidget {
               if (bloc.role == 'Trainer') {
                 bloc.listWidget[0] = HomescreenTrainerScreen();
                 bloc.listWidget[1] = AddCourseScreen();
+                bloc.listWidget[2] = ProfileScreen();
 
                 //supabase assign name for current user
-              } else {
+              } else if (bloc.role == 'User') {
                 bloc.listWidget[0] = HomeScreen();
                 bloc.listWidget[1] = OrderScreen();
+                bloc.listWidget[2] = ProfileScreen();
+              } else {
+                bloc.userinfo.avatar = null;
+                bloc.listWidget[0] = HomeScreen();
+                bloc.listWidget[1] = GuestSignup();
+                bloc.listWidget[2] = GuestSignup();
               }
               return Scaffold(
                 bottomNavigationBar: BottomNavigationBar(

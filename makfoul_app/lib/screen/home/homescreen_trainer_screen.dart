@@ -71,7 +71,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                     style: AppTextStyle.textTitleLarg24dark,
                                   ),
                                   Text(
-                                    "your dashboard for managing training courses \nand empowering domestic workers ",
+                                    "dashboradText".tr(),
                                     style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       fontSize: 12,
@@ -98,7 +98,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                           Align(
                             alignment: Alignment.topLeft,
                             child: Text(
-                              "Dashboard ",
+                              "dashboard".tr(),
                               style: AppTextStyle.textTitleLarg24dark,
                             ),
                           ),
@@ -121,7 +121,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                             MainAxisAlignment.spaceEvenly,
                                         children: [
                                           Text(
-                                            "courses",
+                                            "courses".tr(),
                                             style: TextStyle(
                                               fontWeight: FontWeight.w500,
                                               fontSize: 18,

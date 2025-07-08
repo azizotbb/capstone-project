@@ -8,7 +8,6 @@ import 'package:makfoul_app/widget/profile/change_image.dart';
 import 'package:makfoul_app/widget/profile/change_name.dart';
 import 'package:makfoul_app/widget/profile/change_password.dart';
 import 'package:makfoul_app/widget/profile/customer_service.dart';
-import 'package:makfoul_app/widget/profile/delete_account.dart';
 import 'package:makfoul_app/widget/profile/logout.dart';
 import 'package:makfoul_app/widget/profile/profile_option.dart';
 
@@ -121,21 +120,7 @@ class ProfileScreen extends StatelessWidget {
                       },
                       text: "change_password".tr(),
                     ),
-                    ProfileOption(
-                      icon: Icons.error_outline,
-                      onTap: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return BlocProvider.value(
-                              value: bloc,
-                              child: DeleteAccount(),
-                            );
-                          },
-                        );
-                      },
-                      text: "delete_account".tr(),
-                    ),
+
                     ProfileOption(
                       icon: Icons.headphones_outlined,
                       onTap: () {
