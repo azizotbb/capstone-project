@@ -36,6 +36,8 @@ class AddCourseScreen extends StatelessWidget {
                   style: AppTextStyle.textTitleLarg24dark,
                 ),
                 bottom: TabBar(
+                  indicatorWeight: 5,
+          
                   indicatorColor: AppColors.colorPrimary,
                   labelColor: AppColors.colorDarkGrey,
                   tabs: [
@@ -56,124 +58,127 @@ class AddCourseScreen extends StatelessWidget {
                         .where((e) => e.state == "InActive")
                         .toList();
 
-                    return TabBarView(
-                      children: [
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: activeCourse.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final e = activeCourse[index];
-                            return Dismissible(
-                              key: Key(e.id.toString()),
-                              direction: DismissDirection.endToStart,
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: TabBarView(
+                        children: [
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: activeCourse.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final e = activeCourse[index];
+                              return Dismissible(
+                                key: Key(e.id.toString()),
+                                direction: DismissDirection.endToStart,
 
-                              confirmDismiss: (direction) async {
-                                context.read<AddCorseBloc>().add(
-                                  DeleteCourseEvent(courseId: e.id),
-                                );
-                                await Future.delayed(
-                                  Duration(milliseconds: 300),
-                                  () {},
-                                );
-                                return true;
-                              },
-                              background: Container(
-                                color: Colors.red.withOpacity(0.1),
-                                alignment: Alignment.centerRight,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                ),
-                                child: const Icon(
-                                  Icons.delete_outline_outlined,
-                                  color: Colors.red,
-                                ),
-                              ),
-                              child: CustomCourseWidget(
-                                coursetitle: e.title,
-                                pricecourse: e.price,
-                                image: e.image,
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailsCourse(
-                                        coursetitle: e.title,
-                                        canreguster: e.numberOfTrainees,
-                                        categoryname: e.category,
-                                        startDate: e.startDate,
-                                        endDate: e.endDate,
-                                        state: e.state,
-                                        price: e.price,
-                                        desc: e.description,
-                                        tranername: userinfo.name,
-                                        courseId: e.id,
-                                      ),
-                                    ),
+                                confirmDismiss: (direction) async {
+                                  context.read<AddCorseBloc>().add(
+                                    DeleteCourseEvent(courseId: e.id),
                                   );
-                                },
-                              ),
-                            );
-                          },
-                        ),
-
-                        ListView.builder(
-                          shrinkWrap: true,
-                          itemCount: inactiveCourse.length,
-                          itemBuilder: (BuildContext context, int index) {
-                            final e1 = inactiveCourse[index];
-                            return Dismissible(
-                              key: Key(e1.id.toString()),
-                              direction: DismissDirection.endToStart,
-
-                              confirmDismiss: (direction) async {
-                                context.read<AddCorseBloc>().add(
-                                  DeleteCourseEvent(courseId: e1.id),
-                                );
-                                await Future.delayed(
-                                  Duration(milliseconds: 300),
-                                  () {},
-                                );
-                                return true;
-                              },
-                              background: Container(
-                                color: Colors.red.withOpacity(0.1),
-                                alignment: Alignment.centerRight,
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 20,
-                                ),
-                                child: const Icon(
-                                  Icons.delete_outline_outlined,
-                                  color: Colors.red,
-                                ),
-                              ),
-                              child: CustomCourseWidget(
-                                coursetitle: e1.title,
-                                pricecourse: e1.price,
-                                image: e1.image,
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => DetailsCourse(
-                                        coursetitle: e1.title,
-                                        canreguster: e1.numberOfTrainees,
-                                        categoryname: e1.category,
-                                        startDate: e1.startDate,
-                                        endDate: e1.endDate,
-                                        state: e1.state,
-                                        price: e1.price,
-                                        desc: e1.tid,
-                                        tranername: userinfo.name,
-                                        courseId: e1.id,
-                                      ),
-                                    ),
+                                  await Future.delayed(
+                                    Duration(milliseconds: 300),
+                                    () {},
                                   );
+                                  return true;
                                 },
-                              ),
-                            );
-                          },
-                        ),
-                      ],
+                                background: Container(
+                                  color: Colors.red.withOpacity(0.1),
+                                  alignment: Alignment.centerRight,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                  ),
+                                  child: const Icon(
+                                    Icons.delete_outline_outlined,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                child: CustomCourseWidget(
+                                  coursetitle: e.title,
+                                  pricecourse: e.price,
+                                  image: e.image,
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => DetailsCourse(
+                                          coursetitle: e.title,
+                                          canreguster: e.numberOfTrainees,
+                                          categoryname: e.category,
+                                          startDate: e.startDate,
+                                          endDate: e.endDate,
+                                          state: e.state,
+                                          price: e.price,
+                                          desc: e.description,
+                                          tranername: userinfo.name,
+                                          courseId: e.id,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+
+                          ListView.builder(
+                            shrinkWrap: true,
+                            itemCount: inactiveCourse.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              final e1 = inactiveCourse[index];
+                              return Dismissible(
+                                key: Key(e1.id.toString()),
+                                direction: DismissDirection.endToStart,
+
+                                confirmDismiss: (direction) async {
+                                  context.read<AddCorseBloc>().add(
+                                    DeleteCourseEvent(courseId: e1.id),
+                                  );
+                                  await Future.delayed(
+                                    Duration(milliseconds: 300),
+                                    () {},
+                                  );
+                                  return true;
+                                },
+                                background: Container(
+                                  color: Colors.red.withOpacity(0.1),
+                                  alignment: Alignment.centerRight,
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 20,
+                                  ),
+                                  child: const Icon(
+                                    Icons.delete_outline_outlined,
+                                    color: Colors.red,
+                                  ),
+                                ),
+                                child: CustomCourseWidget(
+                                  coursetitle: e1.title,
+                                  pricecourse: e1.price,
+                                  image: e1.image,
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => DetailsCourse(
+                                          coursetitle: e1.title,
+                                          canreguster: e1.numberOfTrainees,
+                                          categoryname: e1.category,
+                                          startDate: e1.startDate,
+                                          endDate: e1.endDate,
+                                          state: e1.state,
+                                          price: e1.price,
+                                          desc: e1.tid,
+                                          tranername: userinfo.name,
+                                          courseId: e1.id,
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
                     );
                   }
 

@@ -105,20 +105,22 @@ class HomeScreen extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        MainCaregoryWidget(
-                          image: null,
-                          categoryname: 'all'.tr(),
-                          ontap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => TrainerScreen(
-                                  appbarTitle: 'courses'.tr(),
-                                  courses: activeCourses,
+                        SizedBox(
+                          child: MainCaregoryWidget(
+                            image: null,
+                            categoryname: 'all'.tr(),
+                            ontap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => TrainerScreen(
+                                    appbarTitle: 'courses'.tr(),
+                                    courses: activeCourses,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
+                              );
+                            },
+                          ),
                         ),
                         SizedBox(width: 12),
                         MainCaregoryWidget(
@@ -175,7 +177,7 @@ class HomeScreen extends StatelessWidget {
                       height: context.getHeight() * 0.30,
                       child: PageView.builder(
                         controller: PageController(viewportFraction: 0.99),
-                        itemCount: 1,
+                        itemCount: 3,
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                             onTap: () {

@@ -9,44 +9,74 @@ class CustomCourseWidget extends StatelessWidget {
     required this.coursetitle,
     required this.pricecourse,
     required this.image,
-    required this .onTap,
+    required this.onTap,
   });
   final String coursetitle;
   final double pricecourse;
   final String image;
-  final VoidCallback onTap; 
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: SizedBox(
-        width: context.getWidth(),
-        height: context.getHeight() * 0.14,
-        child: Card(
-          color: const Color.fromARGB(255, 255, 255, 255),
-          elevation: 3.5,
-          child: Padding(
-            padding: const EdgeInsets.all(12),
-            child: ListTile(
-              onTap: onTap,
-              title: Text(coursetitle, style: AppTextStyle.textbold16),
-              subtitle: Text(
-                "$pricecourse SAR",
-                style: TextStyle(
-                  color: AppColors.colorScondry,
-                  fontWeight: FontWeight.bold,
-                ),
+    return SizedBox(
+      width: context.getWidth(),
+      height: context.getHeight() * 0.14,
+      child: Card(
+        color: const Color.fromARGB(255, 255, 255, 255),
+        elevation: 3.5,
+        child: Padding(
+          padding: const EdgeInsets.all(15),
+          child: Column(
+            children: [
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    child: Column(
+                      children: [
+                        Text(coursetitle, style: AppTextStyle.textbold16),
+                        Text(
+                          "$pricecourse SAR",
+                          style: TextStyle(
+                            color: AppColors.colorScondry,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container( clipBehavior: Clip.hardEdge,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                    child: Image.network(
+                      image,
+                      height: 80,
+                      width: 110,
+                      fit: BoxFit.fill,
+                    ),
+                  ),
+                ],
               ),
-              trailing: Image.network(
-                image,
-                height: 80,
-                width: 110,
-                fit: BoxFit.fill,
-              ),
-            ),
+            ],
           ),
         ),
       ),
     );
   }
 }
+
+// ListTile(
+//               onTap: onTap,
+//               title: Text(coursetitle, style: AppTextStyle.textbold16),
+//               subtitle: Text(
+//                 "$pricecourse SAR",
+//                 style: TextStyle(
+//                   color: AppColors.colorScondry,
+//                   fontWeight: FontWeight.bold,
+//                 ),
+//               ),
+//               trailing: Image.network(
+//                 image,
+//                 height: 80,
+//                 width: 110,
+//                 fit: BoxFit.fill,
+//               ),
+//             ),

@@ -28,6 +28,7 @@ class AddModalSheet extends StatelessWidget {
           child: GestureDetector(
             onTap: () async {
               await showModalBottomSheet(
+                backgroundColor: Colors.white,
                 showDragHandle: true,
                 useSafeArea: true,
                 isScrollControlled: true,

@@ -17,10 +17,11 @@ class Validators {
     if (value == null || value.isEmpty) {
       return 'Please enter your phone number';
     }
-    if (value.length < 9) {
-      return 'Phone number too short';
+    if (value.length == 10) {
+      return null;
+    } else {
+      return 'the number is not correct';
     }
-    return null;
   }
 
   /// Validates email format

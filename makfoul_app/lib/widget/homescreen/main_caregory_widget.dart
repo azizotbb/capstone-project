@@ -20,8 +20,8 @@ class MainCaregoryWidget extends StatelessWidget {
         GestureDetector(
           onTap: ontap,
           child: Container(
-            height: 80,
-            width: 80,
+            height: 66,
+            width: 66,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: AppColors.colorpeige,
@@ -29,11 +29,16 @@ class MainCaregoryWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: image != null
-                  ? Image.asset(image!, height: 32, fit: BoxFit.contain)
+                  ? Image.asset(
+                      image!,
+                      height: 32,
+                      width: 37,
+                      fit: BoxFit.contain,
+                    )
                   : Icon(
                       Icons.grid_view,
                       color: AppColors.colorScondry,
-                      size: 40,
+                      size: 37,
                     ),
             ),
           ),

@@ -36,168 +36,173 @@ class HomescreenTrainerScreen extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    BackgroundColorWidget(height: 160),
+                    BackgroundColorWidget(height: 200),
                     Padding(
-                      padding: EdgeInsets.all(9),
+                      padding: EdgeInsets.all(12),
                       child: SafeArea(
                         child: SizedBox(
                           width: context.getWidth(),
-                          child: ListTile(
-                            leading: Container(
+                          child: Row(spacing: 16,children: [Container(
                               height: 68,
+                              width: 68,
                               clipBehavior: Clip.hardEdge,
                               decoration: BoxDecoration(shape: BoxShape.circle),
                               child: userinfo.avatar == null
                                   ? Image.asset(
-                                      "assets/images/circler avtar instructor.png",
+                                      "assets/images/circler avtar instructor.png",fit: BoxFit.fill,
                                     )
                                   : Image.network(userinfo.avatar!),
                             ),
-                            title: Text(
+                            Column(spacing: 8,crossAxisAlignment: CrossAxisAlignment.start,children: [Text(
                               "Hi,".tr() + userinfo.name,
                               style: AppTextStyle.textTitleLarg24dark,
                             ),
-                            subtitle: Text(
+                            Text(
                               "your dashboard for managing training courses \nand empowering domestic workers ",
                               style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 12,
                                 color: AppColors.colorDarkGrey,
                               ),
-                            ),
-                          ),
+                            ),],)
+                            
+                            ],),
                         ),
                       ),
                     ),
                   ],
                 ),
+                SizedBox(height: 12),
                 //body
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: ListView(
-                      children: [
-                        //Dashboard
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "Dashboard ",
-                            style: AppTextStyle.textTitleLarg24dark,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        children: [
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Dashboard ",
+                              style: AppTextStyle.textTitleLarg24dark,
+                            ),
                           ),
-                        ),
-                        SizedBox(height: 12),
+                          SizedBox(height: 12),
 
-                        BlocProvider.value(
-                          value: bloc,
-                          child: ActivityCourses(),
-                        ),
-                        SizedBox(height: 12),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            BlocBuilder<AddCorseBloc, AddCorseState>(
-                              builder: (context, state) {
-                                if (state is CoursesLoaded) {
-                                  return Dashboardcard(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Text(
-                                          "courses",
-                                          style: TextStyle(
-                                            fontWeight: FontWeight.w500,
-                                            fontSize: 18,
-                                            color: AppColors.colorDarkGrey,
+                          BlocProvider.value(
+                            value: bloc,
+                            child: ActivityCourses(),
+                          ),
+                          SizedBox(height: 12),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              BlocBuilder<AddCorseBloc, AddCorseState>(
+                                builder: (context, state) {
+                                  if (state is CoursesLoaded) {
+                                    return Dashboardcard(
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceEvenly,
+                                        children: [
+                                          Text(
+                                            "courses",
+                                            style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 18,
+                                              color: AppColors.colorDarkGrey,
+                                            ),
                                           ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Image.asset(
-                                              "assets/images/Clean (2).png",
-                                              height: 20,
-                                              width: 20,
-                                            ),
-                                            Text(
-                                              "${state.clean}",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Image.asset(
+                                                "assets/images/Clean (2).png",
+                                                height: 20,
+                                                width: 20,
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Image.asset(
-                                              "assets/images/cook (2).png",
-                                              height: 20,
-                                              width: 20,
-                                            ),
-                                            Text(
-                                              "${state.cook}",
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.w500,
+                                              Text(
+                                                "${state.clean}",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
-                                  );
-                                }
-                                return SizedBox();
-                              },
-                            ),
-                            BlocProvider.value(
-                              value: bloc,
-                              child: AddModalSheet(),
-                            ),
-                          ],
-                        ),
-
-                        SizedBox(height: 12),
-                        Align(
-                          alignment: Alignment.topLeft,
-                          child: Text(
-                            "Courses ",
-                            style: AppTextStyle.textTitleLarg24dark,
-                          ),
-                        ),
-                        SizedBox(height: 12),
-                        BlocBuilder<AddCorseBloc, AddCorseState>(bloc: bloc,
-                          builder: (context, state) {
-                            bloc.add(GetCoursesEvent());
-                            if (state is CoursesLoaded) {
-                              return GridView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: state.trainearcourses!.length,
-                                gridDelegate:
-                                    SliverGridDelegateWithFixedCrossAxisCount(
-                                      crossAxisCount: 2,
-                                      mainAxisSpacing: 10,
-                                      crossAxisSpacing: 3,
-                                      childAspectRatio: 0.8,
-                                    ),
-                                itemBuilder: (context, index) {
-                                  final e = state.trainearcourses![index];
-                                  return TopCourses(
-                                    image: e.image,
-                                    coursename: e.title,
-                                    location: e.location,
-                                    price: e.price,
-                                  );
+                                            ],
+                                          ),
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceEvenly,
+                                            children: [
+                                              Image.asset(
+                                                "assets/images/cook (2).png",
+                                                height: 20,
+                                                width: 20,
+                                              ),
+                                              Text(
+                                                "${state.cook}",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    );
+                                  }
+                                  return SizedBox();
                                 },
-                              );
-                            }
-                            return SizedBox();
-                          },
-                        ),
-                      ],
+                              ),
+                              BlocProvider.value(
+                                value: bloc,
+                                child: AddModalSheet(),
+                              ),
+                            ],
+                          ),
+
+                          SizedBox(height: 12),
+                          Align(
+                            alignment: Alignment.topLeft,
+                            child: Text(
+                              "Courses ",
+                              style: AppTextStyle.textTitleLarg24dark,
+                            ),
+                          ),
+                          SizedBox(height: 12),
+                          BlocBuilder<AddCorseBloc, AddCorseState>(
+                            bloc: bloc,
+                            builder: (context, state) {
+                              bloc.add(GetCoursesEvent());
+                              if (state is CoursesLoaded) {
+                                return GridView.builder(
+                                  shrinkWrap: true,
+                                  padding: EdgeInsets.zero,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: state.trainearcourses!.length,
+                                  gridDelegate:
+                                      SliverGridDelegateWithFixedCrossAxisCount(
+                                        crossAxisCount: 2,
+                                        mainAxisSpacing: 10,
+                                        crossAxisSpacing: 10,
+                                        childAspectRatio: 0.7,
+                                      ),
+                                  itemBuilder: (context, index) {
+                                    final e = state.trainearcourses![index];
+                                    return TopCourses(
+                                      image: e.image,
+                                      coursename: e.title,
+                                      location: e.location,
+                                      price: e.price,
+                                    );
+                                  },
+                                );
+                              }
+                              return SizedBox();
+                            },
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
