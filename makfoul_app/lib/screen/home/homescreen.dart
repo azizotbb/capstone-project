@@ -175,7 +175,7 @@ class HomeScreen extends StatelessWidget {
                       height: context.getHeight() * 0.30,
                       child: PageView.builder(
                         controller: PageController(viewportFraction: 0.99),
-                        itemCount: 1,
+                        itemCount: 3,
                         itemBuilder: (BuildContext context, int index) {
                           return InkWell(
                             onTap: () {
