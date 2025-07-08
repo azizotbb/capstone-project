@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/repo/layer/auth_layer.dart';
+import 'package:makfoul_app/repo/layer/opreations_layer.dart';
 import 'package:makfoul_app/screen/profile/bloc/profile_bloc.dart';
 
 class ChangeImage extends StatelessWidget {
@@ -15,7 +16,7 @@ class ChangeImage extends StatelessWidget {
     return Builder(
       builder: (context) {
         final bloc = context.read<ProfileBloc>();
-
+        GetIt.I.get<OpreationsLayer>().getImageUrlMethod;
         return InkWell(
           onTap: () {
             bloc.add(UpdateImageEvent());
@@ -23,11 +24,12 @@ class ChangeImage extends StatelessWidget {
           },
           child: Container(
             height: 68,
+            width: 68,
             clipBehavior: Clip.hardEdge,
             decoration: BoxDecoration(shape: BoxShape.circle),
             child: userinfo.avatar == null
                 ? Image.asset("assets/images/circler avtar instructor.png")
-                : Image.network(userinfo.avatar!),
+                : Image.network(userinfo.avatar!, fit: BoxFit.fill),
           ),
         );
       },
