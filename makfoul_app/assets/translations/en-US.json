@@ -118,5 +118,6 @@
   "codeReq": "Please enter the verification code",
   "selectCat": "Select Catagory",
   "regInCourse":"Registered in the Course",
-  "guestSign":"Please Sign up or Sign in to view this page"
+  "guestSign":"Please Sign up or Sign in to view this page",
+  "Search":"Search"
 }

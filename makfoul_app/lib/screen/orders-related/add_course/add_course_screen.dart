@@ -28,7 +28,7 @@ class AddCourseScreen extends StatelessWidget {
           return DefaultTabController(
             length: 2,
             child: Scaffold(
-              appBar: AppBar(
+              appBar: AppBar(automaticallyImplyLeading: false,
                 centerTitle: true,
 
                 title: Text(
@@ -83,7 +83,7 @@ class AddCourseScreen extends StatelessWidget {
                                 },
                                 background: Container(
                                   color: Colors.red.withOpacity(0.1),
-                                  alignment: Alignment.centerRight,
+                                  alignment: context.locale.countryCode == 'US'? Alignment.centerRight:Alignment.centerLeft,
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 20,
                                   ),

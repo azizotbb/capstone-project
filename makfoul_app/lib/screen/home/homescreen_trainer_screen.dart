@@ -97,7 +97,7 @@ class HomescreenTrainerScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Align(
-                            alignment: Alignment.topLeft,
+                            alignment: context.locale.countryCode=="US"? Alignment.topLeft:Alignment.topRight,
                             child: Text(
                               "dashboard".tr(),
                               style: AppTextStyle.textTitleLarg24dark,
@@ -180,9 +180,9 @@ class HomescreenTrainerScreen extends StatelessWidget {
 
                           SizedBox(height: 12),
                           Align(
-                            alignment: Alignment.topLeft,
+                            alignment: context.locale.countryCode=="US"? Alignment.topLeft:Alignment.topRight,
                             child: Text(
-                              "Courses ",
+                              "courses".tr(),
                               style: AppTextStyle.textTitleLarg24dark,
                             ),
                           ),

@@ -73,7 +73,7 @@ class AddModalSheet extends StatelessWidget {
                                               horizontal: 20,
                                             ),
                                             child: Text(
-                                              item,
+                                              item.tr(),
                                               style: TextStyle(fontSize: 12),
                                             ),
                                           ),

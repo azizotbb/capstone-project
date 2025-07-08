@@ -102,7 +102,7 @@ class DetailsCourse extends StatelessWidget {
                   categoryname: categoryname,
                   startDate: startDate,
                   endDate: endDate,
-                  location: 'Alrass',
+                  location: 'Riyadh',
                   description: desc,
                   price: price,
                   isActive: state,
@@ -161,6 +161,7 @@ class DetailsCourse extends StatelessWidget {
                                 child: RegusterdWidget(
                                   numserial: index + 1,
                                   username: user.uid.name,
+                                  phoneNumber: user.uid.phone,
                                   image: user.uid.avatar ?? '',
                                 ),
                               );

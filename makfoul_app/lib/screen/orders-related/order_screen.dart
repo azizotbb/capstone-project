@@ -14,7 +14,7 @@ class OrderScreen extends StatelessWidget {
     final ordersByUID = GetIt.I.get<OpreationsLayer>().ordersByUID;
 
     return Scaffold(
-      appBar: AppBar(title: Text("order").tr(), centerTitle: true),
+      appBar: AppBar(title: Text("order").tr(), centerTitle: true,automaticallyImplyLeading: false,),
       // If there are no orders, show a message. Otherwise, display the list of courses.
       body: ordersByUID.isEmpty
           ? Center(child: Text("No orders found".tr()))
