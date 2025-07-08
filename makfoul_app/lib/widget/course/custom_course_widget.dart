@@ -21,41 +21,44 @@ class CustomCourseWidget extends StatelessWidget {
     return SizedBox(
       width: context.getWidth(),
       height: context.getHeight() * 0.14,
-      child: Card(
-        color: const Color.fromARGB(255, 255, 255, 255),
-        elevation: 3.5,
-        child: Padding(
-          padding: const EdgeInsets.all(15),
-          child: Column(
-            children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: Column(
-                      children: [
-                        Text(coursetitle, style: AppTextStyle.textbold16),
-                        Text(
-                          "$pricecourse SAR",
-                          style: TextStyle(
-                            color: AppColors.colorScondry,
-                            fontWeight: FontWeight.bold,
+      child: InkWell(
+        onTap: onTap,
+        child: Card(
+          color: const Color.fromARGB(255, 255, 255, 255),
+          elevation: 3.5,
+          child: Padding(
+            padding: const EdgeInsets.all(15),
+            child: Column(
+              children: [
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: Column(
+                        children: [
+                          Text(coursetitle, style: AppTextStyle.textbold16),
+                          Text(
+                            "$pricecourse SAR",
+                            style: TextStyle(
+                              color: AppColors.colorScondry,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  ),
-                  Container( clipBehavior: Clip.hardEdge,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
-                    child: Image.network(
-                      image,
-                      height: 80,
-                      width: 110,
-                      fit: BoxFit.fill,
+                    Container( clipBehavior: Clip.hardEdge,decoration: BoxDecoration(borderRadius: BorderRadius.circular(10)),
+                      child: Image.network(
+                        image,
+                        height: 80,
+                        width: 110,
+                        fit: BoxFit.fill,
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

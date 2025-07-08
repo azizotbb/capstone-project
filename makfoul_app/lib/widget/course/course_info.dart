@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 
@@ -45,7 +46,8 @@ class CourseInfo extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  Image.asset("assets/images/date.png"),
+                  SvgPicture.asset('assets/icons/calender.svg'),
+                  // Image.asset("assets/images/date.png"),
                   SizedBox(width: 10),
                   Column(
                     children: [
@@ -63,7 +65,7 @@ class CourseInfo extends StatelessWidget {
               ),
               Row(
                 children: [
-                  Image.asset(categoryimage, height: 35, width: 33),
+                  SvgPicture.asset(categoryimage, height: 25, width: 25),
                   SizedBox(width: 10),
                   Text(
                     categoryname,
@@ -74,12 +76,7 @@ class CourseInfo extends StatelessWidget {
 
               Row(
                 children: [
-                  // Image.asset(
-                  //   "assets/images/Location.png",
-                  //   height: 20,
-                  //   width: 18,
-                  //   fit: BoxFit.fitHeight,
-                  // ),
+                
                   Icon(
                     Icons.location_on_outlined,
                     color: AppColors.colorScondry,

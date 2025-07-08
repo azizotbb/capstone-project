@@ -24,6 +24,7 @@ dependencies:
   intl: ^0.20.2
   url_launcher: ^6.3.1
   onesignal_flutter: ^5.3.4
+  flutter_svg: ^2.2.0
 
 dev_dependencies:
   flutter_test:
@@ -39,3 +40,4 @@ flutter:
     - assets/images/
     - .env
     - assets/translations/
+    - assets/icons/

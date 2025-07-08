@@ -40,10 +40,9 @@ class TopCourses extends StatelessWidget {
               height: 140,
               width: context.getWidth(),
               decoration: BoxDecoration(
-        
                 borderRadius: BorderRadius.circular(12),
               ),
-              child: Image.network(image,fit: BoxFit.fill,),
+              child: Image.network(image, fit: BoxFit.fill),
             ),
             SizedBox(height: 10),
             Column(

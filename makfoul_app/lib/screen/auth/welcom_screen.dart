@@ -60,9 +60,9 @@ class WelcomScreen extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => HomeScreen()),
-                  );
+                  Navigator.of(
+                    context,
+                  ).push(MaterialPageRoute(builder: (context) => HomeScreen()));
                 },
                 child: Text(
                   'continue_as_guest'.tr(),

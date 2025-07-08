@@ -124,7 +124,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         SizedBox(width: 12),
                         MainCaregoryWidget(
-                          image: "assets/images/Clean (2).png",
+                          image: "assets/icons/clean3.svg",
                           categoryname: 'clean'.tr(),
                           ontap: () {
                             List cleanCourses = activeCourses
@@ -144,7 +144,7 @@ class HomeScreen extends StatelessWidget {
                         ),
                         SizedBox(width: 12),
                         MainCaregoryWidget(
-                          image: "assets/images/cook (2).png",
+                          image: "assets/icons/cook.svg",
                           categoryname: 'cook'.tr(),
                           ontap: () {
                             List cookCourses = activeCourses

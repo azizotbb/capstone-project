@@ -90,8 +90,8 @@ class UserDetailsCourse extends StatelessWidget {
                 SizedBox(height: 12),
                 CourseInfo(
                   categoryimage: categoryname == "Clean"
-                      ? "assets/images/Clean (2).png"
-                      : "assets/images/cook (2).png",
+                      ? "assets/icons/clean3.svg"
+                      : "assets/icons/cook.svg",
                   categoryname: categoryname.tr(),
                   startDate: startDate,
                   endDate: endDate,

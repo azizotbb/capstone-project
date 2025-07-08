@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
 
@@ -29,7 +30,7 @@ class MainCaregoryWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: image != null
-                  ? Image.asset(
+                  ? SvgPicture.asset(
                       image!,
                       height: 32,
                       width: 37,

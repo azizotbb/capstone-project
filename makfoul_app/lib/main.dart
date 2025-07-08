@@ -48,7 +48,7 @@ class MainApp extends StatelessWidget {
       locale: context.locale,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.appTheme,
-      home: SplashScreen(),
+      home:  SplashScreen(),
     );
   }
 }

@@ -36,37 +36,52 @@ class HomescreenTrainerScreen extends StatelessWidget {
               children: [
                 Stack(
                   children: [
-                    BackgroundColorWidget(height: 200),
+                    BackgroundColorWidget(height: 170),
                     Padding(
                       padding: EdgeInsets.all(12),
                       child: SafeArea(
                         child: SizedBox(
                           width: context.getWidth(),
-                          child: Row(spacing: 16,children: [Container(
-                              height: 68,
-                              width: 68,
-                              clipBehavior: Clip.hardEdge,
-                              decoration: BoxDecoration(shape: BoxShape.circle),
-                              child: userinfo.avatar == null
-                                  ? Image.asset(
-                                      "assets/images/circler avtar instructor.png",fit: BoxFit.fill,
-                                    )
-                                  : Image.network(userinfo.avatar!),
-                            ),
-                            Column(spacing: 8,crossAxisAlignment: CrossAxisAlignment.start,children: [Text(
-                              "Hi,".tr() + userinfo.name,
-                              style: AppTextStyle.textTitleLarg24dark,
-                            ),
-                            Text(
-                              "your dashboard for managing training courses \nand empowering domestic workers ",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 12,
-                                color: AppColors.colorDarkGrey,
+                          child: Row(
+                            spacing: 16,
+                            children: [
+                              Container(
+                                height: 68,
+                                width: 68,
+                                clipBehavior: Clip.hardEdge,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                ),
+                                child: userinfo.avatar == null
+                                    ? Image.asset(
+                                        "assets/images/circler avtar instructor.png",
+                                        fit: BoxFit.fill,
+                                      )
+                                    : Image.network(
+                                        userinfo.avatar!,
+                                        fit: BoxFit.fill,
+                                      ),
                               ),
-                            ),],)
-                            
-                            ],),
+                              Column(
+                                spacing: 8,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    "Hi,".tr() + userinfo.name,
+                                    style: AppTextStyle.textTitleLarg24dark,
+                                  ),
+                                  Text(
+                                    "your dashboard for managing training courses \nand empowering domestic workers ",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 12,
+                                      color: AppColors.colorDarkGrey,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
