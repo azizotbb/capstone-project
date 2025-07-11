@@ -62,7 +62,15 @@ Our project:
 
 ## 👥 Tasks or Division of Members in the Project
 
-ضيفو التقسيمات هنا 
+-Abdulaziz: handled supabase with frontend programming
+
+-Norah: handled design and frontend with api integrations
+
+-Raghad: handled design and frontend and logic with bloc
+
+-Ayman: supabase and backend with debugging
+
+
 ---
 
 ## 📌 Minimum Requirements
@@ -81,9 +89,9 @@ Our project:
 ## 👤 Project Members
 
 - **azizotbb** – Project Leader   
-- **Norah Alshakrah** – Developer  
-- **Ayman Alzahrani** – Developer  
-- **Raghad Alsakhain** – Developer  
+- **Norah200** – Developer  
+- **AymanAlzahrani** – Developer  
+- **Raghadalsakhain** – Developer  
 
 ---
 
