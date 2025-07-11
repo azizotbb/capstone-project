@@ -1,100 +1,105 @@
+# Makfoul App
 
-## 📱 Project Summary
-
-The capstone project will be a mobile application developed using **Flutter** and **Dart** to address *[briefly describe the problem or value the app provides]*. It aims to offer *[key features or functionalities of the app]*.
+The capstone project will be a mobile application developed using Flutter and Dart to address the challenges families face in improving the skills of their domestic workers.  
+It aims to offer features like training course browsing, location integration, payment handling, and real-time notifications.
 
 ---
 
 ## 🧠 Problem Solving
 
-*[Explain how your app addresses the identified problem or provides value to its users]*
+Many families struggle with the performance of domestic workers due to a lack of experience and communication barriers, especially language.  
+Makfoul App solves this by connecting families with experienced trainers who can help workers improve their skills in areas like cleaning and cooking.  
+It also provides trainers with a way to generate additional income through the platform.
 
 ---
 
 ## 📝 Project Description
 
-The capstone project is an exciting opportunity for you to design and develop a real-world mobile application using the **Flutter** framework. You have the freedom to choose any app idea that interests you, be it a:
+The capstone project is an exciting opportunity for us to design and develop a real-world mobile application using the Flutter framework.
 
-- Social networking app  
-- Productivity tool  
-- Educational platform  
-- E-commerce solution  
-- Health tracker  
+Makfoul is a practical solution that enhances household service quality while reducing the burden on families. It empowers domestic workers through structured training and gives trainers a chance to earn.
 
-...or anything else that demonstrates your creativity and technical abilities.
+Our project:
 
-Your project should:
-- Address a specific problem
-- Provide value to users
-- Explore innovative ideas
-- Have a polished and user-friendly UI
+- Addresses a real and specific social need  
+- Provides value through skill-building and smart features  
+- Has a clean, user-friendly and modern UI
 
 ---
 
 ## 🔧 Project Properties
 
-- **Name**: *[Project Name]*
-- **Platform**: Mobile (Android and iOS)
-- **Language**: Dart
-- **Framework**: Flutter
+- **Name:** Makfoul App  
+- **Platform:** Mobile (Android and iOS)  
+- **Language:** Dart  
+- **Framework:** Flutter 3.32.5 (Dart 3.8.1)
 
 ---
 
 ## 🖼️ Pictures to Apply
 
-*[Include relevant pictures or sketches that demonstrate the app's design and layout]*
+![App Screenshots](https://i.imgur.com/Yr0qJSR.png)
 
 ---
 
 ## ✅ Features That Will Be Added
 
-- *[Feature 1]*
-- *[Feature 2]*
-- *[Feature 3]*
+- Adding and managing training courses  
+- Google Maps integration for location selection  
+- Payment gateway integration via Moyasar  
+- Push notifications using OneSignal
 
 ---
 
 ## 🚀 Features That Will Be Added in the Future
 
-- *[Future Feature 1]*
-- *[Future Feature 2]*
-- *[Future Feature 3]*
+- Rating system for trainers and families  
+- Customer support integration  
+- Chat between trainer and family  
+- UX/UI improvements based on user feedback
 
 ---
 
 ## 👥 Tasks or Division of Members in the Project
 
-*[Outline how the project tasks are divided among team members, including specific responsibilities for each member]*
+-Abdulaziz: handled supabase with frontend programming
+
+-Norah: handled design and frontend with api integrations
+
+-Raghad: handled design and frontend and logic with bloc
+
+-Ayman: supabase and backend with debugging
+
 
 ---
 
 ## 📌 Minimum Requirements
 
-*[Include the minimum requirements for the project, as mentioned in the earlier section]*
+- User authentication and OTP verification  
+- Multi-screen navigation with clean routing  
+- Integration with external APIs (Supabase, Moyasar, Google Maps, OneSignal)  
+- State management using BLoC  
+- Dependency injection with GetIt  
+- Internationalization with Easy Localization  
+- Responsive design and custom UI components  
+- Secure environment configuration with `.env` support
 
 ---
 
 ## 👤 Project Members
 
-- **[Member 1 Name]** - *[Role/Responsibility]*
-- **[Member 2 Name]** - *[Role/Responsibility]*
-- **[Member 3 Name]** - *[Role/Responsibility]*
-- **[Member 4 Name]** - *[Role/Responsibility]*
-- **[Member 5 Name]** - *[Role/Responsibility]*
+- **azizotbb** – Project Leader   
+- **Norah200** – Developer  
+- **AymanAlzahrani** – Developer  
+- **Raghadalsakhain** – Developer  
 
 ---
 
 ## 🔗 Project Member Accounts in GitHub
 
-- **[Member 1 GitHub Username]**: [GitHub Profile URL]  
-- **[Member 2 GitHub Username]**: [GitHub Profile URL]  
-- **[Member 3 GitHub Username]**: [GitHub Profile URL]  
-- **[Member 4 GitHub Username]**: [GitHub Profile URL]  
-- **[Member 5 GitHub Username]**: [GitHub Profile URL]
+- [Norah200](https://github.com/Norah200)  
+- [AymanAlzahrani](https://github.com/AymanAlzahrani)  
+- [azizotbb](https://github.com/azizotbb)  
+- [Raghadalsakhain](https://github.com/Raghadalsakhain)
 
 ---
-
-> 💡 Remember, this is an opportunity to showcase your skills and creativity, so feel free to explore innovative ideas and push your limits in creating a remarkable Flutter application!
-
-**Good luck with your capstone project!**  
-Don't hesitate to seek guidance from your bootcamp instructors if needed.
