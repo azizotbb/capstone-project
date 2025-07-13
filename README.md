@@ -88,14 +88,10 @@ Our project:
 
 ## 👤 Project Members
 
-- **azizotbb** – Project Leader
-  https://bind.link/@abdulaziz-01jz6rmk7z
-- **Norah200** – Developer
-  https://bind.link/@abdulaziz-01jz6rmk7z
-- **AymanAlzahrani** – Developer
-  https://bind.link/@abdulaziz-01jz6rmk7z 
-- **Raghadalsakhain** – Developer
-  https://bind.link/@abdulaziz-01jz6rmk7z
+- **azizotbb** – Project Leader - https://bind.link/@abdulaziz-01jz6rmk7z
+- **Norah200** – Developer - https://bind.link/@norah-portfolio
+- **AymanAlzahrani** – Developer - https://bind.link/@aymanalzharni
+- **Raghadalsakhain** – Developer - https://bind.link/@2ajkps01jz6a66gy
 
 ---
 
