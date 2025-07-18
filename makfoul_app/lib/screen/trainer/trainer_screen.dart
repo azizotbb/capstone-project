@@ -10,6 +10,7 @@ import 'package:makfoul_app/style/app_text_style.dart';
 import 'package:makfoul_app/widget/Instructor/instructor_custom_card.dart';
 import 'package:makfoul_app/widget/homescreen/background_color_widget.dart';
 
+
 // ignore: must_be_immutable
 class TrainerScreen extends StatelessWidget {
   TrainerScreen({super.key, required this.appbarTitle, required this.courses});
@@ -122,7 +123,7 @@ class TrainerScreen extends StatelessWidget {
                                       category: coursestoshow[index].category,
                                       numberOfTrainees:
                                           coursestoshow[index].numberOfTrainees,
-                                      state: coursestoshow[index].state,
+                                      state: coursestoshow[index].state, startDate: coursestoshow[index].startDate , endDate: coursestoshow[index].endDate,
                                     ),
                                   ),
                                 );

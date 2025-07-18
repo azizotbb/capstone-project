@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/style/app_colors.dart';
 import 'package:makfoul_app/style/app_text_style.dart';
+import 'package:makfoul_app/utility/map_helper.dart';
 import 'package:makfoul_app/widget/course/course_info.dart';
 
 class UserDetailsCourse extends StatelessWidget {
@@ -18,6 +21,7 @@ class UserDetailsCourse extends StatelessWidget {
   final int canreguster;
   final String tranername;
   final String tranerPhone;
+  
 
   const UserDetailsCourse({
     super.key,
@@ -38,6 +42,8 @@ class UserDetailsCourse extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+     // Parse course location string into LatLng
+    final LatLng? position = parseLatLng(location);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -139,6 +145,64 @@ class UserDetailsCourse extends StatelessWidget {
                 ),
 
                 SizedBox(height: 30),
+                   Align(
+                  alignment: Alignment.bottomLeft,
+                  child: Text(
+                    "Location".tr(),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 18,
+                      color: AppColors.colorPrimary,
+                    ),
+                  ),
+                ),
+
+                      const SizedBox(height: 16),
+
+                      SizedBox(
+                        width: context.getWidth(),
+                        height: 150,
+                        child: position == null
+                            ? Image.asset(
+                                'assets/images/map.png',
+                                fit: BoxFit.cover,
+                              )
+                            : Stack(
+                                // Show Google Map if position is valid
+                                children: [
+                                  GoogleMap(
+                                    initialCameraPosition: CameraPosition(
+                                      target: position,
+                                      zoom: 14,
+                                    ),
+                                    // Display a single marker on the map for the course location
+                                    markers: {
+                                      (Marker(
+                                        markerId: MarkerId(coursetitle.toString()),
+                                        position: position,
+                                      )),
+                                    },
+                                    zoomControlsEnabled: false,
+                                    myLocationButtonEnabled: false,
+                                    liteModeEnabled: true,
+                                    gestureRecognizers: {},
+                                  ),
+
+                                  // When the map is tapped, open Google Maps externally
+                                  Positioned.fill(
+                                    child: Material(
+                                      color: Colors.transparent,
+                                      child: InkWell(
+                                        onTap: () {
+                                          final latLng = parseLatLng(location);
+                                          openGoogleMap(latLng);
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                      ),
               ],
             ),
           ),

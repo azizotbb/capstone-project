@@ -22,6 +22,10 @@ class CourseView extends StatelessWidget {
   final double price;
   final int numberOfTrainees;
   final String state;
+    final String startDate;
+        final String endDate;
+
+
 
   const CourseView({
     super.key,
@@ -34,7 +38,7 @@ class CourseView extends StatelessWidget {
     required this.tid,
     required this.category,
     required this.numberOfTrainees,
-    required this.state,
+    required this.state,  required this.startDate, required this.endDate,
   });
 
   @override
@@ -140,54 +144,25 @@ class CourseView extends StatelessWidget {
                       Text(description, style: AppTextStyle.textDes12),
                       const SizedBox(height: 16),
 
-                      Text("Location".tr(), style: AppTextStyle.textbold16),
+                      Text("Course date".tr(), style: AppTextStyle.textbold16),
+                                            const SizedBox(height: 6),
+
+                      Row(
+                        spacing: 8,
+                        children: [
+                          Text(
+                                startDate.split('T').first,
+                                style: AppTextStyle.text14primary,
+                              ),
+                              Text("-"),
+                              Text(
+                                endDate.split('T').first,
+                                style: AppTextStyle.text14primary,)
+                        ],
+                      ),
 
                       const SizedBox(height: 16),
 
-                      SizedBox(
-                        width: context.getWidth(),
-                        height: 150,
-                        child: position == null
-                            ? Image.asset(
-                                'assets/images/map.png',
-                                fit: BoxFit.cover,
-                              )
-                            : Stack(
-                                // Show Google Map if position is valid
-                                children: [
-                                  GoogleMap(
-                                    initialCameraPosition: CameraPosition(
-                                      target: position,
-                                      zoom: 14,
-                                    ),
-                                    // Display a single marker on the map for the course location
-                                    markers: {
-                                      (Marker(
-                                        markerId: MarkerId(courseId.toString()),
-                                        position: position,
-                                      )),
-                                    },
-                                    zoomControlsEnabled: false,
-                                    myLocationButtonEnabled: false,
-                                    liteModeEnabled: true,
-                                    gestureRecognizers: {},
-                                  ),
-
-                                  // When the map is tapped, open Google Maps externally
-                                  Positioned.fill(
-                                    child: Material(
-                                      color: Colors.transparent,
-                                      child: InkWell(
-                                        onTap: () {
-                                          final latLng = parseLatLng(location);
-                                          openGoogleMap(latLng);
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                      ),
                       const SizedBox(height: 16),
                       Text("Price".tr(), style: AppTextStyle.textbold16),
                       Row(

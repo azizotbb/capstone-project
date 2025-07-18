@@ -45,6 +45,7 @@ class OrderScreen extends StatelessWidget {
                             tranername: ordersByUID[index].courseId.user!.name,
                             tranerPhone:
                                 ordersByUID[index].courseId.user!.phone,
+                                location: ordersByUID[index].courseId.location,
                           ),
                         ),
                       );

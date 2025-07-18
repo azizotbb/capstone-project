@@ -42,8 +42,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // theme: AppTheme.appTheme,
-      // home: BottomNavigationWidget(),
+      title: 'Makfoul App',
       localizationsDelegates: context.localizationDelegates,
       supportedLocales: context.supportedLocales,
       locale: context.locale,

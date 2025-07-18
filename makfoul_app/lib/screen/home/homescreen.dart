@@ -201,6 +201,8 @@ class HomeScreen extends StatelessWidget {
                                     numberOfTrainees:
                                         activeCourses[index].numberOfTrainees,
                                     state: activeCourses[index].state,
+                                    startDate: activeCourses[index].startDate,
+                                    endDate: activeCourses[index].endDate,
                                   ),
                                 ),
                               );
