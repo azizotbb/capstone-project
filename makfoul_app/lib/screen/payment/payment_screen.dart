@@ -23,7 +23,7 @@ class PaymentScreen extends StatelessWidget {
       publishableApiKey: dotenv.env["moyasarKey"].toString(),
       amount: amount,
       description: 'order #1324',
-      metadata: {'size': '250g'},
+      // metadata: {'size': '250g'},
       creditCard: CreditCardConfig(saveCard: false, manual: false),
     );
     return BlocProvider(
