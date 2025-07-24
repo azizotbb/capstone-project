@@ -119,5 +119,13 @@
   "selectCat": "Select Catagory",
   "regInCourse":"Registered in the Course",
   "guestSign":"Please Sign up or Sign in to view this page",
-  "Search":"Search"
+  "Search":"Search",
+  "payment": "Payment",
+  "Cardholder Name": "Cardholder Name",
+  "Card Number": "Card Number",
+  "month": "Month",
+  "year": "Year",
+  "CVV": "CVV",
+  "Pay": "Pay",
+  "link": "Payment link is not available"
 }

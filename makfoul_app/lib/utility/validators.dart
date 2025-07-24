@@ -1,6 +1,39 @@
 import 'package:easy_localization/easy_localization.dart';
 
 class Validators {
+  /// Validates validteNamePayment format
+  static String? validteNamePayment(String value) {
+    if (!value.trim().contains(' ')) return 'الاسم الكامل مطلوب';
+    return null;
+  }
+
+  // validate card number format
+  static String? validateCardNumber(String value) {
+    if (value.length != 16) return ' رقم البطاقة غير صحيح';
+    return null;
+  }
+
+  // validate validate Month format
+  static String? validateMonth(String value) {
+    final m = int.tryParse(value);
+    if (m == null || m < 1 || m > 12) return 'شهر غير صالح';
+    return null;
+  }
+
+  // validate validate year format
+
+  static String? valaditeYear(String value) {
+    if (value.length != 2) return 'السنة غير صحيحة';
+    return null;
+  }
+
+  // validate validate Cvvformat
+
+  static String? validateCvv(String? value) {
+    if (value == null || value.length != 3) return 'CVV غير صالح';
+    return null;
+  }
+
   /// Validates verificationCode format
 
   static String? verificationCode(String? value) {
