@@ -33,7 +33,7 @@ class ActivityCourses extends StatelessWidget {
                     ),
                     Text(
                       "${state.total}",
-
+                    
                       style: TextStyle(
                         fontWeight: FontWeight.w500,
                         fontSize: 18,

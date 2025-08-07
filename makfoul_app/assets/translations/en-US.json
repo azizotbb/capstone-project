@@ -127,5 +127,8 @@
   "year": "Year",
   "CVV": "CVV",
   "Pay": "Pay",
-  "link": "Payment link is not available"
+  "link": "Payment link is not available",
+  "current_orders": "Active",
+  "completed_orders": "Completed"
+
 }

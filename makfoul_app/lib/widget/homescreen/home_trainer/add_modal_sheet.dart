@@ -237,7 +237,13 @@ class AddModalSheet extends StatelessWidget {
                     color: AppColors.colorDarkGrey,
                   ),
                 ),
-                Image.asset("assets/images/AddCourse.png"),
+                Container(
+                  decoration: BoxDecoration(
+                    color: AppColors.colorScondry,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  child: Icon(Icons.add, color: AppColors.colorpeige),
+                ),
               ],
             ),
           ),

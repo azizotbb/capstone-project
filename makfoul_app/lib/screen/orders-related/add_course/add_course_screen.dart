@@ -28,7 +28,8 @@ class AddCourseScreen extends StatelessWidget {
           return DefaultTabController(
             length: 2,
             child: Scaffold(
-              appBar: AppBar(automaticallyImplyLeading: false,
+              appBar: AppBar(
+                automaticallyImplyLeading: false,
                 centerTitle: true,
 
                 title: Text(
@@ -37,12 +38,24 @@ class AddCourseScreen extends StatelessWidget {
                 ),
                 bottom: TabBar(
                   indicatorWeight: 5,
-          
+                  indicator: BoxDecoration(
+                    color: AppColors.colorPrimary,
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  indicatorSize: TabBarIndicatorSize.tab,
+
                   indicatorColor: AppColors.colorPrimary,
-                  labelColor: AppColors.colorDarkGrey,
+                  labelColor: AppColors.colorLightGrey,
+                  labelStyle: AppTextStyle.text14primary,
                   tabs: [
-                    Tab(icon: Icon(Icons.access_time)),
-                    Tab(icon: Icon(Icons.do_disturb)),
+                    Tab(
+                      text: 'current_orders'.tr(),
+                      // icon: Icon(Icons.access_time)
+                    ),
+                    Tab(
+                      text: 'completed_orders'.tr(),
+                      //  icon: Icon(Icons.do_disturb)
+                    ),
                   ],
                 ),
               ),
@@ -83,7 +96,9 @@ class AddCourseScreen extends StatelessWidget {
                                 },
                                 background: Container(
                                   color: Colors.red.withOpacity(0.1),
-                                  alignment: context.locale.countryCode == 'US'? Alignment.centerRight:Alignment.centerLeft,
+                                  alignment: context.locale.countryCode == 'US'
+                                      ? Alignment.centerRight
+                                      : Alignment.centerLeft,
                                   padding: const EdgeInsets.symmetric(
                                     horizontal: 20,
                                   ),

@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get_it/get_it.dart';
 import 'package:makfoul_app/extension/app_sizes.dart';
 import 'package:makfoul_app/model/user/user_model.dart';
@@ -97,7 +98,9 @@ class HomescreenTrainerScreen extends StatelessWidget {
                       child: Column(
                         children: [
                           Align(
-                            alignment: context.locale.countryCode=="US"? Alignment.topLeft:Alignment.topRight,
+                            alignment: context.locale.countryCode == "US"
+                                ? Alignment.topLeft
+                                : Alignment.topRight,
                             child: Text(
                               "dashboard".tr(),
                               style: AppTextStyle.textTitleLarg24dark,
@@ -115,7 +118,9 @@ class HomescreenTrainerScreen extends StatelessWidget {
                             children: [
                               BlocBuilder<AddCorseBloc, AddCorseState>(
                                 builder: (context, state) {
-                                  GetIt.I.get<OpreationsLayer>().getCoursesMethod();
+                                  GetIt.I
+                                      .get<OpreationsLayer>()
+                                      .getCoursesMethod();
                                   if (state is CoursesLoaded) {
                                     return Dashboardcard(
                                       child: Column(
@@ -132,34 +137,42 @@ class HomescreenTrainerScreen extends StatelessWidget {
                                           ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
+                                                MainAxisAlignment.center,
                                             children: [
-                                              Image.asset(
-                                                "assets/images/Clean (2).png",
+                                              SvgPicture.asset(
+                                                "assets/icons/clean3.svg",
                                                 height: 20,
                                                 width: 20,
                                               ),
+                                              SizedBox(width: 12),
                                               Text(
                                                 "${state.clean}",
                                                 style: TextStyle(
+                                                  fontSize: 16,
                                                   fontWeight: FontWeight.w500,
+                                                  color:
+                                                      AppColors.colorDarkGrey,
                                                 ),
                                               ),
                                             ],
                                           ),
                                           Row(
                                             mainAxisAlignment:
-                                                MainAxisAlignment.spaceEvenly,
+                                                MainAxisAlignment.center,
                                             children: [
-                                              Image.asset(
-                                                "assets/images/cook (2).png",
+                                              SvgPicture.asset(
+                                                "assets/icons/cook.svg",
                                                 height: 20,
                                                 width: 20,
                                               ),
+                                              SizedBox(width: 12),
                                               Text(
                                                 "${state.cook}",
                                                 style: TextStyle(
+                                                  fontSize: 16,
                                                   fontWeight: FontWeight.w500,
+                                                  color:
+                                                      AppColors.colorDarkGrey,
                                                 ),
                                               ),
                                             ],
@@ -180,7 +193,9 @@ class HomescreenTrainerScreen extends StatelessWidget {
 
                           SizedBox(height: 12),
                           Align(
-                            alignment: context.locale.countryCode=="US"? Alignment.topLeft:Alignment.topRight,
+                            alignment: context.locale.countryCode == "US"
+                                ? Alignment.topLeft
+                                : Alignment.topRight,
                             child: Text(
                               "courses".tr(),
                               style: AppTextStyle.textTitleLarg24dark,
